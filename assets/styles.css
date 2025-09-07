@@ -23,6 +23,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:#1a2246;line-he
   position: sticky;  /* ← モバイルで上に固定 */
   top: 0;
   z-index: 2000;     /* ← ヒーローより前面に */
+  position: sticky; /* Safari対策 */
 }
 .header .logo img{height:40px}
 .nav{list-style:none;display:flex;gap:20px;margin:0;padding:0}
@@ -32,7 +33,6 @@ body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:#1a2246;line-he
 
 /* Mobile nav */
 @media(max-width:768px){
-  nav { position: relative; } /* ← これ重要。子のabsoluteの基準にする */
   .hamburger{display:block; position: relative; z-index: 2100;}
   .nav{
     display:none;
@@ -46,8 +46,16 @@ body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:#1a2246;line-he
     padding:12px;
     z-index: 2200;  /* ← 前面に */
     box-shadow:0 12px 24px rgba(0,0,0,.2);
+    max-width: 640px; margin: 0 auto;
+    backdrop-filter: blur(4px);
   }
   .nav.open{ display:flex; }
+   /* 文字が1文字ずつ折れないように */
+  .nav a{
+    display:block;
+    padding:12px 8px;
+    white-space: nowrap;         /* ← ここで改行を防止（日本語の禁則折りを止める） */
+      }
 }
 
 
