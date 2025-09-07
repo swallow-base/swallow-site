@@ -12,63 +12,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- 共通CSS（ある場合） -->
-  <link rel="stylesheet" href="/swallow-site/assets/styles.css?v=20250907">
-
-  <!-- 最低限の保険スタイル（既存CSSがあるなら削ってOK） -->
-  <style>
-    :root{ --navy:#232951; --navy-dark:#1a2246; --accent:#E50012; }
-    html{ line-height:1.9; }
-    body{ margin:0; color:#222; font-family:"Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-text-size-adjust:100%; }
-    a{ color:inherit; }
-    /* ヘッダー */
-    .site-header{ position:sticky; top:0; z-index:50; background:#fff; border-bottom:1px solid #eee; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; }
-    .brand{ display:inline-flex; align-items:center; text-decoration:none; }
-    .brand-logo{ height:clamp(26px,5vw,36px); width:auto; }
-    .nav-toggle{ display:none; background:none; border:none; font-size:1.35rem; }
-    .nav ul{ display:flex; gap:16px; align-items:center; list-style:none; margin:0; padding:0; }
-    .nav a{ text-decoration:none; font-weight:500; }
-    .btn{ padding:.6em 1em; border-radius:999px; border:1px solid var(--navy); color:#fff; background:var(--navy); display:inline-block; }
-    .btn-accent{ border-color:var(--accent); background:var(--accent); }
-    /* モバイル切替 */
-    @media (max-width:900px){
-      .nav-toggle{ display:block; }
-      .nav{ display:none; width:100%; }
-      .nav.open{ display:block; }
-      .nav ul{ flex-direction:column; align-items:stretch; gap:0; }
-      .nav li{ border-top:1px solid #eee; }
-      .nav a, .btn{ display:block; padding:14px 8px; border-radius:0; text-align:left; }
-    }
-    /* ヒーロー */
-    .hero{ position:relative; min-height:62vh; display:grid; place-items:center; text-align:left; background:#0b0f2a; }
-    .hero::before{
-      content:""; position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(26,34,70,.55), rgba(26,34,70,.65)),
-                  url("/swallow-site/assets/hero1.jpg") center/cover no-repeat;
-      filter:saturate(1.05);
-    }
-    .hero-inner{ position:relative; padding:12vh 6vw; max-width:1040px; width:100%; }
-    .hero-title{
-      font-family:"Noto Serif JP", serif; font-weight:700;
-      font-size:clamp(1.6rem,3.8vw,3rem); line-height:1.25; letter-spacing:.02em; margin:0 0 .4em; color:#fff;
-      text-shadow:0 2px 8px rgba(0,0,0,.35);
-    }
-    .hero-sub{
-      font-family:"IBM Plex Sans JP","Noto Sans JP",system-ui,sans-serif; font-weight:500;
-      font-size:clamp(1.05rem,2.2vw,1.5rem); line-height:1.5; margin:0 0 1em; color:#eef1ff;
-    }
-    /* セクション */
-    .section{ padding:56px 6vw; max-width:1080px; margin:0 auto; }
-    .section h2{ font-family:"IBM Plex Sans JP","Noto Sans JP",system-ui,sans-serif; line-height:1.35; letter-spacing:.01em; margin:0 0 .5em; }
-    .pillars{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-    .card{ background:#fff; border:1px solid #eee; border-radius:16px; padding:18px; }
-    .muted{ color:#666; font-size:.95rem; }
-    @media (max-width:900px){ .pillars{ grid-template-columns:1fr; } }
-    /* 浮遊CTA */
-    .cta-fab{ position:fixed; right:16px; bottom:18px; z-index:40; }
-    /* アクセシビリティ */
-    .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
-  </style>
+  <!-- 共通CSS -->
+  <link rel="stylesheet" href="/swallow-site/assets/styles.css?v=20250907-2">
 </head>
 <body>
 
@@ -85,11 +30,11 @@
     </button>
 
     <!-- グローバルナビ -->
-    <nav id="global-nav" class="nav">
+    <nav id="global-nav" class="nav" aria-label="グローバルナビゲーション">
       <ul>
         <li><a href="/swallow-site/">ホーム</a></li>
         <li>
-          <!-- サブがある場合は details でアコーディオン -->
+          <!-- サブあり：detailsでアコーディオン -->
           <details>
             <summary>プログラム</summary>
             <ul class="sub">
@@ -110,7 +55,8 @@
   </header>
 
   <!-- ===================== ヒーロー ===================== -->
-  <section class="hero" aria-label="つばめ学習舎のご紹介">
+  <!-- スライドを止めたい場合は data-rotate="off" を付与 -->
+  <section class="hero" aria-label="つばめ学習舎のご紹介" data-bg="1">
     <div class="hero-inner">
       <h1 class="hero-title">独り立ちの翼を育む</h1>
       <p class="hero-sub">コーチング型学習塾 つばめ学習舎</p>
@@ -135,8 +81,10 @@
       <div class="card">
         <h3>✈️ 特別プログラム</h3>
         <p class="muted">学力に挑戦する「スパルタ」、人生に挑戦する「ひとり旅」を用意。</p>
-        <p><a class="btn" href="/swallow-site/programs/sparta.html">スパルタ</a>
-           <a class="btn" href="/swallow-site/programs/hitoritabi.html" style="margin-left:8px;">ひとり旅</a></p>
+        <p>
+          <a class="btn" href="/swallow-site/programs/sparta.html">スパルタ</a>
+          <a class="btn" href="/swallow-site/programs/hitoritabi.html" style="margin-left:8px;">ひとり旅</a>
+        </p>
       </div>
     </div>
   </section>
@@ -158,7 +106,7 @@
   <section class="section" id="access">
     <h2>アクセス</h2>
     <p class="muted">飯田高校から徒歩1分。自習室・教室の写真は順次掲載します。</p>
-    <!-- Map はあとで置換：Google マップ埋め込み -->
+    <!-- Googleマップ埋め込みは必要に応じてここへ -->
     <p><a class="btn" href="/swallow-site/contact/">アクセス・お問い合わせへ</a></p>
   </section>
 
@@ -170,7 +118,7 @@
   <!-- 右下固定CTA -->
   <a class="btn btn-accent cta-fab" href="/swallow-site/contact/#trial" aria-label="体験入会はこちら">体験入会</a>
 
-  <!-- 共通JS（ハンバーガー等）。<script>タグはHTML側だけ、JS本体はassets/js/main.js内 -->
-  <script src="/swallow-site/assets/js/main.js?v=20250907"></script>
+  <!-- 共通JS -->
+  <script src="/swallow-site/assets/js/main.js?v=20250907-2"></script>
 </body>
 </html>
