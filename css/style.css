@@ -1,0 +1,16 @@
+
+:root { --w: 1000px; }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:system-ui, -apple-system, Segoe UI, Roboto, Noto Sans JP, sans-serif; line-height:1.7; color:#222}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+.container{max-width:var(--w); margin:auto; padding:1rem}
+header{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-bottom:1px solid #eee}
+nav a{margin-left:1rem}
+.btn{padding:.6rem 1rem;border:1px solid #222;border-radius:10px;display:inline-block}
+.hero{padding:3rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.card{border:1px solid #eee;border-radius:12px;padding:1rem}
+footer{border-top:1px solid #eee;margin-top:2rem;padding:1rem 0;color:#666}
+.notice{background:#fafafa;border:1px solid #eee;border-radius:12px;padding:1rem;margin:1rem 0}
