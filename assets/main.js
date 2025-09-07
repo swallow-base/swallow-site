@@ -57,3 +57,32 @@ ready(function(){
     if(m && m[1]) { const img = new Image(); img.src = m[1]; }
   });
 })();
+
+// ================================
+// ヘッダーのナビゲーション制御
+// - PCでは横並び、モバイルではハンバーガーに切り替え
+// - aria-expanded を更新してアクセシビリティにも対応
+// ================================
+const btn = document.querySelector('.nav-toggle');       // ハンバーガーボタン
+const nav = document.getElementById('global-nav');       // ナビゲーション全体
+
+btn?.addEventListener('click', () => {
+  const opened = nav.classList.toggle('open');           // openクラスを切り替え
+  btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+});
+
+// ================================
+// サブメニュー（<details>）のアコーディオン制御
+// - モバイル時のみ「1つだけ開く」動作にする
+// - PCでは常にすべて展開可能
+// ================================
+document.querySelectorAll('.nav details').forEach(d => {
+  d.addEventListener('toggle', () => {
+    if (window.matchMedia('(max-width: 900px)').matches && d.open) {
+      document.querySelectorAll('.nav details').forEach(x => {
+        if (x !== d) x.open = false;   // 自分以外を閉じる
+      });
+    }
+  });
+});
+
