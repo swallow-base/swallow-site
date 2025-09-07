@@ -22,14 +22,43 @@
 </header>
 
 
-<section class="hero">
+<section class="hero hero--image">
+   <!-- 背景レイヤー -->
+  <div class="hero-slideshow" aria-hidden="true">
+    <div class="hero-slide is-active" style="background-image:url('/swallow-site/assets/hero1.jpg')"></div>
+    <div class="hero-slide"          style="background-image:url('/swallow-site/assets/hero2.jpg')"></div>
+    <div class="hero-slide"          style="background-image:url('/swallow-site/assets/hero3.jpg')"></div>
+    <div class="hero-slide"          style="background-image:url('/swallow-site/assets/hero4.jpg')"></div>
+  </div>
   <div class="container">
+    <!-- ロゴ -->
+    <div class="logo-wrap">
+      <a href="/swallow-site/index.html" aria-label="ホーム">
+        <img src="/swallow-site/assets/logo_1b.png" alt="つばめ学習舎 ロゴ">
+      </a>
+    </div>
+
+    <!-- キャッチ -->
     <h1>独り立ちの翼を育む</h1>
     <p class="sub">コーチング型学習塾 つばめ学習舎</p>
     <p>勉強法から習慣まで、“自分で学べる力”を育てます。</p>
-    <span class="pill">飯田市・飯田高校 徒歩1分</span>
+
+    <!-- ヒーローのリンク（枠） -->
+    <div class="hero-links">
+      <a class="btn btn-accent" href="/swallow-site/contact.html">体験入会はこちら</a>
+      <a class="btn" href="/swallow-site/programs.html">プログラムを見る</a>
+      <a class="btn-ghost" href="https://line.me/R/ti/p/" target="_blank" rel="noopener">LINEで相談</a>
+    </div>
+
+    <!-- 任意：強みのチップ -->
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;">
+      <span class="icon-chip"><span class="emoji">🎯</span>コーチング</span>
+      <span class="icon-chip"><span class="emoji">🕒</span>24時間自習室</span>
+      <span class="icon-chip"><span class="emoji">✈️</span>特別プログラム</span>
+    </div>
   </div>
 </section>
+
 <section class="section">
   <div class="container grid-3">
     <div class="card">
