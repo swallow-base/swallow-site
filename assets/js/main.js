@@ -36,7 +36,7 @@ function initHero(){
   setInterval(()=>{
     bg = bg % 4 + 1;
     hero.setAttribute('data-bg', String(bg));
-  }, 6000);
+  }, 3000);
 }
 
 // Accordion: mobile one-open rule
