@@ -37,7 +37,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:#1a2246;line-he
   .nav{
     display:none;
     flex-direction:column;
-    background:var(--navy);
+    background: rgba(35, 41, 81, 0.85); /* 半透明ネイビー */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px); /* Safari用 */
     position:absolute;
     top: 56px;      /* ヘッダーの下に出す */
     right:16px;
