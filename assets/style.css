@@ -3,7 +3,7 @@
    - ヘッダー（横長ロゴ／PC横並び・SPハンバーガー）
    - ヒーロー（Noto Serif / IBM Plex Sans）
    - 3本柱カード、信頼情報、アクセス
-   - 右下固定CTA、アクセシビリティ対応
+   - 右下固定CTA、アクセシビリティ
    - GitHub Pages（/swallow-site/）前提の軽量CSS
    ========================================================= */
 
@@ -161,7 +161,7 @@ h1, h2, h3{
   content:""; position:absolute; inset:0;
   background:
     linear-gradient(180deg, rgba(26,34,70,.55), rgba(26,34,70,.65)),
-    url("/swallow-site/assets/hero1.jpg") center/cover no-repeat;
+    url("/swallow-site/assets/hero1.png") center/cover no-repeat;
   filter:saturate(1.05);
 }
 .hero-inner{
@@ -236,16 +236,16 @@ footer .muted{ color:var(--ink-muted); }
 .center{ text-align:center; }
 
 /* =========================================================
-   追加：ヒーローのスライド（任意採用）
-   - JSで .hero[data-bg="2"] のように data 属性を書き換えるだけで
-     背景を差し替える前提の軽量クラス（CSS切替式）
+   追加：ヒーローのスライド（CSS切替式）
+   - JSが .hero の data-bg を 1→2→3→4 と切替
+   - 画像ファイル名：hero1.png, hero2.png, hero3.jpg, hero4.jpg
    ========================================================= */
 .hero[data-bg="1"]::before{ background-image:
   linear-gradient(180deg, rgba(26,34,70,.55), rgba(26,34,70,.65)),
-  url("/swallow-site/assets/hero1.jpg"); }
+  url("/swallow-site/assets/hero1.png"); }
 .hero[data-bg="2"]::before{ background-image:
   linear-gradient(180deg, rgba(26,34,70,.55), rgba(26,34,70,.65)),
-  url("/swallow-site/assets/hero2.jpg"); }
+  url("/swallow-site/assets/hero2.png"); }
 .hero[data-bg="3"]::before{ background-image:
   linear-gradient(180deg, rgba(26,34,70,.55), rgba(26,34,70,.65)),
   url("/swallow-site/assets/hero3.jpg"); }
