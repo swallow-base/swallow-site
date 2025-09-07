@@ -62,3 +62,43 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   initHero();
   initAccordions();
 });
+
+function initNav(){
+  const hamburger = document.querySelector('.hamburger');
+  const nav = document.querySelector('.nav');
+  if(!hamburger || !nav) return;
+
+  const close = () => {
+    hamburger.setAttribute('aria-expanded','false');
+    nav.classList.remove('open');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  };
+
+  hamburger.addEventListener('click', ()=>{
+    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+    const willOpen = !expanded;
+    hamburger.setAttribute('aria-expanded', String(willOpen));
+    nav.classList.toggle('open');
+    if (willOpen) {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+  });
+
+  // 外側クリックで閉じる
+  document.addEventListener('click', (e)=>{
+    if(!nav.contains(e.target) && !hamburger.contains(e.target)) close();
+  });
+
+  // Escで閉じる
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
+
+  // メニュー内のリンクで閉じる
+  nav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', close);
+  });
+}
