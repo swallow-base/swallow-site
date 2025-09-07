@@ -109,7 +109,7 @@
     let n = Number(hero.dataset.bg || "1");
     setBg(n);
 
-    const INTERVAL_MS = 6000;
+    const INTERVAL_MS = 4000;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (reduceMotion.matches) return;
 
