@@ -183,3 +183,68 @@ header.site-header{
 /* アクセシビリティ */
 .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
 
+/* ========== フォント指定（ベース） ========== */
+html {
+  /* 日本語は行間広めが読みやすい */
+  line-height: 1.9;
+}
+
+body {
+  /* 本文：Noto Sans JP（無難で読みやすい） */
+  font-family: "Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #222;
+  -webkit-text-size-adjust: 100%; /* iOSの勝手な拡大対策 */
+}
+
+/* 見出しのデフォルトはSansに寄せる（本文と統一感）。必要箇所だけSerifに切替 */
+h1, h2, h3 {
+  font-family: "IBM Plex Sans JP", "Noto Sans JP", system-ui, sans-serif;
+  line-height: 1.35;
+  letter-spacing: .01em;
+}
+
+/* ========== ヒーローのタイトルとサブ ========== */
+/* キャッチコピー：上質感のある明朝（Noto Serif JP） */
+.hero-title {
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;                 /* しっかり太め */
+  font-size: clamp(1.6rem, 3.8vw, 3rem);
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  margin: 0 0 .4em;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,.35); /* 背景写真上での可読性UP */
+}
+
+/* サブコピー：現代的で信頼感のあるSans（IBM Plex Sans JP） */
+.hero-sub {
+  font-family: "IBM Plex Sans JP", "Noto Sans JP", system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
+  line-height: 1.5;
+  margin: 0 0 1em;
+  color: #eef1ff;
+}
+
+/* ========== ナビやボタンもSansで揃える（読みやすさ優先） ========== */
+.site-header .nav a,
+.btn {
+  font-family: "IBM Plex Sans JP", "Noto Sans JP", system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* 既存のヒーロー背景にのせるときの器（例） */
+.hero {
+  position: relative;
+  min-height: 62vh;
+  display: grid;
+  place-items: center;
+  text-align: left;
+}
+.hero-inner {
+  position: relative;
+  padding: 12vh 6vw;
+  max-width: 1040px;
+  width: 100%;
+}
