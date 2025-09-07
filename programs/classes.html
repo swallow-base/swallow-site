@@ -10,16 +10,25 @@
 <body>
 
 <header class="site-header">
-  <div class="container nav">
-    <a class="logo" href="/swallow-site/index.html">つばめ学習舎</a>
-    <div class="links">
-      <a href="/swallow-site/index.html">Home</a>
-      <a href="/swallow-site/programs.html">プログラム</a>
-      <a href="/swallow-site/about.html">学舎について</a>
-      <a href="/swallow-site/contact.html">アクセス・お問い合わせ</a>
-    </div>
-  </div>
+  <a class="brand" href="/swallow-site/">
+    <img src="/swallow-site/assets/logo_3.png" alt="つばめ学習舎" class="brand-logo">
+  </a>
+
+  <button class="nav-toggle" aria-expanded="false" aria-controls="global-nav">
+    <span class="sr-only">メニュー</span>☰
+  </button>
+
+  <nav id="global-nav" class="nav">
+    <ul>
+      <li><a href="/swallow-site/">ホーム</a></li>
+      <li><a href="/swallow-site/programs/">プログラム</a></li>
+      <li><a href="/swallow-site/about/">学舎について</a></li>
+      <li><a href="/swallow-site/contact/">アクセス・お問い合わせ</a></li>
+      <li><a class="btn btn-accent" href="/swallow-site/contact/#trial">体験入会</a></li>
+    </ul>
+  </nav>
 </header>
+
 
 <section class="section"><div class="container"><h2>個別指導・集団指導</h2><p>少人数の授業スタイルで、基礎から入試レベルまで対応。</p><p>個別指導：一人ひとりの理解に合わせて進度・教材を最適化。</p><p>集団指導：演習と解説のサイクルで、仲間と切磋琢磨しながら伸ばします。</p></div></section>
 
