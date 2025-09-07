@@ -48,6 +48,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:#1a2246;line-he
     box-shadow:0 12px 24px rgba(0,0,0,.2);
     max-width: 640px; margin: 0 auto;
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px); /* Safari用 */
   }
   .nav.open{ display:flex; }
    /* 文字が1文字ずつ折れないように */
