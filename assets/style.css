@@ -1,11 +1,16 @@
 
+/* === Tsubame Theme (logo-colors) === */
 :root{
-  --brand:#1f6feb;
-  --accent:#ff7f2a;
-  --bg:#ffffff;
-  --text:#111827;
-  --muted:#6b7280;
+  --brand:   #232951; /* ロゴのネイビー */
+  --brand-2: #1a2246; /* 影/見出し用の濃いネイビー */
+  --accent:  #E50012; /* ロゴの赤 */
+  --bg:      #ffffff;
+  --text:    #0b1020;
+  --muted:   #6b7280;
+  --line:    #e6e8ee;
+  --card:    #ffffff;
 }
+
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";line-height:1.65}
 a{color:var(--brand);text-decoration:none}
@@ -48,17 +53,7 @@ header.site-header{position:sticky;top:0;background:rgba(255,255,255,.9);backdro
   .hero h1{font-size:32px}
 }
 
-/* === Tsubame Theme (logo-colors) === */
-:root{
-  --brand:   #232951; /* ロゴのネイビー */
-  --brand-2: #1a2246; /* 影/見出し用の濃いネイビー */
-  --accent:  #E50012; /* ロゴの赤 */
-  --bg:      #ffffff;
-  --text:    #0b1020;
-  --muted:   #6b7280;
-  --line:    #e6e8ee;
-  --card:    #ffffff;
-}
+
 
 /* 全体のタイポ/余白 */
 html,body{
