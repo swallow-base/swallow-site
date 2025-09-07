@@ -131,3 +131,22 @@ header.site-header{
   .hero--image .logo-wrap img{width:140px}
 }
 
+/* === Hero Slideshow === */
+.hero--image { position:relative; overflow:hidden; }
+
+.hero-slideshow {
+  position:absolute; inset:0; z-index:0;  /* テキストの下層に敷く */
+}
+
+.hero-slide {
+  position:absolute; inset:0;
+  background-size:cover; background-position:center;
+  opacity:0; transition:opacity .9s ease;   /* クロスフェード */
+  will-change: opacity;
+}
+.hero-slide.is-active { opacity:1; }
+
+/* ユーザーが「動きを減らす」設定のときは静止 */
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide { transition:none; }
+}
