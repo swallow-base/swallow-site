@@ -1,108 +1,176 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <base href="/swallow-site/">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>つばめ学習舎 | 独り立ちの翼を育む</title>
-<link rel="stylesheet" href="/swallow-site/assets/style.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>つばめ学習舎｜独り立ちの翼を育む</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="コーチング型学習塾つばめ学習舎。飯田高校から徒歩1分。24時間自習室・LINE質問・レギュラー指導と特別プログラムで“自分で選び決める力”を育てます。">
+  <meta name="theme-color" content="#232951">
 
+  <!-- Google Fonts（上質×可読の組み合わせ） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- 共通CSS（ある場合） -->
+  <link rel="stylesheet" href="/swallow-site/assets/styles.css?v=20250907">
+
+  <!-- 最低限の保険スタイル（既存CSSがあるなら削ってOK） -->
+  <style>
+    :root{ --navy:#232951; --navy-dark:#1a2246; --accent:#E50012; }
+    html{ line-height:1.9; }
+    body{ margin:0; color:#222; font-family:"Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-text-size-adjust:100%; }
+    a{ color:inherit; }
+    /* ヘッダー */
+    .site-header{ position:sticky; top:0; z-index:50; background:#fff; border-bottom:1px solid #eee; display:flex; align-items:center; justify-content:space-between; padding:10px 16px; }
+    .brand{ display:inline-flex; align-items:center; text-decoration:none; }
+    .brand-logo{ height:clamp(26px,5vw,36px); width:auto; }
+    .nav-toggle{ display:none; background:none; border:none; font-size:1.35rem; }
+    .nav ul{ display:flex; gap:16px; align-items:center; list-style:none; margin:0; padding:0; }
+    .nav a{ text-decoration:none; font-weight:500; }
+    .btn{ padding:.6em 1em; border-radius:999px; border:1px solid var(--navy); color:#fff; background:var(--navy); display:inline-block; }
+    .btn-accent{ border-color:var(--accent); background:var(--accent); }
+    /* モバイル切替 */
+    @media (max-width:900px){
+      .nav-toggle{ display:block; }
+      .nav{ display:none; width:100%; }
+      .nav.open{ display:block; }
+      .nav ul{ flex-direction:column; align-items:stretch; gap:0; }
+      .nav li{ border-top:1px solid #eee; }
+      .nav a, .btn{ display:block; padding:14px 8px; border-radius:0; text-align:left; }
+    }
+    /* ヒーロー */
+    .hero{ position:relative; min-height:62vh; display:grid; place-items:center; text-align:left; background:#0b0f2a; }
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(26,34,70,.55), rgba(26,34,70,.65)),
+                  url("/swallow-site/assets/hero1.jpg") center/cover no-repeat;
+      filter:saturate(1.05);
+    }
+    .hero-inner{ position:relative; padding:12vh 6vw; max-width:1040px; width:100%; }
+    .hero-title{
+      font-family:"Noto Serif JP", serif; font-weight:700;
+      font-size:clamp(1.6rem,3.8vw,3rem); line-height:1.25; letter-spacing:.02em; margin:0 0 .4em; color:#fff;
+      text-shadow:0 2px 8px rgba(0,0,0,.35);
+    }
+    .hero-sub{
+      font-family:"IBM Plex Sans JP","Noto Sans JP",system-ui,sans-serif; font-weight:500;
+      font-size:clamp(1.05rem,2.2vw,1.5rem); line-height:1.5; margin:0 0 1em; color:#eef1ff;
+    }
+    /* セクション */
+    .section{ padding:56px 6vw; max-width:1080px; margin:0 auto; }
+    .section h2{ font-family:"IBM Plex Sans JP","Noto Sans JP",system-ui,sans-serif; line-height:1.35; letter-spacing:.01em; margin:0 0 .5em; }
+    .pillars{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .card{ background:#fff; border:1px solid #eee; border-radius:16px; padding:18px; }
+    .muted{ color:#666; font-size:.95rem; }
+    @media (max-width:900px){ .pillars{ grid-template-columns:1fr; } }
+    /* 浮遊CTA */
+    .cta-fab{ position:fixed; right:16px; bottom:18px; z-index:40; }
+    /* アクセシビリティ */
+    .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+  </style>
 </head>
 <body>
 
-<header class="site-header">
-  <a class="brand" href="/swallow-site/">
-    <img src="/swallow-site/assets/logo_3.png" alt="つばめ学習舎" class="brand-logo">
-  </a>
+  <!-- ===================== ヘッダー ===================== -->
+  <header class="site-header">
+    <!-- 横長ロゴ -->
+    <a class="brand" href="/swallow-site/">
+      <img src="/swallow-site/assets/logo_3.png" alt="つばめ学習舎" class="brand-logo">
+    </a>
 
-  <button class="nav-toggle" aria-expanded="false" aria-controls="global-nav">
-    <span class="sr-only">メニュー</span>☰
-  </button>
+    <!-- ハンバーガー（モバイル用） -->
+    <button class="nav-toggle" aria-expanded="false" aria-controls="global-nav">
+      <span class="sr-only">メニュー</span>☰
+    </button>
 
-  <nav id="global-nav" class="nav">
-    <ul>
-      <li><a href="/swallow-site/">ホーム</a></li>
-      <li><a href="/swallow-site/programs/">プログラム</a></li>
-      <li><a href="/swallow-site/about/">学舎について</a></li>
-      <li><a href="/swallow-site/contact/">アクセス・お問い合わせ</a></li>
-      <li><a class="btn btn-accent" href="/swallow-site/contact/#trial">体験入会</a></li>
-    </ul>
-  </nav>
-</header>
-
-
-
-<section class="hero hero--image">
-   <!-- 背景レイヤー -->
-  <div class="hero-slideshow" aria-hidden="true">
-    <div class="hero-slide is-active" style="background-image:url('/swallow-site/assets/hero1.png')"></div>
-    <div class="hero-slide"          style="background-image:url('/swallow-site/assets/hero2.png')"></div>
-    <div class="hero-slide"          style="background-image:url('/swallow-site/assets/hero3.jpg')"></div>
-    <div class="hero-slide"          style="background-image:url('/swallow-site/assets/hero4.jpg')"></div>
-  </div>
-  <div class="container">
-    <!-- ロゴ -->
-    <div class="logo-wrap">
-      <a href="/swallow-site/index.html" aria-label="ホーム">
-        <img src="/swallow-site/assets/logo_1b.png" alt="つばめ学習舎 ロゴ">
-      </a>
-    </div>
-
-    <!-- キャッチ -->
-    <h1>独り立ちの翼を育む</h1>
-    <p class="sub">コーチング型学習塾 つばめ学習舎</p>
-    <p>勉強法から習慣まで、“自分で学べる力”を育てます。</p>
-
-    <!-- ヒーローのリンク（枠） -->
-    <div class="hero-links">
-      <a class="btn btn-accent" href="/swallow-site/contact.html">体験入会はこちら</a>
-      <a class="btn" href="/swallow-site/programs.html">プログラムを見る</a>
-      <a class="btn-ghost" href="https://line.me/R/ti/p/" target="_blank" rel="noopener">LINEで相談</a>
-    </div>
-
-    <!-- 任意：強みのチップ -->
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;">
-      <span class="icon-chip"><span class="emoji">🎯</span>コーチング</span>
-      <span class="icon-chip"><span class="emoji">🕒</span>24時間自習室</span>
-      <span class="icon-chip"><span class="emoji">✈️</span>特別プログラム</span>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container grid-3">
-    <div class="card">
-      <h3>🎯 コーチング</h3>
-      <p>学び方・進路・興味を整理し、<b>自分で選ぶ力</b>を育てます。</p>
-      <a class="btn-outline" href="/swallow-site/programs.html#coaching">詳しく</a>
-    </div>
-    <div class="card">
-      <h3>🕒 学びを支える仕組み</h3>
-      <ul class="list">
-        <li>飯田高校から徒歩1分</li>
-        <li>24時間ICカード自習室</li>
-        <li>LINE質問サービス「いつでもつばめ」</li>
+    <!-- グローバルナビ -->
+    <nav id="global-nav" class="nav">
+      <ul>
+        <li><a href="/swallow-site/">ホーム</a></li>
+        <li>
+          <!-- サブがある場合は details でアコーディオン -->
+          <details>
+            <summary>プログラム</summary>
+            <ul class="sub">
+              <li><a href="/swallow-site/programs/coaching.html">コーチング</a></li>
+              <li><a href="/swallow-site/programs/classes.html">個別・集団</a></li>
+              <li><a href="/swallow-site/programs/studyroom.html">自習室</a></li>
+              <li><a href="/swallow-site/programs/itsudemo.html">いつでもつばめ</a></li>
+              <li><a href="/swallow-site/programs/sparta.html">スパルタ</a></li>
+              <li><a href="/swallow-site/programs/hitoritabi.html">ひとり旅</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a href="/swallow-site/about/">学舎について</a></li>
+        <li><a href="/swallow-site/contact/">アクセス・お問い合わせ</a></li>
+        <li><a class="btn btn-accent" href="/swallow-site/contact/#trial">体験入会</a></li>
       </ul>
-      <p>自分のペースで学べる環境が整っています。</p>
-      <a class="btn-outline" href="/swallow-site/programs.html#regular">詳しく</a>
+    </nav>
+  </header>
+
+  <!-- ===================== ヒーロー ===================== -->
+  <section class="hero" aria-label="つばめ学習舎のご紹介">
+    <div class="hero-inner">
+      <h1 class="hero-title">独り立ちの翼を育む</h1>
+      <p class="hero-sub">コーチング型学習塾 つばめ学習舎</p>
+      <a class="btn btn-accent" href="/swallow-site/contact/#trial">体験入会はこちら</a>
     </div>
-    <div class="card">
-      <h3>✈️ 特別プログラム <span class="badge">2本立て</span></h3>
-      <p>「ひとり旅応援」「スパルタ」で挑戦と成長を応援。</p>
-      <a class="btn" href="/swallow-site/programs.html#specials">特別プログラムを見る</a>
+  </section>
+
+  <!-- ===================== 3本柱 ===================== -->
+  <section class="section" id="pillars">
+    <h2>つばめ学習舎の3本柱</h2>
+    <div class="pillars">
+      <div class="card">
+        <h3>🎯 コーチング</h3>
+        <p class="muted">学び方を一緒にデザインし、「自分で選び決める力」を育てます。</p>
+        <p><a class="btn" href="/swallow-site/programs/coaching.html">詳しく見る</a></p>
+      </div>
+      <div class="card">
+        <h3>🕒 学びを支える仕組み</h3>
+        <p class="muted">飯田高校から徒歩1分／24時間IC自習室／LINE質問で日常を支援。</p>
+        <p><a class="btn" href="/swallow-site/programs/studyroom.html">自習室を見る</a></p>
+      </div>
+      <div class="card">
+        <h3>✈️ 特別プログラム</h3>
+        <p class="muted">学力に挑戦する「スパルタ」、人生に挑戦する「ひとり旅」を用意。</p>
+        <p><a class="btn" href="/swallow-site/programs/sparta.html">スパルタ</a>
+           <a class="btn" href="/swallow-site/programs/hitoritabi.html" style="margin-left:8px;">ひとり旅</a></p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- ===================== 信頼の証 ===================== -->
+  <section class="section" id="trust">
+    <h2>受賞・メディア掲載</h2>
+    <ul>
+      <li>令和4年度 飯田市起業家ビジネスプランコンペ 入賞</li>
+      <li>探究学習で表彰、プログラミングイベント、高校連携</li>
+      <li>メディア掲載：「週刊いいだ」「I-port.biz」</li>
+    </ul>
+    <p style="margin-top:12px;">
+      <a class="btn" href="https://i-port.biz/p/7739/" target="_blank" rel="noopener">I-port.biz 記事</a>
+    </p>
+  </section>
 
-<footer class="footer">
-  <div class="container">© つばめ学習舎 — 自分で選び、自分で決める力を育てる</div>
-</footer>
-<a class="cta-button" href="/swallow-site/contact.html">体験入会はこちら</a>
-<script src="/swallow-site/assets/main.js"></script>
+  <!-- ===================== アクセス ===================== -->
+  <section class="section" id="access">
+    <h2>アクセス</h2>
+    <p class="muted">飯田高校から徒歩1分。自習室・教室の写真は順次掲載します。</p>
+    <!-- Map はあとで置換：Google マップ埋め込み -->
+    <p><a class="btn" href="/swallow-site/contact/">アクセス・お問い合わせへ</a></p>
+  </section>
 
+  <!-- ===================== フッター ===================== -->
+  <footer class="section" style="padding-top:24px; padding-bottom:24px;">
+    <p class="muted">© つばめ学習舎</p>
+  </footer>
+
+  <!-- 右下固定CTA -->
+  <a class="btn btn-accent cta-fab" href="/swallow-site/contact/#trial" aria-label="体験入会はこちら">体験入会</a>
+
+  <!-- 共通JS（ハンバーガー等）。<script>タグはHTML側だけ、JS本体はassets/js/main.js内 -->
+  <script src="/swallow-site/assets/js/main.js?v=20250907"></script>
 </body>
 </html>
