@@ -150,3 +150,36 @@ header.site-header{
 @media (prefers-reduced-motion: reduce) {
   .hero-slide { transition:none; }
 }
+
+:root{
+  --navy:#232951; --navy-dark:#1a2246; --accent:#E11D2F;
+}
+.site-header{
+  position: sticky; top:0; z-index: 50;
+  background: #fff; border-bottom: 1px solid #eee;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 10px 16px;
+}
+.brand{ display:inline-flex; align-items:center; text-decoration:none; }
+.brand-logo{
+  height: clamp(26px, 5vw, 36px); /* 小画面で26px, 大で36px */
+  width: auto; image-rendering: -webkit-optimize-contrast;
+}
+.nav ul{ display:flex; gap:16px; align-items:center; list-style:none; margin:0; padding:0; }
+.nav a{ text-decoration:none; color:#222; font-weight:500; }
+.btn{ padding:.6em 1em; border-radius:999px; border:1px solid var(--navy); color:#fff; background:var(--navy); }
+.btn-accent{ border-color:var(--accent); background:var(--accent); }
+.nav-toggle{ display:none; background:none; border:none; font-size:1.35rem; }
+
+/* モバイルでハンバーガー表示 */
+@media (max-width: 900px){
+  .nav-toggle{ display:block; }
+  .nav{ display:none; width:100%; }
+  .nav.open{ display:block; }
+  .nav ul{ flex-direction:column; align-items:stretch; gap:0; }
+  .nav li{ border-top:1px solid #eee; }
+  .nav a, .btn{ display:block; padding:14px 8px; border-radius:0; text-align:left; }
+}
+/* アクセシビリティ */
+.sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
