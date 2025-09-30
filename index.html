@@ -8,50 +8,43 @@
   <meta property="og:title" content="つばめ学習舎">
   <meta property="og:description" content="独り立ちの翼を育む。">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/assets/img/ogp.png">
-  <meta property="og:url" content="https://<your-username>.github.io/<repo>/">
+  <meta property="og:image" content="assets/img/ogp.png">
+  <meta property="og:url" content="https://swallow-base.github.io/swallow-site/">
   <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Solway:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container nav">
-    <!-- 左上ロゴ（リンクは仮に / ） -->
-    <a class="brand-logo" href="/">
-      <img src="/assets/img/logo_3.png" alt="つばめ学習舎">
+    <a class="brand-logo" href="./">
+      <img src="assets/img/logo_3.png" alt="つばめ学習舎">
     </a>
-
-    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false">☰</button>
-
-    <nav class="primary-nav" aria-label="グローバルナビ">
-      <a href="/">ホーム</a>
-      <a href="/programs">プログラム</a>
-      <a href="/course">受講プラン</a>
-      <a href="/about">つばめ学習舎とは</a>
-      <a href="/facility">校舎紹介</a>
-      <a href="/voice">卒業生の声</a>
-      <a class="btn btn-accent" href="/contact">体験入会・お問い合わせ</a>
+    <button class="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
+    <nav class="primary-nav">
+      <a href="./">ホーム</a>
+      <a href="programs">プログラム</a>
+      <a href="course">受講プラン</a>
+      <a href="about">つばめ学習舎とは</a>
+      <a href="facility">校舎紹介</a>
+      <a href="voice">卒業生の声</a>
+      <a class="btn btn-accent" href="contact">体験入会・お問い合わせ</a>
     </nav>
   </div>
 </header>
 
 <main>
-
   <!-- HERO -->
-  <section class="hero" aria-label="メインビジュアル">
+  <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
-
     <div class="container hero-content">
       <h1 class="hero-title">独り立ちの翼を育む</h1>
-      <img class="hero-logo" src="/assets/img/logo_1b.png" alt="つばめ学習舎 ロゴ">
+      <img class="hero-logo" src="assets/img/logo_1b.png" alt="つばめ学習舎 ロゴ">
       <div class="hero-cta">
-        <a class="btn btn-accent btn-lg" href="/contact">体験入会を申し込む</a>
+        <a class="btn btn-accent btn-lg" href="contact">体験入会を申し込む</a>
       </div>
     </div>
-
-    <!-- スライド画像の並び（2秒ごと） -->
     <template id="hero-slides">
       <span data-src="hero1.png"></span>
       <span data-src="hero2.png"></span>
@@ -60,75 +53,63 @@
     </template>
   </section>
 
-  <!-- FEATURE：bg=f5f5ef -->
+  <!-- FEATURE -->
   <section class="section bg-cream" id="feature">
     <div class="container">
       <h2 class="sec-title">FEATURE</h2>
       <p class="sec-sub">つばめ学習舎の3つの学び</p>
-
       <div class="feature-grid">
-        <!-- 自分でいつでも → /facility -->
-        <article class="feature-card" style="--bg:url('/assets/img/feature1.png')">
+        <article class="feature-card" style="--bg:url('assets/img/feature1.png')">
           <div class="feature-body">
             <h3 class="feature-title">自分で いつでも</h3>
-            <p class="feature-text">24時間自習OK・通いやすい立地で、自分のペースを守れる環境。</p>
-            <a class="btn btn-outline" href="/facility">詳しく見る</a>
+            <a class="btn btn-outline" href="facility">詳しく見る</a>
           </div>
         </article>
-
-        <!-- ともに進む → /programs -->
-        <article class="feature-card" style="--bg:url('/assets/img/feature2.png')">
+        <article class="feature-card" style="--bg:url('assets/img/feature2.png')">
           <div class="feature-body">
             <h3 class="feature-title">ともに 進む</h3>
-            <p class="feature-text">コーチング・授業・質問対応。あなたの「次の一歩」を一緒に設計。</p>
-            <a class="btn btn-outline" href="/programs">詳しく見る</a>
+            <a class="btn btn-outline" href="programs">詳しく見る</a>
           </div>
         </article>
-
-        <!-- 学びをひろげる → /programs -->
-        <article class="feature-card" style="--bg:url('/assets/img/feature3.png')">
+        <article class="feature-card" style="--bg:url('assets/img/feature3.png')">
           <div class="feature-body">
             <h3 class="feature-title">学びを ひろげる</h3>
-            <p class="feature-text">短期集中や探究型など、目的別プログラムで可能性を広げる。</p>
-            <a class="btn btn-outline" href="/programs">詳しく見る</a>
+            <a class="btn btn-outline" href="programs">詳しく見る</a>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT：bg=fff -->
+  <!-- ABOUT -->
   <section class="section" id="about">
     <div class="container">
       <h2 class="sec-title">ABOUT</h2>
       <p class="about-lead">つばめ学習舎は、中高生のためのコーチング型学習塾です。</p>
-
       <div class="about-ribbon">
-        <img src="/assets/img/ribon.png" alt="" aria-hidden="true">
+        <img src="assets/img/ribon.png" alt="">
       </div>
-
       <div class="cta-inline">
-        <a class="btn" href="/about">詳しく見る</a>
+        <a class="btn" href="about">詳しく見る</a>
       </div>
     </div>
   </section>
 
-  <!-- VOICE：bg=f5f5ef -->
+  <!-- VOICE -->
   <section class="section bg-cream" id="voice">
     <div class="container">
       <h2 class="sec-title">VOICE</h2>
       <p class="sec-sub">受講生・保護者のみなさんの声</p>
       <div class="cta-inline">
-        <a class="btn" href="/voice">詳しく見る</a>
+        <a class="btn" href="voice">詳しく見る</a>
       </div>
     </div>
   </section>
 
-  <!-- ACCESS（地図埋め込み）：bg=fff -->
+  <!-- ACCESS -->
   <section class="section" id="access">
     <div class="container">
       <h2 class="sec-title">ACCESS</h2>
-
       <div class="access-grid">
         <div class="access-info">
           <p>〒395-0004<br>長野県飯田市上郷黒田443-4 山本ビル2階</p>
@@ -137,15 +118,13 @@
             <li>飯田女子高等学校から徒歩2分</li>
             <li>JR伊那上郷駅から徒歩6分</li>
           </ul>
-          <a class="btn" href="/facility">詳しく見る</a>
+          <a class="btn" href="facility">詳しく見る</a>
         </div>
-
         <div class="access-map">
           <div class="map-wrap">
             <iframe
               title="つばめ学習舎 地図"
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
               src="https://www.google.com/maps?q=長野県飯田市上郷黒田443-4&output=embed">
             </iframe>
           </div>
@@ -154,14 +133,14 @@
     </div>
   </section>
 
-  <!-- CTA：bg=accent -->
+  <!-- CTA -->
   <section class="section cta-final bg-accent">
     <div class="container center">
-      <a class="btn btn-on-dark btn-lg" href="/contact">体験入会を申し込む</a>
+      <a class="btn btn-on-dark btn-lg" href="contact">体験入会を申し込む</a>
     </div>
   </section>
 
-  <!-- フォーム埋め込み（/contact ページでも再利用） -->
+  <!-- フォーム埋め込み -->
   <section class="section bg-cream" id="contact-embed">
     <div class="container">
       <h2 class="sec-title">CONTACT</h2>
@@ -175,18 +154,14 @@
       </div>
     </div>
   </section>
-
 </main>
 
 <footer class="site-footer">
   <div class="container">
     <small>© 2025 つばめ学習舎</small>
-    <nav class="footer-nav">
-      <a href="/sitemap">サイトマップ</a>
-    </nav>
   </div>
 </footer>
 
-<script src="/assets/js/main.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
