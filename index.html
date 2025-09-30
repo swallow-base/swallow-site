@@ -1,65 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>つばめ学習舎 | コーチング型学習塾</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/swallow-site/assets/styles.css?v=20250908-3">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>つばめ学習舎｜独り立ちの翼を育む</title>
+  <meta name="description" content="コーチング×授業×いつでも学べる環境で、“独り立ちの翼”を育む学習塾。">
+  <meta property="og:title" content="つばめ学習舎">
+  <meta property="og:description" content="独り立ちの翼を育む。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/assets/img/ogp.png">
+  <meta property="og:url" content="https://<your-username>.github.io/<repo>/">
+  <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Solway:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
-  <div data-include="header"></div>
 
-  <section class="hero" data-bg="1">
-    <img src="/swallow-site/assets/logo_1b.png" alt="つばめ学習舎ロゴ" class="hero-logo">
-    <h1 class="catch">独り立ちの翼を育む</h1>
-    <p class="sub">コーチング型学習塾 つばめ学習舎</p>
-    <p class="lead">自ら学び続ける人になる力を、一緒に高めませんか。</p>
-    <a href="/swallow-site/contact/" class="cta-btn">体験入会はこちら</a>
+<header class="site-header">
+  <div class="container nav">
+    <!-- 左上ロゴ（リンクは仮に / ） -->
+    <a class="brand-logo" href="/">
+      <img src="/assets/img/logo_3.png" alt="つばめ学習舎">
+    </a>
+
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false">☰</button>
+
+    <nav class="primary-nav" aria-label="グローバルナビ">
+      <a href="/">ホーム</a>
+      <a href="/programs">プログラム</a>
+      <a href="/course">受講プラン</a>
+      <a href="/about">つばめ学習舎とは</a>
+      <a href="/facility">校舎紹介</a>
+      <a href="/voice">卒業生の声</a>
+      <a class="btn btn-accent" href="/contact">体験入会・お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="メインビジュアル">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+      <h1 class="hero-title">独り立ちの翼を育む</h1>
+      <img class="hero-logo" src="/assets/img/logo_1b.png" alt="つばめ学習舎 ロゴ">
+      <div class="hero-cta">
+        <a class="btn btn-accent btn-lg" href="/contact">体験入会を申し込む</a>
+      </div>
+    </div>
+
+    <!-- スライド画像の並び（2秒ごと） -->
+    <template id="hero-slides">
+      <span data-src="hero1.png"></span>
+      <span data-src="hero2.png"></span>
+      <span data-src="hero3.jpg"></span>
+      <span data-src="hero4.jpg"></span>
+    </template>
   </section>
 
-  <section class="features container">
-    <h2>つばめ学習舎の3本柱</h2>
-    <div class="cards">
-      <article class="card">
-        <h3>コーチング</h3>
-        <p>学び方・進路・興味を整理し、「自分で選び実行する力」を育てる</p>
-        <p><a href="/swallow-site/programs/coaching.html">👉 詳しく見る</a></p>
-      </article>
-      <article class="card">
-        <h3>安心の“学びやすさ”</h3>
-        <ul class="bullets">
-          <li>飯田高校から徒歩1分の立地</li>
-          <li>24時間自習室</li>
-          <li>LINE質問サービス「いつでもつばめ」</li>
-        </ul>
-        <p><a href="/swallow-site/programs/">👉 詳しく見る</a></p>
-      </article>
-      <article class="card">
-        <h3>特別プログラム</h3>
-        <p>挑戦と成長を応援する、“学習塾”を超えた独自のプログラム</p>
-        <p><a href="/swallow-site/programs/special.html">👉 詳しく見る</a></p>
-      </article>
+  <!-- FEATURE：bg=f5f5ef -->
+  <section class="section bg-cream" id="feature">
+    <div class="container">
+      <h2 class="sec-title">FEATURE</h2>
+      <p class="sec-sub">つばめ学習舎の3つの学び</p>
+
+      <div class="feature-grid">
+        <!-- 自分でいつでも → /facility -->
+        <article class="feature-card" style="--bg:url('/assets/img/feature1.png')">
+          <div class="feature-body">
+            <h3 class="feature-title">自分で いつでも</h3>
+            <p class="feature-text">24時間自習OK・通いやすい立地で、自分のペースを守れる環境。</p>
+            <a class="btn btn-outline" href="/facility">詳しく見る</a>
+          </div>
+        </article>
+
+        <!-- ともに進む → /programs -->
+        <article class="feature-card" style="--bg:url('/assets/img/feature2.png')">
+          <div class="feature-body">
+            <h3 class="feature-title">ともに 進む</h3>
+            <p class="feature-text">コーチング・授業・質問対応。あなたの「次の一歩」を一緒に設計。</p>
+            <a class="btn btn-outline" href="/programs">詳しく見る</a>
+          </div>
+        </article>
+
+        <!-- 学びをひろげる → /programs -->
+        <article class="feature-card" style="--bg:url('/assets/img/feature3.png')">
+          <div class="feature-body">
+            <h3 class="feature-title">学びを ひろげる</h3>
+            <p class="feature-text">短期集中や探究型など、目的別プログラムで可能性を広げる。</p>
+            <a class="btn btn-outline" href="/programs">詳しく見る</a>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section class="awards container">
-    <h2>受賞・メディア</h2>
-    <ul>
-      <li>「令和4年度 飯田市起業家ビジネスプランコンペティション」移住起業家部門 入賞</li>
-      <li><a href="https://i-port.biz/p/7739/" target="_blank" rel="noopener">I-port.biz「ハジメマシテ、飯田」インタビュー記事掲載</a></li>
-      <li>「週刊いいだ」2023年元旦号 掲載</li>
-    </ul>
+  <!-- ABOUT：bg=fff -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="sec-title">ABOUT</h2>
+      <p class="about-lead">つばめ学習舎は、中高生のためのコーチング型学習塾です。</p>
+
+      <div class="about-ribbon">
+        <img src="/assets/img/ribon.png" alt="" aria-hidden="true">
+      </div>
+
+      <div class="cta-inline">
+        <a class="btn" href="/about">詳しく見る</a>
+      </div>
+    </div>
   </section>
 
-  <section class="access container">
-    <h2>アクセス</h2>
-    <p>飯田高校から徒歩1分。<a href="/swallow-site/contact/">地図・お問い合わせはこちら</a></p>
+  <!-- VOICE：bg=f5f5ef -->
+  <section class="section bg-cream" id="voice">
+    <div class="container">
+      <h2 class="sec-title">VOICE</h2>
+      <p class="sec-sub">受講生・保護者のみなさんの声</p>
+      <div class="cta-inline">
+        <a class="btn" href="/voice">詳しく見る</a>
+      </div>
+    </div>
   </section>
 
-  <div data-include="footer"></div>
-  <script src="/swallow-site/assets/js/main.js?v=20250908-2"></script>
+  <!-- ACCESS（地図埋め込み）：bg=fff -->
+  <section class="section" id="access">
+    <div class="container">
+      <h2 class="sec-title">ACCESS</h2>
+
+      <div class="access-grid">
+        <div class="access-info">
+          <p>〒395-0004<br>長野県飯田市上郷黒田443-4 山本ビル2階</p>
+          <ul class="access-points">
+            <li>飯田高等学校から徒歩1分</li>
+            <li>飯田女子高等学校から徒歩2分</li>
+            <li>JR伊那上郷駅から徒歩6分</li>
+          </ul>
+          <a class="btn" href="/facility">詳しく見る</a>
+        </div>
+
+        <div class="access-map">
+          <div class="map-wrap">
+            <iframe
+              title="つばめ学習舎 地図"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=長野県飯田市上郷黒田443-4&output=embed">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA：bg=accent -->
+  <section class="section cta-final bg-accent">
+    <div class="container center">
+      <a class="btn btn-on-dark btn-lg" href="/contact">体験入会を申し込む</a>
+    </div>
+  </section>
+
+  <!-- フォーム埋め込み（/contact ページでも再利用） -->
+  <section class="section bg-cream" id="contact-embed">
+    <div class="container">
+      <h2 class="sec-title">CONTACT</h2>
+      <div class="form-wrap">
+        <iframe
+          title="体験入会・お問い合わせフォーム"
+          loading="lazy"
+          src="https://docs.google.com/forms/d/e/1FAIpQLSeGcvSGlJq-EdjAqrycMFaXeB9-NhxoKYPKUnFysZZ0g0pKzA/viewform?embedded=true">
+          読み込み中…
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <small>© 2025 つばめ学習舎</small>
+    <nav class="footer-nav">
+      <a href="/sitemap">サイトマップ</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
 </body>
 </html>
