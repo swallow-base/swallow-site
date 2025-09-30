@@ -41,7 +41,7 @@ h1,h2,h3{
 }
 .nav{display:flex;align-items:center;gap:16px;padding:10px 0}
 .brand-logo{display:inline-flex;align-items:center}
-.brand-logo img{height:36px;width:auto}
+.brand-logo img{height:72px;width:auto}
 .nav-toggle{
   margin-left:auto;font-size:20px;background:none;border:0;
   line-height:1;padding:8px;cursor:pointer;
