@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卒業生の声｜つばめ学習舎</title>
+    <meta name="description" content="つばめ学習舎を卒業した先輩たちの声をご紹介。コーチングや授業、自習室、LINEサポートを通じて成長した体験談を掲載しています。飯田高校から徒歩1分の学習塾。">
+    <!-- ファビコン -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- ページ固有CSS -->
+    <style>
+        /* ===== 卒業生の声セクション ===== */
+        .voice-list-section {
+            background: var(--bg-white);
+            padding: 60px 20px 40px;
+        }
+
+        .voice-list-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* リード文 */
+        .voice-lead {
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        /* 各カード */
+        .voice-item {
+            margin-bottom: 24px;
+            background: var(--bg-cream);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .voice-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .voice-item-card {
+            padding: 20px;
+            position: relative;
+        }
+
+        /* 装飾行（数字と引用符） - モバイル用 */
+        .voice-item-deco {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        /* ナンバリング */
+        .voice-number {
+            font-family: 'Hammersmith One', sans-serif;
+            font-size: 28px;
+            color: var(--brand);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        /* 引用符 */
+        .voice-quote {
+            font-family: Georgia, serif;
+            font-size: 48px;
+            color: var(--brand);
+            opacity: 0.2;
+            line-height: 0.7;
+        }
+
+        .voice-item-header {
+            margin-bottom: 12px;
+        }
+
+        .voice-item-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--brand);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .voice-item-author {
+            font-size: 14px;
+            color: var(--brand);
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* もっと読むボタン */
+        .voice-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: var(--brand);
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 0;
+            width: 100%;
+            font-family: inherit;
+            margin-top: 8px;
+        }
+
+        .voice-toggle::before {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--brand);
+        }
+
+        .voice-toggle::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--brand);
+        }
+
+        .voice-toggle-text {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .voice-toggle-arrow {
+            transition: transform 0.3s;
+        }
+
+        .voice-item.open .voice-toggle-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* 展開コンテンツ */
+        .voice-item-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .voice-item.open .voice-item-content {
+            max-height: 2000px;
+        }
+
+        .voice-item-body {
+            background: var(--bg-cream);
+            padding: 0 20px 24px;
+        }
+
+        .voice-item-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+        }
+
+        .voice-item-text p {
+            margin-bottom: 1em;
+        }
+
+        .voice-item-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== CTAセクション: 共通CSSを使用、padding/背景色のみオーバーライド ===== */
+        .cta-section {
+            background: var(--bg-white);
+            padding: 0 20px 50px;
+        }
+
+        /* cta-button-large は共通CSSを使用（モバイルでdisplay: none） */
+
+        .cta-message {
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* ===== タブレット用（768px〜） ===== */
+        @media (min-width: 768px) {
+            .voice-list-section {
+                padding: 80px 20px 50px;
+            }
+
+            .voice-lead {
+                font-size: 16px;
+                margin-bottom: 50px;
+            }
+
+            .voice-item-card {
+                padding: 28px 24px 24px 80px;
+            }
+
+            /* タブレット以上では装飾行を非表示にしてposition: absoluteで配置 */
+            .voice-item-deco {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin-bottom: 0;
+                pointer-events: none;
+            }
+
+            .voice-number {
+                position: absolute;
+                top: 24px;
+                left: 24px;
+                font-size: 32px;
+            }
+
+            .voice-quote {
+                position: absolute;
+                top: 20px;
+                right: 24px;
+                font-size: 56px;
+            }
+
+            .voice-item-title {
+                font-size: 17px;
+                padding-right: 40px;
+            }
+
+            .voice-item-author {
+                font-size: 15px;
+            }
+
+            /* もっと読むボタンをカード全体の中央に配置 */
+            .voice-toggle {
+                margin-left: -28px; /* (80px - 24px) / 2 = 28px */
+            }
+
+            .voice-item-body {
+                padding: 0 24px 28px 80px;
+            }
+
+            .voice-item-text {
+                font-size: 16px;
+            }
+
+            .cta-section {
+                padding: 20px 30px 50px;
+            }
+
+            .cta-message {
+                margin-bottom: 20px;
+            }
+
+            /* cta-button-large は共通CSSを使用 */
+        }
+
+        /* ===== PC用（1024px〜） ===== */
+        @media (min-width: 1024px) {
+            .voice-list-section {
+                padding: 80px 20px 50px;
+            }
+
+            .cta-section {
+                padding: 20px 30px 60px;
+                background: white;
+            }
+        }
+
+        /* ===== 大画面用（1200px〜） ===== */
+        @media (min-width: 1200px) {
+            .voice-item-title {
+                font-size: 18px;
+            }
+
+            .voice-number {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 共通：ヘッダー ========== -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="images/logo_3.png" alt="つばめ学習舎">
+                <span>つばめ学習舎</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li class="has-dropdown">
+                        <a href="programs.html">プログラム</a>
+                        <ul class="dropdown">
+                            <li><a href="programs.html">プログラム一覧</a></li>
+                            <li><a href="programs/coaching.html">コーチング</a></li>
+                            <li><a href="programs/lecture.html">集団指導・個別指導</a></li>
+                            <li><a href="programs/itsudemo.html">LINE質問サービス</a></li>
+                            <li><a href="programs/sparta.html">スパルタ・プログラム</a></li>
+                            <li><a href="programs/hitoritabi.html">ひとり旅プロジェクト</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="course.html">受講プラン</a></li>
+                    <li><a href="about.html">つばめ学習舎とは</a></li>
+                    <li><a href="facility.html">校舎紹介</a></li>
+                    <li><a href="voice.html">卒業生の声</a></li>
+                    <li><a href="contact.html" class="desktop-cta">体験入会・お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 共通：モバイルメニュー ========== -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">×</button>
+        <nav>
+            <ul>
+                <li><a href="index.html" onclick="toggleMenu()">ホーム</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event)">プログラム</a>
+                    <ul class="submenu">
+                        <li><a href="programs.html" onclick="toggleMenu()">プログラム一覧</a></li>
+                        <li><a href="programs/coaching.html" onclick="toggleMenu()">コーチング</a></li>
+                        <li><a href="programs/lecture.html" onclick="toggleMenu()">集団指導・個別指導</a></li>
+                        <li><a href="programs/itsudemo.html" onclick="toggleMenu()">LINE質問サービス</a></li>
+                        <li><a href="programs/sparta.html" onclick="toggleMenu()">スパルタ・プログラム</a></li>
+                        <li><a href="programs/hitoritabi.html" onclick="toggleMenu()">ひとり旅プロジェクト</a></li>
+                    </ul>
+                </li>
+                <li><a href="course.html" onclick="toggleMenu()">受講プラン</a></li>
+                <li><a href="about.html" onclick="toggleMenu()">つばめ学習舎とは</a></li>
+                <li><a href="facility.html" onclick="toggleMenu()">校舎紹介</a></li>
+                <li><a href="voice.html" onclick="toggleMenu()">卒業生の声</a></li>
+                <li><a href="contact.html" onclick="toggleMenu()">体験入会・お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ========== ページ固有コンテンツ ========== -->
+
+    <!-- ヒーローセクション -->
+    <section class="page-hero">
+        <h1 class="section-title en-text">VOICE</h1>
+        <p class="section-subtitle">卒業生の声</p>
+    </section>
+
+    <!-- 卒業生の声一覧 -->
+    <section class="voice-list-section">
+        <div class="voice-list-container">
+
+            <!-- リード文 -->
+            <p class="voice-lead">つばめ学習舎で学んだ卒業生の声をご紹介します。</p>
+
+                <!-- 1. 匿名さん（兵庫県立大学 合格） -->
+                <article class="voice-item">
+                    <div class="voice-item-card">
+                        <div class="voice-item-deco">
+                            <span class="voice-number">01</span>
+                            <span class="voice-quote">"</span>
+                        </div>
+                        <div class="voice-item-header">
+                            <h2 class="voice-item-title">志望校も一緒に悩んでもらえて、納得の選択ができました</h2>
+                            <p class="voice-item-author">【匿名さん（兵庫県立大学 合格）】</p>
+                        </div>
+                        <button class="voice-toggle" onclick="toggleVoice(this)">
+                            <span class="voice-toggle-text">
+                                <span class="voice-toggle-arrow">▼</span>もっと読む
+                            </span>
+                        </button>
+                    </div>
+                    <div class="voice-item-content">
+                        <div class="voice-item-body">
+                            <div class="voice-item-text">
+                                <p>悩みやわからないことを相談できる機会が常にあって安心でした。志望校の話も、自分一人じゃ決められなかったところを一緒に悩んでもらえて、納得のいく選択ができました。</p>
+                                <p>化学の授業では友達と問題を出し合って、「今度はもっと難しいのを出したい」と思える環境が楽しかったです。</p>
+                                <p>学校から"秒"で来られる立地や24時間自習室のおかげで、少しだけ時間が空くときに5分からでも気軽に勉強を始めやすいのが気に入っていました。</p>
+                                <p>テスト直前でもLINEで聞ける環境も本当に助かりました。学校では、みんなの目や先生の都合が気になるけれど、LINEなら自分のタイミングで個別に質問できて安心でした。先生たちもとても優しいので、遠慮してしまうことなく聞きやすかったです。</p>
+                                <p>ここで自分のペースを理解できたことが、卒業後大学の勉強でも役立っています。</p>
+                                <p>塾に迷っている人には、自分を理解するきっかけとしておすすめです！</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. H・Rさん（立命館大学ほか複数合格） -->
+                <article class="voice-item">
+                    <div class="voice-item-card">
+                        <div class="voice-item-deco">
+                            <span class="voice-number">02</span>
+                            <span class="voice-quote">"</span>
+                        </div>
+                        <div class="voice-item-header">
+                            <h2 class="voice-item-title">数学嫌いが"先生とならやりたい"に変わった、成績も気持ちも大きく前進</h2>
+                            <p class="voice-item-author">【H・Rさん（立命館大学ほか複数合格）】</p>
+                        </div>
+                        <button class="voice-toggle" onclick="toggleVoice(this)">
+                            <span class="voice-toggle-text">
+                                <span class="voice-toggle-arrow">▼</span>もっと読む
+                            </span>
+                        </button>
+                    </div>
+                    <div class="voice-item-content">
+                        <div class="voice-item-body">
+                            <div class="voice-item-text">
+                                <p>入塾して一番良かったことは、自分でも驚くほど成績が伸びたことです。入学当初は240人中200番台とほぼ最低レベルだった私ですが、先生に寄り添ってもらいながらコツコツ取り組んだ結果、2年生最後のテストでは文系の中で10位台まで上がりました。</p>
+                                <p>授業では「何度も聞いたら悪いかな」という不安を、自然な信頼関係のおかげで越えられました。何度も同じことを優しく教えてもらえて、「数学は嫌いだけど先生とやるならやりたい」と思えるようになったのが大きな変化です。</p>
+                                <p>もう一つの大きな変化は、コーチングのおかげで自分で考えられる力がついたことです。コーチングは答えを押しつけられるのではなく、自分で答えを見つけられるように導いてもらえ、気づけば気持ちが前向きに。今では問題や悩みに直面したとき、自分で答えを探すセルフコーチングの習慣も身につき、本当に成長を感じています。</p>
+                                <p>特に3年生の受験期には、自習室が大活躍しました。秋から毎日自習室にこもり、集中して取り組めました。自習室にはお昼を食べられるスペースや電子レンジ、飲み物やお菓子も用意されていて、快適な環境で勉強に集中できました。</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3. 匿名さん（北里大学 合格） -->
+                <article class="voice-item">
+                    <div class="voice-item-card">
+                        <div class="voice-item-deco">
+                            <span class="voice-number">03</span>
+                            <span class="voice-quote">"</span>
+                        </div>
+                        <div class="voice-item-header">
+                            <h2 class="voice-item-title">受け身の勉強から、目的を持って取り組む学びへ。楽しみながら洋画でリスニング力20点アップ！</h2>
+                            <p class="voice-item-author">【匿名さん（北里大学 合格）】</p>
+                        </div>
+                        <button class="voice-toggle" onclick="toggleVoice(this)">
+                            <span class="voice-toggle-text">
+                                <span class="voice-toggle-arrow">▼</span>もっと読む
+                            </span>
+                        </button>
+                    </div>
+                    <div class="voice-item-content">
+                        <div class="voice-item-body">
+                            <div class="voice-item-text">
+                                <p>コーチングでは、勉強や生活の話から「どうすれば良くなるか」を一緒に考えてもらえました。英語のリスニング強化で洋画を観る提案をしてもらい、点数が20点上がったのも忘れられません。</p>
+                                <p>授業ではまず自分の考えを聞いてもらった上で解説があるので、納得して解けるし思考力が伸びたと感じます。</p>
+                                <p>LINEで疑問を聞くとすぐに答えてくれて、モヤモヤが残らず気持ちがスッキリします！</p>
+                                <p>高校生はやることも多く、勉強を一つの作業と捉え、受け身になりがちです。実際、私も塾に通う前はそうだったと感じます。でもこの塾に入ってから、「勉強は何のためにしているのか」という本質的な部分を再度考えた上で、自分に今必要なことをこの少ない時間でどうこなそうかということを考えるようになったと感じます。</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 4. N・Kさん（静岡大学ほか 複数合格） -->
+                <article class="voice-item">
+                    <div class="voice-item-card">
+                        <div class="voice-item-deco">
+                            <span class="voice-number">04</span>
+                            <span class="voice-quote">"</span>
+                        </div>
+                        <div class="voice-item-header">
+                            <h2 class="voice-item-title">論理の授業で身につけた読み方が、受験もキャリアも支えてくれた</h2>
+                            <p class="voice-item-author">【N・Kさん（静岡大学ほか 複数合格）】</p>
+                        </div>
+                        <button class="voice-toggle" onclick="toggleVoice(this)">
+                            <span class="voice-toggle-text">
+                                <span class="voice-toggle-arrow">▼</span>もっと読む
+                            </span>
+                        </button>
+                    </div>
+                    <div class="voice-item-content">
+                        <div class="voice-item-body">
+                            <div class="voice-item-text">
+                                <p>「論理」の授業で現代文の読み方を学んだのは大きな収穫でした。私大受験や共通テスト、二次試験まで役立ちました。</p>
+                                <p>学校帰りにちょっと時間があるときも寄れる立地や、受験直前にこもれる24時間自習室もありがたかったです。</p>
+                                <p>受験のための学習だけではなく、先生との交流を通じて自身のキャリア形成力やコミュニケーション能力を上げることができ、これから社会に出ていくために必要な力を多く身につけることができました。</p>
+                                <p>大学推薦の課題文や面接の練習を一緒にやってもらったのも印象に残っています。</p>
+                                <p>受験勉強は長くて苦しいものですが、つばめ学習舎はそれを乗り切り、さらにはもっと成長する力を与えてくれる塾だと思います。</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5. H・Kさん -->
+                <article class="voice-item">
+                    <div class="voice-item-card">
+                        <div class="voice-item-deco">
+                            <span class="voice-number">05</span>
+                            <span class="voice-quote">"</span>
+                        </div>
+                        <div class="voice-item-header">
+                            <h2 class="voice-item-title">暗記じゃなく理解で伸びた数学、"成長ですね"の一言も忘れない</h2>
+                            <p class="voice-item-author">【H・Kさん】</p>
+                        </div>
+                        <button class="voice-toggle" onclick="toggleVoice(this)">
+                            <span class="voice-toggle-text">
+                                <span class="voice-toggle-arrow">▼</span>もっと読む
+                            </span>
+                        </button>
+                    </div>
+                    <div class="voice-item-content">
+                        <div class="voice-item-body">
+                            <div class="voice-item-text">
+                                <p>授業を通して、定理や法則を「暗記」ではなく理解して使えるようになったのが大きかったです。</p>
+                                <p>共通テストの数学は最初点数がすごく低かったけれど、段々と伸ばしていけました。</p>
+                                <p>高校3年のとき「（学校の課題も大事だけれど）受験勉強の方が大事だと思った」と言ったら「成長ですね」と言ってもらえたこと、今でも覚えています。</p>
+                                <p>コーチングを活用して、自分に合った勉強法を見つけてください。受験は思ったより早く始めないと痛い目をみます。無理せず頑張って！</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 6. 匿名さん -->
+                <article class="voice-item">
+                    <div class="voice-item-card">
+                        <div class="voice-item-deco">
+                            <span class="voice-number">06</span>
+                            <span class="voice-quote">"</span>
+                        </div>
+                        <div class="voice-item-header">
+                            <h2 class="voice-item-title">夏休みの自習室とLINE相談で、不安が安心に変わった</h2>
+                            <p class="voice-item-author">【匿名さん】</p>
+                        </div>
+                        <button class="voice-toggle" onclick="toggleVoice(this)">
+                            <span class="voice-toggle-text">
+                                <span class="voice-toggle-arrow">▼</span>もっと読む
+                            </span>
+                        </button>
+                    </div>
+                    <div class="voice-item-content">
+                        <div class="voice-item-body">
+                            <div class="voice-item-text">
+                                <p>夏休みに自習室を長時間使えたのが良かったです。</p>
+                                <p>コーチングやLINEで不安をすぐ相談できる環境もありがたく、勉強のモチベーションが上がり、受験への不安も軽くなりました。</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 7. S・Yさん -->
+                <article class="voice-item">
+                    <div class="voice-item-card">
+                        <div class="voice-item-deco">
+                            <span class="voice-number">07</span>
+                            <span class="voice-quote">"</span>
+                        </div>
+                        <div class="voice-item-header">
+                            <h2 class="voice-item-title">受験中の東京滞在でもLINEで質問できた、応援と伴走が心強かった</h2>
+                            <p class="voice-item-author">【S・Yさん】</p>
+                        </div>
+                        <button class="voice-toggle" onclick="toggleVoice(this)">
+                            <span class="voice-toggle-text">
+                                <span class="voice-toggle-arrow">▼</span>もっと読む
+                            </span>
+                        </button>
+                    </div>
+                    <div class="voice-item-content">
+                        <div class="voice-item-body">
+                            <div class="voice-item-text">
+                                <p>学校から近くて通いやすかったです。</p>
+                                <p>受験で東京に泊まっている時もLINEで質問に答えてもらえて心強かった。</p>
+                                <p>一人旅プロジェクトはできませんでしたが、大学のアメリカ研修に挑戦するきっかけになりました。</p>
+                                <p>計画的に物事を進められるようになったのも大きな変化です。</p>
+                                <p>部活動（ラグビー）の試合を先生が応援に来てくれたことも嬉しく覚えています。個性を大事にしてくれる塾です。</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+        </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <section class="cta-section">
+        <p class="cta-message">あなたも、自分だけの学び方を見つけてみませんか？</p>
+        <a href="contact.html" class="cta-button-large">体験入会・お問い合わせ</a>
+    </section>
+
+    <!-- ========== 共通：フッター ========== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <strong>つばめ学習舎（合同会社つばめ）</strong><br>
+                〒395-0004<br>
+                長野県飯田市上郷黒田443-4 山本ビル2階
+            </div>
+            
+            <div class="copyright">© 2025 つばめ学習舎 / Swallow-Base</div>
+        </div>
+    </footer>
+
+    <!-- ========== 共通：フローティングCTA ========== -->
+    <div class="floating-cta">
+        <a href="contact.html">体験入会・お問い合わせ</a>
+    </div>
+
+    <!-- 共通JS -->
+    <script src="js/script.js"></script>
+    <!-- ページ固有JS -->
+    <script>
+        // アコーディオン開閉
+        function toggleVoice(button) {
+            const voiceItem = button.closest('.voice-item');
+            voiceItem.classList.toggle('open');
+            
+            // ボタンテキスト変更
+            const toggleText = button.querySelector('.voice-toggle-text');
+            if (voiceItem.classList.contains('open')) {
+                toggleText.innerHTML = '<span class="voice-toggle-arrow">▼</span>閉じる';
+            } else {
+                toggleText.innerHTML = '<span class="voice-toggle-arrow">▼</span>もっと読む';
+            }
+        }
+    </script>
+</body>
+</html>

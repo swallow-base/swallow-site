@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スパルタ・プログラム｜つばめ学習舎</title>
+    <meta name="description" content="つばめ学習舎のスパルタ・プログラムは、1ヶ月間の短期集中で基礎学力を一気に鍛える学習チャレンジ。毎日の報告とやり抜く力を評価し、成果に見合った達成報酬も。自分で決めたテーマに本気で挑戦します。">
+    <!-- ファビコン -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&family=Sawarabi+Gothic&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- ページ固有CSS -->
+    <style>
+        /* ===== ヒーローセクション（特別企画用） ===== */
+        .page-hero .hero-label {
+            font-size: 14px;
+            margin-bottom: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        /* 日本語タイトルは共通CSS（.hero-title-jp）を使用 */
+
+        /* モバイル専用改行（PC/タブレットでは非表示） */
+        .sp-only {
+            display: inline;
+        }
+
+        /* ===== プログラムの特徴セクション ===== */
+        .features-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .features-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 24px 20px;
+            border-radius: 8px;
+        }
+
+        .feature-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 12px;
+        }
+
+        .feature-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* ===== 学習法についてセクション ===== */
+        .method-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .method-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .method-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .method-text .book-title {
+            font-weight: bold;
+        }
+
+        .method-formula {
+            background: var(--bg-cream);
+            border-left: 4px solid var(--brand);
+            padding: 20px 24px;
+            margin: 28px 0;
+            text-align: center;
+        }
+
+        .method-formula-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--brand);
+            letter-spacing: 0.02em;
+        }
+
+        .method-note {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.8;
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        /* ===== プログラムの概要セクション ===== */
+        .overview-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .overview-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .overview-table-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .overview-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .overview-table th,
+        .overview-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .overview-table th {
+            background: var(--brand);
+            color: white;
+            font-weight: bold;
+            width: 80px;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .overview-table td {
+            background: white;
+            text-align: left;
+            line-height: 1.7;
+        }
+
+        .overview-table tbody tr:last-child td,
+        .overview-table tbody tr:last-child th {
+            border-bottom: none;
+        }
+
+        .overview-table ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+
+        .overview-table li {
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .overview-table li::before {
+            content: "・";
+            position: absolute;
+            left: 0;
+            color: var(--brand);
+        }
+
+        /* ===== こんな人におすすめセクション ===== */
+        .recommend-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .recommend-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .recommend-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .recommend-list li {
+            padding: 12px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 15px;
+            color: #333;
+            line-height: 1.8;
+            border-bottom: 1px solid #eee;
+        }
+
+        .recommend-list li:last-child {
+            border-bottom: none;
+        }
+
+        .recommend-list li::before {
+            content: "・";
+            position: absolute;
+            left: 0;
+            color: var(--brand);
+            font-weight: bold;
+        }
+
+        /* ===== 挑戦した生徒の声セクション ===== */
+        .voice-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .voice-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .voice-card {
+            background: #e8e8e8;
+            padding: 28px 24px;
+            border-radius: 10px;
+        }
+
+        .voice-card-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .voice-card-author-top {
+            font-size: 14px;
+            color: var(--brand);
+            font-weight: bold;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .voice-card-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .voice-card-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== プログラムに込めた思いセクション ===== */
+        .message-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .message-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .message-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .message-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== タブレット用（768px〜） ===== */
+        @media (min-width: 768px) {
+            /* 日本語タイトルは共通CSS（.hero-title-jp: 30px）を使用 */
+
+            /* モバイル専用改行を非表示 */
+            .sp-only {
+                display: none;
+            }
+
+            /* プログラムの特徴 */
+            .feature-title {
+                font-size: 18px;
+            }
+
+            .feature-text {
+                font-size: 16px;
+            }
+
+            /* 学習法について */
+            .method-text {
+                font-size: 16px;
+            }
+
+            .method-formula-text {
+                font-size: 20px;
+            }
+
+            .method-note {
+                font-size: 14px;
+            }
+
+            /* プログラムの概要 */
+            .overview-table {
+                font-size: 15px;
+            }
+
+            .overview-table th {
+                width: 120px;
+                font-size: 14px;
+            }
+
+            .overview-table li {
+                font-size: 15px;
+            }
+
+            /* こんな人におすすめ */
+            .recommend-list li {
+                font-size: 16px;
+            }
+
+            /* 挑戦した生徒の声 */
+            .voice-card {
+                padding: 40px 36px;
+            }
+
+            .voice-card-title {
+                font-size: 20px;
+            }
+
+            .voice-card-author-top {
+                font-size: 15px;
+            }
+
+            .voice-card-text {
+                font-size: 16px;
+            }
+
+            /* プログラムに込めた思い */
+            .message-text {
+                font-size: 16px;
+            }
+        }
+
+        /* ===== PC用（1024px〜） ===== */
+        @media (min-width: 1024px) {
+            /* CTAセクション背景色 */
+            .cta-section {
+                background: white;
+            }
+        }
+
+        /* ===== 大画面用（1200px〜） ===== */
+        @media (min-width: 1200px) {
+            /* 日本語タイトルは共通CSS（.hero-title-jp: 34px）を使用 */
+
+            .feature-title {
+                font-size: 20px;
+            }
+
+            .method-formula-text {
+                font-size: 22px;
+            }
+
+            .overview-table {
+                font-size: 16px;
+            }
+
+            .overview-table li {
+                font-size: 16px;
+            }
+
+            .voice-card-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 共通：ヘッダー ========== -->
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo_3.png" alt="つばめ学習舎">
+                <span>つばめ学習舎</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li class="has-dropdown">
+                        <a href="../programs.html">プログラム</a>
+                        <ul class="dropdown">
+                            <li><a href="../programs.html">プログラム一覧</a></li>
+                            <li><a href="coaching.html">コーチング</a></li>
+                            <li><a href="lecture.html">集団指導・個別指導</a></li>
+                            <li><a href="itsudemo.html">LINE質問サービス</a></li>
+                            <li><a href="sparta.html">スパルタ・プログラム</a></li>
+                            <li><a href="hitoritabi.html">ひとり旅プロジェクト</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../course.html">受講プラン</a></li>
+                    <li><a href="../about.html">つばめ学習舎とは</a></li>
+                    <li><a href="../facility.html">校舎紹介</a></li>
+                    <li><a href="../voice.html">卒業生の声</a></li>
+                    <li><a href="../contact.html" class="desktop-cta">体験入会・お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 共通：モバイルメニュー ========== -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">×</button>
+        <nav>
+            <ul>
+                <li><a href="../index.html" onclick="toggleMenu()">ホーム</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event)">プログラム</a>
+                    <ul class="submenu">
+                        <li><a href="../programs.html" onclick="toggleMenu()">プログラム一覧</a></li>
+                        <li><a href="coaching.html" onclick="toggleMenu()">コーチング</a></li>
+                        <li><a href="lecture.html" onclick="toggleMenu()">集団指導・個別指導</a></li>
+                        <li><a href="itsudemo.html" onclick="toggleMenu()">LINE質問サービス</a></li>
+                        <li><a href="sparta.html" onclick="toggleMenu()">スパルタ・プログラム</a></li>
+                        <li><a href="hitoritabi.html" onclick="toggleMenu()">ひとり旅プロジェクト</a></li>
+                    </ul>
+                </li>
+                <li><a href="../course.html" onclick="toggleMenu()">受講プラン</a></li>
+                <li><a href="../about.html" onclick="toggleMenu()">つばめ学習舎とは</a></li>
+                <li><a href="../facility.html" onclick="toggleMenu()">校舎紹介</a></li>
+                <li><a href="../voice.html" onclick="toggleMenu()">卒業生の声</a></li>
+                <li><a href="../contact.html" onclick="toggleMenu()">体験入会・お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ========== ページ固有コンテンツ ========== -->
+
+    <!-- ヒーローセクション -->
+    <section class="page-hero">
+        <p class="hero-label">特別企画 〜学力に挑戦〜</p>
+        <h1 class="section-title hero-title-jp">スパルタ・プログラム</h1>
+    </section>
+
+    <!-- イントロセクション（特別デザイン） -->
+    <section class="intro-section">
+        <div class="intro-layout">
+            <div class="intro-text-column">
+                <div class="intro-container">
+                    <h2 class="intro-heading">努力を可視化し、<br>結果につなげる</h2>
+                    
+                    <p class="intro-text">つばめ学習舎では、<br>ただ授業を受けるだけでなく、<br>自ら学び取る力を育てることを<br>大切にしています。</p>
+                    
+                    <p class="intro-text">その代表的な取り組みが、<br>短期間で一気に基礎力を鍛える<br>「スパルタ・プログラム」です。</p>
+                </div>
+            </div>
+            <div class="intro-image-column">
+                <div class="intro-image-wrapper">
+                    <img src="../images/programs/sparta-hero.jpg" alt="スパルタ・プログラムの様子" class="intro-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- プログラムの特徴セクション -->
+    <section class="features-section">
+        <div class="features-container">
+            <h2 class="section-heading">プログラムの特徴</h2>
+            
+            <div class="features-list">
+                <!-- 短期集中の学習法 -->
+                <div class="feature-item">
+                    <h3 class="feature-title">短期集中の学習法</h3>
+                    <p class="feature-text">1ヶ月間、1日1〜2時間を目安に自分で決めたテーマに毎日集中。基礎学力を一気に鍛え上げます。</p>
+                </div>
+                
+                <!-- 本人の意思を尊重 -->
+                <div class="feature-item">
+                    <h3 class="feature-title">本人の意思を尊重</h3>
+                    <p class="feature-text">実施料金はかかりません。本人の「やりたい」が出発点。テーマ選びから学習計画まで、コーチングを通じて一緒に作り上げます。</p>
+                </div>
+                
+                <!-- 努力を形にする評価 -->
+                <div class="feature-item">
+                    <h3 class="feature-title">努力を形にする評価</h3>
+                    <p class="feature-text">1ヶ月間やり抜いた生徒には、最大5,000円の達成報酬を進呈。成績だけでなく努力そのものを評価する仕組みです。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 学習法についてセクション -->
+    <section class="method-section">
+        <div class="method-container">
+            <h2 class="section-heading">このプログラムの<br class="sp-only">ベースになっている学習法</h2>
+            
+            <p class="method-text">スパルタ・プログラムは、スタディサプリ講師・関正生先生の著書<span class="book-title">『大学入試英単語SPARTA』</span>（かんき出版）で紹介されている「1ヶ月1000語メソッド」を参考にしています。</p>
+            
+            <div class="method-formula">
+                <p class="method-formula-text">1日200語 × 5日 × 6周<br class="sp-only">= 1ヶ月で1000語</p>
+            </div>
+            
+            <p class="method-text">「毎日コツコツ」ではなく「短期間で一気に」覚えることで、記憶の定着を狙う学習法です。</p>
+            
+            <p class="method-text">ただし、この方法を一人で1ヶ月間続けるのは簡単ではありません。だからこそ、コーチングでの計画立てと毎日のLINE報告で「やりきる環境」を整えています。</p>
+            
+            <p class="method-note">※つばめ学習舎では、この学習メソッドをベースに、英単語以外のテーマ（古典単語・数学基礎演習など）にも応用しています。</p>
+        </div>
+    </section>
+
+    <!-- プログラムの概要セクション -->
+    <section class="overview-section">
+        <div class="overview-container">
+            <h2 class="section-heading">プログラムの概要</h2>
+            
+            <div class="overview-table-wrapper">
+                <table class="overview-table">
+                    <tbody>
+                        <tr>
+                            <th>対象</th>
+                            <td>コーチングを受講している全生徒</td>
+                        </tr>
+                        <tr>
+                            <th>期間</th>
+                            <td>推奨は1ヶ月間</td>
+                        </tr>
+                        <tr>
+                            <th>内容</th>
+                            <td>コーチングでテーマと教材を決定（例：英単語暗記・古典単語暗記・数学基礎演習など）</td>
+                        </tr>
+                        <tr>
+                            <th>学習の<br>進め方</th>
+                            <td>
+                                <ul>
+                                    <li>1日1〜2時間を目安に集中演習</li>
+                                    <li>反復学習で1ヶ月に6周の達成を目指す</li>
+                                    <li>例：1日2時間で200語 → 1ヶ月で1000語の英単語習得</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>参加条件</th>
+                            <td>
+                                <ul>
+                                    <li>コーチングで期間・内容・目標を事前に決定</li>
+                                    <li>毎日の進捗をLINEで報告</li>
+                                    <li>教室内掲示板に「実施中」「達成」の掲示を承認（個人情報は非掲載）</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>達成報酬</th>
+                            <td>1ヶ月間の目標をやりきった場合、最大5,000円を進呈</td>
+                        </tr>
+                        <tr>
+                            <th>中止条件</th>
+                            <td>2日連続で取り組みや報告がない場合は中止</td>
+                        </tr>
+                        <tr>
+                            <th>サポート<br>体制</th>
+                            <td>
+                                <ul>
+                                    <li>コーチングによる学習内容や学習方法のサポート</li>
+                                    <li>必要に応じて定着度確認テストを実施</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- こんな人におすすめセクション -->
+    <section class="recommend-section">
+        <div class="recommend-container">
+            <h2 class="section-heading">こんな人におすすめ</h2>
+            
+            <ul class="recommend-list">
+                <li>夏休みに基礎学力を固めたい高校1,2年生・受験生</li>
+                <li>「本気で集中してやりきる経験」を積みたい人</li>
+                <li>自分の勉強法を試し、次の成長につなげたい人</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 挑戦した生徒の声セクション -->
+    <section class="voice-section">
+        <div class="voice-container">
+            <h2 class="section-heading">挑戦した生徒の声</h2>
+            
+            <div class="voice-card">
+                <h3 class="voice-card-title">知っている単語6%から、<br class="sp-only">1ヶ月で9割以上へ。</h3>
+                
+                <p class="voice-card-author-top">高1男子<br>夏休みに英単語帳1000語に挑戦</p>
+                
+                <p class="voice-card-text">夏休みを使って、まだほとんど手をつけていなかった新しい単語帳に挑戦しました。最初に開いたとき、知っている単語は6〜7%くらい。知らない単語ばかりで、「こんなの覚えて、本当に使うんだろうか」という気持ちが正直ありました。</p>
+                
+                <p class="voice-card-text">毎日時間を確保するのは簡単ではありませんでしたが、LINEで報告する仕組みがあったおかげで、なんとか続けることができました。</p>
+                
+                <p class="voice-card-text">驚いたのは、自分の思い込みが変わったことです。ずっと「英単語は書かないと覚えられない」と思っていたのですが、このプログラムの方法——書かずに、繰り返し見る——でやってみたら、ちゃんと頭に入りました。新しい勉強法を手に入れた感覚があります。</p>
+                
+                <p class="voice-card-text">1ヶ月後、体感で9割以上の単語がわかるようになっていました。学校のテストでも、覚えた単語がいくつも出ていることに気づきました。「本当に使うのかな」と思っていた単語が、ちゃんと出てくる。全体を一気に学んだからこそ、その効果を実感できました。</p>
+                
+                <p class="voice-card-text">これを一人でやり切るのは、たぶん難しかったと思います。プログラムがあったからこそできました。冬休みには、残りの範囲にも挑戦したいです。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- プログラムに込めた思いセクション -->
+    <section class="message-section">
+        <div class="message-container">
+            <h2 class="section-heading">プログラムに込めた思い</h2>
+            
+            <p class="message-text">このプログラムは決して楽なものではありません。だからこそ大切なのは、本人が「やりたい」と思う気持ちと主体性です。</p>
+            
+            <p class="message-text">私たちはモチベーションを保てるよう全力でサポートしますが、保護者の方がご興味を持たれても、生徒本人の強い意思が確認できない場合は、参加をおすすめしないこともあります。</p>
+            
+            <p class="message-text">それは、生徒にとって適切なタイミングを大切にしているからです。</p>
+            
+            <p class="message-text">そして、挑戦をやり切ったときに得られる達成感や自信は、これからの学びや人生に大きな力となります。</p>
+            
+            <p class="message-text">困難を乗り越えた経験は、何よりも生徒自身の財産になるはずです。</p>
+        </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <section class="cta-section">
+        <a href="../contact.html" class="cta-button-large">体験入会・お問い合わせ</a>
+    </section>
+
+    <!-- ========== 共通：フッター ========== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <strong>つばめ学習舎（合同会社つばめ）</strong><br>
+                〒395-0004<br>
+                長野県飯田市上郷黒田443-4 山本ビル2階
+            </div>
+            
+            <div class="copyright">© 2025 つばめ学習舎 / Swallow-Base</div>
+        </div>
+    </footer>
+
+    <!-- ========== 共通：フローティングCTA ========== -->
+    <div class="floating-cta">
+        <a href="../contact.html">体験入会・お問い合わせ</a>
+    </div>
+
+    <!-- 共通JS -->
+    <script src="../js/script.js"></script>
+</body>
+</html>

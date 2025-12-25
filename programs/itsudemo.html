@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE質問サービス いつでもつばめ｜つばめ学習舎</title>
+    <meta name="description" content="つばめ学習舎のLINE質問サービス「いつでもつばめ」。24時間いつでも全教科の質問に対応。あなた専用の解説で、自習中の疑問をすぐに解決。飯田市の中高生向け学習塾。">
+    <!-- ファビコン -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- ページ固有CSS -->
+    <style>
+        /* ===== ヒーローセクション ===== */
+        /* page-heroは共通CSSを使用 */
+        .page-hero .hero-label {
+            font-size: 14px;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        /* 日本語タイトルは共通CSS（.hero-title-jp）を使用 */
+
+        /* ===== イントロセクション（2カラムレイアウト） ===== */
+        .intro-section {
+            background: white;
+            padding: 60px 20px 0;
+        }
+
+        .intro-layout {
+            /* モバイルでは単純なレイアウト */
+        }
+
+        .intro-text-column {
+            /* モバイルでは非表示 */
+        }
+
+        .intro-image-column {
+            /* モバイルでは非表示 */
+        }
+
+        .intro-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-heading {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--brand);
+            text-align: center;
+            margin-bottom: 28px;
+            /* 下線なし - 特別デザイン */
+        }
+
+        .intro-text {
+            font-size: 15px;
+            line-height: 2;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .intro-image-wrapper {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-top: 30px;
+            overflow: hidden;
+            aspect-ratio: 5 / 2;
+        }
+
+        .intro-image-wrapper::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .intro-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        /* ===== サービス概要セクション ===== */
+        .overview-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .overview-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* セクション見出しは共通CSS（.section-heading）を使用 */
+
+        .overview-text {
+            font-size: 15px;
+            line-height: 2;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* LINE風チャットUI */
+        .line-chat-wrapper {
+            margin-top: 40px;
+            background: #7b96b5;
+            border-radius: 12px;
+            padding: 24px 16px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .line-chat {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* 生徒メッセージ（右寄り・緑背景） */
+        .chat-student {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .chat-bubble-student {
+            background: #7aeb5a;
+            color: #333;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 85%;
+            font-size: 13px;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .chat-image-student {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 140px;
+        }
+
+        .chat-image-student img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 講師メッセージ（左寄り・白背景） */
+        .chat-teacher {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .chat-bubble-teacher {
+            background: white;
+            color: #333;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 85%;
+            font-size: 13px;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        .chat-image-teacher {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 160px;
+        }
+
+        .chat-image-teacher img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ===== 特徴セクション ===== */
+        .feature-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .feature-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .feature-item {
+            background: var(--bg-cream);
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            border-top: 4px solid var(--brand);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .feature-item-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 10px;
+        }
+
+        .feature-item-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* ===== こんな場面にセクション ===== */
+        .scene-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .scene-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .scene-list {
+            list-style: none;
+        }
+
+        .scene-list li {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            padding: 10px 0 10px 20px;
+            position: relative;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .scene-list li:last-child {
+            border-bottom: none;
+        }
+
+        .scene-list li::before {
+            content: "・";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .scene-note {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #666;
+            margin-top: 24px;
+            padding-left: 1em;
+            text-indent: -1em;
+        }
+
+        /* ===== CTAセクション ===== */
+        /* モバイル用は共通CSS（display: none）を使用 */
+        /* cta-button-largeも共通CSSを使用 */
+
+        /* ===== タブレット用（768px〜） ===== */
+        @media (min-width: 768px) {
+            /* page-heroは共通CSSを使用 */
+
+            .page-hero .hero-label {
+                font-size: 15px;
+            }
+
+            /* 日本語タイトルは共通CSS（.hero-title-jp: 30px）を使用 */
+
+            /* 冒頭セクションの2カラムレイアウト */
+            .intro-section {
+                padding: 0;
+                overflow: hidden;
+            }
+
+            .intro-layout {
+                display: flex;
+                align-items: stretch;
+                max-width: 100%;
+            }
+
+            .intro-text-column {
+                flex: 0 0 50%;
+                padding: 50px 40px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .intro-container {
+                max-width: none;
+                margin: 0;
+                text-align: left;
+            }
+
+            .intro-heading {
+                text-align: left;
+                font-size: 22px;
+            }
+
+            .intro-text {
+                text-align: left;
+                font-size: 16px;
+            }
+
+            .intro-text br {
+                display: none;
+            }
+
+            .intro-image-column {
+                flex: 0 0 50%;
+                position: relative;
+                min-height: 350px;
+            }
+
+            .intro-image-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: auto;
+                margin-left: 0;
+                margin-top: 0;
+                aspect-ratio: auto;
+            }
+
+            .intro-image-wrapper::before {
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: auto;
+                width: 100px;
+                height: 100%;
+                background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+            }
+
+            .intro-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            /* タブレット版：セクション左右余白 */
+            .overview-section,
+            .feature-section,
+            .scene-section {
+                padding: 60px 50px;
+            }
+
+            .overview-container,
+            .feature-container,
+            .scene-container {
+                max-width: 680px;
+            }
+
+            /* セクション見出しは共通CSSを使用 */
+
+            .overview-text {
+                font-size: 16px;
+            }
+
+            .line-chat-wrapper {
+                max-width: 450px;
+                padding: 28px 20px;
+            }
+
+            .chat-bubble-student,
+            .chat-bubble-teacher {
+                font-size: 14px;
+            }
+
+            .chat-image-student {
+                max-width: 160px;
+            }
+
+            .chat-image-teacher {
+                max-width: 180px;
+            }
+
+            .feature-item-title {
+                font-size: 17px;
+            }
+
+            .feature-item-text {
+                font-size: 15px;
+            }
+
+            .scene-list li {
+                font-size: 16px;
+            }
+
+            .scene-note {
+                font-size: 14px;
+            }
+        }
+
+        /* ===== PC用（1024px〜） ===== */
+        @media (min-width: 1024px) {
+            .intro-text-column {
+                padding: 60px 60px;
+            }
+
+            .intro-image-column {
+                min-height: 400px;
+            }
+
+            .intro-image-wrapper::before {
+                width: 120px;
+            }
+
+            .feature-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            /* CTAセクション: 背景色のみオーバーライド（display:blockは共通CSS） */
+            .cta-section {
+                background: var(--bg-cream);
+            }
+        }
+
+        /* ===== 大画面用（1200px〜） ===== */
+        @media (min-width: 1200px) {
+            /* page-heroは共通CSSを使用 */
+
+            .page-hero .hero-label {
+                font-size: 16px;
+            }
+
+            /* 日本語タイトルは共通CSS（.hero-title-jp: 34px）を使用 */
+
+            .intro-heading {
+                font-size: 24px;
+            }
+
+            .intro-text {
+                font-size: 16px;
+            }
+
+            .overview-container,
+            .feature-container,
+            .scene-container {
+                max-width: 800px;
+            }
+
+            /* セクション見出しは共通CSS（24px）を使用 */
+
+            .overview-text {
+                font-size: 16px;
+            }
+
+            .line-chat-wrapper {
+                max-width: 500px;
+                padding: 32px 24px;
+            }
+
+            .chat-bubble-student,
+            .chat-bubble-teacher {
+                font-size: 15px;
+            }
+
+            .chat-image-student {
+                max-width: 180px;
+            }
+
+            .chat-image-teacher {
+                max-width: 200px;
+            }
+
+            .feature-item-title {
+                font-size: 18px;
+            }
+
+            .feature-item-text {
+                font-size: 16px;
+            }
+
+            .cta-button-large {
+                font-size: 17px;
+                padding: 20px 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 共通：ヘッダー ========== -->
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo_3.png" alt="つばめ学習舎">
+                <span>つばめ学習舎</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li class="has-dropdown">
+                        <a href="../programs.html">プログラム</a>
+                        <ul class="dropdown">
+                            <li><a href="../programs.html">プログラム一覧</a></li>
+                            <li><a href="coaching.html">コーチング</a></li>
+                            <li><a href="lecture.html">集団指導・個別指導</a></li>
+                            <li><a href="itsudemo.html">LINE質問サービス</a></li>
+                            <li><a href="sparta.html">スパルタ・プログラム</a></li>
+                            <li><a href="hitoritabi.html">ひとり旅プロジェクト</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../course.html">受講プラン</a></li>
+                    <li><a href="../about.html">つばめ学習舎とは</a></li>
+                    <li><a href="../facility.html">校舎紹介</a></li>
+                    <li><a href="../voice.html">卒業生の声</a></li>
+                    <li><a href="../contact.html" class="desktop-cta">体験入会・お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 共通：モバイルメニュー ========== -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">×</button>
+        <nav>
+            <ul>
+                <li><a href="../index.html" onclick="toggleMenu()">ホーム</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event)">プログラム</a>
+                    <ul class="submenu">
+                        <li><a href="../programs.html" onclick="toggleMenu()">プログラム一覧</a></li>
+                        <li><a href="coaching.html" onclick="toggleMenu()">コーチング</a></li>
+                        <li><a href="lecture.html" onclick="toggleMenu()">集団指導・個別指導</a></li>
+                        <li><a href="itsudemo.html" onclick="toggleMenu()">LINE質問サービス</a></li>
+                        <li><a href="sparta.html" onclick="toggleMenu()">スパルタ・プログラム</a></li>
+                        <li><a href="hitoritabi.html" onclick="toggleMenu()">ひとり旅プロジェクト</a></li>
+                    </ul>
+                </li>
+                <li><a href="../course.html" onclick="toggleMenu()">受講プラン</a></li>
+                <li><a href="../about.html" onclick="toggleMenu()">つばめ学習舎とは</a></li>
+                <li><a href="../facility.html" onclick="toggleMenu()">校舎紹介</a></li>
+                <li><a href="../voice.html" onclick="toggleMenu()">卒業生の声</a></li>
+                <li><a href="../contact.html" onclick="toggleMenu()">体験入会・お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ========== ページ固有コンテンツ ========== -->
+
+    <!-- ヒーローセクション（特殊形式） -->
+    <section class="page-hero">
+        <p class="hero-label">LINE質問サービス</p>
+        <h1 class="section-title hero-title-jp">いつでもつばめ</h1>
+    </section>
+
+    <!-- イントロセクション（2カラムレイアウト） -->
+    <section class="intro-section">
+        <div class="intro-layout">
+            <div class="intro-text-column">
+                <div class="intro-container">
+                    <h2 class="intro-heading">いつでも質問、すぐに解決。</h2>
+                    
+                    <p class="intro-text">時間や場所を問わずいつでもLINEで質問が<br>できるサービス「いつでもつばめ」。</p>
+                    
+                    <p class="intro-text">あなたの"今の疑問"に講師が丁寧に応えることで、<br>自習のテンポを崩しません。</p>
+                </div>
+            </div>
+            <div class="intro-image-column">
+                <div class="intro-image-wrapper">
+                    <img src="../images/programs/itsudemo-hero.jpg" alt="LINEでの質問イメージ" class="intro-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- サービス概要セクション -->
+    <section class="overview-section">
+        <div class="overview-container">
+            <h2 class="section-heading">サービス概要</h2>
+            
+            <p class="overview-text">教科を問わず、勉強中に浮かんだ疑問を<br>LINEで送るだけ。</p>
+            
+            <p class="overview-text">講師があなたの質問内容を読み取り、解説・考え方・別解の比較などを、個別に返信します。</p>
+            
+            <p class="overview-text">ただ答えを教えるのではなく、「なぜそうなるのか」「他の方法がなぜ違うのか」など、あなた自身の個別の疑問を解消できるサービスです。</p>
+            
+            <!-- LINE風チャットUI -->
+            <div class="line-chat-wrapper">
+                <div class="line-chat">
+                    <!-- 生徒からの質問 -->
+                    <div class="chat-student">
+                        <div class="chat-bubble-student">この問題、私は＊＊＊と考えて◎と計算をしました。解答では＃＃＃となっているのですが、これは＋＋ですか？</div>
+                        <div class="chat-image-student">
+                            <img src="../images/programs/itsudemo-math-01.png" alt="質問の数式">
+                        </div>
+                    </div>
+                    
+                    <!-- 講師からの回答 -->
+                    <div class="chat-teacher">
+                        <div class="chat-bubble-teacher">いいですね！<br>これは＊＊＊＊を問う問題で、◎◎◎がポイントです。<br>＃＃さんの解答の＋＋の部分に、・・・・</div>
+                        <div class="chat-image-teacher">
+                            <img src="../images/programs/itsudemo-math-02.png" alt="回答の数式">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特徴セクション -->
+    <section class="feature-section">
+        <div class="feature-container">
+            <h2 class="section-heading">「いつでもつばめ」の特徴</h2>
+            
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3 class="feature-item-title">24時間いつでも</h3>
+                    <p class="feature-item-text">夜でも早朝でも、思い立ったときに質問できます。</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3 class="feature-item-title">全教科対応</h3>
+                    <p class="feature-item-text">つばめ学習舎で受講している科目などに関わらず、どんな教科にも対応します。</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3 class="feature-item-title">あなた専用の解説</h3>
+                    <p class="feature-item-text">個別の理解度や解法、疑問点に合わせて返信します。</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3 class="feature-item-title">対面でフォロー可能</h3>
+                    <p class="feature-item-text">LINE上でのやり取りだけでは難しい場合は、コーチングなど対面でさらに詳しく解説します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- こんな場面にセクション -->
+    <section class="scene-section">
+        <div class="scene-container">
+            <h2 class="section-heading">こんな場面に<br>「いつでもつばめ」</h2>
+            
+            <ul class="scene-list">
+                <li>授業後に先生がつかまらず、質問できない</li>
+                <li>クラスメイトの前で質問しづらい</li>
+                <li>自習中に「別解」や「なぜこうなる？」が気になった</li>
+                <li>家で勉強していて行き詰まったときにすぐ聞きたい</li>
+            </ul>
+            
+            <p class="scene-note">※返信は原則、講師の在席時間内に順次対応します。深夜の質問も、翌朝以降優先的に返信されます。</p>
+        </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <section class="cta-section">
+        <a href="../contact.html" class="cta-button-large">体験入会・お問い合わせはこちら</a>
+    </section>
+
+    <!-- ========== 共通：フッター ========== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <strong>つばめ学習舎（合同会社つばめ）</strong><br>
+                〒395-0004<br>
+                長野県飯田市上郷黒田443-4 山本ビル2階
+            </div>
+            
+            <div class="copyright">© 2025 つばめ学習舎 / Swallow-Base</div>
+        </div>
+    </footer>
+
+    <!-- ========== 共通：フローティングCTA ========== -->
+    <div class="floating-cta">
+        <a href="../contact.html">体験入会・お問い合わせ</a>
+    </div>
+
+    <!-- 共通JS -->
+    <script src="../js/script.js"></script>
+    <!-- ページ固有JS -->
+    <script>
+        // このページ固有のJavaScriptはありません
+    </script>
+</body>
+</html>

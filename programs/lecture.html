@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集団指導・個別指導｜つばめ学習舎</title>
+    <meta name="description" content="つばめ学習舎の集団指導・個別指導。少人数制で一人ひとりの思考力を育てます。飯田高校徒歩1分、中高生対象。体験入会5,000円で授業・コーチング・自習室が体験可能。">
+    <!-- ファビコン -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- ページ固有CSS -->
+    <style>
+        /* イントロセクションは共通CSSを使用 */
+        /* ページ固有：max-widthを600pxに */
+        .intro-container {
+            max-width: 600px;
+        }
+
+        /* ===== 授業概要セクション ===== */
+        .overview-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .overview-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* セクション見出しは共通CSS（.section-heading）を使用 */
+
+        .overview-intro {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 24px;
+        }
+
+        .overview-note {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        /* 授業概要テーブル */
+        .overview-table-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .overview-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .overview-table th,
+        .overview-table td {
+            padding: 12px 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            vertical-align: middle;
+        }
+
+        .overview-table thead th {
+            background: var(--brand);
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .overview-table thead th:first-child {
+            min-width: 70px;
+        }
+
+        /* ヘッダーの縦線 */
+        .overview-table thead th:nth-child(2) {
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .overview-table .row-header {
+            background: #f0f0f0;
+            color: var(--brand);
+            font-weight: bold;
+            font-size: 13px;
+            text-align: center;
+            min-width: 70px;
+            white-space: nowrap;
+        }
+
+        .overview-table td {
+            background: white;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* 集団指導と個別指導の間の縦線 */
+        .overview-table td.col-group {
+            border-right: 1px solid #ddd;
+        }
+
+        .overview-table tbody tr:last-child td,
+        .overview-table tbody tr:last-child th {
+            border-bottom: none;
+        }
+
+        .overview-table .colspan-cell {
+            text-align: center;
+        }
+
+        .overview-table .small-text {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* ===== 授業で大切にしていること（つばめの約束スタイル） ===== */
+        .values-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .values-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .values-intro {
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 32px;
+            color: #333;
+        }
+
+        .values-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .values-item {
+            background: var(--bg-cream);
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            border-top: 4px solid var(--brand);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .values-item-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 10px;
+        }
+
+        .values-item-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* ===== 体験入会のご案内セクション ===== */
+        .trial-section {
+            background: #fae6d3;
+            padding: 60px 20px;
+        }
+
+        .trial-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .trial-info-heading {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--brand);
+            text-align: center;
+            margin-bottom: 28px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--brand);
+        }
+
+        .trial-intro {
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* テーブル（オレンジアクセント） */
+        .trial-table-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .trial-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .trial-table th,
+        .trial-table td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .trial-table .row-header {
+            background: #ff8b1d;
+            color: white;
+            font-weight: bold;
+            width: 50px;
+            text-align: center;
+            border-bottom: 1px solid #e67a00;
+        }
+
+        .trial-table td {
+            background: white;
+        }
+
+        .trial-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .trial-table .content-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .trial-table .content-detail {
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* 料金行 */
+        .price-row {
+            background: white;
+            border-top: 2px solid #ff8b1d;
+        }
+
+        .price-row .row-header {
+            background: #ff8b1d;
+            color: white;
+            font-weight: bold;
+        }
+
+        .price-row td {
+            text-align: center;
+            padding: 16px 10px;
+        }
+
+        .price-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .price-main {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .price-period {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .price-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .price-yen {
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .price-tax {
+            font-size: 13px;
+            color: #666;
+            margin-left: 2px;
+        }
+
+        /* CTAボタン */
+        .trial-cta {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .cta-button-inline {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(225, 29, 47, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button-inline:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(225, 29, 47, 0.4);
+        }
+
+        /* CTAセクション・ボタンは共通CSSを使用 */
+
+        /* ===== タブレット用（768px〜） ===== */
+        @media (min-width: 768px) {
+            /* イントロセクションは共通CSSを使用 */
+
+            /* 各セクション */
+            .overview-section,
+            .values-section,
+            .trial-section {
+                padding: 60px 50px;
+            }
+
+            .overview-container,
+            .values-container,
+            .trial-info {
+                max-width: 700px;
+            }
+
+            /* section-headingは共通CSS（22px）を使用 */
+            .trial-info-heading {
+                font-size: 22px;
+            }
+
+            .overview-intro,
+            .trial-intro,
+            .values-intro {
+                font-size: 16px;
+            }
+
+            .overview-table {
+                font-size: 15px;
+            }
+
+            .overview-table th,
+            .overview-table td {
+                padding: 14px 12px;
+            }
+
+            .overview-table thead th:first-child,
+            .overview-table .row-header {
+                min-width: 90px;
+            }
+
+            .trial-table {
+                font-size: 15px;
+            }
+
+            .trial-table th,
+            .trial-table td {
+                padding: 14px 12px;
+            }
+
+            .trial-table .row-header {
+                width: 70px;
+            }
+
+            .price-amount {
+                font-size: 38px;
+            }
+
+            .values-item-title {
+                font-size: 17px;
+            }
+
+            .values-item-text {
+                font-size: 15px;
+            }
+        }
+
+        /* ===== PC用（1024px〜） ===== */
+        @media (min-width: 1024px) {
+            .intro-text-column {
+                padding: 60px 60px;
+            }
+
+            .intro-image-column {
+                min-height: 400px;
+            }
+
+            .intro-image-wrapper::before {
+                width: 120px;
+            }
+
+            /* 大切にしていること：2カラム */
+            .values-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            /* CTAセクション：共通CSSを使用、背景色のみオーバーライド */
+            .cta-section {
+                background: #fae6d3;
+            }
+
+            /* 体験入会セクション内のボタン非表示（PC用CTAで代替） */
+            .trial-cta {
+                display: none;
+            }
+        }
+
+        /* ===== 大画面用（1200px〜） ===== */
+        @media (min-width: 1200px) {
+            .overview-container,
+            .values-container,
+            .trial-info {
+                max-width: 800px;
+            }
+
+            /* section-headingは共通CSS（24px）を使用 */
+            .trial-info-heading {
+                font-size: 24px;
+            }
+
+            .intro-heading {
+                font-size: 24px;
+            }
+
+            .overview-table {
+                font-size: 16px;
+            }
+
+            .overview-table thead th:first-child,
+            .overview-table .row-header {
+                min-width: 100px;
+            }
+
+            .trial-table {
+                font-size: 16px;
+            }
+
+            .trial-table th,
+            .trial-table td {
+                padding: 16px 14px;
+            }
+
+            .price-amount {
+                font-size: 44px;
+            }
+
+            .values-item-title {
+                font-size: 18px;
+            }
+
+            .values-item-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 共通：ヘッダー ========== -->
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo_3.png" alt="つばめ学習舎">
+                <span>つばめ学習舎</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li class="has-dropdown">
+                        <a href="../programs.html">プログラム</a>
+                        <ul class="dropdown">
+                            <li><a href="../programs.html">プログラム一覧</a></li>
+                            <li><a href="coaching.html">コーチング</a></li>
+                            <li><a href="lecture.html">集団指導・個別指導</a></li>
+                            <li><a href="itsudemo.html">LINE質問サービス</a></li>
+                            <li><a href="sparta.html">スパルタ・プログラム</a></li>
+                            <li><a href="hitoritabi.html">ひとり旅プロジェクト</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../course.html">受講プラン</a></li>
+                    <li><a href="../about.html">つばめ学習舎とは</a></li>
+                    <li><a href="../facility.html">校舎紹介</a></li>
+                    <li><a href="../voice.html">卒業生の声</a></li>
+                    <li><a href="../contact.html" class="desktop-cta">体験入会・お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 共通：モバイルメニュー ========== -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">×</button>
+        <nav>
+            <ul>
+                <li><a href="../index.html" onclick="toggleMenu()">ホーム</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event)">プログラム</a>
+                    <ul class="submenu">
+                        <li><a href="../programs.html" onclick="toggleMenu()">プログラム一覧</a></li>
+                        <li><a href="coaching.html" onclick="toggleMenu()">コーチング</a></li>
+                        <li><a href="lecture.html" onclick="toggleMenu()">集団指導・個別指導</a></li>
+                        <li><a href="itsudemo.html" onclick="toggleMenu()">LINE質問サービス</a></li>
+                        <li><a href="sparta.html" onclick="toggleMenu()">スパルタ・プログラム</a></li>
+                        <li><a href="hitoritabi.html" onclick="toggleMenu()">ひとり旅プロジェクト</a></li>
+                    </ul>
+                </li>
+                <li><a href="../course.html" onclick="toggleMenu()">受講プラン</a></li>
+                <li><a href="../about.html" onclick="toggleMenu()">つばめ学習舎とは</a></li>
+                <li><a href="../facility.html" onclick="toggleMenu()">校舎紹介</a></li>
+                <li><a href="../voice.html" onclick="toggleMenu()">卒業生の声</a></li>
+                <li><a href="../contact.html" onclick="toggleMenu()">体験入会・お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ========== ページ固有コンテンツ ========== -->
+
+    <!-- ヒーローセクション -->
+    <section class="page-hero">
+        <h1 class="section-title en-text">LECTURE</h1>
+        <p class="section-subtitle">集団指導・個別指導</p>
+    </section>
+
+    <!-- イントロセクション -->
+    <section class="intro-section">
+        <div class="intro-layout">
+            <div class="intro-text-column">
+                <div class="intro-container">
+                    <h2 class="intro-heading">一人ひとりの"思考力の翼"を<br>育てる授業</h2>
+                    <p class="intro-text">
+                        私たちの役目は、<br>
+                        ただ知識を並べ立てることではありません。
+                    </p>
+                    <p class="intro-text">
+                        理解・応用・思考を繋げ、<br>
+                        自分なりの"使える学力"を<br>
+                        育てることを目指しています。
+                    </p>
+                </div>
+            </div>
+            <div class="intro-image-column">
+                <div class="intro-image-wrapper">
+                    <img src="../images/programs/lecture-hero.jpg" alt="授業風景" class="intro-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 授業概要セクション -->
+    <section class="overview-section">
+        <div class="overview-container">
+            <h2 class="section-heading">授業概要</h2>
+            
+            <p class="overview-intro">少人数の集団指導と、完全マンツーマンの個別指導の2種類を実施しています。いずれも生徒の顔が見える関係の中で、個々のレベルや課題に合わせて授業を設計しています。</p>
+            
+            <p class="overview-note">＊具体的な講座や授業内容、実施日時は、受講生の課題や予定を調整して柔軟に設定しています。詳細は個別にお問い合わせください。</p>
+            
+            <div class="overview-table-wrapper">
+                <table class="overview-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>少人数<br>集団指導</th>
+                            <th>個別指導</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="row-header">生徒数</th>
+                            <td class="col-group">3〜8名程度</td>
+                            <td>1名</td>
+                        </tr>
+                        <tr>
+                            <th class="row-header">対象</th>
+                            <td colspan="2" class="colspan-cell">中学3年生〜高校3年生、既卒生<br><span class="small-text">（その他応相談）</span></td>
+                        </tr>
+                        <tr>
+                            <th class="row-header">時間</th>
+                            <td colspan="2" class="colspan-cell">1回あたり 80分</td>
+                        </tr>
+                        <tr>
+                            <th class="row-header">回数</th>
+                            <td colspan="2" class="colspan-cell">1コマあたり月4回（週1回）</td>
+                        </tr>
+                        <tr>
+                            <th class="row-header">科目</th>
+                            <td class="col-group">
+                                中学生：全科目<br>
+                                高校生：英語、数学、国語*、理科系総合講座*、社会科系総合講座* など<br>
+                                <span class="small-text">＊の詳細はお問い合わせください。<br>コーチングやLINEでの質問は全科目に対応しています。</span>
+                            </td>
+                            <td>
+                                学年を問わず科目の制約なし<br>
+                                <span class="small-text">学習内容を面談やコーチングで柔軟にデザインしていきます</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="row-header">開催時刻</th>
+                            <td class="col-group">おもに平日夕方</td>
+                            <td>平日日中〜土曜日など<br><span class="small-text">（要相談）</span></td>
+                        </tr>
+                        <tr>
+                            <th class="row-header">オンライン受講</th>
+                            <td colspan="2" class="colspan-cell">随時可<br><span class="small-text">（体調不良時・天候不順時など）</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 授業で大切にしていること -->
+    <section class="values-section">
+        <div class="values-container">
+            <h2 class="section-heading">授業で大切にしていること</h2>
+            
+            <ul class="values-list">
+                <li class="values-item">
+                    <h3 class="values-item-title">双方向性</h3>
+                    <p class="values-item-text">生徒が「なぜそう思ったか」を語れる場を大切にしています。教えることだけでなく、生徒自身の思考を引き出すやり取りを重視しています。</p>
+                </li>
+                <li class="values-item">
+                    <h3 class="values-item-title">根拠をつかむ理解</h3>
+                    <p class="values-item-text">単なる暗記ではなく、「なぜそうなるのか」「どう使えるのか」を丁寧に扱う授業を心がけています。</p>
+                </li>
+                <li class="values-item">
+                    <h3 class="values-item-title">教科の全体像をつかむ</h3>
+                    <p class="values-item-text">単元ごとの細切れで終わらず、教科全体の中で今どこを学んでいるのかを常に意識できるようにしています。</p>
+                </li>
+                <li class="values-item">
+                    <h3 class="values-item-title">知識を引き出す力を育てる</h3>
+                    <p class="values-item-text">蓄えた知識をテストで呼び出せるだけでなく、自分で関連付けて思い出せるようになることを目指しています。</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 体験入会のご案内 -->
+    <section class="trial-section">
+        <div class="trial-info">
+            <h2 class="trial-info-heading">体験入会のご案内</h2>
+            
+            <p class="trial-intro">初月1ヶ月間は体験期間とし、特別料金で<br>以下全ての内容をご体験いただけます。</p>
+            
+            <div class="trial-table-wrapper">
+                <table class="trial-table">
+                    <tbody>
+                        <tr>
+                            <th rowspan="4" class="row-header">内容</th>
+                            <td class="content-name">学習指導<br><span class="content-detail">（集団または個別）</span></td>
+                            <td>1回80分<br>全4回</td>
+                        </tr>
+                        <tr>
+                            <td class="content-name">コーチング</td>
+                            <td>1回 15〜30分<br>回数制限なし</td>
+                        </tr>
+                        <tr>
+                            <td class="content-name">自習室</td>
+                            <td>回数制限なし</td>
+                        </tr>
+                        <tr>
+                            <td class="content-name">いつでもつばめ<br><span class="content-detail">（LINE質問サービス）</span></td>
+                            <td>回数制限なし</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="trial-table price-row">
+                    <tbody>
+                        <tr>
+                            <th class="row-header">料金</th>
+                            <td colspan="2">
+                                <span class="price-label">体験期間限定</span>
+                                <div class="price-main">
+                                    <span class="price-period">1ヶ月間</span>
+                                    <span class="price-amount">5,000</span><span class="price-yen">円</span><span class="price-tax">（税込）</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="trial-cta">
+                <a href="../contact.html" class="cta-button-inline">体験入会・お問い合わせ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTAセクション（PC用） -->
+    <section class="cta-section">
+        <a href="../contact.html" class="cta-button-large">体験入会・お問い合わせ</a>
+    </section>
+
+    <!-- ========== 共通：フッター ========== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <strong>つばめ学習舎（合同会社つばめ）</strong><br>
+                〒395-0004<br>
+                長野県飯田市上郷黒田443-4 山本ビル2階
+            </div>
+            
+            <div class="copyright">© 2025 つばめ学習舎 / Swallow-Base</div>
+        </div>
+    </footer>
+
+    <!-- ========== 共通：フローティングCTA ========== -->
+    <div class="floating-cta">
+        <a href="../contact.html">体験入会・お問い合わせ</a>
+    </div>
+
+    <!-- 共通JS -->
+    <script src="../js/script.js"></script>
+    <!-- ページ固有JS -->
+    <script>
+        // このページ固有のJavaScriptはありません
+    </script>
+</body>
+</html>

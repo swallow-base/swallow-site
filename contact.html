@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体験入会・お問い合わせ｜つばめ学習舎</title>
+    <meta name="description" content="つばめ学習舎の体験入会・お問い合わせページ。初月5,000円で授業・コーチング・自習室・LINE質問サービスをすべて体験できます。飯田高校から徒歩1分、中高生のためのコーチング型学習塾。">
+    <!-- ファビコン -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- ページ固有CSS -->
+    <style>
+        /* ===== 体験入会のご案内セクション ===== */
+        .trial-section {
+            background: #fae6d3;
+            padding: 60px 20px;
+        }
+
+        .trial-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* セクション見出しは共通CSS（.section-heading）を使用 */
+
+        .trial-intro {
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* テーブル（オレンジアクセント） */
+        .trial-table-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .trial-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .trial-table th,
+        .trial-table td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .trial-table .row-header {
+            background: #ff8b1d;
+            color: white;
+            font-weight: bold;
+            width: 50px;
+            text-align: center;
+            border-bottom: 1px solid #e67a00;
+        }
+
+        .trial-table td {
+            background: white;
+        }
+
+        .trial-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .trial-table .content-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .trial-table .content-detail {
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* 料金行 */
+        .price-row {
+            background: white;
+            border-top: 2px solid #ff8b1d;
+        }
+
+        .price-row .row-header {
+            background: #ff8b1d;
+            color: white;
+            font-weight: bold;
+        }
+
+        .price-row td {
+            text-align: center;
+            padding: 16px 10px;
+        }
+
+        .price-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .price-main {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .price-period {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .price-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .price-yen {
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .price-tax {
+            font-size: 13px;
+            color: #666;
+            margin-left: 2px;
+        }
+
+        /* ===== 入会の流れセクション ===== */
+        .flow-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .flow-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* セクション見出しは共通CSS（.section-heading）を使用 */
+
+        /* ステップカード（数字がはみ出すデザイン） */
+        .flow-step-wrapper {
+            position: relative;
+            padding-top: 30px;
+        }
+
+        .flow-step {
+            position: relative;
+            background: var(--bg-cream);
+            padding: 24px 20px 24px 20px;
+            border-radius: 12px;
+            /* min-height削除：共通CSS統一 */
+        }
+
+        .flow-step-number {
+            position: absolute;
+            top: -30px;
+            left: 10px;
+            width: 45px;
+            height: 55px;
+            z-index: 2;
+        }
+
+        .flow-step-number img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .flow-step-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 10px;
+            margin-top: 6px;
+        }
+
+        .flow-step-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .flow-step-button {
+            margin-top: 14px;
+            text-align: center;
+        }
+
+        .form-button {
+            display: inline-block;
+            background: white;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 12px 26px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .form-button:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* ステップ内のテーブル（Step 3用） */
+        .flow-step-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-top: 14px;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .flow-step-table th,
+        .flow-step-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .flow-step-table th {
+            background: var(--brand);
+            color: white;
+            font-weight: bold;
+            width: 50px;
+            text-align: center;
+        }
+
+        .flow-step-table tbody tr:last-child td,
+        .flow-step-table tbody tr:last-child th {
+            border-bottom: none;
+        }
+
+        .flow-step-table .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .flow-step-table .content-row td {
+            padding: 8px 12px;
+        }
+
+        /* ステップ間の矢印 */
+        .flow-arrow {
+            text-align: center;
+            padding: 12px 0 6px 0;
+        }
+
+        .flow-arrow::after {
+            content: "";
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-top: 18px solid var(--brand);
+        }
+
+        /* ===== 各種お問い合わせセクション ===== */
+        .inquiry-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .inquiry-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* セクション見出しは共通CSS（.section-heading）を使用 */
+
+        .inquiry-item {
+            margin-bottom: 32px;
+        }
+
+        .inquiry-item-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 12px;
+        }
+
+        .inquiry-item-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+        }
+
+        .inquiry-note {
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.9;
+            margin: 40px 0 24px;
+            color: #333;
+        }
+
+        .inquiry-button-wrapper {
+            text-align: center;
+        }
+
+        /* CTAセクション・ボタンは共通CSSを使用 */
+
+        /* ===== タブレット対応（768px〜1199px） ===== */
+        @media (min-width: 768px) {
+            /* section-headingは共通CSS（22px）を使用 */
+
+            .trial-intro {
+                font-size: 16px;
+            }
+
+            .trial-table {
+                font-size: 15px;
+            }
+
+            .trial-table th,
+            .trial-table td {
+                padding: 14px 12px;
+            }
+
+            .trial-table .row-header {
+                width: 70px;
+            }
+
+            .price-amount {
+                font-size: 38px;
+            }
+
+            .price-row td {
+                padding: 20px 14px;
+            }
+
+            .flow-step-wrapper {
+                padding-top: 35px;
+            }
+
+            .flow-step {
+                padding: 28px 28px 28px 28px;
+            }
+
+            .flow-step-number {
+                top: -35px;
+                left: 15px;
+                width: 55px;
+                height: 65px;
+            }
+
+            .flow-step-title {
+                font-size: 18px;
+                margin-top: 10px;
+            }
+
+            .flow-step-text {
+                font-size: 15px;
+            }
+
+            .flow-step-table {
+                font-size: 14px;
+            }
+
+            .inquiry-item-title {
+                font-size: 17px;
+            }
+
+            .inquiry-item-text {
+                font-size: 16px;
+            }
+
+            .form-button {
+                padding: 14px 30px;
+                font-size: 15px;
+            }
+        }
+
+        /* ===== PC用CTAセクション（1024px以上）：背景色のみオーバーライド ===== */
+        @media (min-width: 1024px) {
+            .cta-section {
+                background: white;
+            }
+        }
+
+        /* ===== デスクトップ用（1200px以上） ===== */
+        @media (min-width: 1200px) {
+            .trial-info {
+                max-width: 700px;
+            }
+
+            /* section-headingは共通CSS（24px）を使用 */
+
+            .trial-intro {
+                font-size: 16px;
+            }
+
+            .trial-table {
+                font-size: 16px;
+            }
+
+            .trial-table th,
+            .trial-table td {
+                padding: 16px 14px;
+            }
+
+            .price-amount {
+                font-size: 44px;
+            }
+
+            .flow-container,
+            .inquiry-container {
+                max-width: 800px;
+            }
+
+            .flow-step-wrapper {
+                padding-top: 40px;
+            }
+
+            .flow-step {
+                padding: 32px 36px;
+            }
+
+            .flow-step-number {
+                top: -40px;
+                left: 20px;
+                width: 65px;
+                height: 75px;
+            }
+
+            .flow-step-title {
+                font-size: 20px;
+                margin-top: 14px;
+            }
+
+            .flow-step-text {
+                font-size: 16px;
+            }
+
+            .flow-step-table {
+                font-size: 15px;
+            }
+
+            .inquiry-item-title {
+                font-size: 18px;
+            }
+
+            .inquiry-item-text {
+                font-size: 16px;
+            }
+
+            .form-button {
+                padding: 16px 34px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 共通：ヘッダー ========== -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="images/logo_3.png" alt="つばめ学習舎">
+                <span>つばめ学習舎</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li class="has-dropdown">
+                        <a href="programs.html">プログラム</a>
+                        <ul class="dropdown">
+                            <li><a href="programs.html">プログラム一覧</a></li>
+                            <li><a href="programs/coaching.html">コーチング</a></li>
+                            <li><a href="programs/lecture.html">集団指導・個別指導</a></li>
+                            <li><a href="programs/itsudemo.html">LINE質問サービス</a></li>
+                            <li><a href="programs/sparta.html">スパルタ・プログラム</a></li>
+                            <li><a href="programs/hitoritabi.html">ひとり旅プロジェクト</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="course.html">受講プラン</a></li>
+                    <li><a href="about.html">つばめ学習舎とは</a></li>
+                    <li><a href="facility.html">校舎紹介</a></li>
+                    <li><a href="voice.html">卒業生の声</a></li>
+                    <li><a href="contact.html" class="desktop-cta">体験入会・お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 共通：モバイルメニュー ========== -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">×</button>
+        <nav>
+            <ul>
+                <li><a href="index.html" onclick="toggleMenu()">ホーム</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event)">プログラム</a>
+                    <ul class="submenu">
+                        <li><a href="programs.html" onclick="toggleMenu()">プログラム一覧</a></li>
+                        <li><a href="programs/coaching.html" onclick="toggleMenu()">コーチング</a></li>
+                        <li><a href="programs/lecture.html" onclick="toggleMenu()">集団指導・個別指導</a></li>
+                        <li><a href="programs/itsudemo.html" onclick="toggleMenu()">LINE質問サービス</a></li>
+                        <li><a href="programs/sparta.html" onclick="toggleMenu()">スパルタ・プログラム</a></li>
+                        <li><a href="programs/hitoritabi.html" onclick="toggleMenu()">ひとり旅プロジェクト</a></li>
+                    </ul>
+                </li>
+                <li><a href="course.html" onclick="toggleMenu()">受講プラン</a></li>
+                <li><a href="about.html" onclick="toggleMenu()">つばめ学習舎とは</a></li>
+                <li><a href="facility.html" onclick="toggleMenu()">校舎紹介</a></li>
+                <li><a href="voice.html" onclick="toggleMenu()">卒業生の声</a></li>
+                <li><a href="contact.html" onclick="toggleMenu()">体験入会・お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ========== ページ固有コンテンツ ========== -->
+
+    <!-- ヒーローセクション -->
+    <section class="page-hero">
+        <h1 class="section-title en-text">CONTACT</h1>
+        <p class="section-subtitle">体験入会・お問い合わせ</p>
+    </section>
+
+    <!-- 体験入会のご案内 -->
+    <section class="trial-section">
+        <div class="trial-info">
+            <h2 class="section-heading">体験入会のご案内</h2>
+            
+            <p class="trial-intro">初月1ヶ月間は体験期間とし、特別料金で<br>以下全ての内容をご体験いただけます。</p>
+            
+            <div class="trial-table-wrapper">
+                <table class="trial-table">
+                    <tbody>
+                        <tr>
+                            <th rowspan="4" class="row-header">内容</th>
+                            <td class="content-name">学習指導<br><span class="content-detail">（集団または個別）</span></td>
+                            <td>1回80分<br>全4回</td>
+                        </tr>
+                        <tr>
+                            <td class="content-name">コーチング</td>
+                            <td>1回 15〜30分<br>回数制限なし</td>
+                        </tr>
+                        <tr>
+                            <td class="content-name">自習室</td>
+                            <td>回数制限なし</td>
+                        </tr>
+                        <tr>
+                            <td class="content-name">いつでもつばめ<br><span class="content-detail">（LINE質問サービス）</span></td>
+                            <td>回数制限なし</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="trial-table price-row">
+                    <tbody>
+                        <tr>
+                            <th class="row-header">料金</th>
+                            <td colspan="2">
+                                <span class="price-label">体験期間限定</span>
+                                <div class="price-main">
+                                    <span class="price-period">1ヶ月間</span>
+                                    <span class="price-amount">5,000</span><span class="price-yen">円</span><span class="price-tax">（税込）</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 入会の流れ -->
+    <section class="flow-section">
+        <div class="flow-container">
+            <h2 class="section-heading">入会の流れ</h2>
+            
+            <!-- Step 1 -->
+            <div class="flow-step-wrapper">
+                <div class="flow-step">
+                    <div class="flow-step-number">
+                        <img src="images/contact/step-1.png" alt="1">
+                    </div>
+                    <h3 class="flow-step-title">フォームご入力</h3>
+                    <p class="flow-step-text">WEBフォームに必要項目を入力してお送りいただきます（この時点で体験入会の是非は未定で結構です）。</p>
+                    <div class="flow-step-button">
+                        <a href="https://forms.gle/uSrhsoDvjEVomLoUA" target="_blank" rel="noopener" class="form-button">お問い合わせフォーム</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flow-arrow"></div>
+            
+            <!-- Step 2 -->
+            <div class="flow-step-wrapper">
+                <div class="flow-step">
+                    <div class="flow-step-number">
+                        <img src="images/contact/step-2.png" alt="2">
+                    </div>
+                    <h3 class="flow-step-title">初回面談</h3>
+                    <p class="flow-step-text">生徒・保護者・講師による三者面談を行います。塾の説明のほか、学習状況・目標・希望などをお伺いします。<br>面談を通して、体験授業の受講をご検討ください。</p>
+                </div>
+            </div>
+            
+            <div class="flow-arrow"></div>
+            
+            <!-- Step 3 -->
+            <div class="flow-step-wrapper">
+                <div class="flow-step">
+                    <div class="flow-step-number">
+                        <img src="images/contact/step-3.png" alt="3">
+                    </div>
+                    <h3 class="flow-step-title">体験入会</h3>
+                    <p class="flow-step-text">コーチングや学習指導を体験します。<br>具体的な教材・進め方を実践しながら、塾との関係性を深めていきます。</p>
+                    <table class="flow-step-table">
+                        <tbody>
+                            <tr class="content-row">
+                                <th rowspan="2">内容</th>
+                                <td>・学習指導</td>
+                                <td>4回分</td>
+                            </tr>
+                            <tr class="content-row">
+                                <td>・コーチング<br>・LINE質問<br>・自習室利用</td>
+                                <td>期間中<br>無制限</td>
+                            </tr>
+                            <tr>
+                                <th>料金</th>
+                                <td>1ヶ月間</td>
+                                <td><span class="highlight">5,000円</span>（税込）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="flow-arrow"></div>
+            
+            <!-- Step 4 -->
+            <div class="flow-step-wrapper">
+                <div class="flow-step">
+                    <div class="flow-step-number">
+                        <img src="images/contact/step-4.png" alt="4">
+                    </div>
+                    <h3 class="flow-step-title">本入会のご判断</h3>
+                    <p class="flow-step-text">体験期間終了後、再度三者面談を実施します。ご家族で話し合い、本入会の可否や受講プランをご検討ください。</p>
+                </div>
+            </div>
+        </div>
+        
+        <p class="inquiry-note">受講内容や定員の状況など、詳細はお気軽にお問い合わせください。</p>
+        
+        <div class="inquiry-button-wrapper">
+            <a href="https://forms.gle/uSrhsoDvjEVomLoUA" target="_blank" rel="noopener" class="form-button">お問い合わせフォーム</a>
+        </div>
+    </section>
+
+    <!-- 各種お問い合わせ -->
+    <section class="inquiry-section">
+        <div class="inquiry-container">
+            <h2 class="section-heading">各種お問い合わせ</h2>
+            
+            <div class="inquiry-item">
+                <h3 class="inquiry-item-title">・採用について</h3>
+                <p class="inquiry-item-text">つばめ学習舎では、一緒に学びをつくる仲間を随時募集しています。生徒と同じ目線で考え、授業やコーチングの形を共に育てていける方を歓迎します。</p>
+                <p class="inquiry-item-text" style="margin-top: 12px;">飯田・下伊那で新しいチャレンジをする方（U/Iターン、起業準備中など）も応援しています。働き方や関わり方は、面談のうえ柔軟に形を決めていきます。</p>
+            </div>
+            
+            <div class="inquiry-item">
+                <h3 class="inquiry-item-title">・見学、取材について</h3>
+                <p class="inquiry-item-text">つばめ学習舎では、教育や学びに関心のある方の見学・取材も歓迎しています。</p>
+            </div>
+            
+            <p class="inquiry-note">その他どのようなことでも、まずはお気軽にご連絡ください。</p>
+            
+            <div class="inquiry-button-wrapper">
+                <a href="https://forms.gle/uSrhsoDvjEVomLoUA" target="_blank" rel="noopener" class="form-button">お問い合わせフォーム</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA セクション -->
+    <section class="cta-section">
+        <a href="https://forms.gle/uSrhsoDvjEVomLoUA" target="_blank" rel="noopener" class="cta-button-large">体験入会・お問い合わせ</a>
+    </section>
+
+    <!-- ========== 共通：フッター ========== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <strong>つばめ学習舎（合同会社つばめ）</strong><br>
+                〒395-0004<br>
+                長野県飯田市上郷黒田443-4 山本ビル2階
+            </div>
+            
+            <div class="copyright">© 2025 つばめ学習舎 / Swallow-Base</div>
+        </div>
+    </footer>
+
+    <!-- ========== 共通：フローティングCTA ========== -->
+    <div class="floating-cta">
+        <a href="https://forms.gle/uSrhsoDvjEVomLoUA" target="_blank" rel="noopener">体験入会・お問い合わせ</a>
+    </div>
+
+    <!-- 共通JS -->
+    <script src="js/script.js"></script>
+    <!-- ページ固有JS -->
+    <script>
+        // このページ固有のJavaScriptはありません
+    </script>
+</body>
+</html>

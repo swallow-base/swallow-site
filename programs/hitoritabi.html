@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ひとり旅プロジェクト｜つばめ学習舎</title>
+    <meta name="description" content="つばめ学習舎のひとり旅プロジェクトは、高校生が自分の力で旅をする経験を応援するプログラム。最大2万円の支援金で、計画から実行まですべて自分で行う旅を通じて自立心を育みます。">
+    <!-- ファビコン -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- ページ固有CSS -->
+    <style>
+        /* ===== ヒーローセクション（特別企画用） ===== */
+        .page-hero .hero-label {
+            font-size: 14px;
+            margin-bottom: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== イントロセクション（このページ特有のスタイル） ===== */
+        .intro-heading {
+            color: #3a4070;
+        }
+
+        .intro-concept {
+            font-size: 16px;
+            font-weight: 900;
+            color: #3a4070;
+            text-align: center;
+            margin: 24px 0;
+        }
+
+        /* ===== プログラムの概要セクション ===== */
+        .overview-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .overview-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .overview-table-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .overview-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .overview-table th,
+        .overview-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .overview-table th {
+            background: var(--brand);
+            color: white;
+            font-weight: bold;
+            width: 50px;
+            text-align: center;
+            /* モバイル版：縦書き */
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 0.1em;
+        }
+
+        .overview-table td {
+            background: white;
+            text-align: left;
+            line-height: 1.7;
+        }
+
+        .overview-table tbody tr:last-child td,
+        .overview-table tbody tr:last-child th {
+            border-bottom: none;
+        }
+
+        .overview-table ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+
+        .overview-table li {
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .overview-table li::before {
+            content: "・";
+            position: absolute;
+            left: 0;
+            color: var(--brand);
+        }
+
+        /* モバイル版：改行 */
+        .mobile-br {
+            display: inline;
+        }
+
+        /* ===== 今までの実施例セクション ===== */
+        .examples-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .examples-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .examples-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .example-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .example-content {
+            flex: 1;
+        }
+
+        .example-theme {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .example-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--brand);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .example-author {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .example-image-wrapper {
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .example-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 実施例の改行（モバイル用） */
+        .example-br {
+            display: inline;
+        }
+
+        /* ===== このプログラムに込めた思いセクション ===== */
+        .message-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .message-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .message-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .message-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== 保護者の方へセクション ===== */
+        .parents-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .parents-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .parents-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .parents-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== タブレット用（768px〜） ===== */
+        @media (min-width: 768px) {
+            /* ヒーローセクション */
+            .page-hero .hero-label {
+                font-size: 15px;
+            }
+
+            .intro-concept {
+                text-align: left;
+                font-size: 17px;
+            }
+
+            /* タブレット版：左右余白を増やす */
+            .overview-section,
+            .examples-section,
+            .message-section,
+            .parents-section {
+                padding: 60px 50px;
+            }
+
+            .overview-container,
+            .message-container,
+            .parents-container {
+                max-width: 680px;
+                margin: 0 auto;
+            }
+
+            .examples-container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .overview-table {
+                font-size: 15px;
+            }
+
+            .overview-table th {
+                width: 100px;
+                /* タブレット以上：横書きに戻す */
+                writing-mode: horizontal-tb;
+                text-orientation: mixed;
+                letter-spacing: normal;
+            }
+
+            .overview-table li {
+                font-size: 15px;
+            }
+
+            /* タブレット以上：改行を非表示 */
+            .mobile-br {
+                display: none;
+            }
+
+            /* タブレット以上：実施例の改行を非表示 */
+            .example-br {
+                display: none;
+            }
+
+            .message-text,
+            .parents-text {
+                font-size: 16px;
+            }
+
+            /* 実施例 */
+            .example-image-wrapper {
+                width: 150px;
+                height: 150px;
+            }
+
+            .example-theme {
+                font-size: 17px;
+            }
+
+            .example-title {
+                font-size: 15px;
+            }
+        }
+
+        /* ===== PC用（1024px〜） ===== */
+        @media (min-width: 1024px) {
+            /* CTAセクション背景色 */
+            .cta-section {
+                background: white;
+            }
+        }
+
+        /* ===== 大画面用（1200px〜） ===== */
+        @media (min-width: 1200px) {
+            .page-hero .hero-label {
+                font-size: 16px;
+            }
+
+            .overview-table {
+                font-size: 16px;
+            }
+
+            .overview-table li {
+                font-size: 16px;
+            }
+
+            .example-image-wrapper {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 共通：ヘッダー ========== -->
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo_3.png" alt="つばめ学習舎">
+                <span>つばめ学習舎</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li class="has-dropdown">
+                        <a href="../programs.html">プログラム</a>
+                        <ul class="dropdown">
+                            <li><a href="../programs.html">プログラム一覧</a></li>
+                            <li><a href="coaching.html">コーチング</a></li>
+                            <li><a href="lecture.html">集団指導・個別指導</a></li>
+                            <li><a href="itsudemo.html">LINE質問サービス</a></li>
+                            <li><a href="sparta.html">スパルタ・プログラム</a></li>
+                            <li><a href="hitoritabi.html">ひとり旅プロジェクト</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../course.html">受講プラン</a></li>
+                    <li><a href="../about.html">つばめ学習舎とは</a></li>
+                    <li><a href="../facility.html">校舎紹介</a></li>
+                    <li><a href="../voice.html">卒業生の声</a></li>
+                    <li><a href="../contact.html" class="desktop-cta">体験入会・お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 共通：モバイルメニュー ========== -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">×</button>
+        <nav>
+            <ul>
+                <li><a href="../index.html" onclick="toggleMenu()">ホーム</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event)">プログラム</a>
+                    <ul class="submenu">
+                        <li><a href="../programs.html" onclick="toggleMenu()">プログラム一覧</a></li>
+                        <li><a href="coaching.html" onclick="toggleMenu()">コーチング</a></li>
+                        <li><a href="lecture.html" onclick="toggleMenu()">集団指導・個別指導</a></li>
+                        <li><a href="itsudemo.html" onclick="toggleMenu()">LINE質問サービス</a></li>
+                        <li><a href="sparta.html" onclick="toggleMenu()">スパルタ・プログラム</a></li>
+                        <li><a href="hitoritabi.html" onclick="toggleMenu()">ひとり旅プロジェクト</a></li>
+                    </ul>
+                </li>
+                <li><a href="../course.html" onclick="toggleMenu()">受講プラン</a></li>
+                <li><a href="../about.html" onclick="toggleMenu()">つばめ学習舎とは</a></li>
+                <li><a href="../facility.html" onclick="toggleMenu()">校舎紹介</a></li>
+                <li><a href="../voice.html" onclick="toggleMenu()">卒業生の声</a></li>
+                <li><a href="../contact.html" onclick="toggleMenu()">体験入会・お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ========== ページ固有コンテンツ ========== -->
+
+    <!-- ヒーローセクション -->
+    <section class="page-hero">
+        <p class="hero-label">特別企画 〜人生に挑戦〜</p>
+        <h1 class="section-title hero-title-jp">ひとり旅プロジェクト</h1>
+    </section>
+
+    <!-- イントロセクション（特別デザイン） -->
+    <section class="intro-section">
+        <div class="intro-layout">
+            <div class="intro-text-column">
+                <div class="intro-container">
+                    <h2 class="intro-heading">自分の力で旅をする。<br>自由と自立を応援する挑戦。</h2>
+                    
+                    <p class="intro-text">つばめ学習舎は学力を伸ばすだけでなく、<br>生徒が自分の人生を切り拓くための<br>経験も大切にしています。<br>その一つが「ひとり旅応援プログラム」。</p>
+                    
+                    <p class="intro-concept">コンセプトは―― 「全部ひとりでやる」。</p>
+                    
+                    <p class="intro-text">行き先や手配、食事や時間の使い方まで、<br>自分で決めて、自分で動く。<br>私たちは旅費を支援しますが、口は出しません。</p>
+                    
+                    <p class="intro-text">計画が狂ったり、迷ったり、<br>思わぬ出会いがあったり。<br>そんな"旅の揺らぎ"に身を置く時間が、<br>いつのまにか<br>ものごとの選び方を少しだけ自由にしてくれるかもしれない。</p>
+                </div>
+            </div>
+            <div class="intro-image-column">
+                <div class="intro-image-wrapper">
+                    <img src="../images/programs/hitoritabi-hero.jpg" alt="ひとり旅プロジェクトの様子" class="intro-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- プログラムの概要セクション -->
+    <section class="overview-section">
+        <div class="overview-container">
+            <h2 class="section-heading">プログラムの概要</h2>
+            
+            <div class="overview-table-wrapper">
+                <table class="overview-table">
+                    <tbody>
+                        <tr>
+                            <th>対象</th>
+                            <td>コーチングを<br class="mobile-br">受講している生徒</td>
+                        </tr>
+                        <tr>
+                            <th>期間</th>
+                            <td>入会3ヶ月以降<br class="mobile-br">〜卒業後1年以内<br class="mobile-br">（1人1回）</td>
+                        </tr>
+                        <tr>
+                            <th>支援額</th>
+                            <td>最大20,000円<br class="mobile-br">（実施前に現金で支給）</td>
+                        </tr>
+                        <tr>
+                            <th>旅のしばり</th>
+                            <td>
+                                <ul>
+                                    <li>一人で旅行する（友達同伴は不可。ただし現地ツアーで同行者ができるのは可）</li>
+                                    <li>目的地の選定から交通手段・宿の手配等まですべて一人で行う</li>
+                                    <li>現地で写真を100枚撮影する</li>
+                                    <li>チェーンではない地元のお店で食事する</li>
+                                    <li>旅行の目的地や内容は問わないが、社会通念に反することを避け、安全に十分留意する</li>
+                                    <li>保護者の同意と旅行保険加入は必須</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 今までの実施例セクション -->
+    <section class="examples-section">
+        <div class="examples-container">
+            <h2 class="section-heading">今までの実施例</h2>
+            
+            <div class="examples-list">
+                <!-- 実施例1 -->
+                <div class="example-item">
+                    <div class="example-content">
+                        <p class="example-theme">自分の「好き」を深めたい</p>
+                        <p class="example-title">遠い長崎、<br class="example-br">憧れの「軍艦島」へ<br class="example-br">行ってみた。</p>
+                        <p class="example-author">（高2男子）</p>
+                    </div>
+                    <div class="example-image-wrapper">
+                        <img src="../images/programs/hitoritabi-example-01.jpg" alt="軍艦島への旅" class="example-image">
+                    </div>
+                </div>
+                
+                <!-- 実施例2 -->
+                <div class="example-item">
+                    <div class="example-content">
+                        <p class="example-theme">受験が終わった自分へのご褒美に、<br class="example-br">進学前に地元を見つめてみる。</p>
+                        <p class="example-title">2万円で海が見れるか？<br class="example-br">飯田線で<br class="example-br">旅をしてみた。</p>
+                        <p class="example-author">（高3男子）</p>
+                    </div>
+                    <div class="example-image-wrapper">
+                        <img src="../images/programs/hitoritabi-example-02.jpg" alt="飯田線の旅" class="example-image">
+                    </div>
+                </div>
+                
+                <!-- 実施例3 -->
+                <div class="example-item">
+                    <div class="example-content">
+                        <p class="example-theme">勉強の毎日にちょっと一息。</p>
+                        <p class="example-title">大好きな「伊達政宗」のゆかりの地仙台へ、<br class="example-br">日常を離れて気持ちをリセット。</p>
+                        <p class="example-author">（高1女子）</p>
+                    </div>
+                    <div class="example-image-wrapper">
+                        <img src="../images/programs/hitoritabi-example-03.jpg" alt="仙台への旅" class="example-image">
+                    </div>
+                </div>
+                
+                <!-- 実施例4 -->
+                <div class="example-item">
+                    <div class="example-content">
+                        <p class="example-theme">気になる大学のオープンキャンパス、<br class="example-br">気軽に行ける距離じゃない…</p>
+                        <p class="example-title">百聞は一見にしかず。<br class="example-br">北海道の大学に<br class="example-br">足を運んでみた。</p>
+                        <p class="example-author">（高2男子）</p>
+                    </div>
+                    <div class="example-image-wrapper">
+                        <img src="../images/programs/hitoritabi-example-04.jpg" alt="北海道の大学訪問" class="example-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- このプログラムに込めた思いセクション -->
+    <section class="message-section">
+        <div class="message-container">
+            <h2 class="section-heading">このプログラムに込めた思い</h2>
+            
+            <p class="message-text">学校では管理され、家庭でも守られることが多い高校生。けれど、人生のどこかでは必ず「すべて自分で決めなければならない瞬間」がやってきます。</p>
+            
+            <p class="message-text">一方で、現実の高校生たちは、何をするにも結果や効率が求められ、「失敗するくらいなら挑戦しないほうがいい」と足踏みしてしまうことも少なくありません。</p>
+            
+            <p class="message-text">そこで私たちは、あえて成果を求めず、失敗すら肯定される「自由な挑戦の場」を用意しました。一般的な支援プログラムのように"成長"を前提とした旅ではなく、民間の塾だからこそできる、一定額の支援だけをして一切口を出さない旅行支援です。</p>
+            
+            <p class="message-text">成長を強いられず、時間とお金を自分の判断で使い（ときには失敗もして）、それでも許される経験は、進路選択に直接的な目に見える影響はなくとも、人生長い目で見れば決して悪いものではないと思います。</p>
+            
+            <p class="message-text">むしろ、予期せぬ出会いや小さな失敗こそが、自立の土台になると私たちは考えています。</p>
+        </div>
+    </section>
+
+    <!-- 保護者の方へセクション -->
+    <section class="parents-section">
+        <div class="parents-container">
+            <h2 class="section-heading">保護者の方へ</h2>
+            
+            <p class="parents-text">この企画の目的は、あくまで生徒本人の人生を豊かにすることであり、参加を強制するものではありません。もし生徒さん自身が「旅に出たい」という思いを持ち、この取り組みの理念に共感してくださるなら、ぜひその一歩を後押しいただければ幸いです。</p>
+            
+            <p class="parents-text">安全面には十分配慮した上で、塾も伴走します。</p>
+        </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <section class="cta-section">
+        <a href="../contact.html" class="cta-button-large">体験入会・お問い合わせ</a>
+    </section>
+
+    <!-- ========== 共通：フッター ========== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <strong>つばめ学習舎（合同会社つばめ）</strong><br>
+                〒395-0004<br>
+                長野県飯田市上郷黒田443-4 山本ビル2階
+            </div>
+            
+            <div class="copyright">© 2025 つばめ学習舎 / Swallow-Base</div>
+        </div>
+    </footer>
+
+    <!-- ========== 共通：フローティングCTA ========== -->
+    <div class="floating-cta">
+        <a href="../contact.html">体験入会・お問い合わせ</a>
+    </div>
+
+    <!-- 共通JS -->
+    <script src="../js/script.js"></script>
+</body>
+</html>

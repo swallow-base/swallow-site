@@ -1,0 +1,735 @@
+/*
+ * つばめ学習舎 共通CSS
+ * 全ページで使用するスタイル
+ */
+
+/* ===== リセット・基本設定 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --brand: #232951;
+    --accent: #E11D2F;
+    --text: #000000;
+    --bg-white: #ffffff;
+    --bg-cream: #f5f5ef;
+}
+
+body {
+    font-family: 'Sawarabi Gothic', sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+.en-text {
+    font-family: 'Hammersmith One', sans-serif;
+}
+
+/* ===== ヘッダー ===== */
+header {
+    background: var(--bg-white);
+    padding: 12px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.logo span {
+    display: none;
+}
+
+.logo img {
+    width: auto;
+    height: clamp(36px, 8vw, 50px);
+    margin-right: 8px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--brand);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.desktop-nav {
+    display: none;
+}
+
+/* ===== モバイルメニュー ===== */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 400px;
+    height: 100vh;
+    background: var(--brand);
+    padding: 80px 0 40px;
+    transition: right 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.close-menu {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    line-height: 1;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu nav ul {
+    list-style: none;
+}
+
+.mobile-menu nav > ul > li {
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.mobile-menu nav a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 18px 30px;
+    font-size: 16px;
+}
+
+.mobile-menu .has-submenu > a {
+    position: relative;
+    padding-right: 50px;
+}
+
+.mobile-menu .has-submenu > a::after {
+    content: '▼';
+    position: absolute;
+    right: 30px;
+    font-size: 12px;
+    transition: transform 0.3s;
+}
+
+.mobile-menu .has-submenu.open > a::after {
+    transform: rotate(180deg);
+}
+
+.mobile-menu .submenu {
+    background: #536980;
+    border-left: 20px solid var(--brand);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.mobile-menu .submenu.open {
+    max-height: 500px;
+}
+
+.mobile-menu .submenu li {
+    border-bottom: none;
+}
+
+.mobile-menu .submenu a {
+    padding: 14px 30px 14px 50px;
+    font-size: 14px;
+}
+
+/* サブメニュー：プログラム一覧を親項目として強調 */
+.mobile-menu .submenu li:first-child {
+    background: #536980;
+}
+
+.mobile-menu .submenu li:first-child a {
+    font-weight: bold;
+    padding-left: 30px;
+}
+
+/* サブメニュー：子項目 */
+.mobile-menu .submenu li:not(:first-child) {
+    background: #536980;
+}
+
+.mobile-menu .submenu li:not(:first-child) a {
+    background: #f7fafa;
+    margin-left: 20px;
+    padding-left: 25px;
+    color: var(--text);
+    border-bottom: 1px solid #ccc;
+    display: block;
+}
+
+/* コーチング（2番目）のaタグに左上角丸 */
+.mobile-menu .submenu li:nth-child(2) a {
+    border-top-left-radius: 12px;
+}
+
+/* 最後の子項目は下線なし */
+.mobile-menu .submenu li:last-child a {
+    border-bottom: none;
+}
+
+.menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 998;
+}
+
+.menu-overlay.active {
+    display: block;
+}
+
+/* ===== セクション共通 ===== */
+section {
+    padding: 60px 30px;
+}
+
+.bg-white {
+    background: var(--bg-white);
+}
+
+.bg-cream {
+    background: var(--bg-cream);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-family: 'Hammersmith One', sans-serif;
+    font-size: 28px;
+    color: var(--brand);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+}
+
+.section-subtitle {
+    font-size: 13px;
+    color: #666;
+}
+
+/* ===== ページヒーローセクション（共通） ===== */
+.page-hero {
+    background: var(--brand);
+    color: white;
+    text-align: center;
+    padding: 80px 20px 50px;
+    margin-top: 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 180px;
+}
+
+.page-hero .section-title {
+    color: white;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.page-hero .section-subtitle {
+    color: white;
+    font-size: 15px;
+}
+
+/* ===== 日本語Heroタイトル用 ===== */
+.section-title-jp,
+.hero-title-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 0.08em;
+}
+
+/* ===== イントロセクション（冒頭セクション共通） ===== */
+.intro-section {
+    background: var(--bg-white);
+    padding: 60px 20px 0;
+}
+
+.intro-container {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro-heading {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--brand);
+    text-align: center;
+    margin-bottom: 28px;
+    /* 下線なし - 他セクションと差別化 */
+}
+
+.intro-text {
+    font-size: 15px;
+    line-height: 2;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.intro-image-wrapper {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-top: 30px;
+    overflow: hidden;
+    aspect-ratio: 5 / 2;
+}
+
+.intro-image-wrapper::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(255, 255, 255, 1) 10%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+.intro-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* ===== セクション見出し（h2相当） ===== */
+.section-heading {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--brand);
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--brand);
+}
+
+/* ===== 共通ボタン ===== */
+.detail-button {
+    display: inline-flex;
+    align-items: center;
+    background: var(--brand);
+    color: white;
+    padding: clamp(8px, 1.5vw, 11px) clamp(16px, 3vw, 24px);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: clamp(12px, 1.8vw, 13px);
+    transition: background 0.3s;
+    white-space: nowrap;
+}
+
+.detail-button:after {
+    content: "▷";
+    margin-left: 6px;
+    font-size: 11px;
+}
+
+.detail-button:hover {
+    background: #1a1f3a;
+}
+
+/* ===== フッター ===== */
+footer {
+    background: var(--brand);
+    color: white;
+    padding: 50px 30px 30px;
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-info {
+    margin-bottom: 30px;
+    line-height: 2;
+    font-size: 14px;
+    text-align: left;
+}
+
+.footer-info strong {
+    font-size: 15px;
+}
+
+.copyright {
+    padding-top: 20px;
+    padding-bottom: 80px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    opacity: 0.8;
+    font-size: 12px;
+}
+
+/* ===== フローティングCTA ===== */
+.floating-cta {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: calc(100% - 40px);
+    max-width: 500px;
+}
+
+.floating-cta a {
+    display: block;
+    background: var(--accent);
+    color: white;
+    padding: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 4px 16px rgba(225, 29, 47, 0.4);
+}
+
+/* ===== CTAセクション（フッター直前） ===== */
+.cta-section {
+    display: none;
+}
+
+.cta-button-large {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 16px 40px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(225, 29, 47, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button-large:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(225, 29, 47, 0.4);
+}
+
+/* ===== タブレット用スタイル（768px〜） ===== */
+@media (min-width: 768px) {
+    .page-hero {
+        padding: 80px 20px 60px;
+        min-height: 200px;
+    }
+
+    .page-hero .section-title {
+        font-size: 36px;
+    }
+
+    .page-hero .section-subtitle {
+        font-size: 16px;
+    }
+
+    /* 日本語Heroタイトル用 */
+    .section-title-jp,
+    .hero-title-jp {
+        font-size: 30px;
+    }
+
+    /* イントロセクション 2カラムレイアウト */
+    .intro-section {
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .intro-layout {
+        display: flex;
+        align-items: stretch;
+        max-width: 100%;
+    }
+
+    .intro-text-column {
+        flex: 0 0 50%;
+        padding: 50px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .intro-container {
+        max-width: none;
+        margin: 0;
+        text-align: left;
+    }
+
+    .intro-heading {
+        text-align: left;
+        font-size: 22px;
+    }
+
+    .intro-text {
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .intro-text br {
+        display: none;
+    }
+
+    .intro-image-column {
+        flex: 0 0 50%;
+        position: relative;
+        min-height: 350px;
+    }
+
+    .intro-image-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        margin-left: 0;
+        margin-top: 0;
+        aspect-ratio: auto;
+    }
+
+    .intro-image-wrapper::before {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: auto;
+        width: 100px;
+        height: 100%;
+        background: linear-gradient(to right, 
+            rgba(255, 255, 255, 1) 0%, 
+            rgba(255, 255, 255, 0) 100%
+        );
+    }
+
+    /* セクション見出し */
+    .section-heading {
+        font-size: 22px;
+    }
+}
+
+/* ===== デスクトップ用スタイル（1024px〜） ===== */
+@media (min-width: 1024px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    .desktop-nav {
+        display: block;
+    }
+
+    .desktop-nav ul {
+        display: flex;
+        list-style: none;
+        gap: 28px;
+        align-items: center;
+    }
+
+    .desktop-nav a {
+        text-decoration: none;
+        color: var(--brand);
+        font-size: 14px;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+    .desktop-nav a:hover {
+        color: var(--accent);
+    }
+
+    .desktop-cta {
+        background: var(--accent);
+        color: white !important;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 13px;
+    }
+
+    .desktop-cta:hover {
+        color: white !important;
+        opacity: 0.9;
+    }
+
+    /* デスクトップナビ ドロップダウン */
+    .desktop-nav .has-dropdown {
+        position: relative;
+    }
+
+    .desktop-nav .dropdown {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        background: white;
+        min-width: 220px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        border-radius: 8px;
+        padding: 8px 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1001;
+        display: block;
+    }
+
+    .desktop-nav .has-dropdown:hover .dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .desktop-nav .dropdown li {
+        list-style: none;
+    }
+
+    .desktop-nav .dropdown a {
+        display: block;
+        padding: 12px 20px;
+        white-space: nowrap;
+        font-size: 13px;
+    }
+
+    .desktop-nav .dropdown a:hover {
+        background: var(--bg-cream);
+    }
+
+    /* ドロップダウン：プログラム一覧を親項目として強調 */
+    .desktop-nav .dropdown li:first-child {
+        border-bottom: 1px solid #eee;
+        margin-bottom: 4px;
+        background: var(--bg-cream);
+    }
+
+    .desktop-nav .dropdown li:first-child a {
+        font-weight: bold;
+    }
+
+    /* ドロップダウン：子項目をインデント */
+    .desktop-nav .dropdown li:not(:first-child) a {
+        padding-left: 32px;
+    }
+
+    .mobile-menu {
+        display: none !important;
+    }
+
+    section {
+        padding: 80px 20px;
+    }
+
+    .floating-cta {
+        display: none;
+    }
+
+    /* イントロセクション PC版 */
+    .intro-text-column {
+        padding: 60px 60px;
+    }
+
+    .intro-image-column {
+        min-height: 400px;
+    }
+
+    .intro-image-wrapper::before {
+        width: 120px;
+    }
+
+    /* CTAセクション PC版：表示 */
+    .cta-section {
+        display: block;
+        padding: 50px 20px;
+        text-align: center;
+    }
+}
+
+/* ===== 大画面用スタイル（1200px〜） ===== */
+@media (min-width: 1200px) {
+    .page-hero {
+        padding: 90px 20px 70px;
+        min-height: 220px;
+    }
+
+    .page-hero .section-title {
+        font-size: 40px;
+    }
+
+    .page-hero .section-subtitle {
+        font-size: 17px;
+    }
+
+    /* 日本語Heroタイトル用 */
+    .section-title-jp,
+    .hero-title-jp {
+        font-size: 34px;
+    }
+
+    /* セクション見出し */
+    .section-heading {
+        font-size: 24px;
+    }
+}

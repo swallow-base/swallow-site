@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コーチング｜つばめ学習舎</title>
+    <meta name="description" content="つばめ学習舎のコーチングは、勉強のやり方を教え込むのではなく、自分で考え選び進められる力を育てる時間。進路選択から学びの計画まで、納得感を持って前に進む伴走を行います。飯田市の中高生向け学習塾。">
+    <!-- ファビコン -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- ページ固有CSS -->
+    <style>
+        /* ===== コーチング内容セクション ===== */
+        .content-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-intro {
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 32px;
+            color: #333;
+        }
+
+        .content-item {
+            background: white;
+            padding: 24px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .content-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-item-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 12px;
+        }
+
+        .content-item-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .content-item-example {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #666;
+            padding-left: 14px;
+            border-left: 3px solid #c5c5c5;
+        }
+
+        /* ===== つばめの約束セクション ===== */
+        .promise-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .promise-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .promise-intro {
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 32px;
+            color: #333;
+        }
+
+        .promise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .promise-item {
+            background: var(--bg-cream);
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            border-top: 4px solid var(--brand);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .promise-item-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 10px;
+        }
+
+        .promise-item-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* ===== 実施方法セクション ===== */
+        .method-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .method-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .method-intro {
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 32px;
+            color: #333;
+        }
+
+        .method-table-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .method-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .method-table th,
+        .method-table td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        .method-table th {
+            background: var(--brand);
+            color: white;
+            font-weight: bold;
+            width: 80px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .method-table td {
+            background: white;
+        }
+
+        .method-table tbody tr:last-child td,
+        .method-table tbody tr:last-child th {
+            border-bottom: none;
+        }
+
+        .method-label {
+            font-weight: bold;
+            color: var(--brand);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .method-detail {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* ===== 当日の流れセクション ===== */
+        .flow-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .flow-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .flow-intro {
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 32px;
+            color: #333;
+        }
+
+        .flow-image-wrapper {
+            text-align: center;
+        }
+
+        .flow-image {
+            max-width: 100%;
+            width: 300px;
+            height: auto;
+        }
+
+        /* ===== 卒業生の声セクション ===== */
+        .voice-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .voice-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* 卒業生の声セクションの見出しは幅を制限 */
+        .voice-section .section-heading {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .voice-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 0 20px 20px;
+            margin: 0 -20px;
+        }
+
+        .voice-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .voice-card {
+            flex: 0 0 85%;
+            max-width: 400px;
+            background: #e8e8e8;
+            padding: 24px;
+            border-radius: 10px;
+            scroll-snap-align: center;
+        }
+
+        .voice-card-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: var(--brand);
+            line-height: 1.6;
+        }
+
+        .voice-card-text {
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 14px;
+            color: #333;
+        }
+
+        .voice-card-author {
+            text-align: right;
+            font-size: 13px;
+            color: var(--brand);
+            font-weight: bold;
+        }
+
+        .scroll-indicator {
+            text-align: center;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .scroll-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            transition: background 0.3s;
+        }
+
+        .scroll-dot.active {
+            background: var(--brand);
+        }
+
+        .read-more-link {
+            text-align: center;
+            margin-top: 36px;
+        }
+
+        /* ===== タブレット用（768px〜） ===== */
+        @media (min-width: 768px) {
+            /* タブレット版：左右余白を増やす */
+            .method-section,
+            .flow-section,
+            .content-section,
+            .promise-section,
+            .voice-section {
+                padding: 60px 50px;
+            }
+
+            .content-container,
+            .promise-container,
+            .method-container,
+            .flow-container {
+                max-width: 680px;
+                margin: 0 auto;
+            }
+
+            .content-intro,
+            .promise-intro,
+            .method-intro,
+            .flow-intro {
+                font-size: 16px;
+            }
+
+            .content-item-title,
+            .promise-item-title {
+                font-size: 17px;
+            }
+
+            .content-item-text,
+            .promise-item-text {
+                font-size: 15px;
+            }
+
+            .method-table {
+                font-size: 15px;
+            }
+
+            .method-table th {
+                width: 100px;
+            }
+
+            .flow-image {
+                width: 340px;
+            }
+        }
+
+        /* ===== PC用（1024px〜） ===== */
+        @media (min-width: 1024px) {
+            .promise-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            .flow-image {
+                width: 380px;
+            }
+
+            .voice-card {
+                flex: 0 0 32%;
+            }
+
+            /* CTAセクション背景色 */
+            .cta-section {
+                background: var(--bg-cream);
+            }
+        }
+
+        /* ===== 大画面用（1200px〜） ===== */
+        @media (min-width: 1200px) {
+            .content-container,
+            .promise-container,
+            .method-container,
+            .flow-container,
+            .voice-container {
+                max-width: 900px;
+            }
+
+            .content-intro,
+            .promise-intro,
+            .method-intro,
+            .flow-intro {
+                font-size: 16px;
+            }
+
+            .content-item-title,
+            .promise-item-title {
+                font-size: 18px;
+            }
+
+            .content-item-text,
+            .promise-item-text {
+                font-size: 16px;
+            }
+
+            .method-table {
+                font-size: 16px;
+            }
+
+            .flow-image {
+                width: 420px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 共通：ヘッダー ========== -->
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo_3.png" alt="つばめ学習舎">
+                <span>つばめ学習舎</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li class="has-dropdown">
+                        <a href="../programs.html">プログラム</a>
+                        <ul class="dropdown">
+                            <li><a href="../programs.html">プログラム一覧</a></li>
+                            <li><a href="coaching.html">コーチング</a></li>
+                            <li><a href="lecture.html">集団指導・個別指導</a></li>
+                            <li><a href="itsudemo.html">LINE質問サービス</a></li>
+                            <li><a href="sparta.html">スパルタ・プログラム</a></li>
+                            <li><a href="hitoritabi.html">ひとり旅プロジェクト</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../course.html">受講プラン</a></li>
+                    <li><a href="../about.html">つばめ学習舎とは</a></li>
+                    <li><a href="../facility.html">校舎紹介</a></li>
+                    <li><a href="../voice.html">卒業生の声</a></li>
+                    <li><a href="../contact.html" class="desktop-cta">体験入会・お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 共通：モバイルメニュー ========== -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">×</button>
+        <nav>
+            <ul>
+                <li><a href="../index.html" onclick="toggleMenu()">ホーム</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event)">プログラム</a>
+                    <ul class="submenu">
+                        <li><a href="../programs.html" onclick="toggleMenu()">プログラム一覧</a></li>
+                        <li><a href="coaching.html" onclick="toggleMenu()">コーチング</a></li>
+                        <li><a href="lecture.html" onclick="toggleMenu()">集団指導・個別指導</a></li>
+                        <li><a href="itsudemo.html" onclick="toggleMenu()">LINE質問サービス</a></li>
+                        <li><a href="sparta.html" onclick="toggleMenu()">スパルタ・プログラム</a></li>
+                        <li><a href="hitoritabi.html" onclick="toggleMenu()">ひとり旅プロジェクト</a></li>
+                    </ul>
+                </li>
+                <li><a href="../course.html" onclick="toggleMenu()">受講プラン</a></li>
+                <li><a href="../about.html" onclick="toggleMenu()">つばめ学習舎とは</a></li>
+                <li><a href="../facility.html" onclick="toggleMenu()">校舎紹介</a></li>
+                <li><a href="../voice.html" onclick="toggleMenu()">卒業生の声</a></li>
+                <li><a href="../contact.html" onclick="toggleMenu()">体験入会・お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ========== ページ固有コンテンツ ========== -->
+
+    <!-- ヒーローセクション -->
+    <section class="page-hero">
+        <h1 class="section-title en-text">COACHING</h1>
+        <p class="section-subtitle">コーチング</p>
+    </section>
+
+    <!-- 「独り立つ」学びへセクション（特別デザイン） -->
+    <section class="intro-section">
+        <div class="intro-layout">
+            <div class="intro-text-column">
+                <div class="intro-container">
+                    <h2 class="intro-heading">「独り立つ」学びへ</h2>
+                    
+                    <p class="intro-text">つばめ学習舎のコーチングは、勉強のやり方<br>を「教え込む」「管理する」のではなく、<br>自分で考え、選び、進められる力を<br>育てる時間です。</p>
+                    
+                    <p class="intro-text">進路や生き方まで含めた<br>「自分を見つめ直す時間」を通して、<br>学びの計画から進学・キャリアの選択まで、<br>納得感を持って前に進む力を育てる<br>伴走を行います。</p>
+                </div>
+            </div>
+            <div class="intro-image-column">
+                <div class="intro-image-wrapper">
+                    <img src="../images/programs/coaching-hero.jpg" alt="コーチングの様子" class="intro-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 実施方法セクション -->
+    <section class="method-section">
+        <div class="method-container">
+            <h2 class="section-heading">実施方法</h2>
+            
+            <p class="method-intro">その日の気持ちや状況に合わせて、自由に使える伴走の時間です。</p>
+            
+            <div class="method-table-wrapper">
+                <table class="method-table">
+                    <tbody>
+                        <tr>
+                            <th>設定方法</th>
+                            <td>
+                                <span class="method-label">予約制</span>
+                                <span class="method-detail">公式LINEで簡単に予約できます。</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>時間</th>
+                            <td>
+                                <span class="method-label">1回あたり 15分 または 30分</span>
+                                <span class="method-detail">短時間で進捗をチェックするのも、時間をかけてじっくり相談するのも。</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>回数</th>
+                            <td>
+                                <span class="method-label">無制限</span>
+                                <span class="method-detail">テスト前後にまとめて入れても、毎週定期的に入れても。</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>料金</th>
+                            <td>
+                                <span class="method-label">毎月定額</span>
+                                <span class="method-detail">気軽に使える安心なシステムです。</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 当日の流れセクション -->
+    <section class="flow-section">
+        <div class="flow-container">
+            <h2 class="section-heading">当日の流れ（例）</h2>
+            
+            <p class="flow-intro">自分が話したいことをベースに、率直に語り合うなかから次の「小さな一歩」を見つけます。</p>
+            
+            <div class="flow-image-wrapper">
+                <img src="../images/programs/coaching-flow.png" alt="コーチング当日の流れ：今日のテーマ決め（5分）生徒さんがいま気になっていること・話したいことを共有、対話と整理（15分）価値観・条件・選択肢などを一緒に言語化にする、小さな一歩を決める（5分）"やること"ではなく"最初の1分目"まで具体化、出口の確認（5分）実践後の振り返り手段などを確認" class="flow-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- コーチング内容セクション -->
+    <section class="content-section">
+        <div class="content-container">
+            <h2 class="section-heading">コーチング内容</h2>
+            
+            <p class="content-intro">テーマはまさに十人十色。ここでは実際に扱っている一例をご紹介します。</p>
+            
+            <div class="content-item">
+                <h3 class="content-item-title">●進路の根っこを確かめる</h3>
+                <p class="content-item-text">そもそも大学に行く？行くならどんな学びが合う？入試方式や志望校はどう設計する？</p>
+                <p class="content-item-example">例）"医療に興味がある"から一歩進めて、どの職種のどんな分野に惹かれるかを一緒に具体化。</p>
+            </div>
+            
+            <div class="content-item">
+                <h3 class="content-item-title">●学問の"面白がり方"を深ぼる</h3>
+                <p class="content-item-text">数学は「定理を覚える」から「なぜそうなる？」へ。現代文は「なんとなく当てる」から「論理の型で読む」へ。</p>
+                <p class="content-item-example">例）リスニング強化は、洋画を観て気になった表現をメモする小さな実験から。</p>
+            </div>
+            
+            <div class="content-item">
+                <h3 class="content-item-title">●日常の整え方を見直す</h3>
+                <p class="content-item-text">眠気・部活・SNS・気分の波。環境と手順を一緒に設計して、無理のない回し方に。</p>
+                <p class="content-item-example">例）「帰校→5分だけ自習室に寄る→単語2トラック」で"やる気を待たない"動線づくり。</p>
+            </div>
+            
+            <div class="content-item">
+                <h3 class="content-item-title">●迷いの言語化と意思決定</h3>
+                <p class="content-item-text">志望変更、科目の取捨、学校課題とのバランス。メリットやデメリット、それぞれのリスクを整理して、本人の意思で決める。</p>
+                <p class="content-item-example">例）私立文系の数学の配点は全体の何割になるか明示、どれくらいの時間をかけるべきか調整する。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- つばめの約束セクション -->
+    <section class="promise-section">
+        <div class="promise-container">
+            <h2 class="section-heading">つばめの約束</h2>
+            
+            <p class="promise-intro">コーチングをする上で、講師が大切にしていることをご紹介します。</p>
+            
+            <div class="promise-list">
+                <div class="promise-item">
+                    <h3 class="promise-item-title">尊重</h3>
+                    <p class="promise-item-text">予め正解を決めて話すことはありません。あなたの予約・あなたの思いからコーチングを始めます。</p>
+                </div>
+                
+                <div class="promise-item">
+                    <h3 class="promise-item-title">共創</h3>
+                    <p class="promise-item-text">提案はするけれど、決めるのはあなた自身。あなたが納得できない作戦は採用しません。</p>
+                </div>
+                
+                <div class="promise-item">
+                    <h3 class="promise-item-title">安心</h3>
+                    <p class="promise-item-text">「勉強が分からない」「やる気が出ない」は資産です。弱さを責めることはありません。質問はいつでも何度でも歓迎です。</p>
+                </div>
+                
+                <div class="promise-item">
+                    <h3 class="promise-item-title">小さく試す</h3>
+                    <p class="promise-item-text">いきなり完璧は狙いません。短期間の実験→振り返り→微修正のサイクルを一緒に進めます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 卒業生の声セクション -->
+    <section class="voice-section">
+        <div class="voice-container">
+            <h2 class="section-heading">卒業生の声</h2>
+            
+            <div class="voice-scroll" id="voiceScroll">
+                <div class="voice-card">
+                    <h4 class="voice-card-title">答えを押し付けず、<br>自分の中にあった答えを引き出してくれた。</h4>
+                    <p class="voice-card-text">振り返ってみると、コーチングのときに先生から「これが正解だよ」と答えを押し付けられたり、無理に説得されたりしたことって、一度もなかったなと思います。私は考えすぎたり、やる気や気分に左右されたりしやすいタイプですが、先生はそんな私に寄り添いながら、実は自分の中にあった答えを引き出してくれました。</p>
+                    <p class="voice-card-author">（H・Rさん）</p>
+                </div>
+                
+                <div class="voice-card">
+                    <h4 class="voice-card-title">コーチングで見通しを立てれば、<br>きっと効率的な勉強ができる。</h4>
+                    <p class="voice-card-text">日常生活や勉強について、先生と改善点を考えたコーチングは、自分にとってより良い時間の使い方について学ぶ良い経験でした。長いようで短い高校3年間、人によって進路が違うからこそ、勉強するべき教科や量が異なります。</p>
+                    <p class="voice-card-author">（匿名）</p>
+                </div>
+                
+                <div class="voice-card">
+                    <h4 class="voice-card-title">志望校も一緒に悩んでもらえて、<br>納得のいく選択ができた。</h4>
+                    <p class="voice-card-text">コーチングによって、自分が悩んでいることやわからないことを聞く機会が確保されていることに安心感がありました。自分ひとりでは決められなかった志望校のことも一緒に悩んでもらえて、結果的に納得のいく学校を選ぶことができました。</p>
+                    <p class="voice-card-author">（匿名）</p>
+                </div>
+                
+                <div class="voice-card">
+                    <h4 class="voice-card-title">先生との交流が、<br>受験もその先も支えてくれた。</h4>
+                    <p class="voice-card-text">受験のための学習だけではなく、先生との交流を通じて自身のキャリア形成力やコミュニケーション能力を上げることができ、これから社会に出ていくために必要な力を多く身につけることができました。</p>
+                    <p class="voice-card-author">（N・Kさん）</p>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator">
+                <span class="scroll-dot active"></span>
+                <span class="scroll-dot"></span>
+                <span class="scroll-dot"></span>
+                <span class="scroll-dot"></span>
+            </div>
+            
+            <div class="read-more-link">
+                <a href="../voice.html" class="detail-button">全文を読む</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <section class="cta-section">
+        <a href="../contact.html" class="cta-button-large">体験入会・お問い合わせ</a>
+    </section>
+
+    <!-- ========== 共通：フッター ========== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <strong>つばめ学習舎（合同会社つばめ）</strong><br>
+                〒395-0004<br>
+                長野県飯田市上郷黒田443-4 山本ビル2階
+            </div>
+            
+            <div class="copyright">© 2025 つばめ学習舎 / Swallow-Base</div>
+        </div>
+    </footer>
+
+    <!-- ========== 共通：フローティングCTA ========== -->
+    <div class="floating-cta">
+        <a href="../contact.html">体験入会・お問い合わせ</a>
+    </div>
+
+    <!-- 共通JS -->
+    <script src="../js/script.js"></script>
+    <!-- ページ固有JS -->
+    <script>
+        // Voice scroll indicator
+        const voiceScroll = document.getElementById('voiceScroll');
+        const scrollDots = document.querySelectorAll('.scroll-dot');
+
+        voiceScroll.addEventListener('scroll', () => {
+            const scrollLeft = voiceScroll.scrollLeft;
+            const scrollWidth = voiceScroll.scrollWidth - voiceScroll.clientWidth;
+            const scrollPercentage = scrollLeft / scrollWidth;
+            
+            const activeIndex = Math.round(scrollPercentage * (scrollDots.length - 1));
+            
+            scrollDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeIndex);
+            });
+        });
+    </script>
+</body>
+</html>

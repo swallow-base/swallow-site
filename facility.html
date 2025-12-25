@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校舎紹介｜つばめ学習舎</title>
+    <meta name="description" content="つばめ学習舎の校舎紹介。飯田高校から徒歩1分、24時間使える自習室を完備。本館・別館の2つの校舎で、快適な学習環境を提供します。">
+    <!-- ファビコン -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- ページ固有CSS -->
+    <style>
+        /* ===== 校舎の特徴セクション ===== */
+        .features-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .features-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 24px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .feature-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-item-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 12px;
+        }
+
+        .feature-item-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+        }
+
+        /* モバイル専用改行 */
+        .sp-only {
+            display: inline;
+        }
+
+        /* ===== 本館・別館セクション ===== */
+        .building-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .building-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* モバイル用：横スクロール */
+        .photo-scroll {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 0 10px 20px;
+            margin: 0 -30px;
+        }
+
+        .photo-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .photo-item {
+            flex: 0 0 75%;
+            max-width: 300px;
+            scroll-snap-align: center;
+            text-align: center;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            aspect-ratio: 4 / 3;
+        }
+
+        .photo-caption {
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* スクロールインジケーター */
+        .scroll-indicator {
+            text-align: center;
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .scroll-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            transition: background 0.3s;
+        }
+
+        .scroll-dot.active {
+            background: var(--brand);
+        }
+
+        /* 別館セクション */
+        .building-section.annex {
+            background: var(--bg-cream);
+        }
+
+        /* ===== アクセスセクション ===== */
+        .access-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .access-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .map-container {
+            background: #e8e8e8;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 280px;
+            background-image: url('images/home/map.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .map-button {
+            display: inline-block;
+            background: #4A90E2;
+            color: white;
+            padding: 11px 28px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: opacity 0.3s;
+        }
+
+        .map-button:hover {
+            opacity: 0.85;
+        }
+
+        .access-info {
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .access-info h3 {
+            font-size: 15px;
+            color: var(--brand);
+            margin-top: 24px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .access-info h3:first-child {
+            margin-top: 0;
+        }
+
+        .access-info ul {
+            list-style: none;
+        }
+
+        .access-info li {
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .access-info li:before {
+            content: "・";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .access-info p {
+            margin: 0;
+        }
+
+        /* ===== CTAセクション固有：背景色のみ ===== */
+        /* 共通CSSでモバイル非表示、PC表示を制御 */
+        @media (min-width: 1024px) {
+            .cta-section {
+                background: white;
+            }
+        }
+
+        /* ===== タブレット用（768px〜） ===== */
+        @media (min-width: 768px) {
+            /* モバイル専用改行を非表示 */
+            .sp-only {
+                display: none;
+            }
+
+            /* 特徴・本館・別館・アクセスセクション */
+            .features-section,
+            .building-section,
+            .access-section {
+                padding: 60px 50px;
+            }
+
+            .features-container,
+            .access-container {
+                max-width: 680px;
+                margin: 0 auto;
+            }
+
+            .feature-item-title {
+                font-size: 18px;
+            }
+
+            .feature-item-text {
+                font-size: 16px;
+            }
+
+            /* タブレット：写真グリッド2列表示 */
+            .photo-scroll {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+                overflow-x: visible;
+                padding: 0;
+                margin: 0;
+            }
+
+            .photo-item {
+                flex: none;
+                max-width: none;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+
+            .photo-caption {
+                font-size: 15px;
+            }
+
+            /* アクセス情報 */
+            .access-info {
+                font-size: 15px;
+            }
+
+            .access-info h3 {
+                font-size: 16px;
+            }
+        }
+
+        /* ===== PC用（1024px〜） ===== */
+        @media (min-width: 1024px) {
+            /* PC：本館の写真グリッド3列 */
+            .building-section.main .photo-scroll {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            /* PC：別館の写真グリッド2列（中央寄せ） */
+            .building-section.annex .photo-scroll {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ===== 大画面用（1200px〜） ===== */
+        @media (min-width: 1200px) {
+            .features-container,
+            .building-container,
+            .access-container {
+                max-width: 900px;
+            }
+
+            .feature-item-title {
+                font-size: 18px;
+            }
+
+            .feature-item-text {
+                font-size: 16px;
+            }
+
+            .access-info {
+                font-size: 16px;
+            }
+
+            .access-info h3 {
+                font-size: 17px;
+            }
+
+            .cta-button-large {
+                font-size: 17px;
+                padding: 20px 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 共通：ヘッダー ========== -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="images/logo_3.png" alt="つばめ学習舎">
+                <span>つばめ学習舎</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li class="has-dropdown">
+                        <a href="programs.html">プログラム</a>
+                        <ul class="dropdown">
+                            <li><a href="programs.html">プログラム一覧</a></li>
+                            <li><a href="programs/coaching.html">コーチング</a></li>
+                            <li><a href="programs/lecture.html">集団指導・個別指導</a></li>
+                            <li><a href="programs/itsudemo.html">LINE質問サービス</a></li>
+                            <li><a href="programs/sparta.html">スパルタ・プログラム</a></li>
+                            <li><a href="programs/hitoritabi.html">ひとり旅プロジェクト</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="course.html">受講プラン</a></li>
+                    <li><a href="about.html">つばめ学習舎とは</a></li>
+                    <li><a href="facility.html">校舎紹介</a></li>
+                    <li><a href="voice.html">卒業生の声</a></li>
+                    <li><a href="contact.html" class="desktop-cta">体験入会・お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 共通：モバイルメニュー ========== -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">×</button>
+        <nav>
+            <ul>
+                <li><a href="index.html" onclick="toggleMenu()">ホーム</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event)">プログラム</a>
+                    <ul class="submenu">
+                        <li><a href="programs.html" onclick="toggleMenu()">プログラム一覧</a></li>
+                        <li><a href="programs/coaching.html" onclick="toggleMenu()">コーチング</a></li>
+                        <li><a href="programs/lecture.html" onclick="toggleMenu()">集団指導・個別指導</a></li>
+                        <li><a href="programs/itsudemo.html" onclick="toggleMenu()">LINE質問サービス</a></li>
+                        <li><a href="programs/sparta.html" onclick="toggleMenu()">スパルタ・プログラム</a></li>
+                        <li><a href="programs/hitoritabi.html" onclick="toggleMenu()">ひとり旅プロジェクト</a></li>
+                    </ul>
+                </li>
+                <li><a href="course.html" onclick="toggleMenu()">受講プラン</a></li>
+                <li><a href="about.html" onclick="toggleMenu()">つばめ学習舎とは</a></li>
+                <li><a href="facility.html" onclick="toggleMenu()">校舎紹介</a></li>
+                <li><a href="voice.html" onclick="toggleMenu()">卒業生の声</a></li>
+                <li><a href="contact.html" onclick="toggleMenu()">体験入会・お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ========== ページ固有コンテンツ ========== -->
+
+    <!-- ヒーローセクション -->
+    <section class="page-hero">
+        <h1 class="section-title en-text">FACILITY</h1>
+        <p class="section-subtitle">校舎紹介</p>
+    </section>
+
+    <!-- 「自分で、いつでも。」イントロセクション（共通CSS使用） -->
+    <section class="intro-section">
+        <div class="intro-layout">
+            <div class="intro-text-column">
+                <div class="intro-container">
+                    <h2 class="intro-heading">自分で、いつでも。</h2>
+                    
+                    <p class="intro-text">電車は1時間に1本、<br>近くの学習スペースはいつも満員。</p>
+                    
+                    <p class="intro-text">そんなこの地域の中高生にとっては、</p>
+                    
+                    <p class="intro-text">自分の足で気軽に行ける<br class="sp-only">快適な学習環境そのものが</p>
+                    
+                    <p class="intro-text">主体的な学びを支えます。</p>
+                </div>
+            </div>
+            <div class="intro-image-column">
+                <div class="intro-image-wrapper">
+                    <img src="images/facility/facility-hero.jpg" alt="自習室の様子" class="intro-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 校舎の特徴セクション -->
+    <section class="features-section">
+        <div class="features-container">
+            <!-- セクション見出し統一 -->
+            <h2 class="section-heading">校舎の特徴</h2>
+            
+            <div class="feature-item">
+                <h3 class="feature-item-title">●飯田高校から徒歩1分</h3>
+                <p class="feature-item-text">本館・別館ともに飯田高校のすぐ目の前。飯田女子高校やJR伊那上郷駅からのアクセスも良好で、学校帰りや送迎の待ち時間にも気軽に立ち寄れます。</p>
+            </div>
+            
+            <div class="feature-item">
+                <h3 class="feature-item-title">●24時間使える自習室</h3>
+                <p class="feature-item-text">本館・別館あわせて2つの校舎に自習室を完備。ICカードで24時間利用可能で、エアコンやコピー機、冷蔵庫・電子レンジなども自由に使えます。勉強の合間につまめるお菓子も常備し、安心して集中できる環境を整えています。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 本館セクション -->
+    <section class="building-section main">
+        <div class="building-container">
+            <!-- セクション見出し統一 -->
+            <h2 class="section-heading">本館</h2>
+            
+            <div class="photo-scroll" id="mainPhotoScroll">
+                <div class="photo-item">
+                    <img src="images/facility/coaching-room.jpg" alt="コーチングルーム">
+                    <p class="photo-caption">コーチングルーム</p>
+                </div>
+                
+                <div class="photo-item">
+                    <img src="images/facility/lecture-room.jpg" alt="講義室">
+                    <p class="photo-caption">講義室</p>
+                </div>
+                
+                <div class="photo-item">
+                    <img src="images/facility/study-room-main.jpg" alt="自習室">
+                    <p class="photo-caption">自習室</p>
+                </div>
+                
+                <div class="photo-item">
+                    <img src="images/facility/entrance.jpg" alt="玄関">
+                    <p class="photo-caption">玄関</p>
+                </div>
+                
+                <div class="photo-item">
+                    <img src="images/facility/lounge-main.jpg" alt="休憩エリア">
+                    <p class="photo-caption">休憩エリア</p>
+                </div>
+                
+                <div class="photo-item">
+                    <img src="images/facility/exterior.jpg" alt="外観">
+                    <p class="photo-caption">外観</p>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator" id="mainScrollIndicator">
+                <span class="scroll-dot active"></span>
+                <span class="scroll-dot"></span>
+                <span class="scroll-dot"></span>
+                <span class="scroll-dot"></span>
+                <span class="scroll-dot"></span>
+                <span class="scroll-dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 別館セクション -->
+    <section class="building-section annex">
+        <div class="building-container">
+            <!-- セクション見出し統一 -->
+            <h2 class="section-heading">別館</h2>
+            
+            <div class="photo-scroll" id="annexPhotoScroll">
+                <div class="photo-item">
+                    <img src="images/facility/study-room-annex.jpg" alt="ブース席">
+                    <p class="photo-caption">ブース席</p>
+                </div>
+                
+                <div class="photo-item">
+                    <img src="images/facility/lounge-annex.jpg" alt="休憩エリア">
+                    <p class="photo-caption">休憩エリア</p>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator" id="annexScrollIndicator">
+                <span class="scroll-dot active"></span>
+                <span class="scroll-dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- アクセスセクション -->
+    <section class="access-section">
+        <div class="access-container">
+            <!-- セクション見出し統一 -->
+            <h2 class="section-heading">アクセス</h2>
+            
+            <div class="map-container">
+                <div class="map-placeholder"></div>
+                <a href="https://maps.app.goo.gl/BSyZyCuLNTqmVdcZ6" target="_blank" class="map-button">Google Mapで確認する</a>
+            </div>
+            
+            <div class="access-info">
+                <h3>＜住所＞</h3>
+                <p>〒395-0004<br>長野県飯田市上郷黒田443-4<br>山本ビル2階</p>
+                
+                <h3>＜アクセス＞</h3>
+                <ul>
+                    <li>飯田高等学校から徒歩1分</li>
+                    <li>飯田女子高等学校から徒歩2分</li>
+                    <li>JR伊那上郷駅から徒歩6分</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTAセクション（共通CSS使用） -->
+    <section class="cta-section">
+        <a href="contact.html" class="cta-button-large">体験入会・お問い合わせはこちら</a>
+    </section>
+
+    <!-- ========== 共通：フッター ========== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <strong>つばめ学習舎（合同会社つばめ）</strong><br>
+                〒395-0004<br>
+                長野県飯田市上郷黒田443-4 山本ビル2階
+            </div>
+            
+            <div class="copyright">© 2025 つばめ学習舎 / Swallow-Base</div>
+        </div>
+    </footer>
+
+    <!-- ========== 共通：フローティングCTA ========== -->
+    <div class="floating-cta">
+        <a href="contact.html">体験入会・お問い合わせ</a>
+    </div>
+
+    <!-- 共通JS -->
+    <script src="js/script.js"></script>
+    <!-- ページ固有JS -->
+    <script>
+        // 写真スクロールインジケーター
+        function setupScrollIndicator(scrollId, indicatorId) {
+            const scroll = document.getElementById(scrollId);
+            const indicator = document.getElementById(indicatorId);
+            if (!scroll || !indicator) return;
+            
+            const dots = indicator.querySelectorAll('.scroll-dot');
+            
+            scroll.addEventListener('scroll', () => {
+                const scrollLeft = scroll.scrollLeft;
+                const scrollWidth = scroll.scrollWidth - scroll.clientWidth;
+                if (scrollWidth <= 0) return;
+                
+                const scrollPercentage = scrollLeft / scrollWidth;
+                const activeIndex = Math.round(scrollPercentage * (dots.length - 1));
+                
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === activeIndex);
+                });
+            });
+        }
+        
+        // 本館・別館のスクロールインジケーターを初期化
+        setupScrollIndicator('mainPhotoScroll', 'mainScrollIndicator');
+        setupScrollIndicator('annexPhotoScroll', 'annexScrollIndicator');
+    </script>
+</body>
+</html>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>つばめ学習舎とは｜つばめ学習舎</title>
+    <meta name="description" content="つばめ学習舎の設立理念・講師紹介・企業概要をご紹介します。飯田下伊那の子どもたちが自分の力を信じて羽ばたけるよう「独り立ちの翼を育む」コーチング型学習塾です。">
+    <!-- ファビコン -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- ページ固有CSS -->
+    <style>
+        /* ===== 設立理念セクション（イントロスタイル）固有：背景色がクリーム ===== */
+        .intro-section {
+            background: var(--bg-cream);
+        }
+
+        .intro-image-wrapper::before {
+            background: linear-gradient(to bottom, 
+                rgba(245, 245, 239, 1) 0%, 
+                rgba(245, 245, 239, 1) 20%,
+                rgba(245, 245, 239, 0) 100%
+            );
+        }
+
+        .intro-image-wrapper {
+            aspect-ratio: 4 / 3;
+        }
+
+        .intro-image {
+            object-position: center top;
+        }
+
+        /* ボタンを画像の上に重ねる */
+        .intro-link {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            margin-bottom: -40px;
+        }
+
+        .intro-link a {
+            display: inline-block;
+            background: #414649;
+            color: white;
+            font-size: 13px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .intro-link a:hover {
+            background: #333;
+        }
+
+        /* ===== 講師紹介セクション ===== */
+        .instructor-section {
+            background: var(--bg-white);
+            padding: 60px 20px;
+        }
+
+        .instructor-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .instructor-card {
+            margin-bottom: 40px;
+        }
+
+        .instructor-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .instructor-image {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .instructor-image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .instructor-name {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--brand);
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .instructor-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 8px;
+        }
+
+        .instructor-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        /* ===== 企業概要セクション ===== */
+        .company-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .company-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .company-intro {
+            font-size: 15px;
+            line-height: 1.9;
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* 基本情報テーブル */
+        .company-info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            font-size: 13px;
+        }
+
+        .company-info-table th,
+        .company-info-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .company-info-table th {
+            background: var(--brand);
+            color: white;
+            font-weight: bold;
+            width: 100px;
+            white-space: nowrap;
+        }
+
+        .company-info-table td {
+            background: white;
+        }
+
+        .company-info-table td ul {
+            margin: 0;
+            padding-left: 1.2em;
+        }
+
+        .company-info-table td li {
+            margin-bottom: 4px;
+        }
+
+        .company-info-table td li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* コンセプトレイアウト */
+        .concept-layout {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-logo {
+            text-align: center;
+            margin-bottom: 16px;
+            order: 0; /* モバイルでは「SWALLOW-BASE」の下 */
+        }
+
+        .concept-logo img {
+            max-width: 180px;
+            height: auto;
+        }
+
+        .concept-items {
+            order: 1;
+        }
+
+        .concept-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--brand);
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .concept-name {
+            font-family: 'Hammersmith One', sans-serif;
+            font-size: 20px;
+            color: var(--brand);
+            text-align: center;
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+        }
+
+        .concept-item {
+            margin-bottom: 20px;
+        }
+
+        .concept-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .concept-item-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 6px;
+        }
+
+        .concept-item-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* ===== 受賞歴・メディア掲載セクション ===== */
+        .awards-section {
+            background: var(--bg-white);
+            padding: 60px 20px;
+        }
+
+        .awards-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .awards-image {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .awards-image img {
+            max-width: 180px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .awards-list {
+            margin-bottom: 0;
+        }
+
+        .awards-item {
+            margin-bottom: 24px;
+        }
+
+        .awards-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .awards-item-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .awards-item-link {
+            text-align: right;
+        }
+
+        .external-link-button {
+            display: inline-block;
+            background: #414649;
+            color: white;
+            font-size: 13px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .external-link-button:hover {
+            background: #333;
+        }
+
+        /* ===== CTAセクション固有：背景色のみ ===== */
+        /* 共通CSSでモバイル非表示、PC表示を制御 */
+        @media (min-width: 1024px) {
+            .cta-section {
+                background: var(--bg-white);
+            }
+        }
+
+        /* ===== タブレット用（768px〜） ===== */
+        @media (min-width: 768px) {
+            /* イントロセクション：タブレット用グラデーション */
+            .intro-image-wrapper::before {
+                background: linear-gradient(to right, 
+                    rgba(245, 245, 239, 1) 0%, 
+                    rgba(245, 245, 239, 0) 100%
+                );
+            }
+
+            .intro-link {
+                text-align: left;
+                margin-bottom: 0;
+                position: static;
+                z-index: auto;
+                margin-top: 24px;
+            }
+
+            /* 講師紹介 */
+            .instructor-section {
+                padding: 80px 20px;
+            }
+
+            .instructor-card {
+                display: flex;
+                align-items: flex-start;
+                gap: 30px;
+                margin-bottom: 50px;
+            }
+
+            .instructor-image {
+                flex-shrink: 0;
+                width: 160px;
+                height: 160px;
+                margin: 0;
+            }
+
+            .instructor-info {
+                flex: 1;
+            }
+
+            .instructor-name {
+                text-align: left;
+                font-size: 18px;
+            }
+
+            .instructor-text {
+                font-size: 16px;
+            }
+
+            /* 企業概要 */
+            .company-section {
+                padding: 80px 20px;
+            }
+
+            .company-intro {
+                font-size: 16px;
+            }
+
+            .company-info-table {
+                font-size: 14px;
+            }
+
+            .company-info-table th {
+                width: 120px;
+            }
+
+            .concept-name {
+                font-size: 22px;
+            }
+
+            .concept-item-title {
+                font-size: 16px;
+            }
+
+            .concept-item-text {
+                font-size: 15px;
+            }
+
+            /* コンセプト：PC版2カラムレイアウト */
+            .concept-layout {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 40px;
+            }
+
+            .concept-logo {
+                flex: 0 0 200px;
+                order: 0;
+                margin-bottom: 0;
+            }
+
+            .concept-logo img {
+                max-width: 100%;
+            }
+
+            .concept-items {
+                flex: 1;
+                order: 0;
+            }
+
+            /* 受賞歴 */
+            .awards-section {
+                padding: 80px 20px;
+            }
+
+            .awards-item-text {
+                font-size: 16px;
+            }
+        }
+
+        /* ===== PC用（1024px〜） ===== */
+        @media (min-width: 1024px) {
+            .instructor-image {
+                width: 180px;
+                height: 180px;
+            }
+
+            .concept-logo {
+                flex: 0 0 220px;
+            }
+
+            .concept-layout {
+                gap: 50px;
+            }
+        }
+
+        /* ===== 大画面用（1200px〜） ===== */
+        @media (min-width: 1200px) {
+            .instructor-name {
+                font-size: 20px;
+            }
+
+            .company-info-table {
+                font-size: 15px;
+            }
+
+            .concept-name {
+                font-size: 24px;
+            }
+
+            .cta-button-large {
+                font-size: 17px;
+                padding: 20px 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 共通：ヘッダー ========== -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="images/logo_3.png" alt="つばめ学習舎">
+                <span>つばめ学習舎</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li class="has-dropdown">
+                        <a href="programs.html">プログラム</a>
+                        <ul class="dropdown">
+                            <li><a href="programs.html">プログラム一覧</a></li>
+                            <li><a href="programs/coaching.html">コーチング</a></li>
+                            <li><a href="programs/lecture.html">集団指導・個別指導</a></li>
+                            <li><a href="programs/itsudemo.html">LINE質問サービス</a></li>
+                            <li><a href="programs/sparta.html">スパルタ・プログラム</a></li>
+                            <li><a href="programs/hitoritabi.html">ひとり旅プロジェクト</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="course.html">受講プラン</a></li>
+                    <li><a href="about.html">つばめ学習舎とは</a></li>
+                    <li><a href="facility.html">校舎紹介</a></li>
+                    <li><a href="voice.html">卒業生の声</a></li>
+                    <li><a href="contact.html" class="desktop-cta">体験入会・お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 共通：モバイルメニュー ========== -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">×</button>
+        <nav>
+            <ul>
+                <li><a href="index.html" onclick="toggleMenu()">ホーム</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event)">プログラム</a>
+                    <ul class="submenu">
+                        <li><a href="programs.html" onclick="toggleMenu()">プログラム一覧</a></li>
+                        <li><a href="programs/coaching.html" onclick="toggleMenu()">コーチング</a></li>
+                        <li><a href="programs/lecture.html" onclick="toggleMenu()">集団指導・個別指導</a></li>
+                        <li><a href="programs/itsudemo.html" onclick="toggleMenu()">LINE質問サービス</a></li>
+                        <li><a href="programs/sparta.html" onclick="toggleMenu()">スパルタ・プログラム</a></li>
+                        <li><a href="programs/hitoritabi.html" onclick="toggleMenu()">ひとり旅プロジェクト</a></li>
+                    </ul>
+                </li>
+                <li><a href="course.html" onclick="toggleMenu()">受講プラン</a></li>
+                <li><a href="about.html" onclick="toggleMenu()">つばめ学習舎とは</a></li>
+                <li><a href="facility.html" onclick="toggleMenu()">校舎紹介</a></li>
+                <li><a href="voice.html" onclick="toggleMenu()">卒業生の声</a></li>
+                <li><a href="contact.html" onclick="toggleMenu()">体験入会・お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ========== ページ固有コンテンツ ========== -->
+
+    <!-- ヒーローセクション -->
+    <section class="page-hero">
+        <h1 class="section-title en-text">ABOUT</h1>
+        <p class="section-subtitle">つばめ学習舎とは</p>
+    </section>
+
+    <!-- 設立理念セクション（イントロスタイル・共通CSS使用） -->
+    <section class="intro-section">
+        <div class="intro-layout">
+            <div class="intro-text-column">
+                <div class="intro-container">
+                    <h2 class="intro-heading">設立理念</h2>
+                    
+                    <p class="intro-text">
+                        飯田下伊那の子どもたちが<br class="mobile-br">
+                        自分の力を信じて羽ばたき、<br>
+                        またいつかなんらかの形で<br class="mobile-br">
+                        地元に戻ってこられる、<br>
+                        そんな若い世代の挑戦を支えたい
+                    </p>
+                    
+                    <p class="intro-text">
+                        という思いを<br>
+                        渡り鳥である「つばめ」に込め、<br>
+                        つばめ学習舎は<br class="mobile-br">
+                        2022年にスタートしました。
+                    </p>
+                    
+                    <p class="intro-text">
+                        点数を上げるだけでなく、<br>
+                        自分で選び決める力を育てることを<br class="mobile-br">
+                        大切にしています。
+                    </p>
+                    
+                    <div class="intro-link">
+                        <a href="https://i-port.biz/p/7739/" target="_blank" rel="noopener">▷ i-port.biz 記事を読む</a>
+                    </div>
+                </div>
+            </div>
+            <div class="intro-image-column">
+                <div class="intro-image-wrapper">
+                    <img src="images/about/about-hero.jpg" alt="つばめ学習舎の様子" class="intro-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 講師紹介セクション -->
+    <section class="instructor-section">
+        <div class="instructor-container">
+            <!-- セクション見出し統一 -->
+            <h2 class="section-heading">講師紹介</h2>
+            
+            <!-- 金田 啓之 -->
+            <div class="instructor-card">
+                <div class="instructor-image">
+                    <img src="images/about/representative-01.jpg" alt="金田 啓之">
+                </div>
+                <div class="instructor-info">
+                    <h3 class="instructor-name">金田 啓之（かなだ ひろゆき）</h3>
+                    
+                    <p class="instructor-label">＜経歴＞</p>
+                    <p class="instructor-text">下伊那郡阿南町新野出身。飯田高校理数科を経て、早稲田大学政治経済学部経済学科を卒業。行政コンサルタントファームやシンクタンクで地域活性化に関わる業務を経験。</p>
+                    
+                    <p class="instructor-label">＜コメント＞</p>
+                    <p class="instructor-text">高校時代から飯田市内に下宿し、自分で学習を調整することに難しさを覚えていました。都市部に比べて学習塾環境が充実しているとはいえない地方都市こそ、コーチング主体の、自分の力で学習を進める指導が有効だと感じています。</p>
+                </div>
+            </div>
+            
+            <!-- 荒井 尚緒 -->
+            <div class="instructor-card">
+                <div class="instructor-image">
+                    <img src="images/about/representative-02.jpg" alt="荒井 尚緒">
+                </div>
+                <div class="instructor-info">
+                    <h3 class="instructor-name">荒井 尚緒（あらい なお）</h3>
+                    
+                    <p class="instructor-label">＜経歴＞</p>
+                    <p class="instructor-text">飯田市出身。飯田高校理数科を経て、京都大学農学部資源生物科学科を卒業・同大学院農学研究科生物資源経済学専攻を修了。京都市の教育系NPOに入職し、学びの場作りに従事。</p>
+                    
+                    <p class="instructor-label">＜コメント＞</p>
+                    <p class="instructor-text">色んな世界を知るわくわくや何かができるようになる楽しさは、場所や世代を問わない根源的な喜びです。一緒に味わっていきましょう！</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 企業概要セクション -->
+    <section class="company-section">
+        <div class="company-container">
+            <!-- セクション見出し統一 -->
+            <h2 class="section-heading">企業概要</h2>
+            
+            <p class="company-intro">「つばめ学習舎」は合同会社つばめが運営する学習支援サービスです。</p>
+            
+            <!-- 基本情報テーブル -->
+            <table class="company-info-table">
+                <tbody>
+                    <tr>
+                        <th>法人名</th>
+                        <td>合同会社つばめ</td>
+                    </tr>
+                    <tr>
+                        <th>代表社員</th>
+                        <td>金田 啓之、荒井 尚緒</td>
+                    </tr>
+                    <tr>
+                        <th>設立</th>
+                        <td>2022年1月（事業開始：2022年4月）</td>
+                    </tr>
+                    <tr>
+                        <th>所在地</th>
+                        <td>〒395-0004<br>長野県飯田市上郷黒田443-4 山本ビル2階</td>
+                    </tr>
+                    <tr>
+                        <th>事業内容</th>
+                        <td>
+                            <ul>
+                                <li>学習塾の運営</li>
+                                <li>学校での探究学習サポート</li>
+                                <li>地域と連携した教育事業</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p class="concept-title">コンセプト</p>
+            <p class="concept-name">「SWALLOW-BASE」</p>
+            
+            <div class="concept-layout">
+                <div class="concept-logo">
+                    <img src="images/about/logo-concept.svg" alt="つばめ学習舎ロゴ">
+                </div>
+                
+                <div class="concept-items">
+                    <div class="concept-item">
+                        <p class="concept-item-title">① 「視座」としてのBASE</p>
+                        <p class="concept-item-text">生涯にわたる学び/選択のベースとなるスキルやマインドを身につける場所</p>
+                    </div>
+                    
+                    <div class="concept-item">
+                        <p class="concept-item-title">② 「基地」としてのBASE</p>
+                        <p class="concept-item-text">人と人、学びと学びが接続し、アイデアが湧きたち行動が始まる場所</p>
+                    </div>
+                    
+                    <div class="concept-item">
+                        <p class="concept-item-title">③ 「ホーム」としてのBASE</p>
+                        <p class="concept-item-text">懐かしくも変わり続ける、ふるさととの新しい関わり方を探す帰り場所</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 受賞歴・メディア掲載セクション -->
+    <section class="awards-section">
+        <div class="awards-container">
+            <!-- セクション見出し統一 -->
+            <h2 class="section-heading">受賞歴・メディア掲載</h2>
+            
+            <div class="awards-image">
+                <img src="images/about/award-photo.jpg" alt="受賞時の写真">
+            </div>
+            
+            <div class="awards-list">
+                <!-- 起業家コンペ -->
+                <div class="awards-item">
+                    <p class="awards-item-text">・「令和4年度 飯田市起業家ビジネスプランコンペティション」移住起業家部門 入賞</p>
+                    <div class="awards-item-link">
+                        <a href="https://i-port.biz/p/6826/" target="_blank" rel="noopener" class="external-link-button">▷外部リンク</a>
+                    </div>
+                </div>
+                
+                <!-- 週刊いいだ -->
+                <div class="awards-item">
+                    <p class="awards-item-text">・「週刊いいだ」2023年元旦号にてインタビュー記事掲載</p>
+                </div>
+                
+                <!-- I-PORT.BIZ -->
+                <div class="awards-item">
+                    <p class="awards-item-text">・I-PORT.BIZ「ハジメマシテ、飯田」にてインタビュー記事掲載</p>
+                    <div class="awards-item-link">
+                        <a href="https://i-port.biz/p/7739/" target="_blank" rel="noopener" class="external-link-button">▷外部リンク</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTAセクション（共通CSS使用・cta-button-largeに統一） -->
+    <section class="cta-section">
+        <a href="contact.html" class="cta-button-large">体験入会・お問い合わせ</a>
+    </section>
+
+    <!-- ========== 共通：フッター ========== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <strong>つばめ学習舎（合同会社つばめ）</strong><br>
+                〒395-0004<br>
+                長野県飯田市上郷黒田443-4 山本ビル2階
+            </div>
+            
+            <div class="copyright">© 2025 つばめ学習舎 / Swallow-Base</div>
+        </div>
+    </footer>
+
+    <!-- ========== 共通：フローティングCTA ========== -->
+    <div class="floating-cta">
+        <a href="contact.html">体験入会・お問い合わせ</a>
+    </div>
+
+    <!-- 共通JS -->
+    <script src="js/script.js"></script>
+    <!-- ページ固有JS -->
+    <script>
+        // このページ固有のJavaScriptはありません
+    </script>
+</body>
+</html>
