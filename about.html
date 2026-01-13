@@ -33,10 +33,14 @@
             aspect-ratio: 4 / 3;
         }
 
-        /* タブレット以上：横長に変更 */
+        /* タブレット以上：2カラムレイアウト時の高さ調整 */
         @media (min-width: 768px) {
+            .intro-image-column {
+                min-height: 500px !important;  /* 350pxから引き上げ */
+            }
+            
             .intro-image-wrapper {
-                aspect-ratio: 5 / 2;
+                aspect-ratio: auto;  /* 2カラム時はautoにする */
             }
         }
 
