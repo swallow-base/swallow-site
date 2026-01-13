@@ -467,6 +467,27 @@
                 font-size: 16px;
             }
         }
+        
+        /* ===== このページ専用：フローティングCTAのデザイン変更 ===== */
+        .floating-cta a {
+            background: #ff8b1d !important;  /* オレンジに変更 */
+            box-shadow: 0 4px 16px rgba(255, 139, 29, 0.4) !important;
+            animation: pulse 2s infinite;  /* パルスアニメーション */
+        }
+
+        .floating-cta a::after {
+            content: " →";  /* 矢印を追加 */
+        }
+
+        /* パルス（点滅）アニメーション */
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 16px rgba(255, 139, 29, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(255, 139, 29, 0.7);
+            }
+        }
     </style>
 </head>
 <body>
