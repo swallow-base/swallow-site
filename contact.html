@@ -467,27 +467,40 @@
                 font-size: 16px;
             }
         }
-        
+
         /* ===== このページ専用：フローティングCTAのデザイン変更 ===== */
         .floating-cta a {
-            background: #ff8b1d !important;  /* オレンジに変更 */
-            box-shadow: 0 4px 16px rgba(255, 139, 29, 0.4) !important;
-            animation: pulse 2s infinite;  /* パルスアニメーション */
+            background: white !important;  /* 白背景 */
+            color: var(--accent) !important;  /* 赤文字 */
+            border: 2px solid var(--accent) !important;  /* 赤の縁取り */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;  /* 軽い影 */
+            transition: all 0.3s ease !important;  /* スムーズな切り替え */
         }
 
-        .floating-cta a::after {
-            content: " →";  /* 矢印を追加 */
+        /* テキストを変更 */
+        .floating-cta a::before {
+            content: "お問い合わせフォームへ";
         }
 
-        /* パルス（点滅）アニメーション */
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 4px 16px rgba(255, 139, 29, 0.4);
-            }
-            50% {
-                box-shadow: 0 4px 20px rgba(255, 139, 29, 0.7);
-            }
+        /* 元のテキストを非表示 */
+        .floating-cta a {
+            font-size: 0 !important;  /* 元のテキストを隠す */
         }
+
+        .floating-cta a::before {
+            font-size: 14px;  /* 新しいテキストのサイズ */
+            font-weight: bold;
+        }
+
+        /* ホバー時：背景が赤に */
+        .floating-cta a:hover {
+            background: var(--accent) !important;  /* 赤背景 */
+            color: white !important;  /* 白文字 */
+            border-color: var(--accent) !important;
+            transform: translateY(-2px);  /* 少し浮く */
+            box-shadow: 0 6px 16px rgba(225, 29, 47, 0.3) !important;
+        }
+        
     </style>
 </head>
 <body>
