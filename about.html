@@ -28,6 +28,18 @@
             );
         }
 
+        /* モバイル：正方形に近い比率 */
+        .intro-image-wrapper {
+            aspect-ratio: 4 / 3;
+        }
+
+        /* タブレット以上：横長に変更 */
+        @media (min-width: 768px) {
+            .intro-image-wrapper {
+                aspect-ratio: 5 / 2;
+            }
+        }
+
         .intro-image {
             object-position: center top;
         }
