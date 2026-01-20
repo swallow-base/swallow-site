@@ -295,27 +295,6 @@
             }
         }
 
-       /* アンカーリンクモバイル */
-        #support-programs,
-        #lecture-programs {
-            scroll-margin-top: 120px;  /* 80px → 120px に変更 */
-        }
-
-        /* アンカーリンクタブレット */
-        @media (min-width: 768px) {
-            #support-programs,
-            #lecture-programs {
-                scroll-margin-top: 130px;
-            }
-        }
-
-        /* アンカーリンクPC */
-        @media (min-width: 1024px) {
-            #support-programs,
-            #lecture-programs {
-                scroll-margin-top: 140px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -391,7 +370,7 @@
     </section>
 
     <!-- レギュラープログラム -->
-    <section class="bg-white" id="support-programs">
+    <section class="bg-white">
         <div class="program-section-header">
             <!-- セクション見出し統一 -->
             <h2 class="section-heading">レギュラープログラム</h2>
@@ -422,7 +401,7 @@
             </div>
 
             <!-- 集団指導・個別指導 -->
-            <div class="program-card program-card-lecture" id="lecture-programs">
+            <div class="program-card program-card-lecture">
                 <div class="program-card-inner">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
                         <div class="accordion-title-wrapper">
