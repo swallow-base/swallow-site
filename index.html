@@ -184,7 +184,7 @@
             padding: clamp(12px, 2.5vw, 20px);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         .feature-list {
@@ -198,6 +198,14 @@
             color: var(--brand);
             font-weight: bold;
             white-space: nowrap;
+            position: relative;
+            padding-left: 1em;
+        }
+
+        .feature-list li::before {
+            content: "・";
+            position: absolute;
+            left: 0;
         }
 
         /* ===== Aboutセクション ===== */
