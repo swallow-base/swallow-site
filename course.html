@@ -730,13 +730,8 @@
                 min-height: 130px;
             }
         }
-        
-        /* ===== つばめ学習舎の関わり方セクション ===== */
-        .approach-section {
-            background: var(--bg-cream);
-            padding: 60px 20px;
-        }
 
+        /* ===== つばめ学習舎の関わり方セクション ===== */
         .approach-container {
             max-width: 600px;
             margin: 0 auto;
@@ -752,6 +747,12 @@
 
         .approach-text:last-child {
             margin-bottom: 0;
+        }
+
+        @media (min-width: 768px) {
+            .approach-text {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -848,7 +849,7 @@
     </section>
 
     <!-- つばめ学習舎の関わり方 -->
-    <section class="approach-section">
+    <section class="bg-cream">
         <div class="approach-container">
             <h2 class="section-heading">つばめ学習舎の関わり方</h2>
             <p class="approach-text">
