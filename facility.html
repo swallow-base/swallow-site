@@ -74,12 +74,19 @@
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
-            padding: 0 12.5% 20px;
+            padding: 0 0 20px;
             margin: 0;
         }
 
         .photo-scroll::-webkit-scrollbar {
             display: none;
+        }
+
+        /* 最初と最後に余白を追加して中央揃えを実現 */
+        .photo-scroll::before,
+        .photo-scroll::after {
+            content: '';
+            flex: 0 0 12.5%;
         }
 
         .photo-item {
