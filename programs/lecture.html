@@ -322,7 +322,17 @@
         .back-to-programs {
             text-align: center;
             padding: 40px 20px;
-            background: var(--bg-white);
+            background: var(--bg-cream);
+        }
+
+        .back-button::before {
+            content: "◁";
+            margin-right: 6px;
+            font-size: 11px;
+        }
+
+        .back-button::after {
+            content: none;
         }
 
     </style>
@@ -516,7 +526,7 @@
 
     <!-- プログラム一覧へ戻る -->
     <div class="back-to-programs">
-        <a href="../programs.html" class="detail-button">◁ プログラム一覧へ戻る</a>
+        <a href="../programs.html" class="detail-button">プログラム一覧へ戻る</a>
     </div>
 
     <!-- CTAセクション（PC用） -->
