@@ -72,12 +72,13 @@
             font-weight: bold;
             width: 50px;
             text-align: center;
-            /* モバイル版：縦書き */
-            -webkit-writing-mode: vertical-rl;
-            writing-mode: vertical-rl;
-            -webkit-text-orientation: upright;
-            text-orientation: upright;
+            line-height: 1.5;
             letter-spacing: 0.1em;
+        }
+
+        /* モバイル版：brを表示（デフォルト） */
+        .overview-table th br {
+            display: inline;
         }
 
         .overview-table td {
@@ -274,6 +275,11 @@
                 letter-spacing: normal;
             }
 
+            /* タブレット以上：brを非表示にして横並びに */
+            .overview-table th br {
+                display: none;
+            }
+
             .overview-table li {
                 font-size: 15px;
             }
@@ -442,19 +448,19 @@
                 <table class="overview-table">
                     <tbody>
                         <tr>
-                            <th>対象</th>
+                            <th>対<br>象</th>
                             <td>コーチングを<br class="mobile-br">受講している生徒</td>
                         </tr>
                         <tr>
-                            <th>期間</th>
+                            <th>期<br>間</th>
                             <td>入会3ヶ月以降<br class="mobile-br">〜卒業後1年以内<br class="mobile-br">（1人1回）</td>
                         </tr>
                         <tr>
-                            <th>支援額</th>
+                            <th>支<br>援<br>額</th>
                             <td>最大20,000円<br class="mobile-br">（実施前に現金で支給）</td>
                         </tr>
                         <tr>
-                            <th>旅のしばり</th>
+                            <th>旅<br>の<br>し<br>ば<br>り</th>
                             <td>
                                 <ul>
                                     <li>一人で旅行する（友達同伴は不可。ただし現地ツアーで同行者ができるのは可）</li>
