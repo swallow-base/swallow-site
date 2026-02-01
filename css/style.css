@@ -421,6 +421,56 @@ footer {
     font-size: 15px;
 }
 
+.footer-nav {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.footer-nav ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    gap: 12px 24px;
+}
+
+.footer-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.footer-nav a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.footer-nav li:nth-child(odd)::after {
+    content: "|";
+    margin-left: 24px;
+    opacity: 0.5;
+}
+
+/* タブレット以上：横一列 */
+@media (min-width: 768px) {
+    .footer-nav ul {
+        grid-template-columns: repeat(4, auto);
+        gap: 8px 32px;
+    }
+
+    .footer-nav li:nth-child(odd)::after {
+        content: none;
+    }
+    
+    .footer-nav li:not(:last-child)::after {
+        content: "|";
+        margin-left: 32px;
+        opacity: 0.5;
+    }
+}
+
 .copyright {
     padding-top: 20px;
     padding-bottom: 80px;
