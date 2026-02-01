@@ -292,11 +292,12 @@ section {
 
 /* ===== 日本語Heroタイトル用 ===== */
 .section-title-jp,
-.hero-title-jp {
+.hero-title-jp,
+.page-hero .hero-title-jp {
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 700;
-    font-size: clamp(20px, 5.5vw, 26px);
-    letter-spacing: 0.05em;
+    font-size: clamp(18px, 5vw, 26px);
+    letter-spacing: 0.02em;
 }
 
 /* ===== イントロセクション（冒頭セクション共通） ===== */
