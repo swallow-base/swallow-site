@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>つばめ浪人プラン｜つばめ学習舎</title>
+    <meta name="description" content="つばめ学習舎の浪人生向けプラン。朝9時から夕方まで講師と生活を共にし、個別指導・コーチング・自習室で1年間を伴走します。自宅浪人と予備校の中間の新しい選択肢。月額5万円から。飯田市の大学受験対応学習塾。">
+    <!-- OGP（SNSシェア用） -->
+    <meta property="og:title" content="つばめ浪人プラン｜つばめ学習舎">
+    <meta property="og:description" content="つばめ学習舎の浪人生向けプラン。朝9時から夕方まで講師と生活を共にし、個別指導・コーチング・自習室で1年間を伴走。月額5万円から。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://swallow-base.com/programs/ronin.html">
+    <meta property="og:image" content="https://swallow-base.com/images/ogp-default.jpg">
+    <meta property="og:site_name" content="つばめ学習舎">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- ファビコン -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- ページ固有CSS -->
+    <style>
+        /* ===== ヒーローセクション ===== */
+        .page-hero .hero-label {
+            font-size: 14px;
+            margin-bottom: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        /* モバイル専用改行（PC/タブレットでは非表示） */
+        .sp-only {
+            display: inline;
+        }
+
+        /* ===== 特徴セクション ===== */
+        .features-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .features-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 24px 20px;
+            border-radius: 8px;
+        }
+
+        .feature-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 12px;
+        }
+
+        .feature-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .feature-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-note {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.7;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+
+        /* ===== スケジュールセクション ===== */
+        .schedule-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .schedule-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .schedule-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 12px 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .schedule-table th {
+            background: var(--brand);
+            color: white;
+            font-weight: bold;
+            width: 100px;
+            text-align: center;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .schedule-table td {
+            background: white;
+            text-align: left;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .schedule-table tbody tr:last-child td,
+        .schedule-table tbody tr:last-child th {
+            border-bottom: none;
+        }
+
+        .schedule-table .optional-row th {
+            background: #536980;
+        }
+
+        .schedule-table .optional-row td {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .schedule-note {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.7;
+            margin-top: 16px;
+        }
+
+        /* ===== 料金セクション ===== */
+        .pricing-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .pricing-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .pricing-card-header {
+            background: var(--brand);
+            color: white;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .pricing-card-body {
+            padding: 24px 20px;
+        }
+
+        .pricing-includes {
+            list-style: none;
+            margin: 0 0 20px;
+            padding: 0;
+        }
+
+        .pricing-includes li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 15px;
+            color: #333;
+            line-height: 1.7;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .pricing-includes li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-includes li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--brand);
+            font-weight: bold;
+        }
+
+        .pricing-includes .include-note {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .pricing-amount {
+            text-align: center;
+            padding: 20px 0 8px;
+            border-top: 2px solid var(--brand);
+        }
+
+        .pricing-amount .price-label {
+            font-size: 14px;
+            color: #666;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .pricing-amount .price-main {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--brand);
+        }
+
+        .pricing-amount .price-yen {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--brand);
+        }
+
+        .pricing-amount .price-tax {
+            font-size: 13px;
+            color: #666;
+            margin-left: 4px;
+        }
+
+        .pricing-amount .price-annual {
+            display: block;
+            font-size: 14px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* 追加授業カード */
+        .pricing-addon {
+            background: white;
+            border-radius: 10px;
+            padding: 24px 20px;
+            margin-bottom: 24px;
+        }
+
+        .pricing-addon-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 12px;
+        }
+
+        .pricing-addon-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .pricing-addon-price {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--brand);
+            margin-bottom: 8px;
+        }
+
+        .pricing-addon-note {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* ===== 経済的サポートセクション ===== */
+        .support-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .support-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .support-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .support-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== 飯田で浪人するということセクション ===== */
+        .message-section {
+            background: var(--bg-cream);
+            padding: 60px 20px;
+        }
+
+        .message-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .message-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .message-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== 募集要項セクション ===== */
+        .requirements-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .requirements-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .requirements-table-wrapper {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .requirements-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .requirements-table th,
+        .requirements-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .requirements-table th {
+            background: var(--brand);
+            color: white;
+            font-weight: bold;
+            width: 100px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .requirements-table td {
+            background: white;
+            text-align: left;
+            line-height: 1.7;
+        }
+
+        .requirements-table tbody tr:last-child td,
+        .requirements-table tbody tr:last-child th {
+            border-bottom: none;
+        }
+
+        .requirements-note {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.8;
+            margin-top: 16px;
+        }
+
+        /* ===== プログラム一覧へ戻るボタン ===== */
+        .back-to-programs {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+        }
+
+        .back-button::after {
+            content: none;
+        }
+
+        /* ===== タブレット用（768px〜） ===== */
+        @media (min-width: 768px) {
+            .sp-only {
+                display: none;
+            }
+
+            .feature-title {
+                font-size: 18px;
+            }
+
+            .feature-text {
+                font-size: 16px;
+            }
+
+            .feature-note {
+                font-size: 14px;
+            }
+
+            .schedule-table {
+                font-size: 15px;
+            }
+
+            .schedule-table th {
+                font-size: 14px;
+                width: 120px;
+            }
+
+            .pricing-includes li {
+                font-size: 16px;
+            }
+
+            .pricing-amount .price-main {
+                font-size: 38px;
+            }
+
+            .pricing-amount .price-yen {
+                font-size: 20px;
+            }
+
+            .pricing-addon-text {
+                font-size: 16px;
+            }
+
+            .support-text {
+                font-size: 16px;
+            }
+
+            .message-text {
+                font-size: 16px;
+            }
+
+            .requirements-table {
+                font-size: 15px;
+            }
+
+            .requirements-table th {
+                width: 120px;
+                font-size: 14px;
+            }
+
+            .schedule-note,
+            .requirements-note,
+            .pricing-addon-note,
+            .include-note {
+                font-size: 14px;
+            }
+
+            .pricing-card-header {
+                font-size: 17px;
+            }
+
+            .pricing-addon-title {
+                font-size: 18px;
+            }
+
+            .pricing-addon-price {
+                font-size: 18px;
+            }
+
+            .pricing-amount .price-label,
+            .pricing-amount .price-annual {
+                font-size: 15px;
+            }
+
+            .pricing-amount .price-tax {
+                font-size: 14px;
+            }
+        }
+
+        /* ===== PC用（1024px〜） ===== */
+        @media (min-width: 1024px) {
+            .cta-section {
+                background: white;
+            }
+        }
+
+        /* ===== 大画面用（1200px〜） ===== */
+        @media (min-width: 1200px) {
+            .feature-title {
+                font-size: 20px;
+            }
+
+            .schedule-table {
+                font-size: 16px;
+            }
+
+            .requirements-table {
+                font-size: 16px;
+            }
+
+            .pricing-amount .price-main {
+                font-size: 44px;
+            }
+
+            .pricing-amount .price-yen {
+                font-size: 22px;
+            }
+
+            .pricing-card-header {
+                font-size: 18px;
+            }
+
+            .pricing-addon-title {
+                font-size: 20px;
+            }
+
+            .pricing-addon-price {
+                font-size: 20px;
+            }
+
+            .pricing-amount .price-label,
+            .pricing-amount .price-annual {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 共通：ヘッダー ========== -->
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo_3.png" alt="つばめ学習舎">
+                <span>つばめ学習舎</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li class="has-dropdown">
+                        <a href="../programs.html">プログラム</a>
+                        <ul class="dropdown">
+                            <li><a href="../programs.html">プログラム一覧</a></li>
+                            <li><a href="coaching.html">コーチング</a></li>
+                            <li><a href="lecture.html">集団指導・個別指導</a></li>
+                            <li><a href="itsudemo.html">LINE質問 いつでもつばめ</a></li>
+                            <li><a href="sparta.html">スパルタ・プログラム</a></li>
+                            <li><a href="hitoritabi.html">ひとり旅プロジェクト</a></li>
+                            <li><a href="ronin.html">つばめ浪人プラン</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../course.html">受講プラン</a></li>
+                    <li><a href="../about.html">つばめ学習舎とは</a></li>
+                    <li><a href="../facility.html">校舎紹介</a></li>
+                    <li><a href="../voice.html">卒業生の声</a></li>
+                    <li><a href="../contact.html" class="desktop-cta">体験入会・お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 共通：モバイルメニュー ========== -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()">×</button>
+        <nav>
+            <ul>
+                <li><a href="../index.html" onclick="toggleMenu()">ホーム</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event)">プログラム</a>
+                    <ul class="submenu">
+                        <li><a href="../programs.html" onclick="toggleMenu()">プログラム一覧</a></li>
+                        <li><a href="coaching.html" onclick="toggleMenu()">コーチング</a></li>
+                        <li><a href="lecture.html" onclick="toggleMenu()">集団指導・個別指導</a></li>
+                        <li><a href="itsudemo.html" onclick="toggleMenu()">LINE質問 いつでもつばめ</a></li>
+                        <li><a href="sparta.html" onclick="toggleMenu()">スパルタ・プログラム</a></li>
+                        <li><a href="hitoritabi.html" onclick="toggleMenu()">ひとり旅プロジェクト</a></li>
+                        <li><a href="ronin.html" onclick="toggleMenu()">つばめ浪人プラン</a></li>
+                    </ul>
+                </li>
+                <li><a href="../course.html" onclick="toggleMenu()">受講プラン</a></li>
+                <li><a href="../about.html" onclick="toggleMenu()">つばめ学習舎とは</a></li>
+                <li><a href="../facility.html" onclick="toggleMenu()">校舎紹介</a></li>
+                <li><a href="../voice.html" onclick="toggleMenu()">卒業生の声</a></li>
+                <li><a href="../contact.html" onclick="toggleMenu()">体験入会・お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- ========== ページ固有コンテンツ ========== -->
+
+    <!-- ヒーローセクション -->
+    <section class="page-hero">
+        <p class="hero-label en-text">GAP YEAR PROGRAM</p>
+        <h1 class="section-title hero-title-jp">つばめ浪人プラン</h1>
+    </section>
+
+    <!-- イントロセクション -->
+    <section class="intro-section">
+        <div class="intro-layout">
+            <div class="intro-text-column">
+                <div class="intro-container">
+                    <h2 class="intro-heading">宅浪と予備校のあいだで、<br>自分の1年をつくる。</h2>
+                    
+                    <p class="intro-text">どんなに良い授業を受けても、<br>最後にものを言うのは、<br>自分で読み解き、繰り返し、<br>定着させる地道な時間の積み重ねです。</p>
+                    
+                    <p class="intro-text">つばめ浪人プランは、<br>その毎日を一緒に過ごし、<br>一緒に振り返る場所。</p>
+
+                    <p class="intro-text">朝の点呼から夕方の解散まで、<br>講師と時間割を共有しながら、<br>自宅浪人の自由さと<br>予備校の生活リズムの<br>両方を取り入れた、<br>新しい浪人の形です。</p>
+                </div>
+            </div>
+            <div class="intro-image-column">
+                <div class="intro-image-wrapper">
+                    <!-- TODO: 浪人プラン用の画像に差し替え -->
+                    <img src="../images/programs/sparta-hero.jpg" alt="つばめ浪人プランの様子" class="intro-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- つばめ浪人プランの特徴セクション -->
+    <section class="features-section">
+        <div class="features-container">
+            <h2 class="section-heading">つばめ浪人プランの特徴</h2>
+            
+            <div class="features-list">
+                <!-- 特徴1 -->
+                <div class="feature-item">
+                    <h3 class="feature-title">講師と生活を共にする伴走型</h3>
+                    <p class="feature-text">朝9時の点呼から夕方16時まで、講師と同じ空間で1日を過ごします。</p>
+                    <p class="feature-text">講師も同じ部屋で自分の仕事に取り組みながら、浪人生と時間を共有します。「監督する・管理する」のではなく、同じ時間を同じ場所で過ごす中で、自然に生まれる対話や気づきを大切にしています。</p>
+                    <p class="feature-text">午前・午後それぞれの始まりに「やること宣言」、終わりに「できたことシェア」を行い、日々の学習に小さな報告と振り返りのサイクルを組み込みます。</p>
+                    <p class="feature-note">※講師が浪人生の授業を行う時間帯など、自習室に講師が不在になる時間帯もあります。あらかじめご了承ください。</p>
+                </div>
+                
+                <!-- 特徴2 -->
+                <div class="feature-item">
+                    <h3 class="feature-title">自分の学びを自分で設計する</h3>
+                    <p class="feature-text">一律のカリキュラムはありません。</p>
+                    <p class="feature-text">週1回の個別指導とコーチングを軸に、何をどの順番で・どのペースで進めるかを一緒に設計し、高い頻度で見直していきます。</p>
+                    <p class="feature-text">インプットの手段は対面授業だけではありません。市販の参考書や映像教材など、有効な外部コンテンツも積極的に活用しながら、大手予備校ではフォローしきれない「自習の時間の質」を高めることに特化してサポートします。</p>
+                </div>
+                
+                <!-- 特徴3 -->
+                <div class="feature-item">
+                    <h3 class="feature-title">必要な支援をひとまとめに、気軽な料金で</h3>
+                    <p class="feature-text">個別指導（週1コマ）・コーチング・いつでもつばめ（LINE質問サービス）・24時間自習室が基本プランに含まれ、月額5万円から。</p>
+                    <p class="feature-text">希望に応じて、夜間の現役生向け集団授業にも参加できます（別料金）。</p>
+                    <p class="feature-text">大都市の予備校に比べて経済的な負担を抑えながら、自宅浪人では得られない生活リズムと学習支援の基盤が揃う。自宅浪人と予備校の、あいだの選択肢です。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1日のスケジュール例セクション -->
+    <section class="schedule-section">
+        <div class="schedule-container">
+            <h2 class="section-heading">1日の過ごし方</h2>
+            
+            <div class="schedule-table-wrapper">
+                <table class="schedule-table">
+                    <tbody>
+                        <tr>
+                            <th>9:00</th>
+                            <td>集合・点呼・ラジオ体操</td>
+                        </tr>
+                        <tr>
+                            <th>9:10</th>
+                            <td>午前の「やること宣言」</td>
+                        </tr>
+                        <tr>
+                            <th>9:15〜12:00</th>
+                            <td>午前の学習（自習 / 授業）</td>
+                        </tr>
+                        <tr>
+                            <th>12:00</th>
+                            <td>午前の「できたことシェア」</td>
+                        </tr>
+                        <tr>
+                            <th>12:10〜13:00</th>
+                            <td>昼食・自由時間</td>
+                        </tr>
+                        <tr>
+                            <th>13:00〜13:20</th>
+                            <td>読書タイム</td>
+                        </tr>
+                        <tr>
+                            <th>13:20〜13:35</th>
+                            <td>パワーナップ（仮眠）</td>
+                        </tr>
+                        <tr>
+                            <th>13:35</th>
+                            <td>午後の「やること宣言」</td>
+                        </tr>
+                        <tr>
+                            <th>13:40〜16:00</th>
+                            <td>午後の学習</td>
+                        </tr>
+                        <tr>
+                            <th>16:00</th>
+                            <td>午後の「できたことシェア」・解散</td>
+                        </tr>
+                        <tr class="optional-row">
+                            <th>（18:00〜）</th>
+                            <td>（希望者）夜間の現役生向け集団授業に参加</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p class="schedule-note">※上記は一例です。個々の学習状況や体調に応じて柔軟に調整します。</p>
+        </div>
+    </section>
+
+    <!-- 料金セクション -->
+    <section class="pricing-section">
+        <div class="pricing-container">
+            <h2 class="section-heading">料金</h2>
+            
+            <!-- 基本プラン -->
+            <div class="pricing-card">
+                <div class="pricing-card-header">基本プラン</div>
+                <div class="pricing-card-body">
+                    <ul class="pricing-includes">
+                        <li>生活伴走（平日の朝〜夕方）</li>
+                        <li>
+                            個別指導 週1コマ・80分
+                            <span class="include-note">※同じ科目・レベルの受講生がいる場合は、少人数の集団指導に切り替えることがあります。その場合、授業枠に余裕が生まれるため、追加の科目を受講できる場合があります。</span>
+                        </li>
+                        <li>コーチング（回数無制限）</li>
+                        <li>いつでもつばめ（LINE質問サービス）</li>
+                        <li>24時間自習室</li>
+                    </ul>
+                    
+                    <div class="pricing-amount">
+                        <span class="price-label">月額</span>
+                        <span class="price-main">50,000</span><span class="price-yen">円</span><span class="price-tax">（税込）</span>
+                        <span class="price-annual">年間 約600,000円</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 追加授業 -->
+            <div class="pricing-addon">
+                <h3 class="pricing-addon-title">授業の追加</h3>
+                <p class="pricing-addon-text">希望に応じて、夜間の現役生向け集団授業にも参加できます。</p>
+                <p class="pricing-addon-price">追加授業：1コマあたり 月額 +5,000円〜</p>
+                <p class="pricing-addon-note">※授業数や科目の組み合わせによって金額が変わります。詳細はお問い合わせください。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 経済的なサポートについてセクション -->
+    <section class="support-section">
+        <div class="support-container">
+            <h2 class="section-heading">経済的なサポートについて</h2>
+            
+            <p class="support-text">希望者には、塾内の業務（清掃等）を通じたアルバイトの機会を設けています。受講料の負担軽減にもつながる仕組みです。</p>
+            
+            <p class="support-text">詳しくは面談にてご相談ください。</p>
+        </div>
+    </section>
+
+    <!-- 飯田で浪人するということセクション -->
+    <section class="message-section">
+        <div class="message-container">
+            <h2 class="section-heading">飯田で浪人するということ</h2>
+            
+            <p class="message-text">私たち講師二人は、どちらも都市部の大手予備校で浪人を経験しました。</p>
+            
+            <p class="message-text">有名な講師の授業、充実した学習環境、選抜試験を経た上位クラス。それでも、そのクラスから第一志望に進めるのは3割にも届かないと、当時の講師が話していました。</p>
+            
+            <p class="message-text">毎週一番前の席で授業を受け続けた人、大教室の後ろでただ時間が過ぎるのを待っていた人。寮の大部屋の自習室に毎日通い続けた人、自室にこもったまま、いつしか来なくなった人。浪人時代、自分自身も含めて、その岐路にみんなが立ち続けていました。</p>
+            
+            <p class="message-text">その差を分けたのは、授業の質でも教材の量でもなく、「自分の弱さとどう向き合うか」だったと思います。</p>
+            
+            <p class="message-text">どこで浪人するとしても、最後に必要なことは同じです。自分で掴み取っていく意思と、地道な毎日を積み重ねる力。どんなに良い環境で良い授業を受けられたとしても、ただ授業を受けるだけで自動的に合格させてもらえるわけではない。</p>
+            
+            <p class="message-text">それは浪人という時間の厳しさであり、同時に、地方都市で浪人する人にとっての、ある種の救いでもあると思うのです。</p>
+            
+            <p class="message-text">地元でも浪人ができる。そう思える人が一人でも増えるように、つばめ浪人プランは生まれました。</p>
+            
+            <p class="message-text">対面授業以外にも有効な学習コンテンツが数多く出回っている今の時代に合わせて、生徒自身が自分に最適な教材を選び、活用する力を育てます。それは自分で学ぶ力を高めることであると同時に、地元で浪人する際の経済的な負担を軽くすることにもつながります。</p>
+            
+            <p class="message-text">そして何より、大手予備校でさえフォローしきれない自習の時間を、いかに充実させるか。その大切さを私たち自身が身をもって実感したからこそ、つばめ浪人プランはそこに特化した伴走を行います。</p>
+        </div>
+    </section>
+
+    <!-- 募集要項セクション -->
+    <section class="requirements-section">
+        <div class="requirements-container">
+            <h2 class="section-heading">募集要項</h2>
+            
+            <div class="requirements-table-wrapper">
+                <table class="requirements-table">
+                    <tbody>
+                        <tr>
+                            <th>対象</th>
+                            <td>大学受験を目指す既卒生（高校卒業者）</td>
+                        </tr>
+                        <tr>
+                            <th>定員</th>
+                            <td>各年度 約4名</td>
+                        </tr>
+                        <tr>
+                            <th>開始時期</th>
+                            <td>原則 4月〜5月（定員に空きがあれば随時受付）</td>
+                        </tr>
+                        <tr>
+                            <th>場所</th>
+                            <td>つばめ学習舎 本館・別館</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p class="requirements-note">※日中の学習環境を必要とする方（通信制高校に在籍の方など）のご利用実績もあります。お気軽にご相談ください。</p>
+        </div>
+    </section>
+
+    <!-- プログラム一覧へ戻る -->
+    <div class="back-to-programs">
+        <a href="../programs.html" class="detail-button back-button">プログラム一覧へ戻る</a>
+    </div>
+
+    <!-- CTAセクション -->
+    <section class="cta-section">
+        <a href="../contact.html" class="cta-button-large">お問い合わせ・ご相談はこちら</a>
+    </section>
+
+    <!-- ========== 共通：フッター ========== -->
+    <footer>
+        <div class="footer-content">
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="../programs.html">プログラム</a></li>
+                    <li><a href="../course.html">受講プラン</a></li>
+                    <li><a href="../about.html">つばめ学習舎とは</a></li>
+                    <li><a href="../voice.html">卒業生の声</a></li>
+                </ul>
+            </nav>
+            <div class="footer-info">
+                <strong>つばめ学習舎（合同会社つばめ）</strong><br>
+                〒395-0004<br>
+                長野県飯田市上郷黒田443-4 山本ビル2階
+            </div>
+            
+            <div class="copyright">© 2026 つばめ学習舎 / Swallow-Base</div>
+        </div>
+    </footer>
+
+    <!-- ========== 共通：フローティングCTA ========== -->
+    <div class="floating-cta">
+        <a href="../contact.html">体験入会・お問い合わせ</a>
+    </div>
+
+    <!-- 共通JS -->
+    <script src="../js/script.js"></script>
+</body>
+</html>
