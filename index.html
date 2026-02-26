@@ -167,6 +167,56 @@
             box-shadow: 0 6px 16px rgba(225, 29, 47, 0.4);
         }
 
+        /* ===== お知らせバー ===== */
+        .announcement-bar {
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            display: none; /* JSで表示制御 */
+        }
+
+        .announcement-bar.is-visible {
+            display: block;
+        }
+
+        .announcement-bar-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 8px 20px;
+        }
+
+        .announcement-bar-text {
+            font-weight: bold;
+        }
+
+        .announcement-bar-links {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .announcement-bar-link {
+            color: white;
+            text-decoration: underline;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .announcement-bar-link:hover {
+            opacity: 0.85;
+        }
+
+        .announcement-bar-separator {
+            color: rgba(255,255,255,0.5);
+        }
+
         /* ===== フィーチャーカード ===== */
         .feature-grid {
             display: grid;
@@ -796,6 +846,19 @@
         </div>
     </section>
 
+    <!-- お知らせバー（表示期間：毎年 2/1〜5/15、JSで自動制御）-->
+    <!-- 手動で非表示にしたい場合は、下の行を <div class="announcement-bar" id="announcementBar" style="display:none!important"> に変更 -->
+    <div class="announcement-bar" id="announcementBar">
+        <div class="announcement-bar-inner">
+            <span class="announcement-bar-text">🌸 2026年度 塾生募集中</span>
+            <div class="announcement-bar-links">
+                <a href="contact.html" class="announcement-bar-link">現役生（中高生）はこちら</a>
+                <span class="announcement-bar-separator">｜</span>
+                <a href="programs/ronin.html" class="announcement-bar-link">既卒生はこちら</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Feature Section -->
     <section class="bg-white">
         <div class="section-header">
@@ -1018,6 +1081,17 @@
                 dot.classList.toggle('active', index === activeIndex);
             });
         });
+        // お知らせバー表示制御（毎年 2/1〜5/15 に自動表示）
+        (function() {
+            var now = new Date();
+            var month = now.getMonth() + 1; // 1-12
+            var day = now.getDate();
+            var show = (month >= 2 && month <= 4) || (month === 5 && day <= 15);
+            if (show) {
+                var bar = document.getElementById('announcementBar');
+                if (bar) bar.classList.add('is-visible');
+            }
+        })();
     </script>
 </body>
 </html>
