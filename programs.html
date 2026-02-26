@@ -184,25 +184,6 @@
             background-image: url('images/programs/ronin-bg.jpg');
         }
 
-        /* 既卒生セクション：カード1枚のため中央揃え */
-        @media (min-width: 1024px) {
-            .graduate-section .program-cards {
-                display: flex;
-                justify-content: center;
-                max-width: 900px;
-            }
-
-            .graduate-section .program-card {
-                width: calc(50% - 15px);
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .graduate-section .program-cards {
-                max-width: 1000px;
-            }
-        }
-
         /* ===== 特別企画セクション ===== */
         .special-section {
             padding-top: 50px;
@@ -318,6 +299,25 @@
 
             .accordion-title {
                 font-size: 20px;
+            }
+        }
+
+        /* ===== 既卒生セクション：カード1枚のため中央揃え ===== */
+        @media (min-width: 1024px) {
+            .graduate-section .program-cards {
+                display: flex;
+                justify-content: center;
+                max-width: 900px;
+            }
+
+            .graduate-section .program-card {
+                width: calc(50% - 15px);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .graduate-section .program-cards {
+                max-width: 1000px;
             }
         }
 
@@ -552,6 +552,7 @@
                 <div class="program-card-inner">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
                         <div class="accordion-title-wrapper">
+                            <p class="accordion-label">GAP YEAR PROGRAM</p>
                             <h3 class="accordion-title">つばめ既卒生プラン</h3>
                         </div>
                         <span class="accordion-icon">▼</span>
