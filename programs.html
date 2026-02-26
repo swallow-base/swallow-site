@@ -180,6 +180,29 @@
             background-image: url('images/programs/hitoritabi-bg.jpg');
         }
 
+        .program-card-ronin {
+            background-image: url('images/programs/ronin-bg.jpg');
+        }
+
+        /* 既卒生セクション：カード1枚のため中央揃え */
+        @media (min-width: 1024px) {
+            .graduate-section .program-cards {
+                display: flex;
+                justify-content: center;
+                max-width: 900px;
+            }
+
+            .graduate-section .program-card {
+                width: calc(50% - 15px);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .graduate-section .program-cards {
+                max-width: 1000px;
+            }
+        }
+
         /* ===== 特別企画セクション ===== */
         .special-section {
             padding-top: 50px;
@@ -189,7 +212,7 @@
         /* 共通CSSでモバイル非表示、PC表示を制御 */
         @media (min-width: 1024px) {
             .cta-section {
-                background: var(--bg-cream);
+                background: white;
             }
         }
 
@@ -506,6 +529,38 @@
                         <div class="accordion-content-inner">
                             <p class="program-card-text">旅行の計画から手配、実行までをすべて自分で行う旅に応援金を支給します。自由と挑戦、そして失敗も含めて学ぶ経験を通して、自立と選択の土台を作ります。</p>
                             <a href="programs/hitoritabi.html" class="detail-button">詳しく見る</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 既卒生向けプログラム -->
+    <section class="bg-white graduate-section">
+        <div class="program-section-header">
+            <h2 class="section-heading">既卒生向けプログラム</h2>
+            <p class="program-section-description">
+                大学受験を目指す既卒生のための、<br>
+                日常伴走型プラン
+            </p>
+        </div>
+
+        <div class="program-cards">
+            <!-- つばめ既卒生プラン -->
+            <div class="program-card program-card-ronin">
+                <div class="program-card-inner">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title-wrapper">
+                            <p class="accordion-label">GAP YEAR PROGRAM</p>
+                            <h3 class="accordion-title">つばめ既卒生プラン</h3>
+                        </div>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p class="program-card-text">宅浪と予備校のあいだで、自分の1年をつくる。朝9時から夕方まで講師と生活を共にし、個別指導・コーチング・自習室で伴走します。</p>
+                            <a href="programs/ronin.html" class="detail-button">詳しく見る</a>
                         </div>
                     </div>
                 </div>
