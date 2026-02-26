@@ -33,6 +33,10 @@
     <loc>https://swallow-base.com/programs/hitoritabi.html</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://swallow-base.com/programs/ronin.html</loc>
+    <priority>0.7</priority>
+  </url>
   
   <!-- 受講プラン -->
   <url>
