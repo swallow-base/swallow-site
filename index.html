@@ -169,12 +169,10 @@
 
         /* ===== お知らせバー ===== */
         .announcement-bar {
-            background: #fae6d3;
-            color: #333;
+            background: #ffffff;
             text-align: center;
-            padding: 12px 20px;
-            font-size: 14px;
-            line-height: 1.6;
+            padding: 28px 20px;
+            position: relative;
             display: none; /* JSで表示制御 */
         }
 
@@ -182,32 +180,64 @@
             display: block;
         }
 
+        /* 上下のストライプ装飾 */
+        .announcement-bar::before,
+        .announcement-bar::after {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 18px;
+            background: repeating-linear-gradient(
+                -45deg,
+                #ffd8ca,
+                #ffd8ca 12px,
+                #ffffff 12px,
+                #ffffff 24px
+            );
+        }
+
+        .announcement-bar::before {
+            top: 0;
+        }
+
+        .announcement-bar::after {
+            bottom: 0;
+        }
+
         .announcement-bar-inner {
             max-width: 800px;
             margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 8px 20px;
+            padding: 12px 0;
         }
 
         .announcement-bar-text {
+            font-size: 16px;
             font-weight: bold;
+            color: #333;
+            margin-bottom: 16px;
+            display: block;
         }
 
         .announcement-bar-links {
             display: flex;
-            gap: 12px;
-            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
         .announcement-bar-link {
-            color: var(--brand);
+            display: inline-block;
+            background: #4a4a4a;
+            color: white;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
+            padding: 10px 24px;
+            border-radius: 30px;
             white-space: nowrap;
+            transition: opacity 0.3s ease;
         }
 
         .announcement-bar-link:hover {
@@ -215,7 +245,7 @@
         }
 
         .announcement-bar-separator {
-            color: #ccc;
+            display: none;
         }
 
         /* ===== フィーチャーカード ===== */
