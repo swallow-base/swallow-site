@@ -258,6 +258,32 @@
             background-repeat: no-repeat;
         }
 
+        /* モバイル版お知らせバー調整 */
+        @media (max-width: 767px) {
+            .announcement-bar {
+                padding: 20px 16px;
+            }
+
+            .announcement-bar-inner {
+                padding: 8px 0;
+            }
+
+            .announcement-bar-text {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+
+            .announcement-bar-links {
+                flex-direction: row;
+                gap: 10px;
+            }
+
+            .announcement-bar-link {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+        }
+
         /* ===== フィーチャーカード ===== */
         .feature-grid {
             display: grid;
