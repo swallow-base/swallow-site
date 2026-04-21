@@ -42,20 +42,31 @@
             margin: 0 auto;
         }
 
-        /* 体験期間についての補足文 */
+        /* 体験期間の注釈マーク */
+        .trial-asterisk {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-left: 1px;
+        }
+
+        /* 体験期間についての補足文（料金表の下に配置） */
         .trial-note {
             font-size: 13px;
             line-height: 1.8;
             color: #555;
             max-width: 700px;
-            margin: -8px auto 24px;
-            padding: 0 16px;
+            margin: 20px auto 32px;
+            padding: 16px 20px;
+            background: #f5f5ef;
+            border-radius: 8px;
             text-align: left;
         }
 
         @media (min-width: 768px) {
             .trial-note {
                 font-size: 14px;
+                padding: 20px 24px;
             }
         }
 
@@ -615,8 +626,7 @@
         <div class="trial-info">
             <h2 class="section-heading">体験入会のご案内</h2>
             
-            <p class="trial-intro">体験期間中は、特別料金で<br>以下全ての内容をご体験いただけます。</p>
-            <p class="trial-note">※体験期間は「集団指導または個別指導の授業を合計4コマ受講する期間」です。週1コマ受講なら約1ヶ月、週2コマ受講なら約2週間で終了となります。自習室・LINE質問サービスは体験期間中いつでもご利用いただけます。</p>
+            <p class="trial-intro">初月の体験期間<sup class="trial-asterisk">*</sup>は、特別料金で<br>以下全ての内容をご体験いただけます。</p>
             
             <div class="trial-table-wrapper">
                 <table class="trial-table">
@@ -647,7 +657,7 @@
                             <td colspan="2">
                                 <span class="price-label">体験期間限定</span>
                                 <div class="price-main">
-                                    <span class="price-period">授業4コマ分（約1ヶ月間）</span>
+                                    <span class="price-period">約1ヶ月間<sup class="trial-asterisk">*</sup></span>
                                     <span class="price-amount">5,000</span><span class="price-yen">円</span><span class="price-tax">（税込）</span>
                                 </div>
                             </td>
@@ -655,6 +665,10 @@
                     </tbody>
                 </table>
             </div>
+            <p class="trial-note">
+                <sup class="trial-asterisk">*</sup>体験期間は「集団指導または個別指導の授業を合計4コマ受講する期間」です。週1コマ受講なら約1ヶ月、週2コマ受講なら約2週間で終了となります。自習室・LINE質問サービスは体験期間中いつでもご利用いただけます。
+            </p>
+
         </div>
     </section>
 
@@ -713,7 +727,7 @@
                             </tr>
                             <tr>
                                 <th>料金</th>
-                                <td>授業4コマ分（約1ヶ月間）</td>
+                                <td>約1ヶ月間<sup class="trial-asterisk">*</sup></td>
                                 <td><span class="highlight">5,000円</span>（税込）</td>
                             </tr>
                         </tbody>
