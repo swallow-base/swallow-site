@@ -228,6 +228,15 @@
             display: block;
         }
 
+        /* 募集状況の案内文（地の文） */
+        .announcement-bar-notice {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
         .announcement-bar-links {
             display: flex;
             justify-content: center;
@@ -279,6 +288,12 @@
             .announcement-bar-text {
                 font-size: 14px;
                 margin-bottom: 12px;
+            }
+
+            .announcement-bar-notice {
+                font-size: 13px;
+                line-height: 1.7;
+                margin-bottom: 16px;
             }
 
             .announcement-bar-links {
@@ -925,7 +940,11 @@
     <!-- 手動で非表示にしたい場合は、下の行を <div class="announcement-bar" id="announcementBar" style="display:none!important"> に変更 -->
     <div class="announcement-bar" id="announcementBar">
         <div class="announcement-bar-inner">
-            <span class="announcement-bar-text"><span class="sakura-icon"></span> 2026年度 入会受付中！ <span class="sakura-icon"></span></span>
+            <span class="announcement-bar-text"><span class="sakura-icon"></span> 2026年度 入会について <span class="sakura-icon"></span></span>
+            <p class="announcement-bar-notice">
+            高校3年生は定員に達したため、入会を締め切りました。<br>
+            その他の学年については、募集を継続しております。
+            </p>
             <div class="announcement-bar-links">
                 <a href="contact.html" class="announcement-bar-link">▶︎ 現役生（中高生）</a>
                 <span class="announcement-bar-separator">｜</span>
