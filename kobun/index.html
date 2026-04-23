@@ -1,0 +1,3231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>つばめ古文 — 識別演習 v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Klee+One:wght@400;600&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --bg-paper: #faf6ed;
+    --bg-paper-dark: #ede4d0;
+    --ink: #2a2520;
+    --ink-soft: #4a4238;
+    --accent: #8b2e2e;
+    --accent-soft: #b85c5c;
+    --sakura: #e8c4c4;
+    --sakura-bg: #f7e8e8;
+    --gold: #a67c3f;
+    --moss: #5a6b3e;
+    --moss-bg: #e4e9d8;
+    --line: #c9b99a;
+    --line-soft: #d9ccb3;
+    --shadow: 0 4px 20px rgba(74, 58, 40, 0.08);
+    --shadow-lg: 0 8px 40px rgba(74, 58, 40, 0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+    min-height: 100vh;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(184, 92, 92, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(166, 124, 63, 0.04) 0%, transparent 40%);
+    padding: 20px 16px 60px;
+  }
+  .app { max-width: 780px; margin: 0 auto; }
+
+  header.masthead {
+    text-align: center;
+    padding: 20px 0 30px;
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 30px;
+    position: relative;
+  }
+  header.masthead::before {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: -1px;
+    width: 80px; height: 3px;
+    background: var(--accent);
+    transform: translateX(-50%);
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: 0.1em;
+  }
+  .tagline {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.2em;
+  }
+
+  /* 進捗バー */
+  .progress-card {
+    background: var(--bg-paper);
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    box-shadow: var(--shadow);
+  }
+  .progress-stats { display: flex; gap: 20px; }
+  .stat { display: flex; flex-direction: column; align-items: center; }
+  .stat-value {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+  .stat.remaining .stat-value { color: var(--accent); }
+  .stat.correct .stat-value { color: var(--moss); }
+  .stat.mistake .stat-value { color: var(--gold); }
+
+  /* 例文セッションのヘッダー */
+  .session-header {
+    background: linear-gradient(135deg, #f7ede0 0%, #efe2cc 100%);
+    border: 1px solid var(--line-soft);
+    border-radius: 6px 6px 0 0;
+    padding: 20px 28px;
+    border-bottom: none;
+  }
+  .session-title {
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+  .session-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .session-word {
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .session-word .word {
+    background: var(--sakura-bg);
+    color: var(--accent);
+    padding: 3px 12px;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 18px;
+    margin-left: 8px;
+  }
+  .session-step {
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+  }
+
+  /* 原文表示(セッション共通) */
+  .session-example {
+    background: var(--bg-paper);
+    border: 1px solid var(--line-soft);
+    border-top: none;
+    padding: 22px 28px;
+  }
+  .example-text {
+    font-size: 22px;
+    line-height: 2.3;
+    color: var(--ink);
+    padding: 18px 16px;
+    background: linear-gradient(180deg, #fdfbf5 0%, #f8f2e4 100%);
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+  .example-text .highlight {
+    background: linear-gradient(transparent 55%, var(--sakura) 55%, var(--sakura) 85%, transparent 85%);
+    padding: 0 3px;
+    font-weight: 600;
+    color: var(--accent);
+    transition: background 0.3s;
+  }
+  .example-source {
+    text-align: right;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    letter-spacing: 0.1em;
+  }
+  .example-source::before { content: "― "; }
+
+  /* ステップ進捗インジケータ */
+  .step-indicator {
+    display: flex;
+    gap: 4px;
+    margin-top: 14px;
+    justify-content: center;
+  }
+  .step-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--line-soft);
+    border: 1.5px solid transparent;
+    transition: all 0.2s;
+  }
+  .step-dot.done { background: var(--moss); }
+  .step-dot.done.mistake { background: var(--gold); }
+  .step-dot.current {
+    background: var(--accent);
+    transform: scale(1.3);
+  }
+  .step-dot.final {
+    border-radius: 2px;
+    transform: rotate(45deg);
+    width: 11px; height: 11px;
+  }
+  .step-dot.final.current { transform: rotate(45deg) scale(1.3); }
+
+  /* 問題エリア */
+  .question-area {
+    background: var(--bg-paper);
+    border: 1px solid var(--line-soft);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    padding: 24px 28px 28px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+  }
+  .question-area::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 0 0 0 6px;
+  }
+
+  .q-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--line-soft);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .q-index {
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.15em;
+  }
+  .q-type-badges { display: flex; gap: 6px; }
+  .q-type-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    background: var(--bg-paper-dark);
+  }
+  .q-type-badge.follow-up {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+  }
+
+  /* 問題文 */
+  .q-prompt {
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    background: var(--bg);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 3px 3px 0;
+    line-height: 1.7;
+  }
+  .q-prompt.follow-up-prompt {
+    border-left-color: var(--accent);
+    background: var(--sakura-bg);
+  }
+  .q-prompt-label {
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  /* 選択肢 */
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .choice {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 14px 18px;
+    background: #fff;
+    border: 1.5px solid var(--line-soft);
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .choice:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: #fffcf6;
+    transform: translateX(2px);
+  }
+  .choice-marker {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+    font-family: 'Klee One', serif;
+    font-weight: 600;
+  }
+  .choice.selected { border-color: var(--accent); background: var(--sakura-bg); }
+  .choice.correct { border-color: var(--moss); background: var(--moss-bg); }
+  .choice.correct .choice-marker { background: var(--moss); color: white; border-color: var(--moss); }
+  .choice.incorrect { border-color: var(--accent); background: var(--sakura-bg); }
+  .choice.incorrect .choice-marker { background: var(--accent); color: white; border-color: var(--accent); }
+  .choice:disabled { cursor: default; }
+
+  /* 記述式 */
+  .text-input {
+    font-family: 'Klee One', 'Shippori Mincho', serif;
+    font-size: 16px;
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--line-soft);
+    border-radius: 3px;
+    background: #fff;
+    color: var(--ink);
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .text-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fffcf6;
+  }
+  .self-judge-note {
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-align: center;
+    padding: 14px;
+    background: var(--bg);
+    border-radius: 3px;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .model-answer {
+    background: var(--moss-bg);
+    border: 1px solid var(--moss);
+    border-radius: 3px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .model-answer.user {
+    background: #fff;
+    border-color: var(--line);
+  }
+  .model-answer-label {
+    font-size: 12px;
+    color: var(--moss);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+  }
+  .model-answer.user .model-answer-label { color: var(--ink-soft); }
+  .model-answer-text {
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.8;
+  }
+
+  /* 解説 */
+  .explanation {
+    background: linear-gradient(180deg, #fefbf3 0%, #fbf5e5 100%);
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  /* 結果バナー */
+  .result-banner {
+    text-align: center;
+    padding: 14px 18px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    animation: fadeIn 0.3s ease;
+  }
+  .result-banner.all-correct {
+    background: var(--moss-bg);
+    color: var(--moss);
+    border: 1px solid var(--moss);
+  }
+  .result-banner.partial {
+    background: #fdf2e0;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+  }
+  .result-banner.all-wrong {
+    background: var(--sakura-bg);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .explanation-label {
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .explanation-label::before {
+    content: "解";
+    display: inline-block;
+    width: 20px; height: 20px;
+    background: var(--gold);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+  .explanation-text { font-size: 15px; line-height: 1.8; }
+  .explanation-ref {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+
+  /* ボタン */
+  .btn {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: #6f1f1f; }
+  .btn-primary:disabled { background: var(--line); cursor: not-allowed; }
+  .btn-secondary {
+    background: white;
+    color: var(--ink);
+    border: 1.5px solid var(--line);
+  }
+  .btn-secondary:hover { background: var(--bg-paper-dark); }
+  .btn-moss { background: var(--moss); color: white; }
+  .btn-moss:hover { background: #435229; }
+  .btn-gold { background: var(--gold); color: white; }
+  .btn-gold:hover { background: #8a6630; }
+  .btn-block { width: 100%; }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  /* セッション完了サマリー */
+  .session-summary {
+    background: linear-gradient(180deg, #faf6ed 0%, #efe2cc 100%);
+    border: 1px solid var(--line-soft);
+    border-radius: 0 0 6px 6px;
+    border-top: none;
+    padding: 30px 28px;
+    text-align: center;
+  }
+  .summary-title {
+    font-size: 20px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+  .summary-line {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .summary-translation {
+    background: white;
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    padding: 18px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  .summary-translation-label {
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+  .summary-translation-text {
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  /* 完了画面(全セッション) */
+  .all-complete-card {
+    background: var(--bg-paper);
+    border: 1px solid var(--line-soft);
+    border-radius: 6px;
+    padding: 60px 30px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+  }
+  .all-complete-title {
+    font-size: 32px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .all-complete-summary {
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin-bottom: 30px;
+    line-height: 2;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.2em;
+  }
+
+  @media (max-width: 500px) {
+    .example-text { font-size: 18px; padding: 16px 12px; }
+    .q-prompt { font-size: 15px; }
+    .choice { font-size: 15px; padding: 12px 14px; }
+    .question-area, .session-header, .session-example { padding-left: 18px; padding-right: 18px; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client"
+  }
+}
+</script>
+
+<script type="module">
+import React, { useState, useMemo, useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+
+// ========================================
+// 問題データ
+// フォーマット拡張ポイント:
+// - 例文セッション単位で構造化(questions配列の順序が出題順)
+// - 一部の問題に follow_up を追加(理由を問う連鎖質問)
+// ========================================
+// ============================================================
+// つばめ古文 識別演習 問題データ
+// 教材p155-166より、10語分を収録
+// ============================================================
+const QUESTION_DATA = [
+  {
+    "target_word": "が",
+    "word_id": "word_ga",
+    "examples": [
+      {
+        "example_id": "ga_01",
+        "text": "雀の子を犬君が逃がしつる。",
+        "source": "源氏物語",
+        "modern_translation": "雀の子を犬君が逃がしてしまったの。",
+        "highlights": [
+          {
+            "id": "h_ga",
+            "text": "が",
+            "start": 6,
+            "end": 7
+          },
+          {
+            "id": "h_tsuru",
+            "text": "つる",
+            "start": 10,
+            "end": 12
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ga_01_q1",
+            "highlight_id": "h_ga",
+            "question_type": "識別",
+            "prompt": "傍線部「が」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "格助詞",
+              "接続助詞",
+              "副助詞",
+              "係助詞"
+            ],
+            "correct_answer": "格助詞",
+            "explanation": "体言「犬君」に接続しているため格助詞。",
+            "reference_page": 80,
+            "follow_up": {
+              "prompt": "「格助詞」と判断した決め手はどれですか。",
+              "choices": [
+                "直前が体言(名詞)だから",
+                "直前が連体形だから",
+                "文末にあるから",
+                "「〜が」と訳せるから"
+              ],
+              "correct_answer": "直前が体言(名詞)だから",
+              "explanation": "「が」の識別は接続で判別する。体言接続なら格助詞。"
+            }
+          },
+          {
+            "q_id": "ga_01_q2",
+            "highlight_id": "h_tsuru",
+            "question_type": "分解",
+            "prompt": "傍線部「つる」を文法的に分解するとどうなりますか。",
+            "answer_format": "select",
+            "choices": [
+              "助動詞「つ」一語",
+              "助動詞「つ」+助動詞「る」",
+              "動詞の活用語尾",
+              "助動詞「つる」一語"
+            ],
+            "correct_answer": "助動詞「つ」一語",
+            "explanation": "「つる」は完了の助動詞「つ」の連体形で、一語。"
+          },
+          {
+            "q_id": "ga_01_q3",
+            "highlight_id": "h_tsuru",
+            "question_type": "活用形",
+            "prompt": "助動詞「つ」の活用形を答えなさい。",
+            "answer_format": "select",
+            "choices": [
+              "未然形",
+              "連用形",
+              "終止形",
+              "連体形",
+              "已然形",
+              "命令形"
+            ],
+            "correct_answer": "連体形",
+            "explanation": "文末の余韻(「〜の。」)で連体形。"
+          },
+          {
+            "q_id": "ga_01_q4",
+            "highlight_id": "h_tsuru",
+            "question_type": "助動詞の意味",
+            "prompt": "助動詞「つ」の意味として最も適切なものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "完了",
+              "強意",
+              "存続",
+              "過去"
+            ],
+            "correct_answer": "完了",
+            "explanation": "ここでは「〜てしまった」の意で完了。",
+            "follow_up": {
+              "prompt": "「完了」と判断した決め手はどれですか。",
+              "choices": [
+                "「〜てしまった」と訳せるから",
+                "推量系の助動詞を伴わないから",
+                "連用形に接続しているから",
+                "文末にあるから"
+              ],
+              "correct_answer": "推量系の助動詞を伴わないから",
+              "explanation": "「つ」は下に推量系の助動詞(む・べし等)を伴う場合は強意、そうでなければ基本的に完了。"
+            }
+          },
+          {
+            "q_id": "ga_01_q5",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文全体を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "雀の子を犬君が逃がしてしまったの。",
+            "explanation": "「つる」は完了の助動詞「つ」の連体形で「〜てしまった」。"
+          }
+        ]
+      },
+      {
+        "example_id": "ga_02",
+        "text": "雁などの連ねたるが、いと小さく見ゆるは、いとをかし。",
+        "source": "枕草子",
+        "modern_translation": "雁などが列をなしているのが、とても小さく見えるのは、とても趣がある。",
+        "highlights": [
+          {
+            "id": "h_ga",
+            "text": "が",
+            "start": 8,
+            "end": 9
+          },
+          {
+            "id": "h_taru",
+            "text": "たる",
+            "start": 6,
+            "end": 8
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ga_02_q1",
+            "highlight_id": "h_ga",
+            "question_type": "識別",
+            "prompt": "傍線部「が」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "格助詞",
+              "接続助詞",
+              "副助詞",
+              "係助詞"
+            ],
+            "correct_answer": "格助詞",
+            "explanation": "連体形「たる」に接続するが、下に「トコロ」などの体言を補えるため格助詞。",
+            "reference_page": 80,
+            "follow_up": {
+              "prompt": "連体形接続の「が」が格助詞となる根拠はどれですか。",
+              "choices": [
+                "下に「トキ・トコロ」などの体言を補える",
+                "下に体言を補えない",
+                "直前が体言である",
+                "文末にある"
+              ],
+              "correct_answer": "下に「トキ・トコロ」などの体言を補える",
+              "explanation": "「連ねたる(トコロ)が」と体言を補えるため格助詞。"
+            }
+          },
+          {
+            "q_id": "ga_02_q2",
+            "highlight_id": "h_taru",
+            "question_type": "活用形",
+            "prompt": "傍線部「たる」の活用形を答えなさい。",
+            "answer_format": "select",
+            "choices": [
+              "未然形",
+              "連用形",
+              "終止形",
+              "連体形",
+              "已然形",
+              "命令形"
+            ],
+            "correct_answer": "連体形",
+            "explanation": "直後の格助詞「が」は連体形に接続している。"
+          },
+          {
+            "q_id": "ga_02_q3",
+            "highlight_id": null,
+            "question_type": "古文単語の意味",
+            "prompt": "文中の「をかし」の意味として最も適切なものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "趣がある",
+              "こっけいだ",
+              "不思議だ",
+              "美しい"
+            ],
+            "correct_answer": "趣がある",
+            "explanation": "枕草子における「をかし」は基本的に「趣がある」。"
+          },
+          {
+            "q_id": "ga_02_q4",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文全体を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "雁などが列をなしているのが、とても小さく見えるのは、とても趣がある。",
+            "explanation": "格助詞「が」の用法に注意。「をかし」は「趣がある」。"
+          }
+        ]
+      },
+      {
+        "example_id": "ga_03",
+        "text": "清盛公そのころいまだ大納言にておはしけるが、大きに恐れさわがれけり。",
+        "source": "平家物語",
+        "modern_translation": "清盛公は当時はまだ大納言でいらっしゃったが、たいそう恐れさわがれた。",
+        "highlights": [
+          {
+            "id": "h_ga",
+            "text": "が",
+            "start": 20,
+            "end": 21
+          },
+          {
+            "id": "h_keru",
+            "text": "ける",
+            "start": 18,
+            "end": 20
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ga_03_q1",
+            "highlight_id": "h_ga",
+            "question_type": "識別",
+            "prompt": "傍線部「が」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "格助詞",
+              "接続助詞",
+              "副助詞",
+              "係助詞"
+            ],
+            "correct_answer": "接続助詞",
+            "explanation": "連体形「ける」に接続し、下に体言を補えないため接続助詞。",
+            "reference_page": 90,
+            "follow_up": {
+              "prompt": "連体形接続の「が」が接続助詞となる根拠はどれですか。",
+              "choices": [
+                "下に体言を補えない",
+                "下に「トキ・トコロ」などの体言を補える",
+                "直前が体言である",
+                "文末にある"
+              ],
+              "correct_answer": "下に体言を補えない",
+              "explanation": "「おはしける(◯◯)が」と体言を補うと不自然。平安時代後期以降に発生した用法。"
+            }
+          },
+          {
+            "q_id": "ga_03_q2",
+            "highlight_id": "h_keru",
+            "question_type": "助動詞の意味",
+            "prompt": "助動詞「けり」の意味として最も適切なものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "過去",
+              "詠嘆",
+              "完了",
+              "推量"
+            ],
+            "correct_answer": "過去",
+            "explanation": "地の文では基本的に過去の意。"
+          },
+          {
+            "q_id": "ga_03_q3",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文全体を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "清盛公は当時はまだ大納言でいらっしゃったが、たいそう恐れさわがれた。",
+            "explanation": "接続助詞「が」は単純接続の用法。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "target_word": "けれ",
+    "word_id": "word_kere",
+    "examples": [
+      {
+        "example_id": "kere_01",
+        "text": "芥川といふ川を率て行きければ、女を連れて行った。",
+        "source": "伊勢物語",
+        "modern_translation": "芥川という川のほとりを(女を)連れて行ったところ、",
+        "highlights": [
+          {
+            "id": "h_kere",
+            "text": "けれ",
+            "start": 11,
+            "end": 13
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "kere_01_q1",
+            "highlight_id": "h_kere",
+            "question_type": "識別",
+            "prompt": "傍線部「けれ」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "過去の助動詞「けり」の已然形",
+              "形容詞の語尾",
+              "推量の助動詞「べし」の一部",
+              "打消推量の助動詞「まじ」の一部"
+            ],
+            "correct_answer": "過去の助動詞「けり」の已然形",
+            "explanation": "連用形「行き」に接続しており、下に「ば」が続いているため已然形。",
+            "reference_page": 54,
+            "follow_up": {
+              "prompt": "「けり」の已然形と判断した決め手はどれですか。",
+              "choices": [
+                "連用形に接続し、下に「ば」が続くから",
+                "体言に接続しているから",
+                "文末にあるから",
+                "形容詞の語幹の下にあるから"
+              ],
+              "correct_answer": "連用形に接続し、下に「ば」が続くから",
+              "explanation": "「けり」は連用形接続の助動詞。「ば」は已然形に接続する。"
+            }
+          },
+          {
+            "q_id": "kere_01_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "芥川という川のほとりを(女を)連れて行ったところ、",
+            "explanation": "「ば」は已然形接続で順接の確定条件(〜ので・〜ところ)。"
+          }
+        ]
+      },
+      {
+        "example_id": "kere_02",
+        "text": "野分のあくる朝こそをかしけれ。",
+        "source": "徒然草",
+        "modern_translation": "台風のあくる朝の有様は特に情趣あるものである。",
+        "highlights": [
+          {
+            "id": "h_kere",
+            "text": "けれ",
+            "start": 12,
+            "end": 14
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "kere_02_q1",
+            "highlight_id": "h_kere",
+            "question_type": "識別",
+            "prompt": "傍線部「けれ」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "形容詞「をかし」の已然形活用語尾の一部",
+              "過去の助動詞「けり」の已然形",
+              "推量の助動詞「べし」の已然形",
+              "打消の助動詞「まじ」の已然形"
+            ],
+            "correct_answer": "形容詞「をかし」の已然形活用語尾の一部",
+            "explanation": "形容詞「をかし」のシク活用已然形「をかしけれ」の一部。係助詞「こそ」の結びで已然形。",
+            "reference_page": 30,
+            "follow_up": {
+              "prompt": "「けり」の已然形ではなく形容詞活用語尾の一部と判断した決め手はどれですか。",
+              "choices": [
+                "「をかし」の語幹には助動詞「けり」は接続しないから",
+                "連用形に接続しているから",
+                "文末にないから",
+                "連体形に接続しているから"
+              ],
+              "correct_answer": "「をかし」の語幹には助動詞「けり」は接続しないから",
+              "explanation": "助動詞「けり」は形容詞の語幹には直接接続しない。形容詞の活用語尾の一部と判別する。"
+            }
+          },
+          {
+            "q_id": "kere_02_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "台風のあくる朝の有様は特に情趣あるものである。",
+            "explanation": "係助詞「こそ」の結びで已然形「をかしけれ」。"
+          }
+        ]
+      },
+      {
+        "example_id": "kere_03",
+        "text": "四十路に足らぬほどにて死なんこそめやすかるべけれ。",
+        "source": "徒然草",
+        "modern_translation": "四十歳に足りない年齢で死ぬようなのが見苦しくないだろう。",
+        "highlights": [
+          {
+            "id": "h_bekere",
+            "text": "べけれ",
+            "start": 21,
+            "end": 24
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "kere_03_q1",
+            "highlight_id": "h_bekere",
+            "question_type": "識別",
+            "prompt": "傍線部「べけれ」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "推量の助動詞「べし」の已然形",
+              "過去の助動詞「けり」",
+              "形容詞の活用語尾",
+              "打消推量の助動詞「まじ」"
+            ],
+            "correct_answer": "推量の助動詞「べし」の已然形",
+            "explanation": "「べし」のク活用已然形「べけれ」。係助詞「こそ」の結びで已然形。",
+            "reference_page": 64,
+            "follow_up": {
+              "prompt": "「べし」の已然形と判断した決め手はどれですか。",
+              "choices": [
+                "形容詞型の活用で係助詞「こそ」の結びが「べけれ」となるから",
+                "連用形に接続しているから",
+                "体言に接続しているから",
+                "文頭にあるから"
+              ],
+              "correct_answer": "形容詞型の活用で係助詞「こそ」の結びが「べけれ」となるから",
+              "explanation": "「べし」は形容詞のク活用型の活用をする。係助詞「こそ」の結びは已然形。"
+            }
+          },
+          {
+            "q_id": "kere_03_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "四十歳に足りない年齢で死ぬようなのが見苦しくないだろう。",
+            "explanation": "「べけれ」は推量の助動詞「べし」の已然形。"
+          }
+        ]
+      },
+      {
+        "example_id": "kere_04",
+        "text": "御覧ぜまほしけれど、",
+        "source": "源氏物語",
+        "modern_translation": "(帝は)ご覧になりたいが、",
+        "highlights": [
+          {
+            "id": "h_makere",
+            "text": "まほしけれ",
+            "start": 3,
+            "end": 8
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "kere_04_q1",
+            "highlight_id": "h_makere",
+            "question_type": "識別",
+            "prompt": "傍線部「まほしけれ」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "希望の助動詞「まほし」の已然形の一部",
+              "形容詞の已然形",
+              "過去の助動詞「けり」の已然形",
+              "打消の助動詞「まじ」の已然形"
+            ],
+            "correct_answer": "希望の助動詞「まほし」の已然形の一部",
+            "explanation": "希望の助動詞「まほし」の已然形「まほしけれ」の一部。",
+            "reference_page": 70
+          },
+          {
+            "q_id": "kere_04_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "(帝は)ご覧になりたいが、",
+            "explanation": "「まほし」は「〜たい」という希望。「ど」は逆接の確定条件。"
+          }
+        ]
+      },
+      {
+        "example_id": "kere_06",
+        "text": "咲きけれ(動詞の一部)",
+        "source": "参考例",
+        "modern_translation": "咲く(四段活用動詞)の已然形+助動詞「り」",
+        "highlights": [
+          {
+            "id": "h_sakikere",
+            "text": "咲きけれ",
+            "start": 0,
+            "end": 4
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "kere_06_q1",
+            "highlight_id": "h_sakikere",
+            "question_type": "識別",
+            "prompt": "動詞「咲く」の語幹「咲」は「咲きけれ」と切り離せますか。",
+            "answer_format": "select",
+            "choices": [
+              "切り離せない(動詞「咲く」の語幹と活用語尾)",
+              "切り離せる(語幹+助動詞「けり」)"
+            ],
+            "correct_answer": "切り離せない(動詞「咲く」の語幹と活用語尾)",
+            "explanation": "動詞の語幹「咲」は独立して用いられず、助動詞「けり」とは接続しない。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "target_word": "し",
+    "word_id": "word_shi",
+    "examples": [
+      {
+        "example_id": "shi_01",
+        "text": "名にし負はば(いざこと問はむ都鳥)",
+        "source": "伊勢物語",
+        "modern_translation": "(都という)名を持っているのならば",
+        "highlights": [
+          {
+            "id": "h_shi",
+            "text": "し",
+            "start": 2,
+            "end": 3
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "shi_01_q1",
+            "highlight_id": "h_shi",
+            "question_type": "識別",
+            "prompt": "傍線部「し」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "副助詞「し」(強意)",
+              "過去の助動詞「き」の連体形",
+              "サ変動詞「す」の連用形",
+              "形容詞の語尾"
+            ],
+            "correct_answer": "副助詞「し」(強意)",
+            "explanation": "体言「名」と動詞「負は」の間にあり、強意の副助詞「し」。",
+            "reference_page": 106,
+            "follow_up": {
+              "prompt": "副助詞「し」と判断した決め手はどれですか。",
+              "choices": [
+                "除外しても意味が通じるから",
+                "連用形に接続しているから",
+                "連体形に接続しているから",
+                "文末にあるから"
+              ],
+              "correct_answer": "除外しても意味が通じるから",
+              "explanation": "副助詞「し」(強意)は除外しても文意が通じる。"
+            }
+          },
+          {
+            "q_id": "shi_01_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この部分を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "(都という)名を持っているのならば",
+            "explanation": "「し」は強意の副助詞で、訳に反映しないか「まさに」「本当に」などで訳す。"
+          }
+        ]
+      },
+      {
+        "example_id": "shi_02",
+        "text": "一つな落としそ。",
+        "source": "宇治拾遺物語",
+        "modern_translation": "一つも落とすな。",
+        "highlights": [
+          {
+            "id": "h_shi",
+            "text": "し",
+            "start": 5,
+            "end": 6
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "shi_02_q1",
+            "highlight_id": "h_shi",
+            "question_type": "識別",
+            "prompt": "「落としそ」の「し」は「落と-し-そ」でどう識別しますか。",
+            "answer_format": "select",
+            "choices": [
+              "副助詞「し」",
+              "四段動詞「落とす」の連用形活用語尾",
+              "過去の助動詞「き」",
+              "形容詞の語尾"
+            ],
+            "correct_answer": "四段動詞「落とす」の連用形活用語尾",
+            "explanation": "禁止「な〜そ」の間は連用形。四段動詞「落とす」の連用形活用語尾。",
+            "reference_page": 19
+          }
+        ]
+      },
+      {
+        "example_id": "shi_03",
+        "text": "昔ありし家はまれなり。",
+        "source": "方丈記",
+        "modern_translation": "昔あった家はまれである。",
+        "highlights": [
+          {
+            "id": "h_shi",
+            "text": "し",
+            "start": 3,
+            "end": 4
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "shi_03_q1",
+            "highlight_id": "h_shi",
+            "question_type": "識別",
+            "prompt": "傍線部「し」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "過去の助動詞「き」の連体形",
+              "副助詞「し」",
+              "サ変動詞「す」の連用形",
+              "形容詞の語尾"
+            ],
+            "correct_answer": "過去の助動詞「き」の連体形",
+            "explanation": "連用形「あり」に接続し、体言「家」を修飾するため「き」の連体形。",
+            "reference_page": 53,
+            "follow_up": {
+              "prompt": "「き」の連体形と判断した決め手はどれですか。",
+              "choices": [
+                "連用形に接続し下に体言が続く",
+                "体言に接続している",
+                "文末にある",
+                "未然形に接続している"
+              ],
+              "correct_answer": "連用形に接続し下に体言が続く",
+              "explanation": "助動詞「き」は連用形接続。下に体言が続くため連体形。"
+            }
+          },
+          {
+            "q_id": "shi_03_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "昔あった家はまれである。",
+            "explanation": "「し」は過去の助動詞「き」の連体形で「〜た」。"
+          }
+        ]
+      },
+      {
+        "example_id": "shi_04",
+        "text": "あやしき者どもの心ばへなりしかし。",
+        "source": "今昔物語集",
+        "modern_translation": "不思議な者たちの心情であることよ。",
+        "highlights": [
+          {
+            "id": "h_shikashi",
+            "text": "しかし",
+            "start": 13,
+            "end": 16
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "shi_04_q1",
+            "highlight_id": "h_shikashi",
+            "question_type": "分解",
+            "prompt": "「しかし」は「〜なりしかし」の文末で用いられています。文法的にどう分解しますか。",
+            "answer_format": "select",
+            "choices": [
+              "助動詞「き」の已然形「しか」+終助詞「し」",
+              "助動詞「けり」+助動詞「し」",
+              "副詞「しか」+助詞「し」",
+              "副詞「しかし」一語"
+            ],
+            "correct_answer": "助動詞「き」の已然形「しか」+終助詞「し」",
+            "explanation": "過去の助動詞「き」の已然形「しか」に、文末の詠嘆・念押しの終助詞「し」が付いた形。",
+            "reference_page": 39
+          }
+        ]
+      },
+      {
+        "example_id": "shi_05",
+        "text": "しか言はばと思ひけるにや。",
+        "source": "今昔物語集",
+        "modern_translation": "そのように言えばと思ったのだろうか。",
+        "highlights": [
+          {
+            "id": "h_shika",
+            "text": "しか",
+            "start": 0,
+            "end": 2
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "shi_05_q1",
+            "highlight_id": "h_shika",
+            "question_type": "識別",
+            "prompt": "傍線部「しか」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "副詞「しか」(そのように)",
+              "過去の助動詞「き」の已然形",
+              "形容詞の活用語尾",
+              "副助詞「し」+係助詞「か」"
+            ],
+            "correct_answer": "副詞「しか」(そのように)",
+            "explanation": "文頭にあり「そのように」の意を示す副詞。",
+            "reference_page": 106
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "target_word": "て",
+    "word_id": "word_te",
+    "examples": [
+      {
+        "example_id": "te_01",
+        "text": "行き行きて、駿河の国にいたりぬ。",
+        "source": "伊勢物語",
+        "modern_translation": "どんどん進んで行って、駿河の国に着いた。",
+        "highlights": [
+          {
+            "id": "h_te",
+            "text": "て",
+            "start": 4,
+            "end": 5
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "te_01_q1",
+            "highlight_id": "h_te",
+            "question_type": "識別",
+            "prompt": "傍線部「て」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "接続助詞「て」",
+              "完了の助動詞「つ」の未然形・連用形",
+              "格助詞「て」",
+              "副詞の一部"
+            ],
+            "correct_answer": "接続助詞「て」",
+            "explanation": "連用形「行き」に接続し、下に動詞が続くため接続助詞。",
+            "reference_page": 91,
+            "follow_up": {
+              "prompt": "接続助詞「て」と判断した決め手はどれですか。",
+              "choices": [
+                "連用形に接続し、下に用言が続く",
+                "体言に接続している",
+                "文末にある",
+                "未然形に接続している"
+              ],
+              "correct_answer": "連用形に接続し、下に用言が続く",
+              "explanation": "接続助詞「て」は連用形に接続。完了「つ」は下に助動詞(む・ず・き・けり等)を伴うことが多い。"
+            }
+          },
+          {
+            "q_id": "te_01_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "どんどん進んで行って、駿河の国に着いた。",
+            "explanation": "接続助詞「て」は単純接続で「〜て」。"
+          }
+        ]
+      },
+      {
+        "example_id": "te_02",
+        "text": "鬼はや一口に食ひてけり。",
+        "source": "伊勢物語",
+        "modern_translation": "鬼が(女を)たちまち一口で食ってしまった。",
+        "highlights": [
+          {
+            "id": "h_te",
+            "text": "て",
+            "start": 8,
+            "end": 9
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "te_02_q1",
+            "highlight_id": "h_te",
+            "question_type": "識別",
+            "prompt": "傍線部「て」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "完了の助動詞「つ」の未然形または連用形",
+              "接続助詞「て」",
+              "格助詞「て」",
+              "副詞の一部"
+            ],
+            "correct_answer": "完了の助動詞「つ」の未然形または連用形",
+            "explanation": "下に助動詞「けり」が接続しているため完了の助動詞「つ」の連用形。",
+            "reference_page": 56,
+            "follow_up": {
+              "prompt": "完了の助動詞「つ」と判断した決め手はどれですか。",
+              "choices": [
+                "下に助動詞(む・き・けり等)を伴う",
+                "連用形に接続し下に用言が続く",
+                "体言に接続している",
+                "文末にある"
+              ],
+              "correct_answer": "下に助動詞(む・き・けり等)を伴う",
+              "explanation": "完了の助動詞「つ」の下には助動詞が続くことが多い。"
+            }
+          },
+          {
+            "q_id": "te_02_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "鬼が(女を)たちまち一口で食ってしまった。",
+            "explanation": "「てけり」は完了「つ」の連用形+過去「けり」で「〜てしまった」。"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "target_word": "と",
+    "word_id": "word_to",
+    "examples": [
+      {
+        "example_id": "to_01",
+        "text": "大家ほろびて、小家となる。",
+        "source": "方丈記",
+        "modern_translation": "大きな家が没落して小さな家となる。",
+        "highlights": [
+          {
+            "id": "h_to",
+            "text": "と",
+            "start": 9,
+            "end": 10
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "to_01_q1",
+            "highlight_id": "h_to",
+            "question_type": "識別",
+            "prompt": "傍線部「と」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "格助詞「と」",
+              "接続助詞「と」",
+              "タリ活用形容動詞の連用形活用語尾",
+              "副詞の一部"
+            ],
+            "correct_answer": "格助詞「と」",
+            "explanation": "体言「小家」に接続しているため格助詞。",
+            "reference_page": 88,
+            "follow_up": {
+              "prompt": "格助詞「と」と判断した決め手はどれですか。",
+              "choices": [
+                "体言に接続している",
+                "連体形に接続している",
+                "文末にある",
+                "活用語の語幹に接続している"
+              ],
+              "correct_answer": "体言に接続している",
+              "explanation": "格助詞「と」は体言(まれに連体形)に接続する。"
+            }
+          },
+          {
+            "q_id": "to_01_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "大きな家が没落して小さな家となる。",
+            "explanation": "格助詞「と」は変化の結果を示し「〜となる」。"
+          }
+        ]
+      },
+      {
+        "example_id": "to_02",
+        "text": "風ふくと枝をはなれて落つまじく、",
+        "source": "発心集",
+        "modern_translation": "風が吹いても、枝を離れて落ちないように、",
+        "highlights": [
+          {
+            "id": "h_to",
+            "text": "と",
+            "start": 3,
+            "end": 4
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "to_02_q1",
+            "highlight_id": "h_to",
+            "question_type": "識別",
+            "prompt": "傍線部「と」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "接続助詞「と」(逆接の仮定条件)",
+              "格助詞「と」",
+              "タリ活用形容動詞の連用形活用語尾",
+              "副詞の一部"
+            ],
+            "correct_answer": "接続助詞「と」(逆接の仮定条件)",
+            "explanation": "終止形「ふく」に接続し、「〜ても」の逆接仮定条件を表す。",
+            "reference_page": 73,
+            "follow_up": {
+              "prompt": "接続助詞「と」と判断した決め手はどれですか。",
+              "choices": [
+                "終止形(ラ変には連体形)に接続し「〜ても」と訳せる",
+                "体言に接続している",
+                "未然形に接続している",
+                "活用語の語幹に接続している"
+              ],
+              "correct_answer": "終止形(ラ変には連体形)に接続し「〜ても」と訳せる",
+              "explanation": "接続助詞「と」は終止形接続で逆接仮定「〜ても」を表す。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "to_03",
+        "text": "三世の仏の母といます。",
+        "source": "梁塵秘抄",
+        "modern_translation": "三世の仏の母でいらっしゃいます。",
+        "highlights": [
+          {
+            "id": "h_to",
+            "text": "と",
+            "start": 6,
+            "end": 7
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "to_03_q1",
+            "highlight_id": "h_to",
+            "question_type": "識別",
+            "prompt": "傍線部「と」は「断定・助動詞『たり』の連用形」です。この「たり」は何の略か答えなさい。",
+            "answer_format": "select",
+            "choices": [
+              "断定の助動詞「たり」の連用形「と」",
+              "格助詞「と」",
+              "接続助詞「と」",
+              "形容動詞の活用語尾"
+            ],
+            "correct_answer": "断定の助動詞「たり」の連用形「と」",
+            "explanation": "漢語を語幹とする「たり」(断定)の連用形。軍記物に多い。",
+            "reference_page": 33
+          }
+        ]
+      },
+      {
+        "example_id": "to_04",
+        "text": "雨朦朧として鳥海の山かくる。",
+        "source": "おくのほそ道",
+        "modern_translation": "雨がぼんやりとかかっていて鳥海山が隠れる。",
+        "highlights": [
+          {
+            "id": "h_to",
+            "text": "と",
+            "start": 3,
+            "end": 4
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "to_04_q1",
+            "highlight_id": "h_to",
+            "question_type": "識別",
+            "prompt": "「朦朧と」の「と」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "形容動詞「朦朧たり」の連用形活用語尾",
+              "格助詞「と」",
+              "接続助詞「と」",
+              "副詞の一部"
+            ],
+            "correct_answer": "形容動詞「朦朧たり」の連用形活用語尾",
+            "explanation": "漢語を語幹とする形容動詞(タリ活用)の連用形「〜と」。",
+            "reference_page": 33
+          }
+        ]
+      },
+      {
+        "example_id": "to_05",
+        "text": "夜のほのぼのと明くるに、",
+        "source": "伊勢物語",
+        "modern_translation": "夜がほのぼのと明けると、",
+        "highlights": [
+          {
+            "id": "h_to",
+            "text": "と",
+            "start": 6,
+            "end": 7
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "to_05_q1",
+            "highlight_id": "h_to",
+            "question_type": "識別",
+            "prompt": "「ほのぼのと」の「と」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "副詞「ほのぼのと」の一部",
+              "格助詞「と」",
+              "接続助詞「と」",
+              "形容動詞の活用語尾"
+            ],
+            "correct_answer": "副詞「ほのぼのと」の一部",
+            "explanation": "「ほのぼのと」で一語の副詞。切り離せない。活用がない。",
+            "reference_page": 39
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "target_word": "な",
+    "word_id": "word_na",
+    "examples": [
+      {
+        "example_id": "na_01",
+        "text": "や、な起こしたてまつりそ。",
+        "source": "宇治拾遺物語",
+        "modern_translation": "これこれ、起こし申し上げるな。",
+        "highlights": [
+          {
+            "id": "h_na",
+            "text": "な",
+            "start": 2,
+            "end": 3
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "na_01_q1",
+            "highlight_id": "h_na",
+            "question_type": "識別",
+            "prompt": "傍線部「な」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "副詞「な」(禁止)",
+              "終助詞「な」(禁止)",
+              "終助詞「な」(詠嘆)",
+              "完了の助動詞「ぬ」の未然形"
+            ],
+            "correct_answer": "副詞「な」(禁止)",
+            "explanation": "下に終助詞「そ」を伴って「〜するな」の禁止を表す副詞「な」。",
+            "reference_page": 40,
+            "follow_up": {
+              "prompt": "副詞「な」(禁止)と判断した決め手はどれですか。",
+              "choices": [
+                "下に終助詞「そ」を伴う",
+                "文末にある",
+                "体言に接続している",
+                "連用形に接続している"
+              ],
+              "correct_answer": "下に終助詞「そ」を伴う",
+              "explanation": "副詞「な」は禁止の終助詞「そ」と呼応する。"
+            }
+          },
+          {
+            "q_id": "na_01_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "これこれ、起こし申し上げるな。",
+            "explanation": "「な〜そ」は禁止を表す。"
+          }
+        ]
+      },
+      {
+        "example_id": "na_02",
+        "text": "過ちすな。心して降りよ。",
+        "source": "徒然草",
+        "modern_translation": "けがをするな。用心して降りろ。",
+        "highlights": [
+          {
+            "id": "h_na",
+            "text": "な",
+            "start": 3,
+            "end": 4
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "na_02_q1",
+            "highlight_id": "h_na",
+            "question_type": "識別",
+            "prompt": "傍線部「な」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "終助詞「な」(禁止)",
+              "副詞「な」(禁止)",
+              "終助詞「な」(詠嘆)",
+              "助動詞「ぬ」の未然形"
+            ],
+            "correct_answer": "終助詞「な」(禁止)",
+            "explanation": "ラ変以外の終止形に接続し、禁止(〜するな)を表す終助詞。",
+            "reference_page": 104,
+            "follow_up": {
+              "prompt": "終助詞「な」(禁止)と判断した決め手はどれですか。",
+              "choices": [
+                "終止形に接続し「〜するな」と訳せる",
+                "連用形に接続している",
+                "体言に接続している",
+                "未然形に接続している"
+              ],
+              "correct_answer": "終止形に接続し「〜するな」と訳せる",
+              "explanation": "禁止の終助詞「な」は終止形(ラ変型の活用語は連体形)に接続する。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "na_03",
+        "text": "花の色はうつりにけりな。",
+        "source": "古今集",
+        "modern_translation": "桜の花のような私の容姿もすっかり衰えてしまったことだなあ。",
+        "highlights": [
+          {
+            "id": "h_na",
+            "text": "な",
+            "start": 10,
+            "end": 11
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "na_03_q1",
+            "highlight_id": "h_na",
+            "question_type": "識別",
+            "prompt": "傍線部「な」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "終助詞「な」(詠嘆)",
+              "終助詞「な」(禁止)",
+              "副詞「な」(禁止)",
+              "助動詞「ぬ」の未然形"
+            ],
+            "correct_answer": "終助詞「な」(詠嘆)",
+            "explanation": "文末にあり詠嘆を表す終助詞。和歌に多い。",
+            "reference_page": 105,
+            "follow_up": {
+              "prompt": "終助詞「な」(詠嘆)と判断した決め手はどれですか。",
+              "choices": [
+                "文末にあり「〜だなあ」と訳せる",
+                "終止形に接続し「〜するな」と訳せる",
+                "下に「そ」を伴う",
+                "体言に接続している"
+              ],
+              "correct_answer": "文末にあり「〜だなあ」と訳せる",
+              "explanation": "詠嘆の終助詞「な」は文末にある。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "na_04",
+        "text": "玉拾ひて行かな。",
+        "source": "万葉集",
+        "modern_translation": "白玉を拾って行きたい。",
+        "highlights": [
+          {
+            "id": "h_na",
+            "text": "な",
+            "start": 6,
+            "end": 7
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "na_04_q1",
+            "highlight_id": "h_na",
+            "question_type": "識別",
+            "prompt": "傍線部「な」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "奈良時代の終助詞「な」(自己の希望・意志)",
+              "禁止の終助詞「な」",
+              "詠嘆の終助詞「な」",
+              "完了の助動詞「ぬ」"
+            ],
+            "correct_answer": "奈良時代の終助詞「な」(自己の希望・意志)",
+            "explanation": "未然形「行か」に接続し、奈良時代の用法で自己の希望・意志を表す。",
+            "reference_page": 108,
+            "follow_up": {
+              "prompt": "自己の希望の「な」と判断した決め手はどれですか。",
+              "choices": [
+                "未然形に接続している",
+                "終止形に接続している",
+                "連用形に接続している",
+                "体言に接続している"
+              ],
+              "correct_answer": "未然形に接続している",
+              "explanation": "奈良時代の終助詞「な」(自己の希望)は未然形に接続する。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "na_05",
+        "text": "いざ桜我も散りなむひとさかりありなば人に憂き目見えなむ。",
+        "source": "古今集",
+        "modern_translation": "さあ桜よ、私もおまえのように潔く散ってしまおう、一度盛りの時があったならば、人にみじめな姿をきっと見られるだろうから。",
+        "highlights": [
+          {
+            "id": "h_na",
+            "text": "な",
+            "start": 7,
+            "end": 8
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "na_05_q1",
+            "highlight_id": "h_na",
+            "question_type": "識別",
+            "prompt": "「散りなむ」の「な」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "完了の助動詞「ぬ」の未然形",
+              "禁止の終助詞「な」",
+              "詠嘆の終助詞「な」",
+              "奈良時代の希望の終助詞「な」"
+            ],
+            "correct_answer": "完了の助動詞「ぬ」の未然形",
+            "explanation": "連用形「散り」に接続し、下に助動詞「む」が続くため完了「ぬ」の未然形。",
+            "reference_page": 56,
+            "follow_up": {
+              "prompt": "完了「ぬ」の未然形と判断した決め手はどれですか。",
+              "choices": [
+                "連用形に接続し下に助動詞「む」が続く",
+                "終止形に接続している",
+                "体言に接続している",
+                "未然形に接続している"
+              ],
+              "correct_answer": "連用形に接続し下に助動詞「む」が続く",
+              "explanation": "助動詞「ぬ」は連用形接続。下に「む」が続く場合は未然形「な」で強意。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "na_06",
+        "text": "飽かなくに、",
+        "source": "伊勢物語",
+        "modern_translation": "十分満足してはいないのに、",
+        "highlights": [
+          {
+            "id": "h_na",
+            "text": "な",
+            "start": 2,
+            "end": 3
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "na_06_q1",
+            "highlight_id": "h_na",
+            "question_type": "識別",
+            "prompt": "「飽かなくに」の「な」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "打消の助動詞「ず」の未然形「な」",
+              "完了の助動詞「ぬ」の未然形",
+              "禁止の終助詞「な」",
+              "奈良時代の希望の終助詞「な」"
+            ],
+            "correct_answer": "打消の助動詞「ず」の未然形「な」",
+            "explanation": "「なくに」の「な」は「ず」の未然形。「〜ないことだなあ」「〜ないのに」と訳せる。",
+            "reference_page": 52
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "target_word": "なり",
+    "word_id": "word_nari",
+    "examples": [
+      {
+        "example_id": "nari_01",
+        "text": "火桶の火も白き灰がちになりて、",
+        "source": "枕草子",
+        "modern_translation": "火鉢の火も白い灰の部分が目立つようになって、",
+        "highlights": [
+          {
+            "id": "h_nari",
+            "text": "なり",
+            "start": 11,
+            "end": 13
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "nari_01_q1",
+            "highlight_id": "h_nari",
+            "question_type": "識別",
+            "prompt": "傍線部「なり」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "ラ行四段動詞「なる」の連用形",
+              "断定の助動詞「なり」の連用形",
+              "伝聞・推定の助動詞「なり」",
+              "形容動詞の活用語尾"
+            ],
+            "correct_answer": "ラ行四段動詞「なる」の連用形",
+            "explanation": "下に接続助詞「て」が続き、「〜になる」の意。動詞「なる」の連用形。",
+            "reference_page": 17,
+            "follow_up": {
+              "prompt": "動詞「なる」と判断した決め手はどれですか。",
+              "choices": [
+                "文節の最初にあり述語になる。「なる」の意味がある",
+                "体言・連体形に接続している",
+                "終止形に接続している",
+                "連用形に接続している"
+              ],
+              "correct_answer": "文節の最初にあり述語になる。「なる」の意味がある",
+              "explanation": "動詞「なる」は独立して述語になる。「〜になる」の意味をもつ。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "nari_02",
+        "text": "女もしてみむとてするなり。",
+        "source": "土佐日記",
+        "modern_translation": "女(の私)も書いてみようと思って書くのである。",
+        "highlights": [
+          {
+            "id": "h_nari",
+            "text": "なり",
+            "start": 10,
+            "end": 12
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "nari_02_q1",
+            "highlight_id": "h_nari",
+            "question_type": "識別",
+            "prompt": "傍線部「なり」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "断定の助動詞「なり」の終止形",
+              "伝聞・推定の助動詞「なり」の終止形",
+              "ラ行四段動詞「なる」の連用形",
+              "形容動詞の活用語尾"
+            ],
+            "correct_answer": "断定の助動詞「なり」の終止形",
+            "explanation": "連体形「する」に接続し、「〜である」の意。断定の助動詞「なり」。",
+            "reference_page": 73,
+            "follow_up": {
+              "prompt": "断定の助動詞「なり」と判断した決め手はどれですか。",
+              "choices": [
+                "体言・連体形に接続している",
+                "終止形に接続している",
+                "連用形に接続している",
+                "未然形に接続している"
+              ],
+              "correct_answer": "体言・連体形に接続している",
+              "explanation": "断定の「なり」は体言または連体形に接続する。"
+            }
+          },
+          {
+            "q_id": "nari_02_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "女(の私)も書いてみようと思って書くのである。",
+            "explanation": "「なり」は断定で「〜である」。"
+          }
+        ]
+      },
+      {
+        "example_id": "nari_03",
+        "text": "弓の音すなり。",
+        "source": "今昔物語集",
+        "modern_translation": "弓の音がするようだ。",
+        "highlights": [
+          {
+            "id": "h_nari",
+            "text": "なり",
+            "start": 4,
+            "end": 6
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "nari_03_q1",
+            "highlight_id": "h_nari",
+            "question_type": "識別",
+            "prompt": "傍線部「なり」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "伝聞・推定の助動詞「なり」の終止形",
+              "断定の助動詞「なり」の終止形",
+              "ラ行四段動詞「なる」の連用形",
+              "形容動詞の活用語尾"
+            ],
+            "correct_answer": "伝聞・推定の助動詞「なり」の終止形",
+            "explanation": "終止形「す」に接続し、聴覚に基づく推定「〜ようだ」の意。",
+            "reference_page": 68,
+            "follow_up": {
+              "prompt": "伝聞・推定の助動詞「なり」と判断した決め手はどれですか。",
+              "choices": [
+                "終止形に接続し聴覚に基づく推定",
+                "体言に接続している",
+                "連体形に接続している",
+                "未然形に接続している"
+              ],
+              "correct_answer": "終止形に接続し聴覚に基づく推定",
+              "explanation": "伝聞・推定の「なり」は終止形(ラ変型は連体形)接続。聴覚に基づく。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "nari_04",
+        "text": "恐ろしなんどもおろかなり。",
+        "source": "平家物語",
+        "modern_translation": "恐ろしいなどという言葉では言いつくせない。",
+        "highlights": [
+          {
+            "id": "h_nari",
+            "text": "なり",
+            "start": 10,
+            "end": 12
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "nari_04_q1",
+            "highlight_id": "h_nari",
+            "question_type": "識別",
+            "prompt": "「おろかなり」の「なり」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "ナリ活用形容動詞の終止形活用語尾",
+              "断定の助動詞「なり」",
+              "伝聞・推定の助動詞「なり」",
+              "ラ行四段動詞「なる」"
+            ],
+            "correct_answer": "ナリ活用形容動詞の終止形活用語尾",
+            "explanation": "「おろかなり」で一語の形容動詞。語幹「おろか」は主語にならず、上に「い」「と(とても)」をつけることができる。",
+            "reference_page": 32,
+            "follow_up": {
+              "prompt": "形容動詞「おろかなり」の一部と判断した決め手はどれですか。",
+              "choices": [
+                "語幹「おろか」は主語にならず、上に「いと」をつけられる",
+                "連用形に接続している",
+                "体言に接続している",
+                "終止形に接続している"
+              ],
+              "correct_answer": "語幹「おろか」は主語にならず、上に「いと」をつけられる",
+              "explanation": "形容動詞の語幹は単独で主語にならず、副詞「いと」「と」で修飾できる。"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "target_word": "に",
+    "word_id": "word_ni",
+    "examples": [
+      {
+        "example_id": "ni_01",
+        "text": "井筒にかけしまろがたけ",
+        "source": "伊勢物語",
+        "modern_translation": "井筒と高さを比べあった私の背丈は",
+        "highlights": [
+          {
+            "id": "h_ni",
+            "text": "に",
+            "start": 2,
+            "end": 3
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ni_01_q1",
+            "highlight_id": "h_ni",
+            "question_type": "識別",
+            "prompt": "傍線部「に」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "格助詞「に」",
+              "接続助詞「に」",
+              "完了の助動詞「ぬ」の連用形",
+              "断定の助動詞「なり」の連用形"
+            ],
+            "correct_answer": "格助詞「に」",
+            "explanation": "体言「井筒」に接続しているため格助詞。",
+            "reference_page": 81,
+            "follow_up": {
+              "prompt": "格助詞「に」と判断した決め手はどれですか。",
+              "choices": [
+                "体言に接続している",
+                "連体形に接続し体言を補えない",
+                "連用形に接続している",
+                "未然形に接続している"
+              ],
+              "correct_answer": "体言に接続している",
+              "explanation": "格助詞「に」は体言(まれに連体形)に接続する。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "ni_02",
+        "text": "よろづのことは月見るにこそ、慰むものなれ。",
+        "source": "徒然草",
+        "modern_translation": "すべてのことは(とりわけ)月を見ることによって、心慰むものである。",
+        "highlights": [
+          {
+            "id": "h_ni",
+            "text": "に",
+            "start": 10,
+            "end": 11
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ni_02_q1",
+            "highlight_id": "h_ni",
+            "question_type": "識別",
+            "prompt": "傍線部「に」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "格助詞「に」",
+              "接続助詞「に」",
+              "完了の助動詞「ぬ」の連用形",
+              "断定の助動詞「なり」の連用形"
+            ],
+            "correct_answer": "格助詞「に」",
+            "explanation": "連体形「見る」に接続するが、下に「こと」などの体言を補えるため格助詞。",
+            "reference_page": 81,
+            "follow_up": {
+              "prompt": "連体形接続の「に」が格助詞となる根拠はどれですか。",
+              "choices": [
+                "連体形の下に「トキ・トコロ」などの体言を補える",
+                "下に体言を補えない",
+                "文末にある",
+                "語幹に接続している"
+              ],
+              "correct_answer": "連体形の下に「トキ・トコロ」などの体言を補える",
+              "explanation": "「見る(コト)に」のように体言を補えるため格助詞。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "ni_03",
+        "text": "涙落つともおぼえぬに、",
+        "source": "宇治拾遺物語",
+        "modern_translation": "(涙が落ちるとも感じないのに、",
+        "highlights": [
+          {
+            "id": "h_ni",
+            "text": "に",
+            "start": 9,
+            "end": 10
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ni_03_q1",
+            "highlight_id": "h_ni",
+            "question_type": "識別",
+            "prompt": "傍線部「に」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "接続助詞「に」",
+              "格助詞「に」",
+              "完了の助動詞「ぬ」の連用形",
+              "断定の助動詞「なり」の連用形"
+            ],
+            "correct_answer": "接続助詞「に」",
+            "explanation": "連体形「ぬ」に接続するが、下に体言を補えないため接続助詞。",
+            "reference_page": 90,
+            "follow_up": {
+              "prompt": "接続助詞「に」と判断した決め手はどれですか。",
+              "choices": [
+                "連体形に接続し下に体言を補えない",
+                "連体形に接続し下に体言を補える",
+                "体言に接続している",
+                "未然形に接続している"
+              ],
+              "correct_answer": "連体形に接続し下に体言を補えない",
+              "explanation": "体言を補えない場合は接続助詞。「〜のに」「〜ので」と訳す。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "ni_04",
+        "text": "をさなき人は、寝入りたまひにけり。",
+        "source": "平家物語",
+        "modern_translation": "幼い人は、寝入ってしまわれた。",
+        "highlights": [
+          {
+            "id": "h_ni",
+            "text": "に",
+            "start": 13,
+            "end": 14
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ni_04_q1",
+            "highlight_id": "h_ni",
+            "question_type": "識別",
+            "prompt": "傍線部「に」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "完了の助動詞「ぬ」の連用形",
+              "断定の助動詞「なり」の連用形",
+              "格助詞「に」",
+              "接続助詞「に」"
+            ],
+            "correct_answer": "完了の助動詞「ぬ」の連用形",
+            "explanation": "連用形「たまひ」に接続し、下に助動詞「けり」が続くため完了「ぬ」の連用形。",
+            "reference_page": 56,
+            "follow_up": {
+              "prompt": "完了「ぬ」の連用形と判断した決め手はどれですか。",
+              "choices": [
+                "連用形に接続し下に助動詞(き・けり・たり等)が続く",
+                "体言に接続している",
+                "連体形に接続し体言を補える",
+                "未然形に接続している"
+              ],
+              "correct_answer": "連用形に接続し下に助動詞(き・けり・たり等)が続く",
+              "explanation": "助動詞「ぬ」は連用形接続。「にき・にけり・にたり」の形で用いられる。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "ni_05",
+        "text": "心といふもののなきにやあらむ、",
+        "source": "徒然草",
+        "modern_translation": "心というものがないのであろうか、",
+        "highlights": [
+          {
+            "id": "h_ni",
+            "text": "に",
+            "start": 9,
+            "end": 10
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ni_05_q1",
+            "highlight_id": "h_ni",
+            "question_type": "識別",
+            "prompt": "傍線部「に」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "断定の助動詞「なり」の連用形",
+              "完了の助動詞「ぬ」の連用形",
+              "格助詞「に」",
+              "接続助詞「に」"
+            ],
+            "correct_answer": "断定の助動詞「なり」の連用形",
+            "explanation": "連体形「なき」に接続し、「〜で・〜であり」の意。「にあり」「にけり」など「あり」「けり」に続く場合が多い。",
+            "reference_page": 73,
+            "follow_up": {
+              "prompt": "断定「なり」の連用形と判断した決め手はどれですか。",
+              "choices": [
+                "「にあり」「にや」「にか」などの形が多い",
+                "連用形に接続し下に助動詞が続く",
+                "終止形に接続している",
+                "未然形に接続している"
+              ],
+              "correct_answer": "「にあり」「にや」「にか」などの形が多い",
+              "explanation": "断定「なり」の連用形「に」は「にあり」「にや(あらむ)」などの形で現れる。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "ni_06",
+        "text": "いま静かに、御局にさぶらひて、",
+        "source": "枕草子",
+        "modern_translation": "今ゆっくりと、お部屋に伺いましょう、",
+        "highlights": [
+          {
+            "id": "h_ni",
+            "text": "に",
+            "start": 4,
+            "end": 5
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ni_06_q1",
+            "highlight_id": "h_ni",
+            "question_type": "識別",
+            "prompt": "「静かに」の「に」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "ナリ活用形容動詞「静かなり」の連用形活用語尾",
+              "断定の助動詞「なり」の連用形",
+              "格助詞「に」",
+              "副詞の一部"
+            ],
+            "correct_answer": "ナリ活用形容動詞「静かなり」の連用形活用語尾",
+            "explanation": "「静かなり」の連用形活用語尾。語幹「静か」は主語にならない。",
+            "reference_page": 32,
+            "follow_up": {
+              "prompt": "形容動詞の連用形活用語尾と判断した決め手はどれですか。",
+              "choices": [
+                "語幹「静か」は主語にならず「いと」をつけられる",
+                "体言に接続している",
+                "連用形に接続している",
+                "終止形に接続している"
+              ],
+              "correct_answer": "語幹「静か」は主語にならず「いと」をつけられる",
+              "explanation": "形容動詞の語幹の特徴を使って識別する。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "ni_07",
+        "text": "心静かに去にければ、",
+        "source": "徒然草",
+        "modern_translation": "静かに去って行ったので、",
+        "highlights": [
+          {
+            "id": "h_ni",
+            "text": "に",
+            "start": 5,
+            "end": 6
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ni_07_q1",
+            "highlight_id": "h_ni",
+            "question_type": "識別",
+            "prompt": "「去にければ」の「に」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "ナ変動詞「去(い)ぬ」の連用形活用語尾",
+              "完了の助動詞「ぬ」の連用形",
+              "格助詞「に」",
+              "断定の助動詞「なり」の連用形"
+            ],
+            "correct_answer": "ナ変動詞「去(い)ぬ」の連用形活用語尾",
+            "explanation": "「死」「往(去)」に「に」「ぬ」がつく形は主語にならず、ナ変動詞の活用語尾。",
+            "reference_page": 18,
+            "follow_up": {
+              "prompt": "ナ変動詞の活用語尾と判断した決め手はどれですか。",
+              "choices": [
+                "語幹「死」「往(去)」に「に・ぬ」がつき「〜ぬ」「〜ね」の形で主語にならない",
+                "連用形に接続している",
+                "体言に接続している",
+                "終止形に接続している"
+              ],
+              "correct_answer": "語幹「死」「往(去)」に「に・ぬ」がつき「〜ぬ」「〜ね」の形で主語にならない",
+              "explanation": "ナ変動詞は「死ぬ」「往ぬ」「去ぬ」のみ。語幹が助動詞「ぬ」と紛らわしいため注意。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "ni_08",
+        "text": "げにいとあはれなりなど聞きながら、",
+        "source": "枕草子",
+        "modern_translation": "(据えなほして)たいそう情趣深いなどと聞きながら、",
+        "highlights": [
+          {
+            "id": "h_ni",
+            "text": "に",
+            "start": 1,
+            "end": 2
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ni_08_q1",
+            "highlight_id": "h_ni",
+            "question_type": "識別",
+            "prompt": "「げに」の「に」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "副詞「げに」の一部",
+              "格助詞「に」",
+              "形容動詞の活用語尾",
+              "断定の助動詞「なり」の連用形"
+            ],
+            "correct_answer": "副詞「げに」の一部",
+            "explanation": "「げに」で一語の副詞(本当に・なるほど)。切り離せない。",
+            "reference_page": 39
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "target_word": "ぬ",
+    "word_id": "word_nu",
+    "examples": [
+      {
+        "example_id": "nu_01",
+        "text": "垂れこめて春の行方知らぬも、",
+        "source": "古今集",
+        "modern_translation": "御簾を垂れこめて春の過ぎていくことを知らないのも、",
+        "highlights": [
+          {
+            "id": "h_nu",
+            "text": "ぬ",
+            "start": 11,
+            "end": 12
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "nu_01_q1",
+            "highlight_id": "h_nu",
+            "question_type": "識別",
+            "prompt": "傍線部「ぬ」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "打消の助動詞「ず」の連体形",
+              "完了の助動詞「ぬ」の終止形",
+              "ナ変動詞の活用語尾",
+              "副詞の一部"
+            ],
+            "correct_answer": "打消の助動詞「ず」の連体形",
+            "explanation": "未然形「知ら」に接続し、下に助詞「も」が続く連体形用法。",
+            "reference_page": 52,
+            "follow_up": {
+              "prompt": "打消「ず」の連体形と判断した決め手はどれですか。",
+              "choices": [
+                "未然形に接続している",
+                "連用形に接続している",
+                "体言に接続している",
+                "終止形に接続している"
+              ],
+              "correct_answer": "未然形に接続している",
+              "explanation": "打消「ず」は未然形接続、完了「ぬ」は連用形接続で区別する。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "nu_02",
+        "text": "翁、竹を取ること久しくなりぬ。",
+        "source": "竹取物語",
+        "modern_translation": "翁は、竹を取ることが長く続いた。",
+        "highlights": [
+          {
+            "id": "h_nu",
+            "text": "ぬ",
+            "start": 13,
+            "end": 14
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "nu_02_q1",
+            "highlight_id": "h_nu",
+            "question_type": "識別",
+            "prompt": "傍線部「ぬ」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "完了の助動詞「ぬ」の終止形",
+              "打消の助動詞「ず」の連体形",
+              "ナ変動詞の活用語尾",
+              "副詞の一部"
+            ],
+            "correct_answer": "完了の助動詞「ぬ」の終止形",
+            "explanation": "連用形「なり」に接続し、文末にあるため完了「ぬ」の終止形。",
+            "reference_page": 52,
+            "follow_up": {
+              "prompt": "完了「ぬ」の終止形と判断した決め手はどれですか。",
+              "choices": [
+                "連用形に接続し文末にある",
+                "未然形に接続している",
+                "体言に接続している",
+                "連体形に接続している"
+              ],
+              "correct_answer": "連用形に接続し文末にある",
+              "explanation": "完了「ぬ」は連用形接続。文末で終止形で使われる。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "nu_04",
+        "text": "その思ひまさりて深き者、必ず先立ちて死ぬ。",
+        "source": "方丈記",
+        "modern_translation": "その愛情がより深い者は、必ず先立って死ぬ。",
+        "highlights": [
+          {
+            "id": "h_nu",
+            "text": "ぬ",
+            "start": 19,
+            "end": 20
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "nu_04_q1",
+            "highlight_id": "h_nu",
+            "question_type": "識別",
+            "prompt": "「死ぬ」の「ぬ」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "ナ変動詞「死ぬ」の活用語尾",
+              "完了の助動詞「ぬ」の終止形",
+              "打消の助動詞「ず」の連体形",
+              "副詞の一部"
+            ],
+            "correct_answer": "ナ変動詞「死ぬ」の活用語尾",
+            "explanation": "「死」「往(去)」に「ぬ」「ね」がつく形はナ変動詞。主語にならず、切り離せない。",
+            "reference_page": 18,
+            "follow_up": {
+              "prompt": "ナ変動詞の活用語尾と判断した決め手はどれですか。",
+              "choices": [
+                "語幹「死」「往(去)」に「ぬ・ね」がつき切り離せない",
+                "連用形に接続している",
+                "未然形に接続している",
+                "連体形に接続している"
+              ],
+              "correct_answer": "語幹「死」「往(去)」に「ぬ・ね」がつき切り離せない",
+              "explanation": "ナ変動詞は「死ぬ」「往ぬ」「去ぬ」のみ。切り離すと意味不明。"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "target_word": "ね",
+    "word_id": "word_ne",
+    "examples": [
+      {
+        "example_id": "ne_01",
+        "text": "伝へ承ること、心も詞も及ばれね。",
+        "source": "平家物語",
+        "modern_translation": "(伝え承ることは、)想像することも言葉で表すこともできない。",
+        "highlights": [
+          {
+            "id": "h_ne",
+            "text": "ね",
+            "start": 14,
+            "end": 15
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ne_01_q1",
+            "highlight_id": "h_ne",
+            "question_type": "識別",
+            "prompt": "傍線部「ね」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "打消の助動詞「ず」の已然形",
+              "完了の助動詞「ぬ」の命令形",
+              "ナ変動詞の活用語尾",
+              "副詞の一部"
+            ],
+            "correct_answer": "打消の助動詞「ず」の已然形",
+            "explanation": "未然形「れ」に接続し、「こそ」の結びで已然形。",
+            "reference_page": 52,
+            "follow_up": {
+              "prompt": "打消「ず」の已然形と判断した決め手はどれですか。",
+              "choices": [
+                "未然形に接続している",
+                "連用形に接続している",
+                "体言に接続している",
+                "連体形に接続している"
+              ],
+              "correct_answer": "未然形に接続している",
+              "explanation": "打消「ず」は未然形接続。完了「ぬ」の命令形は連用形接続で区別。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "ne_02",
+        "text": "ひたすら草の庵にふみ散りねや。",
+        "source": "古今集",
+        "modern_translation": "ひたすら草の庵に散ってしまえよ。",
+        "highlights": [
+          {
+            "id": "h_ne",
+            "text": "ね",
+            "start": 12,
+            "end": 13
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ne_02_q1",
+            "highlight_id": "h_ne",
+            "question_type": "識別",
+            "prompt": "「散りね」の「ね」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "完了の助動詞「ぬ」の命令形",
+              "打消の助動詞「ず」の已然形",
+              "ナ変動詞の活用語尾",
+              "副詞の一部"
+            ],
+            "correct_answer": "完了の助動詞「ぬ」の命令形",
+            "explanation": "連用形「散り」に接続し、下に終助詞「や」が続くため完了「ぬ」の命令形。",
+            "reference_page": 56,
+            "follow_up": {
+              "prompt": "完了「ぬ」の命令形と判断した決め手はどれですか。",
+              "choices": [
+                "連用形に接続している",
+                "未然形に接続している",
+                "体言に接続している",
+                "連体形に接続している"
+              ],
+              "correct_answer": "連用形に接続している",
+              "explanation": "完了の「ぬ」は連用形接続。打消「ず」は未然形接続で区別する。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "ne_03",
+        "text": "恋ひ死ねとや",
+        "source": "万葉集",
+        "modern_translation": "恋い焦がれて死ねとでもいうのか",
+        "highlights": [
+          {
+            "id": "h_ne",
+            "text": "ね",
+            "start": 3,
+            "end": 4
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ne_03_q1",
+            "highlight_id": "h_ne",
+            "question_type": "識別",
+            "prompt": "「死ね」の「ね」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "ナ変動詞「死ぬ」の已然形・命令形",
+              "完了の助動詞「ぬ」の命令形",
+              "打消の助動詞「ず」の已然形",
+              "副詞の一部"
+            ],
+            "correct_answer": "ナ変動詞「死ぬ」の已然形・命令形",
+            "explanation": "「死」「往(去)」に「ね」がつき切り離せず主語にならない。ナ変動詞の已然形・命令形。",
+            "reference_page": 18,
+            "follow_up": {
+              "prompt": "ナ変動詞の活用語尾と判断した決め手はどれですか。",
+              "choices": [
+                "語幹「死」「往(去)」に「ね」がつき切り離せない",
+                "連用形に接続している",
+                "未然形に接続している",
+                "連体形に接続している"
+              ],
+              "correct_answer": "語幹「死」「往(去)」に「ね」がつき切り離せない",
+              "explanation": "ナ変動詞「死ぬ」「往ぬ」「去ぬ」の活用語尾で、独立して分離できない。"
+            }
+          }
+        ]
+      },
+      {
+        "example_id": "ne_04",
+        "text": "寝ねて寝らえず。",
+        "source": "徒然草",
+        "modern_translation": "眠っても眠れない。",
+        "highlights": [
+          {
+            "id": "h_ne",
+            "text": "ね",
+            "start": 1,
+            "end": 2
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ne_04_q1",
+            "highlight_id": "h_ne",
+            "question_type": "識別",
+            "prompt": "「寝ね」の「ね」の文法的説明として正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "ナ行下二段動詞「寝(ぬ)」の未然形・連用形",
+              "完了の助動詞「ぬ」の命令形",
+              "打消の助動詞「ず」の已然形",
+              "ナ変動詞の活用語尾"
+            ],
+            "correct_answer": "ナ行下二段動詞「寝(ぬ)」の未然形・連用形",
+            "explanation": "「寝(ぬ)」はナ行下二段動詞で「眠る」の意。「寝ね」は未然形または連用形。",
+            "reference_page": 21
+          }
+        ]
+      },
+      {
+        "example_id": "ne_05",
+        "text": "恋ひ死なば幾たびも死ねとでもいうのか。",
+        "source": "万葉集",
+        "modern_translation": "恋い焦がれて死ぬならば、幾度も死ねとでもいうのか。",
+        "highlights": [
+          {
+            "id": "h_ne",
+            "text": "ね",
+            "start": 10,
+            "end": 11
+          }
+        ],
+        "questions": [
+          {
+            "q_id": "ne_05_q1",
+            "highlight_id": "h_ne",
+            "question_type": "識別",
+            "prompt": "「奈良時代の終助詞『ね』」とは何を表しますか。",
+            "answer_format": "select",
+            "choices": [
+              "他への願望(〜してほしい)",
+              "自己の意志(〜したい)",
+              "完了(〜た)",
+              "打消(〜ない)"
+            ],
+            "correct_answer": "他への願望(〜してほしい)",
+            "explanation": "奈良時代の終助詞「ね」は他への願望を表す。未然形接続。",
+            "reference_page": 109
+          }
+        ]
+      }
+    ]
+  }
+];
+
+// ========================================
+// 例文セッションをフラット化して構築
+// 各セッション = { target_word, example, questions[], total }
+// ========================================
+function buildSessions() {
+  const sessions = [];
+  QUESTION_DATA.forEach(word => {
+    word.examples.forEach(example => {
+      sessions.push({
+        session_id: example.example_id,
+        target_word: word.target_word,
+        example: {
+          text: example.text,
+          source: example.source,
+          modern_translation: example.modern_translation,
+          highlights: example.highlights,
+        },
+        questions: example.questions,
+      });
+    });
+  });
+  return sessions;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ========================================
+// 原文ハイライト表示
+// ========================================
+function HighlightedText({ text, highlights, activeId }) {
+  if (!highlights || !activeId) return React.createElement('span', null, text);
+  const target = highlights.find(h => h.id === activeId);
+  if (!target) return React.createElement('span', null, text);
+
+  const before = text.slice(0, target.start);
+  const mid = text.slice(target.start, target.end);
+  const after = text.slice(target.end);
+
+  return React.createElement(React.Fragment, null,
+    before,
+    React.createElement('span', { className: 'highlight' }, mid),
+    after
+  );
+}
+
+// ========================================
+// 単一問題の表示
+// v0.3 変更点:
+// - follow_up がある場合、メイン問題と根拠問題を同時に表示
+// - 両方選んでから採点
+// - 記述式(和訳)は自己採点方式のまま
+// ========================================
+function QuestionBlock({ question, questionIndex, totalQuestions, onComplete }) {
+  const [mainSelected, setMainSelected] = useState(null);
+  const [followSelected, setFollowSelected] = useState(null);
+  const [revealed, setRevealed] = useState(false);
+  const [mainCorrect, setMainCorrect] = useState(null);
+  const [followCorrect, setFollowCorrect] = useState(null);
+
+  // 記述式用
+  const [textAnswer, setTextAnswer] = useState('');
+  const [textRevealed, setTextRevealed] = useState(false);
+
+  useEffect(() => {
+    setMainSelected(null);
+    setFollowSelected(null);
+    setRevealed(false);
+    setMainCorrect(null);
+    setFollowCorrect(null);
+    setTextAnswer('');
+    setTextRevealed(false);
+  }, [question.q_id]);
+
+  const isSelect = question.answer_format === 'select';
+  const isText = question.answer_format === 'text';
+  const hasFollowUp = !!question.follow_up;
+
+  // 選択式の採点(メイン + 根拠まとめて)
+  const handleReveal = () => {
+    const mOk = mainSelected === question.correct_answer;
+    setMainCorrect(mOk);
+
+    if (hasFollowUp) {
+      const fOk = followSelected === question.follow_up.correct_answer;
+      setFollowCorrect(fOk);
+    }
+    setRevealed(true);
+  };
+
+  const handleNext = () => {
+    const overall = hasFollowUp
+      ? (mainCorrect && followCorrect)
+      : mainCorrect;
+    onComplete({
+      mainCorrect,
+      followCorrect: hasFollowUp ? followCorrect : null,
+      overallCorrect: overall,
+    });
+  };
+
+  // 記述式
+  const handleTextReveal = () => setTextRevealed(true);
+  const handleTextJudge = (isCorrect) => {
+    onComplete({
+      mainCorrect: isCorrect,
+      followCorrect: null,
+      overallCorrect: isCorrect,
+    });
+  };
+
+  // 回答ボタンの有効/無効
+  const canReveal = isSelect && mainSelected && (!hasFollowUp || followSelected);
+
+  // 選択肢のクラス名を決定
+  const getChoiceClass = (choice, selected, correctAnswer) => {
+    let cls = 'choice';
+    if (revealed) {
+      if (choice === correctAnswer) cls += ' correct';
+      else if (choice === selected) cls += ' incorrect';
+    } else if (choice === selected) {
+      cls += ' selected';
+    }
+    return cls;
+  };
+
+  return React.createElement('div', { className: 'question-area' },
+    React.createElement('div', { className: 'q-header' },
+      React.createElement('div', { className: 'q-index' },
+        `問 ${questionIndex + 1} / ${totalQuestions}`
+      ),
+      React.createElement('div', { className: 'q-type-badges' },
+        React.createElement('span', { className: 'q-type-badge' }, question.question_type),
+        hasFollowUp && React.createElement('span', { className: 'q-type-badge follow-up' }, '+根拠')
+      )
+    ),
+
+    // === メイン問題 ===
+    React.createElement('div', { className: 'q-prompt' }, question.prompt),
+
+    // 選択式メイン
+    isSelect && React.createElement('div', { className: 'choices' },
+      question.choices.map((choice, idx) =>
+        React.createElement('button', {
+          key: idx,
+          className: getChoiceClass(choice, mainSelected, question.correct_answer),
+          onClick: () => !revealed && setMainSelected(choice),
+          disabled: revealed,
+        },
+          React.createElement('span', { className: 'choice-marker' }, String.fromCharCode(0x2460 + idx)),
+          React.createElement('span', null, choice)
+        )
+      )
+    ),
+
+    // 記述式入力
+    isText && !textRevealed && React.createElement(React.Fragment, null,
+      React.createElement('textarea', {
+        className: 'text-input',
+        placeholder: 'ここに現代語訳を入力…',
+        value: textAnswer,
+        onChange: (e) => setTextAnswer(e.target.value),
+      }),
+      React.createElement('button', {
+        className: 'btn btn-primary btn-block',
+        onClick: handleTextReveal,
+        disabled: !textAnswer.trim(),
+      }, '模範解答を見る')
+    ),
+
+    // 記述式:模範解答と自己採点
+    isText && textRevealed && React.createElement(React.Fragment, null,
+      React.createElement('div', { className: 'self-judge-note' },
+        'あなたの解答と模範解答を見比べて、自己採点してください。'
+      ),
+      React.createElement('div', { className: 'model-answer user' },
+        React.createElement('div', { className: 'model-answer-label' }, 'あなたの解答'),
+        React.createElement('div', { className: 'model-answer-text' }, textAnswer)
+      ),
+      React.createElement('div', { className: 'model-answer' },
+        React.createElement('div', { className: 'model-answer-label' }, '模範解答'),
+        React.createElement('div', { className: 'model-answer-text' }, question.correct_answer)
+      ),
+      React.createElement('div', { className: 'explanation' },
+        React.createElement('div', { className: 'explanation-label' }, '解説'),
+        React.createElement('div', { className: 'explanation-text' }, question.explanation)
+      ),
+      React.createElement('div', { className: 'actions' },
+        React.createElement('button', {
+          className: 'btn btn-gold',
+          onClick: () => handleTextJudge(false),
+        }, '△ もう一度'),
+        React.createElement('button', {
+          className: 'btn btn-moss',
+          onClick: () => handleTextJudge(true),
+        }, '◯ 正解だった'),
+      )
+    ),
+
+    // === 根拠問題(follow-up) ===
+    hasFollowUp && isSelect && React.createElement(React.Fragment, null,
+      React.createElement('div', {
+        className: 'q-prompt follow-up-prompt',
+        style: { marginTop: '8px' }
+      },
+        React.createElement('div', { className: 'q-prompt-label' }, '根拠を答えよ'),
+        question.follow_up.prompt
+      ),
+      React.createElement('div', { className: 'choices' },
+        question.follow_up.choices.map((choice, idx) =>
+          React.createElement('button', {
+            key: idx,
+            className: getChoiceClass(choice, followSelected, question.follow_up.correct_answer),
+            onClick: () => !revealed && setFollowSelected(choice),
+            disabled: revealed,
+          },
+            React.createElement('span', { className: 'choice-marker' }, String.fromCharCode(0x2460 + idx)),
+            React.createElement('span', null, choice)
+          )
+        )
+      )
+    ),
+
+    // === 採点後の表示 ===
+    isSelect && revealed && React.createElement(React.Fragment, null,
+      // 総合結果バッジ
+      React.createElement('div', { className: 'result-banner ' + (
+        (hasFollowUp ? (mainCorrect && followCorrect) : mainCorrect) ? 'all-correct' :
+        (hasFollowUp && (mainCorrect || followCorrect)) ? 'partial' : 'all-wrong'
+      ) },
+        (hasFollowUp
+          ? (mainCorrect && followCorrect ? '完全正解' : (mainCorrect ? '判別 ◯ / 根拠 ✕' : (followCorrect ? '判別 ✕ / 根拠 ◯' : '要復習')))
+          : (mainCorrect ? '正解' : '要復習')
+        )
+      ),
+      // 解説(メイン)
+      React.createElement('div', { className: 'explanation' },
+        React.createElement('div', { className: 'explanation-label' }, '判別の解説'),
+        React.createElement('div', { className: 'explanation-text' }, question.explanation),
+        question.reference_page && React.createElement('div', { className: 'explanation-ref' },
+          `(教材 p.${question.reference_page} 参照)`
+        )
+      ),
+      // 解説(根拠)
+      hasFollowUp && React.createElement('div', { className: 'explanation' },
+        React.createElement('div', { className: 'explanation-label' }, '根拠の解説'),
+        React.createElement('div', { className: 'explanation-text' }, question.follow_up.explanation)
+      ),
+      // 次へ
+      React.createElement('div', { className: 'actions' },
+        React.createElement('button', {
+          className: 'btn btn-primary',
+          onClick: handleNext,
+        }, '次の問題へ →')
+      )
+    ),
+
+    // === 回答前:採点ボタン ===
+    isSelect && !revealed && React.createElement('div', { className: 'actions' },
+      React.createElement('button', {
+        className: 'btn btn-primary',
+        onClick: handleReveal,
+        disabled: !canReveal,
+      }, hasFollowUp ? '判別・根拠をまとめて採点' : '回答する')
+    )
+  );
+}
+// ========================================
+// 例文セッション(1つの例文の問題をすべて解く)
+// ========================================
+function ExampleSession({ session, onSessionComplete }) {
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [results, setResults] = useState([]); // [{q_id, overallCorrect}]
+  const [showSummary, setShowSummary] = useState(false);
+
+  const currentQuestion = session.questions[currentIdx];
+  const totalQuestions = session.questions.length;
+
+  const handleQuestionComplete = (result) => {
+    const newResults = [...results, { q_id: currentQuestion.q_id, ...result }];
+    setResults(newResults);
+
+    if (currentIdx + 1 >= totalQuestions) {
+      // セッション完了
+      setShowSummary(true);
+    } else {
+      setCurrentIdx(currentIdx + 1);
+    }
+  };
+
+  const handleFinishSession = () => {
+    // このセッション内に間違いが1つでもあったか?
+    const anyMistake = results.some(r => !r.overallCorrect);
+    onSessionComplete({
+      sessionId: session.session_id,
+      anyMistake,
+      results,
+    });
+  };
+
+  // 現在の問題で使うハイライト(原文表示用)
+  const activeHighlight = currentQuestion?.highlight_id || null;
+
+  // ステップインジケータの状態
+  const stepStatuses = session.questions.map((q, i) => {
+    if (i < results.length) {
+      const r = results[i];
+      return r.overallCorrect ? 'done' : 'done mistake';
+    } else if (i === currentIdx && !showSummary) {
+      return 'current';
+    } else {
+      return '';
+    }
+  });
+
+  return React.createElement(React.Fragment, null,
+    // セッションヘッダー
+    React.createElement('div', { className: 'session-header' },
+      React.createElement('div', { className: 'session-title' }, '例文セッション'),
+      React.createElement('div', { className: 'session-meta' },
+        React.createElement('div', { className: 'session-word' },
+          '識別対象',
+          React.createElement('span', { className: 'word' }, session.target_word)
+        ),
+        !showSummary && React.createElement('div', { className: 'session-step' },
+          `${currentIdx + 1} / ${totalQuestions} 問目`
+        )
+      ),
+      // ステップドット
+      React.createElement('div', { className: 'step-indicator' },
+        session.questions.map((q, i) => {
+          const isFinalQuestion = q.answer_format === 'text';
+          const cls = `step-dot ${stepStatuses[i]} ${isFinalQuestion ? 'final' : ''}`;
+          return React.createElement('div', { key: i, className: cls, title: q.question_type });
+        })
+      )
+    ),
+
+    // 例文表示
+    React.createElement('div', { className: 'session-example' },
+      React.createElement('div', { className: 'example-text' },
+        React.createElement(HighlightedText, {
+          text: session.example.text,
+          highlights: session.example.highlights,
+          activeId: showSummary ? null : activeHighlight
+        })
+      ),
+      React.createElement('div', { className: 'example-source' }, session.example.source)
+    ),
+
+    // 問題 or サマリー
+    !showSummary ? React.createElement(QuestionBlock, {
+      key: currentQuestion.q_id,
+      question: currentQuestion,
+      questionIndex: currentIdx,
+      totalQuestions: totalQuestions,
+      onComplete: handleQuestionComplete,
+    }) : React.createElement('div', { className: 'session-summary' },
+      React.createElement('div', { className: 'summary-title' },
+        results.every(r => r.overallCorrect) ? '◇ 完答 ◇' : '◇ 修了(要復習あり) ◇'
+      ),
+      React.createElement('div', { className: 'summary-line' },
+        `${totalQuestions}問中、${results.filter(r => r.overallCorrect).length}問完全正解`
+      ),
+      React.createElement('div', { className: 'summary-translation' },
+        React.createElement('div', { className: 'summary-translation-label' }, '現代語訳(確認用)'),
+        React.createElement('div', { className: 'summary-translation-text' }, session.example.modern_translation)
+      ),
+      React.createElement('button', {
+        className: 'btn btn-primary',
+        onClick: handleFinishSession,
+      }, '次の例文へ →')
+    )
+  );
+}
+
+// ========================================
+// メインアプリ
+// ========================================
+function App() {
+  const allSessions = useMemo(() => buildSessions(), []);
+  const totalSessions = allSessions.length;
+
+  const [sessionQueue, setSessionQueue] = useState(() => shuffle(allSessions));
+  const [reviewQueue, setReviewQueue] = useState([]);
+  const [completedCount, setCompletedCount] = useState(0);
+  const [mistakeSessionCount, setMistakeSessionCount] = useState(0);
+  const [resetKey, setResetKey] = useState(0);
+
+  const currentSession = sessionQueue[0] || null;
+  const isAllComplete = !currentSession && reviewQueue.length === 0;
+
+  const handleSessionComplete = (result) => {
+    const newQueue = sessionQueue.slice(1);
+
+    if (result.anyMistake) {
+      // このセッションは復習キューへ
+      const newReview = [...reviewQueue, currentSession];
+      setMistakeSessionCount(m => m + 1);
+      if (newQueue.length === 0) {
+        setSessionQueue(shuffle(newReview));
+        setReviewQueue([]);
+      } else {
+        setSessionQueue(newQueue);
+        setReviewQueue(newReview);
+      }
+    } else {
+      setCompletedCount(c => c + 1);
+      if (newQueue.length === 0 && reviewQueue.length > 0) {
+        setSessionQueue(shuffle(reviewQueue));
+        setReviewQueue([]);
+      } else {
+        setSessionQueue(newQueue);
+      }
+    }
+  };
+
+  const handleRestart = () => {
+    setSessionQueue(shuffle(buildSessions()));
+    setReviewQueue([]);
+    setCompletedCount(0);
+    setMistakeSessionCount(0);
+    setResetKey(k => k + 1);
+  };
+
+  const remaining = sessionQueue.length + reviewQueue.length;
+
+  return React.createElement('div', { className: 'app' },
+    React.createElement('header', { className: 'masthead' },
+      React.createElement('div', { className: 'logo' },
+        'つばめ古文'
+      ),
+      React.createElement('div', { className: 'tagline' }, '識別演習 v1.0 — 10語収録')
+    ),
+
+    React.createElement('div', { className: 'progress-card' },
+      React.createElement('div', { className: 'progress-stats' },
+        React.createElement('div', { className: 'stat remaining' },
+          React.createElement('div', { className: 'stat-value' }, remaining),
+          React.createElement('div', { className: 'stat-label' }, '残り例文')
+        ),
+        React.createElement('div', { className: 'stat correct' },
+          React.createElement('div', { className: 'stat-value' }, completedCount),
+          React.createElement('div', { className: 'stat-label' }, '完答')
+        ),
+        React.createElement('div', { className: 'stat mistake' },
+          React.createElement('div', { className: 'stat-value' }, mistakeSessionCount),
+          React.createElement('div', { className: 'stat-label' }, '要復習')
+        ),
+      ),
+      React.createElement('button', {
+        className: 'btn btn-secondary',
+        onClick: handleRestart,
+      }, '最初から')
+    ),
+
+    currentSession && React.createElement(ExampleSession, {
+      key: `${resetKey}_${currentSession.session_id}_${sessionQueue.length}`,
+      session: currentSession,
+      onSessionComplete: handleSessionComplete,
+    }),
+
+    isAllComplete && React.createElement('div', { className: 'all-complete-card' },
+      React.createElement('div', { className: 'all-complete-title' }, '◇ 演習 修了 ◇'),
+      React.createElement('div', { className: 'all-complete-summary' },
+        `全${totalSessions}例文を完答しました。`,
+        React.createElement('br'),
+        `うち${mistakeSessionCount}回の復習を経て完答です。`
+      ),
+      React.createElement('button', {
+        className: 'btn btn-primary',
+        onClick: handleRestart,
+      }, 'もう一度挑戦する')
+    ),
+
+    React.createElement('footer', null, 'SWALLOW-BASE — 古文識別演習 v1.0')
+  );
+}
+
+createRoot(document.getElementById('root')).render(React.createElement(App));
+</script>
+</body>
+</html>
