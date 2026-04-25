@@ -936,19 +936,42 @@
         </div>
     </section>
 
-    <!-- お知らせバー（表示期間：毎年 2/1〜5/15、JSで自動制御）-->
-    <!-- 手動で非表示にしたい場合は、下の行を <div class="announcement-bar" id="announcementBar" style="display:none!important"> に変更 -->
+    <!-- ============================================
+        お知らせバー
+        - 現在表示中：【パターンB】募集終了版（常時表示）
+        - 非表示で保管中：【パターンA】募集案内版（来年度の募集開始時に切替予定）
+        - 切替方法：使いたい方のコメントを外し、もう一方をコメントアウトする
+        ============================================ -->
+
+    <!-- 【パターンA】募集案内版（来年度用に保管。表示期間：毎年 2/1〜5/15、JSで期間制御） -->
+    <!--
+    <div class="announcement-bar" id="announcementBar">
+        <div class="announcement-bar-inner">
+            <span class="announcement-bar-text"><span class="sakura-icon"></span> 2026年度 入会について <span class="sakura-icon"></span></span>
+            <p class="announcement-bar-notice">
+                高校3年生は定員に達したため、入会を締め切りました。<br>
+                その他の学年については、募集を継続しております。
+            </p>
+            <div class="announcement-bar-links">
+                <a href="contact.html" class="announcement-bar-link">▶︎ 現役生(中高生)</a>
+                <span class="announcement-bar-separator">｜</span>
+                <a href="programs/ronin.html" class="announcement-bar-link">▶︎ 既卒生</a>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <!-- 【パターンB】募集終了版（現在表示中・常時表示） -->
     <div class="announcement-bar" id="announcementBar">
         <div class="announcement-bar-inner">
             <span class="announcement-bar-text"><span class="sakura-icon"></span> 2026年度 新規入会について <span class="sakura-icon"></span></span>
             <p class="announcement-bar-notice">
-            高校3年生は定員に達したため、入会を締め切りました。<br>
-            その他の学年については、募集を継続しています。
+                おかげさまで全学年定員に達したため、<br>
+                2026年度の募集は終了いたしました。<br>
+                ご質問等ございましたら、個別にお問い合わせください。
             </p>
             <div class="announcement-bar-links">
-                <a href="contact.html" class="announcement-bar-link">▶︎ 現役生（中高生）</a>
-                <span class="announcement-bar-separator">｜</span>
-                <a href="programs/ronin.html" class="announcement-bar-link">▶︎ 既卒生</a>
+                <a href="contact.html" class="announcement-bar-link">▶︎ お問い合わせはこちら</a>
             </div>
         </div>
     </div>
@@ -1175,7 +1198,16 @@
                 dot.classList.toggle('active', index === activeIndex);
             });
         });
-        // お知らせバー表示制御（毎年 2/1〜5/15 に自動表示）
+        // お知らせバー表示制御
+        // 現在：常時表示（パターンB：募集終了版）
+        // 来年度切替時：下のコメントアウト部分（期間制御版）に戻す
+        (function() {
+            var bar = document.getElementById('announcementBar');
+            if (bar) bar.classList.add('is-visible');
+        })();
+
+        /*
+        // 【保管】期間制御版（パターンA（表示期間：毎年 2/1〜5/15、JSで期間制御）募集案内版を使用時に有効化）
         (function() {
             var now = new Date();
             var month = now.getMonth() + 1; // 1-12
@@ -1186,6 +1218,7 @@
                 if (bar) bar.classList.add('is-visible');
             }
         })();
+        */
     </script>
 </body>
 </html>
