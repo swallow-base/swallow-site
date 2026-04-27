@@ -934,6 +934,23 @@ const QUESTION_DATA = [
             "explanation": "地の文では基本的に過去の意。"
           },
           {
+            "q_id": "ga_03_q4",
+            "highlight_id": "h_keru",
+            "question_type": "活用形",
+            "prompt": "傍線部「ける」の活用形を答えなさい。",
+            "answer_format": "select",
+            "choices": [
+              "未然形",
+              "連用形",
+              "終止形",
+              "連体形",
+              "已然形",
+              "命令形"
+            ],
+            "correct_answer": "連体形",
+            "explanation": "接続助詞「が」は連体形に接続するため、「ける」は連体形。"
+          },
+          {
             "q_id": "ga_03_q3",
             "highlight_id": null,
             "question_type": "和訳",
@@ -992,6 +1009,21 @@ const QUESTION_DATA = [
             }
           },
           {
+            "q_id": "kere_01_q3",
+            "highlight_id": "h_kere",
+            "question_type": "助動詞の意味",
+            "prompt": "助動詞「けり」の意味として最も適切なものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "過去",
+              "詠嘆",
+              "完了",
+              "推量"
+            ],
+            "correct_answer": "過去",
+            "explanation": "物語の地の文では基本的に過去の意。"
+          },
+          {
             "q_id": "kere_01_q2",
             "highlight_id": null,
             "question_type": "和訳",
@@ -1042,6 +1074,21 @@ const QUESTION_DATA = [
               "correct_answer": "「をかし」の語幹には助動詞「けり」は接続しないから",
               "explanation": "助動詞「けり」は形容詞の語幹には直接接続しない。形容詞の活用語尾の一部と判別する。"
             }
+          },
+          {
+            "q_id": "kere_02_q3",
+            "highlight_id": "h_kere",
+            "question_type": "古文単語の意味",
+            "prompt": "「をかし」の意味として最も適切なものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "趣がある",
+              "こっけいだ",
+              "不思議だ",
+              "美しい"
+            ],
+            "correct_answer": "趣がある",
+            "explanation": "徒然草・枕草子における「をかし」は基本的に「趣がある」。"
           },
           {
             "q_id": "kere_02_q2",
@@ -1096,6 +1143,32 @@ const QUESTION_DATA = [
             }
           },
           {
+            "q_id": "kere_03_q3",
+            "highlight_id": "h_bekere",
+            "question_type": "助動詞の意味",
+            "prompt": "助動詞「べし」の意味として最も適切なものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "推量",
+              "意志",
+              "可能",
+              "当然"
+            ],
+            "correct_answer": "推量",
+            "explanation": "「〜だろう」と訳せる用法で推量。",
+            "follow_up": {
+              "prompt": "「推量」と判断した決め手はどれですか。",
+              "choices": [
+                "「〜だろう」と訳せる",
+                "命令形に接続している",
+                "未然形に接続している",
+                "已然形に接続している"
+              ],
+              "correct_answer": "「〜だろう」と訳せる",
+              "explanation": "「べし」の意味判別は文脈による。「〜だろう」と訳せれば推量。"
+            }
+          },
+          {
             "q_id": "kere_03_q2",
             "highlight_id": null,
             "question_type": "和訳",
@@ -1137,6 +1210,21 @@ const QUESTION_DATA = [
             "reference_page": 70
           },
           {
+            "q_id": "kere_04_q3",
+            "highlight_id": "h_makere",
+            "question_type": "助動詞の意味",
+            "prompt": "助動詞「まほし」の意味として最も適切なものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "希望",
+              "推量",
+              "意志",
+              "可能"
+            ],
+            "correct_answer": "希望",
+            "explanation": "「まほし」は「〜たい」という希望(願望)を表す助動詞。"
+          },
+          {
             "q_id": "kere_04_q2",
             "highlight_id": null,
             "question_type": "和訳",
@@ -1173,6 +1261,21 @@ const QUESTION_DATA = [
             ],
             "correct_answer": "切り離せない(動詞「咲く」の語幹と活用語尾)",
             "explanation": "動詞の語幹「咲」は独立して用いられず、助動詞「けり」とは接続しない。"
+          },
+          {
+            "q_id": "kere_06_q2",
+            "highlight_id": "h_sakikere",
+            "question_type": "識別",
+            "prompt": "「咲きけれ」を文法的に説明する場合、最も適切なものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "動詞「咲く」の連用形+助動詞「けり」の已然形",
+              "形容詞の活用語尾",
+              "助動詞「べし」の已然形",
+              "助動詞「まじ」の已然形"
+            ],
+            "correct_answer": "動詞「咲く」の連用形+助動詞「けり」の已然形",
+            "explanation": "動詞「咲く」(四段活用)の連用形「咲き」に、過去の助動詞「けり」の已然形「けれ」が接続している。"
           }
         ]
       }
@@ -1263,6 +1366,30 @@ const QUESTION_DATA = [
             "correct_answer": "四段動詞「落とす」の連用形活用語尾",
             "explanation": "禁止「な〜そ」の間は連用形。四段動詞「落とす」の連用形活用語尾。",
             "reference_page": 19
+          },
+          {
+            "q_id": "shi_02_q3",
+            "highlight_id": null,
+            "question_type": "識別",
+            "prompt": "この文の「な」と「そ」の関係について、正しいものを選びなさい。",
+            "answer_format": "select",
+            "choices": [
+              "副詞「な」と終助詞「そ」が呼応して禁止を表す",
+              "終助詞「な」と終助詞「そ」が独立して使われている",
+              "助動詞「ぬ」の活用形",
+              "完了の助動詞「つ」の一部"
+            ],
+            "correct_answer": "副詞「な」と終助詞「そ」が呼応して禁止を表す",
+            "explanation": "「な〜そ」の形で禁止(〜するな)を表す。間に動詞の連用形が入る。"
+          },
+          {
+            "q_id": "shi_02_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "一つも落とすな。",
+            "explanation": "「な〜そ」は禁止の表現。「な落としそ」で「落とすな」。"
           }
         ]
       },
@@ -1347,6 +1474,15 @@ const QUESTION_DATA = [
             "correct_answer": "助動詞「き」の已然形「しか」+終助詞「し」",
             "explanation": "過去の助動詞「き」の已然形「しか」に、文末の詠嘆・念押しの終助詞「し」が付いた形。",
             "reference_page": 39
+          },
+          {
+            "q_id": "shi_04_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "不思議な者たちの心情であることよ。",
+            "explanation": "「しかし」は過去の助動詞「き」の已然形+詠嘆の終助詞で、感慨を表す。"
           }
         ]
       },
@@ -1379,6 +1515,15 @@ const QUESTION_DATA = [
             "correct_answer": "副詞「しか」(そのように)",
             "explanation": "文頭にあり「そのように」の意を示す副詞。",
             "reference_page": 106
+          },
+          {
+            "q_id": "shi_05_q2",
+            "highlight_id": null,
+            "question_type": "和訳",
+            "prompt": "この文を現代語訳しなさい。",
+            "answer_format": "text",
+            "correct_answer": "そのように言えばと思ったのだろうか。",
+            "explanation": "副詞「しか」は「そのように」の意。"
           }
         ]
       }
@@ -1428,6 +1573,21 @@ const QUESTION_DATA = [
               "correct_answer": "連用形に接続し、下に用言が続く",
               "explanation": "接続助詞「て」は連用形に接続。完了「つ」は下に助動詞(む・ず・き・けり等)を伴うことが多い。"
             }
+          },
+          {
+            "q_id": "te_01_q3",
+            "highlight_id": null,
+            "question_type": "古文単語の意味",
+            "prompt": "「行き行きて」とはどのような意味を表しますか。",
+            "answer_format": "select",
+            "choices": [
+              "どんどん進んで行く",
+              "何度も帰る",
+              "ゆっくりと歩く",
+              "立ち止まる"
+            ],
+            "correct_answer": "どんどん進んで行く",
+            "explanation": "動詞を重ねることで、その動作を強調・継続する表現。"
           },
           {
             "q_id": "te_01_q2",
