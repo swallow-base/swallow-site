@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>つばめ古文 — 識別演習 v1.0</title>
+<title>つばめ古文 — 識別演習 v1.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Klee+One:wght@400;600&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -322,6 +322,49 @@
   .choice.incorrect { border-color: var(--accent); background: var(--sakura-bg); }
   .choice.incorrect .choice-marker { background: var(--accent); color: white; border-color: var(--accent); }
   .choice:disabled { cursor: default; }
+
+  /* 「わからない」選択肢 */
+  .choice.unknown {
+    margin-top: 8px;
+    background: transparent;
+    border-style: dashed;
+    color: var(--ink-soft);
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+  .choice.unknown .choice-marker {
+    background: transparent;
+    color: var(--ink-soft);
+    border-color: var(--line);
+    font-style: italic;
+  }
+  .choice.unknown:hover:not(:disabled) {
+    border-color: var(--ink-soft);
+    background: var(--bg-paper-dark);
+    transform: none;
+  }
+  .choice.unknown.selected {
+    border-style: solid;
+    border-color: var(--gold);
+    background: #fdf2e0;
+    color: var(--ink);
+  }
+  .choice.unknown.selected .choice-marker {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+  }
+  .choice.unknown.incorrect {
+    border-style: solid;
+    border-color: var(--gold);
+    background: #fdf2e0;
+    color: var(--ink-soft);
+  }
+  .choice.unknown.incorrect .choice-marker {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+  }
 
   /* 記述式 */
   .text-input {
@@ -2773,6 +2816,10 @@ function shuffle(arr) {
   return a;
 }
 
+// 「わからない」を選んだ際の内部値(通常の選択肢と被らない値)
+const UNKNOWN_ANSWER = '__UNKNOWN__';
+const UNKNOWN_LABEL = 'わからない';
+
 // ========================================
 // 原文ハイライト表示
 // ========================================
@@ -2898,6 +2945,19 @@ function QuestionBlock({ question, questionIndex, totalQuestions, onComplete }) 
           React.createElement('span', { className: 'choice-marker' }, String.fromCharCode(0x2460 + idx)),
           React.createElement('span', null, choice)
         )
+      ),
+      // 「わからない」選択肢
+      React.createElement('button', {
+        key: 'unknown',
+        className: 'choice unknown' + (
+          revealed && mainSelected === UNKNOWN_ANSWER ? ' incorrect' :
+          mainSelected === UNKNOWN_ANSWER ? ' selected' : ''
+        ),
+        onClick: () => !revealed && setMainSelected(UNKNOWN_ANSWER),
+        disabled: revealed,
+      },
+        React.createElement('span', { className: 'choice-marker' }, '?'),
+        React.createElement('span', null, UNKNOWN_LABEL)
       )
     ),
 
@@ -2965,6 +3025,19 @@ function QuestionBlock({ question, questionIndex, totalQuestions, onComplete }) 
             React.createElement('span', { className: 'choice-marker' }, String.fromCharCode(0x2460 + idx)),
             React.createElement('span', null, choice)
           )
+        ),
+        // 「わからない」選択肢(フォローアップ)
+        React.createElement('button', {
+          key: 'unknown',
+          className: 'choice unknown' + (
+            revealed && followSelected === UNKNOWN_ANSWER ? ' incorrect' :
+            followSelected === UNKNOWN_ANSWER ? ' selected' : ''
+          ),
+          onClick: () => !revealed && setFollowSelected(UNKNOWN_ANSWER),
+          disabled: revealed,
+        },
+          React.createElement('span', { className: 'choice-marker' }, '?'),
+          React.createElement('span', null, UNKNOWN_LABEL)
         )
       )
     ),
@@ -3178,7 +3251,7 @@ function App() {
       React.createElement('div', { className: 'logo' },
         'つばめ古文'
       ),
-      React.createElement('div', { className: 'tagline' }, '識別演習 v1.0 — 10語収録')
+      React.createElement('div', { className: 'tagline' }, '識別演習 v1.1 — 10語収録')
     ),
 
     React.createElement('div', { className: 'progress-card' },
@@ -3221,7 +3294,7 @@ function App() {
       }, 'もう一度挑戦する')
     ),
 
-    React.createElement('footer', null, 'SWALLOW-BASE — 古文識別演習 v1.0')
+    React.createElement('footer', null, 'SWALLOW-BASE — 古文識別演習 v1.1')
   );
 }
 
