@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>つばめ古文 — 識別演習 v1.1</title>
+<title>つばめ古文 — 識別演習 v1.2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Klee+One:wght@400;600&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -101,6 +101,21 @@
   .stat.correct .stat-value { color: var(--moss); }
   .stat.mistake .stat-value { color: var(--gold); }
 
+  /* 進捗バー */
+  .progress-bar-container {
+    height: 4px;
+    background: var(--line-soft);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+  }
+
   /* 例文セッションのヘッダー */
   .session-header {
     background: linear-gradient(135deg, #f7ede0 0%, #efe2cc 100%);
@@ -139,6 +154,23 @@
     font-size: 12px;
     color: var(--ink-soft);
     letter-spacing: 0.1em;
+  }
+
+  /* 単問復習用 */
+  .session-header.review-header {
+    background: linear-gradient(135deg, #fdf2e0 0%, #f5e3c4 100%);
+    border-color: var(--gold);
+  }
+  .review-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-right: 4px;
   }
 
   /* 原文表示(セッション共通) */
@@ -3089,7 +3121,65 @@ function QuestionBlock({ question, questionIndex, totalQuestions, onComplete }) 
 // ========================================
 // 例文セッション(1つの例文の問題をすべて解く)
 // ========================================
-function ExampleSession({ session, onSessionComplete }) {
+// ========================================
+// 単問再出題ブロック(SRS復習用)
+// 原文と1問のみを表示。「復習」バッジ付き。
+// ========================================
+function SingleReviewBlock({ reviewItem, onComplete }) {
+  const { example, question, target_word, mistakeCount } = reviewItem;
+  const activeHighlight = question?.highlight_id || null;
+
+  const handleQuestionComplete = (result) => {
+    onComplete({
+      sessionId: example.example_id,
+      question: question,
+      result,
+      isReview: true,
+    });
+  };
+
+  return React.createElement(React.Fragment, null,
+    // 復習ヘッダー
+    React.createElement('div', { className: 'session-header review-header' },
+      React.createElement('div', { className: 'session-title' },
+        React.createElement('span', { className: 'review-badge' }, '復習'),
+        ' 単問演習'
+      ),
+      React.createElement('div', { className: 'session-meta' },
+        React.createElement('div', { className: 'session-word' },
+          '識別対象',
+          React.createElement('span', { className: 'word' }, target_word)
+        ),
+        mistakeCount > 1 && React.createElement('div', { className: 'session-step' },
+          `${mistakeCount}回目の挑戦`
+        )
+      )
+    ),
+
+    // 例文表示
+    React.createElement('div', { className: 'session-example' },
+      React.createElement('div', { className: 'example-text' },
+        React.createElement(HighlightedText, {
+          text: example.text,
+          highlights: example.highlights,
+          activeId: activeHighlight
+        })
+      ),
+      React.createElement('div', { className: 'example-source' }, example.source)
+    ),
+
+    // 問題ブロック
+    React.createElement(QuestionBlock, {
+      key: question.q_id + '_review_' + mistakeCount,
+      question: question,
+      questionIndex: 0,
+      totalQuestions: 1,
+      onComplete: handleQuestionComplete,
+    })
+  );
+}
+
+function ExampleSession({ session, onSessionComplete, onQuestionAnswered }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [results, setResults] = useState([]); // [{q_id, overallCorrect}]
   const [showSummary, setShowSummary] = useState(false);
@@ -3100,6 +3190,15 @@ function ExampleSession({ session, onSessionComplete }) {
   const handleQuestionComplete = (result) => {
     const newResults = [...results, { q_id: currentQuestion.q_id, ...result }];
     setResults(newResults);
+
+    // 親に問題ごとの結果を通知(SRSキュー管理用)
+    if (onQuestionAnswered) {
+      onQuestionAnswered({
+        sessionId: session.session_id,
+        question: currentQuestion,
+        result,
+      });
+    }
 
     if (currentIdx + 1 >= totalQuestions) {
       // セッション完了
@@ -3198,75 +3297,240 @@ function ExampleSession({ session, onSessionComplete }) {
 // ========================================
 // メインアプリ
 // ========================================
+// ========================================
+// SRS間隔設定(間違えた回数 → 次の出題までの問題数)
+// ========================================
+const SRS_INTERVALS = [
+  { mistakes: 1, min: 3, max: 5 },
+  { mistakes: 2, min: 7, max: 10 },
+  { mistakes: 3, min: 12, max: 18 },
+  { mistakes: 4, min: 18, max: 25 }, // 4回目以降
+];
+
+function getSrsInterval(mistakeCount) {
+  const idx = Math.min(mistakeCount - 1, SRS_INTERVALS.length - 1);
+  const conf = SRS_INTERVALS[idx];
+  // ランダムに min〜max の範囲で
+  return Math.floor(Math.random() * (conf.max - conf.min + 1)) + conf.min;
+}
+
+// セッション総問題数
+const SESSION_TARGET = 40;
+
 function App() {
   const allSessions = useMemo(() => buildSessions(), []);
-  const totalSessions = allSessions.length;
 
+  // セッションキュー(まだ手をつけていない例文)
   const [sessionQueue, setSessionQueue] = useState(() => shuffle(allSessions));
-  const [reviewQueue, setReviewQueue] = useState([]);
-  const [completedCount, setCompletedCount] = useState(0);
-  const [mistakeSessionCount, setMistakeSessionCount] = useState(0);
+  // SRSキュー(間違えた問題の単問再出題待ち)
+  // 各エントリ: { example, question, target_word, mistakeCount, dueAt }
+  const [srsQueue, setSrsQueue] = useState([]);
+  // 解いた問題の総数(タイマー兼カウンタ)
+  const [questionsAnswered, setQuestionsAnswered] = useState(0);
+  // 現在の表示モード: 'session' | 'review'
+  const [mode, setMode] = useState('session');
+  // 復習モード時の現在のアイテム
+  const [currentReview, setCurrentReview] = useState(null);
+  // 統計
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [mistakeCount, setMistakeCount] = useState(0);
   const [resetKey, setResetKey] = useState(0);
 
+  // 現在の例文セッション
   const currentSession = sessionQueue[0] || null;
-  const isAllComplete = !currentSession && reviewQueue.length === 0;
 
-  const handleSessionComplete = (result) => {
-    const newQueue = sessionQueue.slice(1);
+  // セッション完了済み判定
+  const isSessionComplete = questionsAnswered >= SESSION_TARGET;
 
-    if (result.anyMistake) {
-      // このセッションは復習キューへ
-      const newReview = [...reviewQueue, currentSession];
-      setMistakeSessionCount(m => m + 1);
-      if (newQueue.length === 0) {
-        setSessionQueue(shuffle(newReview));
-        setReviewQueue([]);
-      } else {
-        setSessionQueue(newQueue);
-        setReviewQueue(newReview);
+  // 1問解いた時の処理(ExampleSession内の各問題、または単問再出題で呼ばれる)
+  const handleQuestionAnswered = (data) => {
+    const { question, result, sessionId, isReview } = data;
+    const newAnswered = questionsAnswered + 1;
+    setQuestionsAnswered(newAnswered);
+
+    if (result.overallCorrect) {
+      // 正解
+      setCorrectAnswers(c => c + 1);
+      // 復習中の問題が正解になったら、SRSキューから削除
+      if (isReview) {
+        setSrsQueue(q => q.filter(item => item.question.q_id !== question.q_id));
       }
     } else {
-      setCompletedCount(c => c + 1);
-      if (newQueue.length === 0 && reviewQueue.length > 0) {
-        setSessionQueue(shuffle(reviewQueue));
-        setReviewQueue([]);
-      } else {
-        setSessionQueue(newQueue);
-      }
+      // 不正解
+      setMistakeCount(m => m + 1);
+      // SRSキューに追加(または既存エントリを更新)
+      setSrsQueue(q => {
+        const existing = q.find(item => item.question.q_id === question.q_id);
+        if (existing) {
+          // 既に存在 → 間違い回数を増やしてdueAtを再計算
+          const newMistakeCount = existing.mistakeCount + 1;
+          const interval = getSrsInterval(newMistakeCount);
+          return q.map(item => item.question.q_id === question.q_id
+            ? { ...item, mistakeCount: newMistakeCount, dueAt: newAnswered + interval }
+            : item
+          );
+        } else {
+          // 新規追加
+          // 元のセッションから例文情報を取り出す
+          const session = allSessions.find(s => s.session_id === sessionId);
+          if (!session) return q;
+          const interval = getSrsInterval(1);
+          return [...q, {
+            example: session.example,
+            question: question,
+            target_word: session.target_word,
+            mistakeCount: 1,
+            dueAt: newAnswered + interval,
+          }];
+        }
+      });
     }
   };
 
+  // 単問復習完了時の処理
+  const handleReviewComplete = (data) => {
+    handleQuestionAnswered(data);
+    setCurrentReview(null);
+    setMode('between'); // 復習完了 → 状態遷移待ちへ
+  };
+
+  // 状態遷移の管理(modeが'between'になった時 = 1区切り完了時に次の出題内容を決める)
+  useEffect(() => {
+    if (mode !== 'between') return;
+    if (isSessionComplete) return; // 40問達成済み
+
+    // SRSキューから「再出題タイミングが来た」ものを探す
+    const due = srsQueue.filter(item => item.dueAt <= questionsAnswered);
+    if (due.length > 0) {
+      // 復習モードへ
+      const sorted = [...due].sort((a, b) => a.dueAt - b.dueAt);
+      setCurrentReview(sorted[0]);
+      setMode('review');
+    } else if (sessionQueue.length > 0) {
+      // 次の例文セッションへ進む
+      // 注意: 復習から戻る場合は次の例文へ。例文セッション完了から戻る場合も次へ。
+      // 「復習から戻った時に同じ例文をもう一度」とはしない。
+      // → 例文セッションが完了した直後の場合のみ、queueをsliceする
+      // ここでは前のmodeを判別する手段が必要だが、シンプルにするため:
+      // mode='between'に切り替わる前の状態は「session」または「review」だった
+      // そこで、setMode('between')を呼ぶ箇所で例文を切り替えるかどうかは事前に判断する方が良い
+      setMode('session');
+    } else {
+      // 例文セッションが尽きた
+      if (srsQueue.length > 0) {
+        // SRSキューはあるが、まだdueAtが来ていない場合 → 強制的に1つ出題
+        const sorted = [...srsQueue].sort((a, b) => a.dueAt - b.dueAt);
+        setCurrentReview(sorted[0]);
+        setMode('review');
+      } else {
+        // 完全に全問完答
+        setMode('all_done');
+      }
+    }
+  }, [mode, srsQueue, questionsAnswered, isSessionComplete, sessionQueue.length]);
+
+  // 例文セッション完了時に、セッションキューから1つ削除する処理を分離
+  // これは例文セッションが完了した「直後」に1度だけ実行されるべき
+  const [pendingSessionAdvance, setPendingSessionAdvance] = useState(false);
+
+  // ExampleSessionからの完了通知をフック
+  const handleExampleSessionComplete = () => {
+    setPendingSessionAdvance(true);
+    setMode('between');
+  };
+
+  useEffect(() => {
+    if (pendingSessionAdvance) {
+      setSessionQueue(q => q.slice(1));
+      setPendingSessionAdvance(false);
+    }
+  }, [pendingSessionAdvance]);
+
   const handleRestart = () => {
     setSessionQueue(shuffle(buildSessions()));
-    setReviewQueue([]);
-    setCompletedCount(0);
-    setMistakeSessionCount(0);
+    setSrsQueue([]);
+    setQuestionsAnswered(0);
+    setMode('session');
+    setCurrentReview(null);
+    setCorrectAnswers(0);
+    setMistakeCount(0);
     setResetKey(k => k + 1);
   };
 
-  const remaining = sessionQueue.length + reviewQueue.length;
+  // 表示する内容を決定(useEffectで状態遷移を管理しているので、ここではsetStateを呼ばない)
+  let mainContent;
+  if (isSessionComplete) {
+    mainContent = React.createElement('div', { className: 'all-complete-card' },
+      React.createElement('div', { className: 'all-complete-title' }, '◇ セッション修了 ◇'),
+      React.createElement('div', { className: 'all-complete-summary' },
+        `${SESSION_TARGET}問解きました。`,
+        React.createElement('br'),
+        `正解: ${correctAnswers} 問 / 要復習: ${srsQueue.length} 問`
+      ),
+      srsQueue.length > 0 && React.createElement('div', {
+        className: 'all-complete-summary',
+        style: { fontSize: '14px', marginTop: '-15px' }
+      },
+        '※ 残り復習問題は次回のセッションで再出題されます'
+      ),
+      React.createElement('button', {
+        className: 'btn btn-primary',
+        onClick: handleRestart,
+      }, 'もう一度挑戦する')
+    );
+  } else if (mode === 'all_done') {
+    mainContent = React.createElement('div', { className: 'all-complete-card' },
+      React.createElement('div', { className: 'all-complete-title' }, '◇ 全問完答 ◇'),
+      React.createElement('div', { className: 'all-complete-summary' },
+        `${questionsAnswered}問すべて完答しました!`
+      ),
+      React.createElement('button', {
+        className: 'btn btn-primary',
+        onClick: handleRestart,
+      }, 'もう一度挑戦する')
+    );
+  } else if (mode === 'review' && currentReview) {
+    mainContent = React.createElement(SingleReviewBlock, {
+      key: `review_${resetKey}_${currentReview.question.q_id}_${currentReview.mistakeCount}`,
+      reviewItem: currentReview,
+      onComplete: handleReviewComplete,
+    });
+  } else if (mode === 'session' && currentSession) {
+    mainContent = React.createElement(ExampleSession, {
+      key: `${resetKey}_${currentSession.session_id}_${sessionQueue.length}`,
+      session: currentSession,
+      onSessionComplete: handleExampleSessionComplete,
+      onQuestionAnswered: handleQuestionAnswered,
+    });
+  } else {
+    // 'between' などの過渡状態 → useEffect が次の状態を決めるので一瞬だけ空表示
+    mainContent = React.createElement('div', { style: { padding: '40px', textAlign: 'center', color: 'var(--ink-soft)' } }, '...');
+  }
+
+  // 進捗バー(40問中の現在地)
+  const progressPercent = Math.min(100, (questionsAnswered / SESSION_TARGET) * 100);
 
   return React.createElement('div', { className: 'app' },
     React.createElement('header', { className: 'masthead' },
       React.createElement('div', { className: 'logo' },
         'つばめ古文'
       ),
-      React.createElement('div', { className: 'tagline' }, '識別演習 v1.1 — 10語収録')
+      React.createElement('div', { className: 'tagline' }, '識別演習 v1.2 — SRS復習機能搭載')
     ),
 
     React.createElement('div', { className: 'progress-card' },
       React.createElement('div', { className: 'progress-stats' },
         React.createElement('div', { className: 'stat remaining' },
-          React.createElement('div', { className: 'stat-value' }, remaining),
-          React.createElement('div', { className: 'stat-label' }, '残り例文')
+          React.createElement('div', { className: 'stat-value' }, `${questionsAnswered}/${SESSION_TARGET}`),
+          React.createElement('div', { className: 'stat-label' }, '進捗')
         ),
         React.createElement('div', { className: 'stat correct' },
-          React.createElement('div', { className: 'stat-value' }, completedCount),
-          React.createElement('div', { className: 'stat-label' }, '完答')
+          React.createElement('div', { className: 'stat-value' }, correctAnswers),
+          React.createElement('div', { className: 'stat-label' }, '正解')
         ),
         React.createElement('div', { className: 'stat mistake' },
-          React.createElement('div', { className: 'stat-value' }, mistakeSessionCount),
-          React.createElement('div', { className: 'stat-label' }, '要復習')
+          React.createElement('div', { className: 'stat-value' }, srsQueue.length),
+          React.createElement('div', { className: 'stat-label' }, '復習待ち')
         ),
       ),
       React.createElement('button', {
@@ -3275,26 +3539,17 @@ function App() {
       }, '最初から')
     ),
 
-    currentSession && React.createElement(ExampleSession, {
-      key: `${resetKey}_${currentSession.session_id}_${sessionQueue.length}`,
-      session: currentSession,
-      onSessionComplete: handleSessionComplete,
-    }),
-
-    isAllComplete && React.createElement('div', { className: 'all-complete-card' },
-      React.createElement('div', { className: 'all-complete-title' }, '◇ 演習 修了 ◇'),
-      React.createElement('div', { className: 'all-complete-summary' },
-        `全${totalSessions}例文を完答しました。`,
-        React.createElement('br'),
-        `うち${mistakeSessionCount}回の復習を経て完答です。`
-      ),
-      React.createElement('button', {
-        className: 'btn btn-primary',
-        onClick: handleRestart,
-      }, 'もう一度挑戦する')
+    // 進捗バー
+    React.createElement('div', { className: 'progress-bar-container' },
+      React.createElement('div', {
+        className: 'progress-bar-fill',
+        style: { width: `${progressPercent}%` }
+      })
     ),
 
-    React.createElement('footer', null, 'SWALLOW-BASE — 古文識別演習 v1.1')
+    mainContent,
+
+    React.createElement('footer', null, 'SWALLOW-BASE — 古文識別演習 v1.2')
   );
 }
 
