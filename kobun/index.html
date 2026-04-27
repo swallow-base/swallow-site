@@ -3123,6 +3123,7 @@ function QuestionBlock({ question, questionIndex, totalQuestions, onComplete }) 
 // ========================================
 // ========================================
 // 単問再出題ブロック(SRS復習用)
+// ExampleSessionと違い、原文と1問だけを表示する
 // ========================================
 function SingleReviewBlock({ reviewItem, onComplete }) {
   const { example, question, target_word, mistakeCount } = reviewItem;
@@ -3132,7 +3133,7 @@ function SingleReviewBlock({ reviewItem, onComplete }) {
     onComplete({
       question: question,
       result,
-      isReview: true,
+      mistakeCount: mistakeCount,
     });
   };
 
@@ -3172,7 +3173,7 @@ function SingleReviewBlock({ reviewItem, onComplete }) {
   );
 }
 
-function ExampleSession({ session, onSessionComplete, onQuestionAnswered }) {
+function ExampleSession({ session, onSessionComplete }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [results, setResults] = useState([]); // [{q_id, overallCorrect}]
   const [showSummary, setShowSummary] = useState(false);
@@ -3183,14 +3184,6 @@ function ExampleSession({ session, onSessionComplete, onQuestionAnswered }) {
   const handleQuestionComplete = (result) => {
     const newResults = [...results, { q_id: currentQuestion.q_id, ...result }];
     setResults(newResults);
-
-    // 親に問題ごとの結果を通知(SRSキュー管理用)
-    if (onQuestionAnswered) {
-      onQuestionAnswered({
-        question: currentQuestion,
-        result,
-      });
-    }
 
     if (currentIdx + 1 >= totalQuestions) {
       // セッション完了
@@ -3287,6 +3280,9 @@ function ExampleSession({ session, onSessionComplete, onQuestionAnswered }) {
 }
 
 // ========================================
+// メインアプリ
+// ========================================
+// ========================================
 // SRS間隔設定(間違えた回数 → 次の出題までの問題数)
 // ========================================
 const SRS_INTERVALS = [
@@ -3305,105 +3301,115 @@ function getSrsInterval(mistakeCount) {
 // セッション総問題数
 const SESSION_TARGET = 40;
 
-// ========================================
-// メインアプリ
-// ========================================
 function App() {
   const allSessions = useMemo(() => buildSessions(), []);
 
-  // 状態管理(シンプル化のため、useEffectは使わない)
+  // セッションキュー(まだ手をつけていない例文)
   const [sessionQueue, setSessionQueue] = useState(() => shuffle(allSessions));
-  const [srsQueue, setSrsQueue] = useState([]); // 各エントリ: {example, question, target_word, mistakeCount, dueAt}
+  // SRSキュー(間違えた問題の単問再出題待ち)
+  // 各エントリ: { example, question, target_word, mistakeCount, dueAt }
+  const [srsQueue, setSrsQueue] = useState([]);
+  // 解いた問題の総数(タイマー兼カウンタ)
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
+  // 統計
   const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [currentReview, setCurrentReview] = useState(null); // 現在の復習問題(復習中のみセット)
+  // 復習モード時の問題
+  const [currentReview, setCurrentReview] = useState(null);
   const [resetKey, setResetKey] = useState(0);
-  // currentSessionのIDをuseStateで管理して、ExampleSessionの再マウント条件を明示
-  const [currentSessionId, setCurrentSessionId] = useState(() => {
-    const initial = sessionQueue[0];
-    return initial ? initial.session_id : null;
-  });
 
-  // 現在の例文セッション(currentSessionIdから取得 - sessionQueueの変化に左右されない)
-  const currentSession = sessionQueue.find(s => s.session_id === currentSessionId) || sessionQueue[0] || null;
+  const currentSession = sessionQueue[0] || null;
   const isSessionComplete = questionsAnswered >= SESSION_TARGET;
 
-  // 例文セッション内の各問題が解答された時(問題ごとに呼ばれる)
-  const handleQuestionAnswered = ({ question, result }) => {
-    const newAnswered = questionsAnswered + 1;
-    setQuestionsAnswered(newAnswered);
+  // 例文セッション完了時(「次の例文へ」ボタン押下時に呼ばれる)
+  // ExampleSessionから受け取るresults配列を使ってSRSキューを更新
+  const handleSessionComplete = (result) => {
+    const { results } = result;
 
-    if (result.overallCorrect) {
-      setCorrectAnswers(c => c + 1);
-    } else {
-      // 不正解 → SRSキューに追加
-      const interval = getSrsInterval(1);
-      setSrsQueue(q => {
-        // 既に同じ問題がキューにある場合は重複させない(まずないが念のため)
-        if (q.some(item => item.question.q_id === question.q_id)) return q;
-        return [...q, {
+    // 解いた問題数を加算
+    const totalNewQuestions = results.length;
+    const newAnswered = questionsAnswered + totalNewQuestions;
+    const newCorrect = correctAnswers + results.filter(r => r.overallCorrect).length;
+    setQuestionsAnswered(newAnswered);
+    setCorrectAnswers(newCorrect);
+
+    // 不正解だった問題をSRSキューに追加
+    const newSrsItems = [];
+    results.forEach((r, idx) => {
+      if (!r.overallCorrect) {
+        // この問題のオブジェクトを取得(currentSessionの問題から)
+        const q = currentSession.questions.find(q => q.q_id === r.q_id);
+        if (!q) return;
+        // dueAtの基準: その問題を解いた直後の questionsAnswered + interval
+        // questionsAnswered は累積値なので、その問題は (questionsAnswered + idx + 1) 問目に解かれた
+        const answeredAtThisQuestion = questionsAnswered + idx + 1;
+        const interval = getSrsInterval(1);
+        newSrsItems.push({
           example: currentSession.example,
-          question: question,
+          question: q,
           target_word: currentSession.target_word,
           mistakeCount: 1,
-          dueAt: newAnswered + interval,
-        }];
-      });
+          dueAt: answeredAtThisQuestion + interval,
+        });
+      }
+    });
+
+    const updatedSrsQueue = [...srsQueue, ...newSrsItems];
+    setSrsQueue(updatedSrsQueue);
+
+    // 40問達成済みなら、すべて終了
+    if (newAnswered >= SESSION_TARGET) {
+      // 何もしない - レンダリング側で完了画面を出す
+      return;
     }
-  };
 
-  // 例文セッション完了時(「次の例文へ」ボタンが押された時)
-  const handleExampleSessionComplete = () => {
-    if (isSessionComplete) return; // 40問達成済み
-
-    // SRSキューから「再出題タイミングが来た」問題があるか確認
-    const due = srsQueue.filter(item => item.dueAt <= questionsAnswered);
+    // SRSキューから「再出題タイミングが来た」問題を探す
+    const due = updatedSrsQueue.filter(item => item.dueAt <= newAnswered);
     if (due.length > 0) {
       // 復習モードへ
       const sorted = [...due].sort((a, b) => a.dueAt - b.dueAt);
       setCurrentReview(sorted[0]);
-      // 例文キューは進めない(復習が終わってから次の例文へ)
+      // 例文キューはそのまま(復習が終わってから次の例文に進む)
     } else {
       // 次の例文セッションへ
-      advanceToNextSession();
+      setSessionQueue(q => q.slice(1));
     }
   };
 
-  // 単問復習完了時(「次の問題へ」ボタンが押された時)
-  const handleReviewComplete = ({ question, result }) => {
+  // 単問復習完了時
+  const handleReviewComplete = ({ question, result, mistakeCount }) => {
     const newAnswered = questionsAnswered + 1;
     setQuestionsAnswered(newAnswered);
 
+    let updatedSrsQueue;
     if (result.overallCorrect) {
       setCorrectAnswers(c => c + 1);
       // 正解 → SRSキューから削除
-      setSrsQueue(q => q.filter(item => item.question.q_id !== question.q_id));
+      updatedSrsQueue = srsQueue.filter(item => item.question.q_id !== question.q_id);
     } else {
       // 復習でも間違い → mistakeCountを増やしてdueAtを更新
-      setSrsQueue(q => q.map(item => {
+      updatedSrsQueue = srsQueue.map(item => {
         if (item.question.q_id !== question.q_id) return item;
         const newCount = item.mistakeCount + 1;
         const interval = getSrsInterval(newCount);
         return { ...item, mistakeCount: newCount, dueAt: newAnswered + interval };
-      }));
+      });
+    }
+    setSrsQueue(updatedSrsQueue);
+
+    // 復習モード解除
+    setCurrentReview(null);
+
+    // 40問達成済み?
+    if (newAnswered >= SESSION_TARGET) {
+      return;
     }
 
-    // 復習終了 → 次の例文セッションへ
-    setCurrentReview(null);
-    advanceToNextSession();
-  };
-
-  // 次の例文セッションに進む処理
-  const advanceToNextSession = () => {
-    const nextQueue = sessionQueue.slice(1);
-    setSessionQueue(nextQueue);
-    setCurrentSessionId(nextQueue[0] ? nextQueue[0].session_id : null);
+    // 例文キューを進める
+    setSessionQueue(q => q.slice(1));
   };
 
   const handleRestart = () => {
-    const newSessions = shuffle(buildSessions());
-    setSessionQueue(newSessions);
-    setCurrentSessionId(newSessions[0] ? newSessions[0].session_id : null);
+    setSessionQueue(shuffle(buildSessions()));
     setSrsQueue([]);
     setQuestionsAnswered(0);
     setCorrectAnswers(0);
@@ -3434,36 +3440,34 @@ function App() {
       onComplete: handleReviewComplete,
     });
   } else if (currentSession) {
-    // 通常の例文セッション
+    // 通常の例文セッション(ExampleSessionは v1.1のまま、無加工)
     mainContent = React.createElement(ExampleSession, {
-      key: `${resetKey}_${currentSessionId}`,
+      key: `${resetKey}_${currentSession.session_id}`,
       session: currentSession,
-      onSessionComplete: handleExampleSessionComplete,
-      onQuestionAnswered: handleQuestionAnswered,
+      onSessionComplete: handleSessionComplete,
     });
-  } else if (srsQueue.length > 0) {
-    // 例文キューが尽きたが、SRSキューに残っている → 強制的に最古のものを出題
-    const sorted = [...srsQueue].sort((a, b) => a.dueAt - b.dueAt);
-    mainContent = React.createElement(SingleReviewBlock, {
-      key: `review_forced_${resetKey}_${sorted[0].question.q_id}_${sorted[0].mistakeCount}`,
-      reviewItem: sorted[0],
-      onComplete: handleReviewComplete,
-    });
-    // currentReviewにセットすべきだが、render中にsetStateは避けたいのでこのまま
-    // 次回handleReviewCompleteから戻ってくる時、currentSessionもsessionQueue[0]もnullなので、
-    // ここで再びこの分岐に入り、次のSRSキューアイテムが表示される
   } else {
-    // 全てやり終えた
-    mainContent = React.createElement('div', { className: 'all-complete-card' },
-      React.createElement('div', { className: 'all-complete-title' }, '◇ 全問完答 ◇'),
-      React.createElement('div', { className: 'all-complete-summary' },
-        `${questionsAnswered}問すべて完答しました!`
-      ),
-      React.createElement('button', {
-        className: 'btn btn-primary',
-        onClick: handleRestart,
-      }, 'もう一度挑戦する')
-    );
+    // 例文キューが尽きたが、SRSキューが残っている場合
+    if (srsQueue.length > 0) {
+      const sorted = [...srsQueue].sort((a, b) => a.dueAt - b.dueAt);
+      mainContent = React.createElement(SingleReviewBlock, {
+        key: `review_forced_${resetKey}_${sorted[0].question.q_id}_${sorted[0].mistakeCount}`,
+        reviewItem: sorted[0],
+        onComplete: handleReviewComplete,
+      });
+    } else {
+      // 全問完答
+      mainContent = React.createElement('div', { className: 'all-complete-card' },
+        React.createElement('div', { className: 'all-complete-title' }, '◇ 全問完答 ◇'),
+        React.createElement('div', { className: 'all-complete-summary' },
+          `${questionsAnswered}問すべて完答しました!`
+        ),
+        React.createElement('button', {
+          className: 'btn btn-primary',
+          onClick: handleRestart,
+        }, 'もう一度挑戦する')
+      );
+    }
   }
 
   // 進捗パーセント
