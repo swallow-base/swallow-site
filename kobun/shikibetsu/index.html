@@ -43,6 +43,49 @@
   }
   .app { max-width: 780px; margin: 0 auto; }
 
+  /* ── ホームボタン ── */
+  .btn-home-shiki {
+    position: absolute; top: 20px; left: 0;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    border-radius: 6px;
+    font-family: inherit; font-size: .75rem;
+    padding: 5px 12px; cursor: pointer;
+    letter-spacing: .06em;
+    transition: background .15s, border-color .15s;
+  }
+  .btn-home-shiki:hover {
+    background: var(--bg-paper-dark);
+    border-color: var(--ink-soft);
+  }
+
+  /* ── 確認ダイアログ ── */
+  .dialog-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .dialog-overlay.hidden { display: none !important; }
+  .dialog-box {
+    background: var(--bg-paper);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.2);
+    padding: 28px 24px; max-width: 320px; width: 90%;
+    text-align: center;
+  }
+  .dialog-box p { font-size: .95rem; line-height: 1.7; margin-bottom: 20px; color: var(--ink); }
+  .dialog-btns { display: flex; gap: 10px; }
+  .dialog-btns button {
+    flex: 1; border-radius: 6px; padding: 10px;
+    font-family: inherit; font-size: .9rem; cursor: pointer; border: none;
+  }
+  .dialog-btn-ok { background: var(--accent); color: #fff; }
+  .dialog-btn-ok:hover { background: var(--accent-soft); }
+  .dialog-btn-cancel { background: var(--bg-paper-dark); color: var(--ink); border: 1px solid var(--line) !important; }
+  .dialog-btn-cancel:hover { background: var(--line-soft); }
+
   header.masthead {
     text-align: center;
     padding: 20px 0 30px;
@@ -4076,9 +4119,11 @@ function App() {
 
   return React.createElement('div', { className: 'app' },
     React.createElement('header', { className: 'masthead' },
-      React.createElement('div', { className: 'logo' },
-        'つばめ古文'
-      ),
+      React.createElement('button', {
+        className: 'btn-home-shiki',
+        onClick: () => document.getElementById('dialog-home-shiki').classList.remove('hidden')
+      }, '⌂ ホーム'),
+      React.createElement('div', { className: 'logo' }, 'つばめ古文'),
       React.createElement('div', { className: 'tagline' }, '識別演習 v1.2 — SRS復習機能搭載')
     ),
 
@@ -4118,5 +4163,15 @@ function App() {
 
 createRoot(document.getElementById('root')).render(React.createElement(App));
 </script>
+<!-- ホーム確認ダイアログ -->
+<div class="dialog-overlay hidden" id="dialog-home-shiki">
+  <div class="dialog-box">
+    <p>現在の演習を終了して<br>ホームに戻りますか？</p>
+    <div class="dialog-btns">
+      <button class="dialog-btn-cancel" onclick="document.getElementById('dialog-home-shiki').classList.add('hidden')">キャンセル</button>
+      <button class="dialog-btn-ok" onclick="window.location.href='../'">ホームへ戻る</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
