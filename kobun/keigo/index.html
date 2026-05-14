@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>つばめ古文 — 敬語演習 v1.0</title>
+<style>
+:root {
+  --bg:#faf7f2; --surface:#fff; --surface2:#f3ede3;
+  --border:#d4c5a9; --text:#2c2416; --text-sub:#6b5b3e;
+  --accent:#8b1a1a; --accent2:#c0392b; --gold:#b8860b;
+  --son:#6b2f6b; --ken:#1a5276; --tei:#1e6b45;
+  --nibetsu:#7d5a00; --tokubetsu:#8b1a1a;
+  --correct:#1a6b2f; --wrong:#8b1a1a;
+  --radius:8px; --shadow:0 2px 12px rgba(44,36,22,.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hiragino Mincho ProN','Yu Mincho',Georgia,serif;
+  background:var(--bg);color:var(--text);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center}
+
+header{width:100%;background:var(--accent);padding:14px 20px;
+  display:flex;align-items:center;gap:12px}
+.header-title{color:#fff;font-size:1.15rem;letter-spacing:.12em}
+.header-tagline{color:rgba(255,255,255,.7);font-size:.78rem;margin-left:auto}
+
+main{width:100%;max-width:760px;padding:28px 16px 60px}
+
+.card{background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:28px 24px;margin-bottom:20px}
+
+/* ── スタート ── */
+#screen-start{text-align:center}
+.app-logo{font-size:2rem;color:var(--accent);margin-bottom:6px}
+.app-sub{color:var(--text-sub);font-size:.88rem;margin-bottom:28px}
+.stats-row{display:flex;justify-content:center;gap:32px;margin-bottom:28px}
+.stat-box{text-align:center}
+.stat-num{font-size:2rem;color:var(--accent);font-weight:bold}
+.stat-lbl{font-size:.75rem;color:var(--text-sub)}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:28px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--text-sub)}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+.btn-start{background:var(--accent);color:#fff;border:none;border-radius:var(--radius);
+  font-family:inherit;font-size:1.05rem;padding:14px 48px;cursor:pointer;
+  letter-spacing:.1em;transition:background .15s}
+.btn-start:hover{background:var(--accent2)}
+
+/* ── 進捗 ── */
+.progress-wrap{margin-bottom:20px}
+.progress-bar-bg{background:var(--surface2);border-radius:4px;height:6px;overflow:hidden}
+.progress-bar-fill{background:var(--accent);height:100%;border-radius:4px;transition:width .4s}
+.progress-text{font-size:.78rem;color:var(--text-sub);margin-top:5px;text-align:right}
+
+/* ── 例文カード ── */
+.example-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.word-badge{display:inline-flex;align-items:center;padding:3px 10px;
+  border-radius:14px;font-size:.78rem;font-weight:bold;color:#fff}
+.cat-son{background:var(--son)}
+.cat-ken{background:var(--ken)}
+.cat-tei{background:var(--tei)}
+.cat-nibetsu{background:var(--nibetsu)}
+.cat-tokubetsu{background:var(--tokubetsu)}
+.source-tag{font-size:.75rem;color:var(--text-sub);margin-left:auto}
+.example-text{font-size:1.12rem;line-height:2;
+  background:var(--surface2);border-left:3px solid var(--border);
+  padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:4px}
+.example-text .hl{color:var(--accent);border-bottom:2px solid var(--accent);font-weight:bold}
+
+/* ── 問題 ── */
+.q-label{font-size:.78rem;color:var(--text-sub);letter-spacing:.08em;margin-bottom:8px}
+.q-text{font-size:.98rem;margin-bottom:12px;line-height:1.7}
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice-btn{background:var(--surface2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:11px 16px;font-family:inherit;
+  font-size:.92rem;text-align:left;cursor:pointer;transition:background .1s,border-color .1s}
+.choice-btn:hover:not(:disabled){background:#ede4d4;border-color:var(--gold)}
+.choice-btn.selected-pending{background:#e8e0f0;border-color:var(--son);color:var(--son);font-weight:bold}
+.result-label{font-size:.92rem;font-weight:bold;margin-top:8px;padding:4px 0}
+.result-correct{color:var(--correct)}
+.result-wrong{color:var(--wrong)}
+.choice-btn.correct{background:#e6f4ea;border-color:var(--correct);color:var(--correct)}
+.choice-btn.wrong{background:#fdecea;border-color:var(--wrong);color:var(--wrong)}
+.choice-btn:disabled{cursor:default}
+
+/* 自己採点 */
+.model-answer-box{background:#f9f3e3;border:1px solid var(--gold);
+  border-radius:var(--radius);padding:12px 16px;font-size:.95rem;margin-bottom:12px}
+.model-answer-box .label{font-size:.75rem;color:var(--gold);margin-bottom:4px}
+.self-check-btns{display:flex;gap:10px;margin-top:8px}
+.btn-ok{flex:1;background:#e6f4ea;border:1px solid var(--correct);color:var(--correct)}
+.btn-ng{flex:1;background:#fdecea;border:1px solid var(--wrong);color:var(--wrong)}
+.btn-ok,.btn-ng{border-radius:var(--radius);padding:10px;font-family:inherit;font-size:.9rem;cursor:pointer}
+.btn-ok:hover{background:#c8e6c9}
+.btn-ng:hover{background:#ffcdd2}
+
+.explanation-box{background:#f5f0e8;border-left:3px solid var(--gold);
+  padding:10px 14px;border-radius:0 var(--radius) var(--radius) 0;
+  font-size:.85rem;color:var(--text-sub);margin-top:10px;line-height:1.7}
+
+/* 次へ */
+.btn-next{width:100%;margin-top:18px;background:var(--accent);color:#fff;
+  border:none;border-radius:var(--radius);font-family:inherit;
+  font-size:.98rem;padding:13px;cursor:pointer;transition:background .15s}
+.btn-next:hover{background:var(--accent2)}
+
+/* 再挑戦バナー */
+/* ── スティッキー例文 ── */
+.sticky-example{
+  position:sticky; top:0; z-index:100;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:0 2px 8px rgba(44,36,22,.13);
+  padding:16px 20px;
+  margin-bottom:12px;
+}
+.sticky-example .example-text{
+  margin-bottom:0;
+}
+
+.retry-banner{background:#fff8e1;border:1px solid var(--gold);border-radius:var(--radius);
+  padding:8px 14px;font-size:.82rem;color:var(--gold);margin-bottom:14px;text-align:center}
+
+/* ── 結果 ── */
+#screen-result{text-align:center}
+.result-badge{font-size:3.5rem;margin-bottom:16px}
+.result-title{font-size:1.6rem;color:var(--accent);margin-bottom:8px}
+.result-sub{color:var(--text-sub);font-size:.9rem;margin-bottom:16px}
+.result-score{font-size:1.2rem;margin-bottom:24px}
+.result-details{text-align:left;margin-bottom:24px}
+.result-row{display:flex;justify-content:space-between;
+  padding:8px 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.result-row:last-child{border-bottom:none}
+
+footer{width:100%;background:var(--surface2);border-top:1px solid var(--border);
+  text-align:center;padding:14px;font-size:.75rem;color:var(--text-sub);letter-spacing:.08em}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">つばめ古文</div>
+  <div class="header-tagline">敬語演習 v1.0</div>
+</header>
+
+<main>
+
+  <!-- ═══ スタート ═══ -->
+  <div id="screen-start" class="card">
+    <div class="app-logo">敬語演習</div>
+    <div class="app-sub">尊敬語・謙譲語・丁寧語の識別と敬意の方向を演習</div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-num" id="stat-words">—</div><div class="stat-lbl">収録語数</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-examples">—</div><div class="stat-lbl">例文数</div></div>
+      <div class="stat-box"><div class="stat-num" id="stat-questions">—</div><div class="stat-lbl">問題数</div></div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--son)"></div>尊敬語</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--ken)"></div>謙譲語</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--tei)"></div>丁寧語</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--nibetsu)"></div>見分け方演習</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--tokubetsu)"></div>特別な敬語表現</div>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">演習を始める</button>
+  </div>
+
+  <!-- ═══ 問題 ═══ -->
+  <div id="screen-quiz" class="hidden">
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+      <div class="progress-text" id="progress-text"></div>
+    </div>
+    <div id="retry-banner" class="retry-banner hidden">🔄 再挑戦：前回間違えた例文です</div>
+    <!-- 例文：スティッキー固定 -->
+    <div class="sticky-example" id="sticky-example">
+      <div class="example-header">
+        <span class="word-badge" id="word-badge">—</span>
+        <span id="word-name" style="font-size:.92rem;color:var(--text-sub)"></span>
+        <span class="source-tag" id="source-tag"></span>
+      </div>
+      <div class="example-text" id="example-text"></div>
+    </div>
+    <!-- 問題エリア -->
+    <div class="card" id="quiz-card">
+      <div id="question-block"></div>
+      <button class="btn-next hidden" id="btn-next" onclick="nextExample()">次の例文へ →</button>
+    </div>
+  </div>
+
+  <!-- ═══ 結果 ═══ -->
+  <div id="screen-result" class="hidden card">
+    <div class="result-badge" id="result-badge"></div>
+    <div class="result-title">演習完了！</div>
+    <div class="result-sub" id="result-sub"></div>
+    <div class="result-score" id="result-score"></div>
+    <div class="result-details" id="result-details"></div>
+    <button class="btn-start" onclick="restartQuiz()">もう一度</button>
+  </div>
+
+</main>
+
+<footer>SWALLOW-BASE — 古文敬語演習 v1.2</footer>
+
+<script>
+// ══════════════════════════════════════════════
+//  KEIGO_DATA — 問題データ（教材 p112〜125 準拠）
+// ══════════════════════════════════════════════
+// ================================================================
+// つばめ古文 敬語演習 KEIGO_DATA v3.0
+// 教材 p.114〜125 準拠（MDファイル「古典_敬語.md」より正確に起こし）
+// 37例文・111問
+// ================================================================
+
+// ================================================================
+// つばめ古文 敬語演習 KEIGO_DATA v3.0
+// 教材 p.114〜125 準拠（MDファイル「古典_敬語.md」より正確に起こし）
+// 37例文・111問
+// ================================================================
+
+// ================================================================
+// つばめ古文 敬語演習 KEIGO_DATA v3.0
+// 教材 p.114〜125 準拠（MDファイル「古典_敬語.md」より正確に起こし）
+// 37例文・111問
+// ================================================================
+
+const KEIGO_DATA = [
+
+  // ══════════════════════════════════════════════════════
+  // §1 尊敬語の用例
+  // ══════════════════════════════════════════════════════
+
+  {
+    word_id: "tamafu_son",
+    word: "たまふ（給ふ・賜ふ）四段",
+    category: "尊敬語",
+    examples: [{
+      example_id: "tamafu_son_01",
+      text: "そのわたりの山がつまで、（光源氏ハ）さるべき物ども賜ひ、御誦経などとして出でたまふ。",
+      highlight: "賜ひ",
+      source: "源氏物語・若紫",
+      questions: [
+        { q_id:"ts01q1", type:"category",
+          question:"傍線部「賜ひ」の敬語の種類を答えよ。",
+          answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+          correct_answer:"尊敬語",
+          explanation:"「たまふ」が四段活用のとき尊敬語（お与えになる）。" },
+        { q_id:"ts01q2", type:"direction",
+          question:"「賜ひ」は誰から誰への敬意を表しているか。",
+          answer_format:"select", choices:["書き手→光源氏","書き手→山がつ（里人）","光源氏→紫の上"],
+          correct_answer:"書き手→光源氏",
+          explanation:"書き手から、動作をする人（光源氏）への敬意。",
+            distractor_choices:["書き手→紫の上","書き手→山がつ（里人）","紫の上→光源氏","山がつ→光源氏","帝→光源氏"] },
+        { q_id:"ts01q3", type:"translation",
+          question:"傍線部「賜ひ」を現代語訳せよ。",
+          answer_format:"self_check", model_answer:"お与えになり",
+          explanation:"" }
+      ]
+    }]
+  },
+
+  {
+    word_id: "ohas",
+    word: "おはす（坐す・在す）",
+    category: "尊敬語",
+    examples: [{
+      example_id: "ohas_01",
+      text: "（竹取の翁がかぐや姫ニ）「わが朝ごと夕ごとに見る竹の中におはするにて知りぬ。」",
+      highlight: "おはする",
+      source: "竹取物語",
+      questions: [
+        { q_id:"oh01q1", type:"category",
+          question:"傍線部「おはする」の敬語の種類を答えよ。",
+          answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+          correct_answer:"尊敬語",
+          explanation:"「おはす」は「あり・いる・行く・来」の尊敬語（いらっしゃる）。" },
+        { q_id:"oh01q2", type:"direction",
+          question:"「おはする」は誰から誰への敬意を表しているか。",
+          answer_format:"select", choices:["竹取の翁→かぐや姫","かぐや姫→竹取の翁","書き手→帝"],
+          correct_answer:"竹取の翁→かぐや姫",
+          explanation:"話し手（竹取の翁）から、動作をする人（かぐや姫）への敬意。",
+            distractor_choices:["竹取の翁→帝","かぐや姫→竹取の翁","書き手→竹取の翁","帝→かぐや姫","竹取の翁→月人"] },
+        { q_id:"oh01q3", type:"translation",
+          question:"傍線部「おはする」を現代語訳せよ。",
+          answer_format:"self_check", model_answer:"いらっしゃる",
+          explanation:"" }
+      ]
+    }]
+  },
+
+  {
+    word_id: "ohashimasu",
+    word: "おはします",
+    category: "尊敬語",
+    examples: [
+      {
+        example_id: "oham_01",
+        text: "年ごとの桜の花ざかりには、（惟喬親王ハ）その宮へなむおはしましける。",
+        highlight: "おはしまし",
+        source: "伊勢物語・八二",
+        questions: [
+          { q_id:"oham01q1", type:"category",
+            question:"傍線部「おはしまし」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「おはします」は「おはす」よりさらに高い敬意を表す尊敬語（いらっしゃる）。" },
+          { q_id:"oham01q2", type:"direction",
+            question:"「おはしまし」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→惟喬親王","惟喬親王→書き手","書き手→供の者"],
+            correct_answer:"書き手→惟喬親王",
+            explanation:"書き手から、動作をする人（惟喬親王）への敬意。",
+            distractor_choices:["書き手→供の者","書き手→作者","惟喬親王→書き手","供の者→惟喬親王","帝→惟喬親王"] },
+          { q_id:"oham01q3", type:"translation",
+            question:"傍線部「おはしまし」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"いらっしゃった",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "oham_02",
+        text: "丈六の仏九体、いと尊くてならびおはします。",
+        highlight: "おはします",
+        source: "徒然草・二五",
+        questions: [
+          { q_id:"oham02q1", type:"category",
+            question:"傍線部「おはします」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「おはします」は補助動詞として「〜ていらっしゃる」の意味でも使う。" },
+          { q_id:"oham02q2", type:"direction",
+            question:"「おはします」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→仏","書き手→参拝者","参拝者→仏"],
+            correct_answer:"書き手→仏",
+            explanation:"書き手から、動作をする人（仏）への敬意。",
+            distractor_choices:["書き手→参拝者","書き手→作者","参拝者→仏","作者→仏","僧→仏"] },
+          { q_id:"oham02q3", type:"translation",
+            question:"傍線部「おはします」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"いらっしゃる・おいでになる",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  {
+    word_id: "imasu",
+    word: "います（坐す・在す）",
+    category: "尊敬語",
+    examples: [{
+      example_id: "imasu_01",
+      text: "（匂宮）「右大将の宇治へいますること、なほ絶えはてずや。」",
+      highlight: "います",
+      source: "源氏物語・浮舟",
+      questions: [
+        { q_id:"im01q1", type:"category",
+          question:"傍線部「います」の敬語の種類を答えよ。",
+          answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+          correct_answer:"尊敬語",
+          explanation:"「います（坐す・在す）」は「行く・来る」の尊敬語（おいでになる）。" },
+        { q_id:"im01q2", type:"direction",
+          question:"「います」は誰から誰への敬意を表しているか。",
+          answer_format:"select", choices:["匂宮→右大将（薫）","右大将（薫）→匂宮","書き手→匂宮"],
+          correct_answer:"匂宮→右大将（薫）",
+          explanation:"話し手（匂宮）から、動作をする人（右大将・薫）への敬意。",
+            distractor_choices:["匂宮→宇治の姫君","右大将（薫）→匂宮","書き手→匂宮","書き手→右大将（薫）","匂宮→書き手"] },
+        { q_id:"im01q3", type:"translation",
+          question:"傍線部「います」を現代語訳せよ。",
+          answer_format:"self_check", model_answer:"おいでになること・いらっしゃること",
+          explanation:"" }
+      ]
+    }]
+  },
+
+  {
+    word_id: "notamafu",
+    word: "のたまふ・のたまはす・仰せらる",
+    category: "尊敬語",
+    examples: [
+      {
+        example_id: "nota_01",
+        text: "（中宮ガ）「少納言よ、香炉峰の雪いかならむ。」と仰せらるれば、",
+        highlight: "仰せらる",
+        source: "枕草子・二八〇",
+        questions: [
+          { q_id:"nota01q1", type:"category",
+            question:"傍線部「仰せらる」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「仰せらる」は「言ふ」の尊敬語（おっしゃる）の中でも高い敬意を表す。" },
+          { q_id:"nota01q2", type:"direction",
+            question:"「仰せらる」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→中宮","中宮→少納言（清少納言）","少納言→帝"],
+            correct_answer:"書き手→中宮",
+            explanation:"書き手から、動作をする人（中宮）への敬意。",
+            distractor_choices:["書き手→少納言（清少納言）","書き手→帝","中宮→少納言（清少納言）","少納言→帝","帝→中宮"] },
+          { q_id:"nota01q3", type:"translation",
+            question:"傍線部「仰せらる」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"おっしゃるので・おっしゃれば",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "nota_02",
+        text: "入道殿、「かの大納言、いづれの船にか乗らるべき。」とのたまはすれば、",
+        highlight: "のたまはすれ",
+        source: "大鏡",
+        questions: [
+          { q_id:"nota02q1", type:"category",
+            question:"傍線部「のたまはすれ」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「のたまはす」は「言ふ」の尊敬語（おっしゃる）。" },
+          { q_id:"nota02q2", type:"direction",
+            question:"「のたまはすれ」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["語り手→入道殿（道長）","入道殿（道長）→大納言（公任）","語り手→帝"],
+            correct_answer:"語り手→入道殿（道長）",
+            explanation:"語り手から、動作をする人（入道殿）への敬意。",
+            distractor_choices:["語り手→大納言（公任）","語り手→帝","入道殿→大納言（公任）","大納言→入道殿","帝→入道殿"] },
+          { q_id:"nota02q3", type:"translation",
+            question:"傍線部「のたまはすれ」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"おっしゃると・おっしゃれば",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  {
+    word_id: "obosu",
+    word: "おぼす・おぼしめす（思す・思し召す）",
+    category: "尊敬語",
+    examples: [
+      {
+        example_id: "obosu_01",
+        text: "（帝ノ姫君ハ）いみじうゆかしく思されければ、",
+        highlight: "思され",
+        source: "更級日記",
+        questions: [
+          { q_id:"obosu01q1", type:"category",
+            question:"傍線部「思され」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「おぼす（思す）」は「思ふ」の尊敬語（お思いになる）。" },
+          { q_id:"obosu01q2", type:"direction",
+            question:"「思され」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→帝の姫君","帝の姫君→作者","書き手→帝"],
+            correct_answer:"書き手→帝の姫君",
+            explanation:"書き手から、動作をする人（帝の姫君）への敬意。",
+            distractor_choices:["書き手→帝","書き手→作者","帝の姫君→書き手","帝→帝の姫君","作者→帝の姫君"] },
+          { q_id:"obosu01q3", type:"translation",
+            question:"傍線部「思され」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"お思いになったので",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "obosu_02",
+        text: "帝、さうざうしとや思し召しけむ、",
+        highlight: "思し召し",
+        source: "大鏡",
+        questions: [
+          { q_id:"obosu02q1", type:"category",
+            question:"傍線部「思し召し」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「おぼしめす（思し召す）」は「おぼす」よりさらに高い敬意を表す尊敬語。" },
+          { q_id:"obosu02q2", type:"direction",
+            question:"「思し召し」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→帝（花山天皇）","帝（花山天皇）→大納言","書き手→作者"],
+            correct_answer:"書き手→帝（花山天皇）",
+            explanation:"書き手から、動作をする人（帝）への敬意。",
+            distractor_choices:["書き手→大納言","書き手→作者","帝（花山天皇）→大納言","大納言→帝（花山天皇）","作者→帝（花山天皇）"] },
+          { q_id:"obosu02q3", type:"translation",
+            question:"傍線部「思し召し」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"お思いになったのであろうか",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  {
+    word_id: "kikoshimesu",
+    word: "きこしめす（聞こし召す）",
+    category: "尊敬語",
+    examples: [
+      {
+        example_id: "kiko_01",
+        text: "かぐや姫、かたちの世に似ずめでたきことを、帝きこしめして、",
+        highlight: "きこしめし",
+        source: "竹取物語",
+        questions: [
+          { q_id:"kiko01q1", type:"category",
+            question:"傍線部「きこしめし」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「きこしめす」は「聞く」の尊敬語（お聞きになる）。" },
+          { q_id:"kiko01q2", type:"direction",
+            question:"「きこしめし」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→帝（天皇）","書き手→かぐや姫","天人→帝（天皇）"],
+            correct_answer:"書き手→帝（天皇）",
+            explanation:"書き手から、動作をする人（帝）への敬意。",
+            distractor_choices:["書き手→かぐや姫","書き手→天人","天人→帝（天皇）","かぐや姫→帝（天皇）","帝→書き手"] },
+          { q_id:"kiko01q3", type:"translation",
+            question:"傍線部「きこしめし」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"お聞きになって",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "kiko_02",
+        text: "（天人）「（かぐや姫ガ）きたなき所のもの聞こしめしたれば、」",
+        highlight: "聞こしめし",
+        source: "竹取物語",
+        questions: [
+          { q_id:"kiko02q1", type:"category",
+            question:"傍線部「聞こしめし」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「きこしめす」は「食ふ・飲む」の尊敬語としても使う（召し上がる）。" },
+          { q_id:"kiko02q2", type:"direction",
+            question:"「聞こしめし」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["天人→かぐや姫","かぐや姫→天人","書き手→かぐや姫"],
+            correct_answer:"天人→かぐや姫",
+            explanation:"話し手（天人）から、動作をする人（かぐや姫）への敬意。",
+            distractor_choices:["天人→竹取の翁","かぐや姫→天人","書き手→かぐや姫","書き手→天人","竹取の翁→かぐや姫"] },
+          { q_id:"kiko02q3", type:"translation",
+            question:"傍線部「聞こしめし」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"召し上がったので",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  {
+    word_id: "tatematsuru_son",
+    word: "たてまつる（奉る）〔尊敬〕",
+    category: "尊敬語",
+    examples: [
+      {
+        example_id: "tate_son_01",
+        text: "（天人がかぐや姫ニ）「壺なる御薬奉れ。」",
+        highlight: "奉れ",
+        source: "竹取物語",
+        questions: [
+          { q_id:"tateson01q1", type:"category",
+            question:"傍線部「奉れ」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「たてまつる（奉る）」が「食ふ・飲む」の意味のとき尊敬語（召し上がる）。" },
+          { q_id:"tateson01q2", type:"direction",
+            question:"「奉れ」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["天人→かぐや姫","かぐや姫→天人","書き手→竹取の翁"],
+            correct_answer:"天人→かぐや姫",
+            explanation:"話し手（天人）から、動作をする人（かぐや姫）への敬意。",
+            distractor_choices:["天人→竹取の翁","かぐや姫→天人","書き手→かぐや姫","天人→帝","書き手→天人"] },
+          { q_id:"tateson01q3", type:"translation",
+            question:"傍線部「奉れ」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"召し上がれ",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "tate_son_02",
+        text: "（薫ガ女二の宮ニ）「いと暑しや。これより薄き御衣奉れ。」",
+        highlight: "奉れ",
+        source: "源氏物語・蜻蛉",
+        questions: [
+          { q_id:"tateson02q1", type:"category",
+            question:"傍線部「奉れ」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「たてまつる（奉る）」が「着る」の意味のとき尊敬語（お召しになる）。" },
+          { q_id:"tateson02q2", type:"direction",
+            question:"「奉れ」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["薫→女二の宮","女二の宮→薫","書き手→中宮"],
+            correct_answer:"薫→女二の宮",
+            explanation:"話し手（薫）から、動作をする人（女二の宮）への敬意。",
+            distractor_choices:["薫→中宮","女二の宮→薫","書き手→女二の宮","書き手→薫","薫→帝"] },
+          { q_id:"tateson02q3", type:"translation",
+            question:"傍線部「奉れ」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"お召しなさい",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "tate_son_03",
+        text: "（天皇ガ）御輿にたてまつりて後に、",
+        highlight: "たてまつり",
+        source: "竹取物語",
+        questions: [
+          { q_id:"tateson03q1", type:"category",
+            question:"傍線部「たてまつり」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「たてまつる（奉る）」が「乗る」の意味のとき尊敬語（お乗りになる）。" },
+          { q_id:"tateson03q2", type:"direction",
+            question:"「たてまつり」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→天皇","天皇→かぐや姫","書き手→頭中将"],
+            correct_answer:"書き手→天皇",
+            explanation:"書き手から、動作をする人（天皇）への敬意。",
+            distractor_choices:["書き手→かぐや姫","書き手→頭中将","天皇→書き手","かぐや姫→天皇","頭中将→天皇"] },
+          { q_id:"tateson03q3", type:"translation",
+            question:"傍線部「たてまつり」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"お乗りになって",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  {
+    word_id: "mesu",
+    word: "めす（召す）",
+    category: "尊敬語",
+    examples: [{
+      example_id: "mesu_01",
+      text: "（中宮ガ）「右近ぞ見知りたる。呼べ。」とて召せば、参りたり。",
+      highlight: "召せ",
+      source: "枕草子・七",
+      questions: [
+        { q_id:"mesu01q1", type:"category",
+          question:"傍線部「召せ」の敬語の種類を答えよ。",
+          answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+          correct_answer:"尊敬語",
+          explanation:"「めす（召す）」は「呼ぶ」の尊敬語（お呼びになる）。" },
+        { q_id:"mesu01q2", type:"direction",
+          question:"「召せ」は誰から誰への敬意を表しているか。",
+          answer_format:"select", choices:["書き手→中宮","中宮→右近","書き手→少納言"],
+          correct_answer:"書き手→中宮",
+          explanation:"書き手から、動作をする人（中宮）への敬意。",
+            distractor_choices:["書き手→右近","書き手→少納言","中宮→右近","右近→中宮","帝→中宮"] },
+        { q_id:"mesu01q3", type:"translation",
+          question:"傍線部「召せ」を現代語訳せよ。",
+          answer_format:"self_check", model_answer:"お呼びになったので",
+          explanation:"" }
+      ]
+    }]
+  },
+
+  {
+    word_id: "mairu_son",
+    word: "まゐる（参る）〔尊敬〕",
+    category: "尊敬語",
+    examples: [
+      {
+        example_id: "mairu_son_01",
+        text: "（大君ハ）御心地もまことに苦しければ、物も、つゆばかりまゐらず。",
+        highlight: "まゐら",
+        source: "源氏物語・総角",
+        questions: [
+          { q_id:"mairuson01q1", type:"category",
+            question:"傍線部「まゐら」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「まゐる（参る）」が「食ふ・飲む」の意味のとき尊敬語（召し上がる）。" },
+          { q_id:"mairuson01q2", type:"direction",
+            question:"「まゐら」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→大君","大君→光源氏","書き手→中宮"],
+            correct_answer:"書き手→大君",
+            explanation:"書き手から、動作をする人（大君）への敬意。",
+            distractor_choices:["書き手→光源氏","書き手→中宮","大君→光源氏","光源氏→大君","中宮→大君"] },
+          { q_id:"mairuson01q3", type:"translation",
+            question:"傍線部「まゐら」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"召し上がらない",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "mairu_son_02",
+        text: "（大徳ガ光源氏ニ）今宵は、なほ、しづかに加持などまゐりて、出でさせ給へ。",
+        highlight: "まゐり",
+        source: "源氏物語・若紫",
+        questions: [
+          { q_id:"mairuson02q1", type:"category",
+            question:"傍線部「まゐり」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"尊敬語",
+            explanation:"「まゐる（参る）」が「す（する）」の意味のとき尊敬語（なさる）。" },
+          { q_id:"mairuson02q2", type:"direction",
+            question:"「まゐり」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["大徳→光源氏","光源氏→大徳","書き手→中宮"],
+            correct_answer:"大徳→光源氏",
+            explanation:"話し手（大徳）から、動作をする人（光源氏）への敬意。",
+            distractor_choices:["大徳→中宮","光源氏→大徳","書き手→光源氏","書き手→大徳","大徳→帝"] },
+          { q_id:"mairuson02q3", type:"translation",
+            question:"傍線部「まゐり」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"なさって",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  // §2 謙譲語の用例
+  // ══════════════════════════════════════════════════════
+
+  {
+    word_id: "tatematsuru_ken",
+    word: "たてまつる（奉る）〔謙譲〕",
+    category: "謙譲語",
+    examples: [
+      {
+        example_id: "tate_ken_01",
+        text: "〔かぐや姫ハ〕壺の薬をそへて、頭中将呼びよせて、〔天皇ニ〕奉らす。",
+        highlight: "奉らす",
+        source: "竹取物語",
+        questions: [
+          { q_id:"tateken01q1", type:"category",
+            question:"傍線部「奉らす」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"謙譲語",
+            explanation:"「たてまつる（奉る）」が「与ふ」の意味のとき謙譲語（差し上げる）。" },
+          { q_id:"tateken01q2", type:"direction",
+            question:"「奉らす」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→天皇（帝）","かぐや姫→天皇（帝）","書き手→頭中将"],
+            correct_answer:"書き手→天皇（帝）",
+            explanation:"書き手から、動作の受け手（天皇）への敬意。",
+            distractor_choices:["書き手→かぐや姫","書き手→頭中将","かぐや姫→天皇（帝）","頭中将→天皇（帝）","天皇（帝）→書き手"] },
+          { q_id:"tateken01q3", type:"translation",
+            question:"傍線部「奉らす」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"差し上げさせる",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "tate_ken_02",
+        text: "薬師仏の立ち給へるを、（私ガ）見捨て奉る、かなしくて、",
+        highlight: "奉る",
+        source: "更級日記",
+        questions: [
+          { q_id:"tateken02q1", type:"category",
+            question:"傍線部「奉る」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"謙譲語",
+            explanation:"「たてまつる（奉る）」が補助動詞として使われるとき謙譲語（〜申し上げる）。" },
+          { q_id:"tateken02q2", type:"direction",
+            question:"「奉る」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手（私）→薬師仏","薬師仏→書き手（私）","書き手→光源氏"],
+            correct_answer:"書き手（私）→薬師仏",
+            explanation:"書き手（私）から、動作の受け手（薬師仏）への敬意。",
+            distractor_choices:["書き手（私）→光源氏","書き手（私）→作者","薬師仏→書き手（私）","作者→薬師仏","光源氏→薬師仏"] },
+          { q_id:"tateken02q3", type:"translation",
+            question:"傍線部「奉る」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"申し上げる・〜し申し上げる",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  {
+    word_id: "saburahu_ken",
+    word: "はべり・さぶらふ〔謙譲〕",
+    category: "謙譲語",
+    examples: [
+      {
+        example_id: "sabk_01",
+        text: "（蔵人ガ）御前のかたに向かひて、うしろざまに「誰々か侍る。」と問ふこそをかしけれ。",
+        highlight: "侍る",
+        source: "枕草子・五四",
+        questions: [
+          { q_id:"sabk01q1", type:"category",
+            question:"傍線部「侍る」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"謙譲語",
+            explanation:"「はべり（侍り）」が「お側にひかえる」の意味のとき謙譲語。" },
+          { q_id:"sabk01q2", type:"direction",
+            question:"「侍る」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["蔵人→天皇","天皇→蔵人","書き手→作者"],
+            correct_answer:"蔵人→天皇",
+            explanation:"話し手（蔵人）から、お側にひかえる相手（天皇）への敬意。",
+            distractor_choices:["蔵人→少納言","天皇→蔵人","書き手→天皇","書き手→蔵人","蔵人→帝"] },
+          { q_id:"sabk01q3", type:"translation",
+            question:"傍線部「侍る」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"お側にひかえている",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "sabk_02",
+        text: "十年ばかり（御所ニ）さぶらひてきしに、",
+        highlight: "さぶらひ",
+        source: "枕草子・三九",
+        questions: [
+          { q_id:"sabk02q1", type:"category",
+            question:"傍線部「さぶらひ」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"謙譲語",
+            explanation:"「さぶらふ」が「お仕え申し上げる」の意味のとき謙譲語。" },
+          { q_id:"sabk02q2", type:"direction",
+            question:"「さぶらひ」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→天皇","天皇→書き手","書き手→大臣"],
+            correct_answer:"書き手→天皇",
+            explanation:"書き手から、仕える相手（天皇）への敬意。",
+            distractor_choices:["書き手→大臣","書き手→蔵人","天皇→書き手","大臣→天皇","蔵人→天皇"] },
+          { q_id:"sabk02q3", type:"translation",
+            question:"傍線部「さぶらひ」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"お仕え申し上げて",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  {
+    word_id: "mairu_ken",
+    word: "まゐる（参る）〔謙譲〕",
+    category: "謙譲語",
+    examples: [
+      {
+        example_id: "mairu_ken_01",
+        text: "月もなき頃なれば、（光源氏ガ玉鬘ノタメニ）灯籠に大殿油参れり。",
+        highlight: "参れ",
+        source: "源氏物語・常夏",
+        questions: [
+          { q_id:"mairuk01q1", type:"category",
+            question:"傍線部「参れ」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"謙譲語",
+            explanation:"「まゐる（参る）」が「与ふ」の意味のとき謙譲語（差し上げる）。" },
+          { q_id:"mairuk01q2", type:"direction",
+            question:"「参れ」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→玉鬘","玉鬘→光源氏","書き手→夕顔"],
+            correct_answer:"書き手→玉鬘",
+            explanation:"書き手から、動作の受け手（玉鬘）への敬意。",
+            distractor_choices:["書き手→光源氏","書き手→夕顔","玉鬘→書き手","光源氏→玉鬘","夕顔→玉鬘"] },
+          { q_id:"mairuk01q3", type:"translation",
+            question:"傍線部「参れ」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"さし上げた",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "mairu_ken_02",
+        text: "堀河の大臣、太郎国経の大納言、まだ下﨟にて内裏へ参りたまふに、",
+        highlight: "参り",
+        source: "伊勢物語・六",
+        questions: [
+          { q_id:"mairuk02q1", type:"category",
+            question:"傍線部「参り」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"謙譲語",
+            explanation:"「まゐる（参る）」が「行く・来る」の意味のとき謙譲語（参上する・参内する）。" },
+          { q_id:"mairuk02q2", type:"direction",
+            question:"「参り」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→内裏（天皇）","堀河の大臣→内裏","太郎国経の大納言→堀河の大臣"],
+            correct_answer:"書き手→内裏（天皇）",
+            explanation:"書き手から、参上する先（内裏・天皇）への敬意。",
+            distractor_choices:["書き手→堀河の大臣","書き手→太郎国経の大納言","堀河の大臣→内裏（天皇）","太郎国経→内裏（天皇）","内裏→書き手"] },
+          { q_id:"mairuk02q3", type:"translation",
+            question:"傍線部「参り」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"参内なさるときに",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  {
+    word_id: "makaru",
+    word: "まかる・まかづ（罷る・罷づ）",
+    category: "謙譲語",
+    examples: [
+      {
+        example_id: "makaru_01",
+        text: "（光源氏ノ所ニ）参る人々も、皆、立ちながらまかづれば、",
+        highlight: "まかづれ",
+        source: "源氏物語・夕顔",
+        questions: [
+          { q_id:"makaru01q1", type:"category",
+            question:"傍線部「まかづれ」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"謙譲語",
+            explanation:"「まかづ（罷づ）」は退出するの謙譲語。敬意の対象（光源氏）のもとから退出する。" },
+          { q_id:"makaru01q2", type:"direction",
+            question:"「まかづれ」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["書き手→光源氏","光源氏→参上した人々","書き手→夕顔"],
+            correct_answer:"書き手→光源氏",
+            explanation:"書き手から、退出する場所の主（光源氏）への敬意。",
+            distractor_choices:["書き手→夕顔","書き手→参上した人々","光源氏→参上した人々","参上した人々→光源氏","夕顔→光源氏"] },
+          { q_id:"makaru01q3", type:"translation",
+            question:"傍線部「まかづれ」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"退出すると",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "makaru_02",
+        text: "憶良らは（宴席ヲ）今は罷らむ",
+        highlight: "罷ら",
+        source: "万葉集・巻三",
+        questions: [
+          { q_id:"makaru02q1", type:"category",
+            question:"傍線部「罷ら」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"謙譲語",
+            explanation:"「まかる（罷る）」は退出するの謙譲語。宴席の主への敬意を含む。" },
+          { q_id:"makaru02q2", type:"direction",
+            question:"「罷ら」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["憶良→宴席の主","宴席の主→憶良","書き手→作者"],
+            correct_answer:"憶良→宴席の主",
+            explanation:"話し手（憶良）から、退出する場所の主（宴席の主）への敬意。",
+            distractor_choices:["憶良→主人","宴席の主→憶良","書き手→憶良","書き手→宴席の主","憶良→帝"] },
+          { q_id:"makaru02q3", type:"translation",
+            question:"傍線部「罷ら」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"退出しよう",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  {
+    word_id: "kikoyu",
+    word: "きこゆ（聞こゆ）",
+    category: "謙譲語",
+    examples: [{
+      example_id: "kikoyu_01",
+      text: "（僧都ハ）かくこもれるほどの御物語など、（光源氏ニ）きこえ給ひて、",
+      highlight: "きこえ",
+      source: "源氏物語・若紫",
+      questions: [
+        { q_id:"kikoyu01q1", type:"category",
+          question:"傍線部「きこえ」の敬語の種類を答えよ。",
+          answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+          correct_answer:"謙譲語",
+          explanation:"「きこゆ（聞こゆ）」が補助動詞として使われるとき謙譲語（〜申し上げる）。" },
+        { q_id:"kikoyu01q2", type:"direction",
+          question:"「きこえ」は誰から誰への敬意を表しているか。",
+          answer_format:"select", choices:["書き手→光源氏","僧都→光源氏","書き手→紫の上"],
+          correct_answer:"書き手→光源氏",
+          explanation:"書き手から、動作の受け手（光源氏）への敬意。",
+            distractor_choices:["書き手→紫の上","書き手→僧都","僧都→光源氏","光源氏→僧都","紫の上→光源氏"] },
+        { q_id:"kikoyu01q3", type:"translation",
+          question:"傍線部「きこえ」を現代語訳せよ。",
+          answer_format:"self_check", model_answer:"申し上げなさって",
+          explanation:"" }
+      ]
+    }]
+  },
+
+  {
+    word_id: "mausu",
+    word: "まうす（申す）",
+    category: "謙譲語",
+    examples: [{
+      example_id: "mausu_01",
+      text: "（妻の媼）「さらば、（かぐや姫ニ）かく申しはべらん。」",
+      highlight: "申し",
+      source: "竹取物語",
+      questions: [
+        { q_id:"mausu01q1", type:"category",
+          question:"傍線部「申し」の敬語の種類を答えよ。",
+          answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+          correct_answer:"謙譲語",
+          explanation:"「まうす（申す）」は「言ふ」の謙譲語（申し上げる）。" },
+        { q_id:"mausu01q2", type:"direction",
+          question:"「申し」は誰から誰への敬意を表しているか。",
+          answer_format:"select", choices:["妻の媼→かぐや姫","かぐや姫→妻の媼","書き手→竹取の翁"],
+          correct_answer:"妻の媼→かぐや姫",
+          explanation:"話し手（妻の媼）から、動作の受け手（かぐや姫）への敬意。",
+            distractor_choices:["妻の媼→竹取の翁","かぐや姫→妻の媼","書き手→かぐや姫","書き手→妻の媼","竹取の翁→かぐや姫"] },
+        { q_id:"mausu01q3", type:"translation",
+          question:"傍線部「申し」を現代語訳せよ。",
+          answer_format:"self_check", model_answer:"申し上げましょう",
+          explanation:"" }
+      ]
+    }]
+  },
+
+  // ══════════════════════════════════════════════════════
+  // §3 丁寧語の用例
+  // ══════════════════════════════════════════════════════
+
+  {
+    word_id: "haberi_tei",
+    word: "はべり・さぶらふ〔丁寧〕",
+    category: "丁寧語",
+    examples: [
+      {
+        example_id: "habe_t01",
+        text: "（僧都ガ光源氏ニ）「（女）、ただ一人侍りし、失せて」",
+        highlight: "侍り",
+        source: "源氏物語・若紫",
+        questions: [
+          { q_id:"habet01q1", type:"category",
+            question:"傍線部「侍り」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"丁寧語",
+            explanation:"「はべり（侍り）」が「あり・いる」の意味のとき丁寧語（ございます）。" },
+          { q_id:"habet01q2", type:"direction",
+            question:"「侍り」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["僧都→光源氏","光源氏→僧都","書き手→亡くなった女"],
+            correct_answer:"僧都→光源氏",
+            explanation:"話し手（僧都）から聞き手（光源氏）への敬意。",
+            distractor_choices:["僧都→紫の上","光源氏→僧都","書き手→光源氏","書き手→僧都","紫の上→僧都"] },
+          { q_id:"habet01q3", type:"translation",
+            question:"傍線部「侍り」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"ございました",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "habe_t02",
+        text: "（道長ガ花山天皇ニ）「ただにて帰り参りて侍らむは、証さぶらふまじきにより、」",
+        highlight: "侍ら",
+        source: "大鏡",
+        questions: [
+          { q_id:"habet02q1", type:"category",
+            question:"傍線部「侍ら」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"丁寧語",
+            explanation:"「はべり（侍り）」が補助動詞として使われるとき丁寧語（〜ございます）。" },
+          { q_id:"habet02q2", type:"direction",
+            question:"「侍ら」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["道長→花山天皇","花山天皇→道長","書き手→作者"],
+            correct_answer:"道長→花山天皇",
+            explanation:"話し手（道長）から聞き手（花山天皇）への敬意。",
+            distractor_choices:["道長→帝","花山天皇→道長","書き手→花山天皇","書き手→道長","道長→作者"] },
+          { q_id:"habet02q3", type:"translation",
+            question:"傍線部「侍ら」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"ございましょう",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "habe_t03",
+        text: "（随身ガ光源氏ニ）「かの白く咲ける（花）をなむ夕顔と申しはべる。」",
+        highlight: "はべる",
+        source: "源氏物語・夕顔",
+        questions: [
+          { q_id:"habet03q1", type:"category",
+            question:"傍線部「はべる」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"丁寧語",
+            explanation:"「はべり（侍り）」が補助動詞として使われるとき丁寧語（〜ます）。" },
+          { q_id:"habet03q2", type:"direction",
+            question:"「はべる」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["随身→光源氏","光源氏→随身","書き手→夕顔"],
+            correct_answer:"随身→光源氏",
+            explanation:"話し手（随身）から聞き手（光源氏）への敬意。",
+            distractor_choices:["随身→夕顔","光源氏→随身","書き手→光源氏","書き手→随身","夕顔→随身"] },
+          { q_id:"habet03q3", type:"translation",
+            question:"傍線部「はべる」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"申します",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "habe_t04",
+        text: "中納言、「げにおもしろうさうらふ。」と（大臣ニ）申し給ふに、",
+        highlight: "さうらふ",
+        source: "今昔物語集",
+        questions: [
+          { q_id:"habet04q1", type:"category",
+            question:"傍線部「さうらふ」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"丁寧語",
+            explanation:"「さうらふ（候ふ）」が「あり・いる」の意味のとき丁寧語（ございます）。" },
+          { q_id:"habet04q2", type:"direction",
+            question:"「さうらふ」は誰から誰への敬意を表しているか。",
+            answer_format:"select", choices:["中納言→大臣","大臣→中納言","書き手→作者"],
+            correct_answer:"中納言→大臣",
+            explanation:"話し手（中納言）から聞き手（大臣）への敬意。",
+            distractor_choices:["中納言→帝","大臣→中納言","書き手→大臣","書き手→中納言","帝→大臣"] },
+          { q_id:"habet04q3", type:"translation",
+            question:"傍線部「さうらふ」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"ございます",
+            explanation:"" }
+        ]
+      }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════
+  // §5 二種類の用法を持つ敬語の見分け方
+  // ══════════════════════════════════════════════════════
+
+  {
+    word_id: "nibetsu_haberi",
+    word: "侍り・候ふ〔見分け〕",
+    category: "見分け方演習",
+    examples: [
+      {
+        example_id: "nib_07",
+        text: "雨のいたく降りければ、夕さりまで侍りてまかり出でけるに、",
+        highlight: "侍り",
+        source: "古今集・巻八",
+        questions: [
+          { q_id:"nib07q1", type:"category",
+            question:"傍線部「侍り」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"謙譲語",
+            explanation:"「はべり（侍り）」が「お側にひかえる」の意味のとき謙譲語。" },
+          { q_id:"nib07q2", type:"reason",
+            answer_format:"select",
+            reason_by_answer: {
+              "謙譲語": {
+                question:"「侍り」を謙譲語と判断した根拠として正しいものを選べ。",
+                choices:["「お側にひかえる」という動作の意味で使われているから","「ある・いる」の意味で使われているから","補助動詞として用いられているから"],
+                correct_answer:"「お側にひかえる」という動作の意味で使われているから",
+                explanation:"「お側にひかえる・お仕えする」の意味＝謙譲語。「ある・いる」や補助動詞＝丁寧語。"
+              },
+              "丁寧語": {
+                question:"「侍り」を丁寧語と判断した根拠として正しいものを選べ。",
+                choices:["「お側にひかえる」という動作の意味で使われているから","「ある・いる」の意味で使われているから","補助動詞として用いられているから"],
+                correct_answer:"「お側にひかえる」という動作の意味で使われているから",
+                explanation:"実は謙譲語。「お側にひかえる・お仕えする」の意味のとき謙譲語になる。"
+              }
+            } },
+          { q_id:"nib07q3", type:"translation",
+            question:"傍線部「侍り」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"お側にひかえて",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "nib_08",
+        text: "女御、更衣あまた候ひ給ひける中に、",
+        highlight: "候ひ",
+        source: "源氏物語・桐壺",
+        questions: [
+          { q_id:"nib08q1", type:"category",
+            question:"傍線部「候ひ」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"謙譲語",
+            explanation:"「さぶらふ（候ふ）」が「お仕え申し上げる」の意味のとき謙譲語。" },
+          { q_id:"nib08q2", type:"reason",
+            answer_format:"select",
+            reason_by_answer: {
+              "謙譲語": {
+                question:"「候ひ」を謙譲語と判断した根拠として正しいものを選べ。",
+                choices:["「お仕え申し上げる」という動作の意味で使われているから","「ある・いる」の意味で使われているから","補助動詞として用いられているから"],
+                correct_answer:"「お仕え申し上げる」という動作の意味で使われているから",
+                explanation:"「お仕えする・お側にひかえる」の意味＝謙譲語。「ある・いる」や補助動詞＝丁寧語。"
+              },
+              "丁寧語": {
+                question:"「候ひ」を丁寧語と判断した根拠として正しいものを選べ。",
+                choices:["「お仕え申し上げる」という動作の意味で使われているから","「ある・いる」の意味で使われているから","補助動詞として用いられているから"],
+                correct_answer:"「お仕え申し上げる」という動作の意味で使われているから",
+                explanation:"実は謙譲語。「お仕えする」の意味のとき謙譲語になる。"
+              }
+            } },
+          { q_id:"nib08q3", type:"translation",
+            question:"傍線部「候ひ」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"お仕え申し上げ",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "nib_09",
+        text: "「碁盤はべりやな。」",
+        highlight: "はべり",
+        source: "枕草子・一五五",
+        questions: [
+          { q_id:"nib09q1", type:"category",
+            question:"傍線部「はべり」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"丁寧語",
+            explanation:"「はべり（侍り）」が「ある・います」の意味のとき丁寧語（ございます）。" },
+          { q_id:"nib09q2", type:"reason",
+            answer_format:"select",
+            reason_by_answer: {
+              "丁寧語": {
+                question:"「はべり」を丁寧語と判断した根拠として正しいものを選べ。",
+                choices:["「ありますか」という意味で使われているから","「お側にひかえる」という意味で使われているから","補助動詞として用いられているから"],
+                correct_answer:"「ありますか」という意味で使われているから",
+                explanation:"「ある・いる（ございます）」の意味＝丁寧語。「お仕えする・お側にひかえる」＝謙譲語。"
+              },
+              "謙譲語": {
+                question:"「はべり」を謙譲語と判断した根拠として正しいものを選べ。",
+                choices:["「ありますか」という意味で使われているから","「お側にひかえる」という意味で使われているから","補助動詞として用いられているから"],
+                correct_answer:"「ありますか」という意味で使われているから",
+                explanation:"実は丁寧語。「ある・いる（ありますか）」の意味のとき丁寧語になる。"
+              }
+            } },
+          { q_id:"nib09q3", type:"translation",
+            question:"傍線部「はべり」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"ありますか",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "nib_10",
+        text: "これより珍しきことは、さぶらひなむや。",
+        highlight: "さぶらひ",
+        source: "源氏物語・帚木",
+        questions: [
+          { q_id:"nib10q1", type:"category",
+            question:"傍線部「さぶらひ」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"丁寧語",
+            explanation:"「さぶらふ（候ふ）」が「ある・いる」の意味のとき丁寧語（ございます）。" },
+          { q_id:"nib10q2", type:"reason",
+            answer_format:"select",
+            reason_by_answer: {
+              "丁寧語": {
+                question:"「さぶらひ」を丁寧語と判断した根拠として正しいものを選べ。",
+                choices:["「ございましょうか」という意味で使われているから","「お仕えする」という意味で使われているから","補助動詞として用いられているから"],
+                correct_answer:"「ございましょうか」という意味で使われているから",
+                explanation:"「ある・いる（ございます）」の意味＝丁寧語。「お仕えする」＝謙譲語。"
+              },
+              "謙譲語": {
+                question:"「さぶらひ」を謙譲語と判断した根拠として正しいものを選べ。",
+                choices:["「ございましょうか」という意味で使われているから","「お仕えする」という意味で使われているから","補助動詞として用いられているから"],
+                correct_answer:"「ございましょうか」という意味で使われているから",
+                explanation:"実は丁寧語。「ございましょうか（ある・いる）」の意味のとき丁寧語になる。"
+              }
+            } },
+          { q_id:"nib10q3", type:"translation",
+            question:"傍線部「さぶらひ」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"ございましょうか",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "nib_11",
+        text: "たしかに守り侍らむ。",
+        highlight: "侍ら",
+        source: "枕草子・八三",
+        questions: [
+          { q_id:"nib11q1", type:"category",
+            question:"傍線部「侍ら」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"丁寧語",
+            explanation:"「はべり（侍り）」が補助動詞として使われるとき丁寧語（〜ておりましょう）。" },
+          { q_id:"nib11q2", type:"reason",
+            answer_format:"select",
+            reason_by_answer: {
+              "丁寧語": {
+                question:"「侍ら」を丁寧語と判断した根拠として正しいものを選べ。",
+                choices:["補助動詞として用いられているから","「お側にひかえる」という意味で使われているから","「ある・いる」という意味で使われているから"],
+                correct_answer:"補助動詞として用いられているから",
+                explanation:"補助動詞の「はべり（侍り）」はすべて丁寧語。"
+              },
+              "謙譲語": {
+                question:"「侍ら」を謙譲語と判断した根拠として正しいものを選べ。",
+                choices:["補助動詞として用いられているから","「お側にひかえる」という意味で使われているから","「ある・いる」という意味で使われているから"],
+                correct_answer:"補助動詞として用いられているから",
+                explanation:"実は丁寧語。補助動詞の「はべり（侍り）」はすべて丁寧語になる。"
+              }
+            } },
+          { q_id:"nib11q3", type:"translation",
+            question:"傍線部「侍ら」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"おりましょう・ましょう",
+            explanation:"" }
+        ]
+      },
+      {
+        example_id: "nib_12",
+        text: "「なにごとぞ、なにごとぞ。」と人ごとにとひ候ひしかば、",
+        highlight: "候ひ",
+        source: "大鏡",
+        questions: [
+          { q_id:"nib12q1", type:"category",
+            question:"傍線部「候ひ」の敬語の種類を答えよ。",
+            answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+            correct_answer:"丁寧語",
+            explanation:"「さぶらふ（候ふ）」が補助動詞として使われるとき丁寧語（〜ました）。" },
+          { q_id:"nib12q2", type:"reason",
+            answer_format:"select",
+            reason_by_answer: {
+              "丁寧語": {
+                question:"「候ひ」を丁寧語と判断した根拠として正しいものを選べ。",
+                choices:["補助動詞として用いられているから","「お仕えする」という意味で使われているから","「ある・いる」という意味で使われているから"],
+                correct_answer:"補助動詞として用いられているから",
+                explanation:"補助動詞の「さぶらふ（候ふ）」はすべて丁寧語。"
+              },
+              "謙譲語": {
+                question:"「候ひ」を謙譲語と判断した根拠として正しいものを選べ。",
+                choices:["補助動詞として用いられているから","「お仕えする」という意味で使われているから","「ある・いる」という意味で使われているから"],
+                correct_answer:"補助動詞として用いられているから",
+                explanation:"実は丁寧語。補助動詞の「さぶらふ（候ふ）」はすべて丁寧語になる。"
+              }
+            } },
+          { q_id:"nib12q3", type:"translation",
+            question:"傍線部「候ひ」を現代語訳せよ。",
+            answer_format:"self_check", model_answer:"ましたので",
+            explanation:"" }
+        ]
+      }
+    ]
+  }
+
+];
+
+// ══════════════════════════════════════════════
+//  アプリロジック
+// ══════════════════════════════════════════════
+const CAT_CLASS = {
+  "尊敗語":"cat-son","尊敬語":"cat-son",
+  "謙譲語":"cat-ken","丁寧語":"cat-tei",
+  "見分け方演習":"cat-nibetsu","特別な敬語表現":"cat-tokubetsu"
+};
+const TYPE_LABEL = {
+  category:"種別",direction:"敬意の方向",
+  translation:"現代語訳",reason:"判断の根拠"
+};
+
+let queue=[],retryQueue=[],currentItem=null,currentQIdx=0;
+let stats={correct:0,wrong:0,self_ok:0,self_ng:0};
+
+function init(){
+  const all=[];
+  KEIGO_DATA.forEach(w=>w.examples.forEach(ex=>all.push({word:w,ex:ex})));
+  const totalQ=all.reduce((a,e)=>a+e.ex.questions.length,0);
+  document.getElementById('stat-words').textContent=KEIGO_DATA.length;
+  document.getElementById('stat-examples').textContent=all.length;
+  document.getElementById('stat-questions').textContent=totalQ;
+}
+
+const SESSION_SIZE = 20;
+
+function startQuiz(){
+  const all=[];
+  KEIGO_DATA.forEach(w=>w.examples.forEach(ex=>all.push({word:w,ex:ex})));
+  queue=shuffle([...all]).slice(0, SESSION_SIZE);
+  retryQueue=[];
+  stats={correct:0,wrong:0,self_ok:0,self_ng:0,total:SESSION_SIZE};
+  document.getElementById('screen-start').classList.add('hidden');
+  document.getElementById('screen-quiz').classList.remove('hidden');
+  nextExample();
+}
+
+function nextExample(){
+  if(queue.length>0){ loadExample(queue.shift(),false); }
+  else if(retryQueue.length>0){ loadExample(retryQueue.shift(),true); }
+  else { showResult(); }
+}
+
+function loadExample(item,isRetry){
+  currentItem=item;
+  item.ex._wrong=false;
+  currentQIdx=0;
+
+  const done=stats.total-queue.length-retryQueue.length-1;
+  const pct=stats.total>0?Math.round(done/stats.total*100):0;
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-text').textContent=`${Math.max(0,done)} / ${stats.total} 例文`;
+
+  const banner=document.getElementById('retry-banner');
+  isRetry?banner.classList.remove('hidden'):banner.classList.add('hidden');
+
+  const w=item.word, ex=item.ex;
+  const badge=document.getElementById('word-badge');
+  // バッジはセクション種別を表示（カテゴリそのままは答えのヒントになるため）
+  const badgeLabel = w.category==='見分け方演習' ? '敬語の見分け' : '敬語の用例';
+  badge.textContent=badgeLabel;
+  badge.className='word-badge '+(CAT_CLASS[w.category]||'cat-son');
+  document.getElementById('word-name').textContent='';  // 語名は答えのヒントになるため非表示
+  document.getElementById('source-tag').textContent=ex.source||'';
+
+  const hl=ex.highlight;
+  const re=new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
+  document.getElementById('example-text').innerHTML=
+    ex.text.replace(re,`<span class="hl">${hl}</span>`);
+
+  document.getElementById('question-block').innerHTML='';
+  document.getElementById('btn-next').classList.add('hidden');
+  document.getElementById('btn-next').textContent='次の例文へ →';
+
+  // Q1(category)とQ2(direction)を同時表示、Q3(translation)は単独
+  renderPair();
+}
+
+// ── Q1+Q2を同時表示して「確認する」ボタンで同時採点 ──────
+function renderPair(){
+  const qs = currentItem.ex.questions;
+  const block = document.getElementById('question-block');
+
+  // Q1とQ2が両方selectならペア表示
+  const q1 = qs[0]; // category
+  const q2 = qs[1]; // direction
+  const q3 = qs[2]; // translation
+
+  if(q1 && q2 && q1.answer_format==='select' && q2.answer_format==='select'){
+    renderPairBlock(q1, q2, q3);
+  } else {
+    // フォールバック：順番通り
+    currentQIdx=0;
+    renderQuestion(qs[0]);
+  }
+}
+
+function renderPairBlock(q1, q2, q3){
+  const block = document.getElementById('question-block');
+
+  // ── Q1ブロック ──
+  const div1 = document.createElement('div');
+  div1.style.marginTop='22px';
+  div1.innerHTML=`<div class="q-label">問1（${TYPE_LABEL[q1.type]||q1.type}）</div><div class="q-text">${q1.question}</div>`;
+  const cd1 = document.createElement('div');
+  cd1.className='choices';
+  let sel1=null;
+  shuffle([...q1.choices]).forEach(c=>{
+    const btn=document.createElement('button');
+    btn.className='choice-btn';
+    btn.textContent=c;
+    btn.onclick=()=>{
+      cd1.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected-pending'));
+      btn.classList.add('selected-pending');
+      sel1=c;
+      // Q2がreason_by_answerのとき選択肢をリアルタイム更新
+      if(q2.reason_by_answer) updateQ2Block(sel1);
+      checkEnableConfirm();
+    };
+    cd1.appendChild(btn);
+  });
+  div1.appendChild(cd1);
+  block.appendChild(div1);
+
+  // ── Q2ブロック ──
+  const div2 = document.createElement('div');
+  div2.style.marginTop='22px';
+  // reason_by_answerのとき初期はプレースホルダー表示
+  const q2InitData = q2.reason_by_answer
+    ? Object.values(q2.reason_by_answer)[0]  // 最初のパターンで仮表示
+    : q2;
+  div2.innerHTML=`<div class="q-label">問2（${TYPE_LABEL[q2.type]||q2.type}）</div><div class="q-text q2-text">${q2.reason_by_answer ? '問1に答えると問2が表示されます。' : q2InitData.question}</div>`;
+  const cd2 = document.createElement('div');
+  cd2.className='choices';
+  cd2.id='cd2-choices';
+  if(!q2.reason_by_answer){
+    // distractor_choicesがあれば4択をランダム構成、なければ従来の3択
+    const choices4 = buildChoices4(q2);
+    shuffle(choices4).forEach(c=>{
+      const btn=document.createElement('button');
+      btn.className='choice-btn';
+      btn.textContent=c;
+      btn.onclick=()=>{
+        cd2.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected-pending'));
+        btn.classList.add('selected-pending');
+        sel2=c;
+        checkEnableConfirm();
+      };
+      cd2.appendChild(btn);
+    });
+  }
+  div2.appendChild(cd2);
+  block.appendChild(div2);
+
+  let sel2=null;
+  let currentQ2Data=q2InitData;
+
+  // reason_by_answer: Q1選択後にQ2を更新
+  function updateQ2Block(q1Answer){
+    const data = q2.reason_by_answer[q1Answer] || Object.values(q2.reason_by_answer)[0];
+    currentQ2Data = data;
+    sel2 = null;
+    div2.querySelector('.q2-text').textContent = data.question;
+    const cd = div2.querySelector('#cd2-choices');
+    cd.innerHTML='';
+    const choices4r = buildChoices4(data);
+    shuffle(choices4r).forEach(c=>{
+      const btn=document.createElement('button');
+      btn.className='choice-btn';
+      btn.textContent=c;
+      btn.onclick=()=>{
+        cd.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected-pending'));
+        btn.classList.add('selected-pending');
+        sel2=c;
+        checkEnableConfirm();
+      };
+      cd.appendChild(btn);
+    });
+    checkEnableConfirm();
+  }
+
+  // ── 確認ボタン ──
+  const confirmBtn = document.createElement('button');
+  confirmBtn.className='btn-next';
+  confirmBtn.style.marginTop='16px';
+  confirmBtn.textContent='確認する';
+  confirmBtn.disabled=true;
+  confirmBtn.id='btn-confirm-pair';
+  block.appendChild(confirmBtn);
+
+  function checkEnableConfirm(){
+    confirmBtn.disabled = !(sel1 && sel2);
+  }
+
+  function addResultLabel(parentDiv, isCorrect){
+    const lbl = document.createElement('div');
+    lbl.className = 'result-label ' + (isCorrect ? 'result-correct' : 'result-wrong');
+    lbl.textContent = isCorrect ? '⭕️ 正解' : '❌ 不正解';
+    parentDiv.appendChild(lbl);
+  }
+
+  confirmBtn.onclick=()=>{
+    confirmBtn.disabled=true;
+
+    // Q1採点
+    const c1=q1.correct_answer;
+    cd1.querySelectorAll('.choice-btn').forEach(btn=>{
+      btn.disabled=true;
+      btn.classList.remove('selected-pending');
+      if(btn.textContent===c1) btn.classList.add('correct');
+      if(btn.textContent===sel1&&sel1!==c1) btn.classList.add('wrong');
+    });
+    const ok1 = sel1===c1;
+    if(ok1){ stats.correct++; } else { stats.wrong++; currentItem.ex._wrong=true; }
+    addResultLabel(div1, ok1);
+    if(q1.explanation){
+      const e=document.createElement('div');
+      e.className='explanation-box';
+      e.textContent=q1.explanation;
+      div1.appendChild(e);
+    }
+
+    // Q2採点（reason_by_answerのとき正解はsel1に対応するデータから取得）
+    const q2data = q2.reason_by_answer ? currentQ2Data : q2;
+    const c2 = q2data.correct_answer;
+    const cd2el = div2.querySelector('#cd2-choices');
+    cd2el.querySelectorAll('.choice-btn').forEach(btn=>{
+      btn.disabled=true;
+      btn.classList.remove('selected-pending');
+      if(btn.textContent===c2) btn.classList.add('correct');
+      if(btn.textContent===sel2&&sel2!==c2) btn.classList.add('wrong');
+    });
+    const ok2 = sel2===c2;
+    if(ok2){ stats.correct++; } else { stats.wrong++; currentItem.ex._wrong=true; }
+    addResultLabel(div2, ok2);
+    if(q2data.explanation){
+      const e=document.createElement('div');
+      e.className='explanation-box';
+      e.textContent=q2data.explanation;
+      div2.appendChild(e);
+    }
+
+    // Q3（現代語訳）を表示
+    currentQIdx=2;
+    setTimeout(()=>renderQuestion(q3), 200);
+  };
+}
+
+function renderQuestion(q){
+  const block=document.getElementById('question-block');
+  // 確認ボタンを除去
+  const cb=document.getElementById('btn-confirm-pair');
+  if(cb) cb.remove();
+
+  const div=document.createElement('div');
+  div.id='q-'+q.q_id;
+  div.style.marginTop='22px';
+  div.innerHTML=`
+    <div class="q-label">問3（${TYPE_LABEL[q.type]||q.type}）</div>
+    <div class="q-text">${q.question}</div>`;
+
+  // 自己採点
+  const ma=document.createElement('div');
+  ma.className='model-answer-box hidden';
+  ma.id='ma-'+q.q_id;
+  ma.innerHTML=`<div class="label">模範解答</div>${q.model_answer}`;
+  const showBtn=document.createElement('button');
+  showBtn.className='choice-btn';
+  showBtn.textContent='模範解答を見る';
+  showBtn.onclick=()=>{
+    showBtn.style.display='none';
+    ma.classList.remove('hidden');
+    const sb=document.createElement('div');
+    sb.className='self-check-btns';
+    sb.innerHTML=`<button class="btn-ok">○ 正解</button><button class="btn-ng">✕ 不正解</button>`;
+    sb.querySelector('.btn-ok').onclick=()=>selfCheck('ok',q,div,sb);
+    sb.querySelector('.btn-ng').onclick=()=>selfCheck('ng',q,div,sb);
+    div.appendChild(sb);
+  };
+  div.appendChild(ma);
+  div.appendChild(showBtn);
+  block.appendChild(div);
+}
+
+function selfCheck(result,q,div,sb){
+  sb.querySelectorAll('button').forEach(b=>b.disabled=true);
+  const isOk = result==='ok';
+  if(isOk){ stats.self_ok++; }
+  else { stats.self_ng++; currentItem.ex._wrong=true; }
+  const lbl=document.createElement('div');
+  lbl.className='result-label '+(isOk?'result-correct':'result-wrong');
+  lbl.textContent=isOk?'⭕️ 正解':'❌ 不正解';
+  div.appendChild(lbl);
+  if(q.explanation){
+    const e=document.createElement('div');
+    e.className='explanation-box';
+    e.textContent=q.explanation;
+    div.appendChild(e);
+  }
+  // Q3完了→次へボタン表示
+  if(currentItem.ex._wrong) retryQueue.push(currentItem);
+  const btn=document.getElementById('btn-next');
+  btn.classList.remove('hidden');
+  if(queue.length===0&&retryQueue.length===0)
+    btn.textContent='結果を見る →';
+}
+
+// 4択を構成：正解1 + distractor_choicesからランダム3
+// 「誰から」が正解と同じものが1個または2個になるようランダムに混在
+function buildChoices4(q){
+  const correct = q.correct_answer;
+  if(!q.distractor_choices || q.distractor_choices.length===0){
+    return [...q.choices]; // フォールバック
+  }
+  const correctFrom = correct.split('→')[0];
+  // 同じ「誰から」の誤答と異なる「誰から」の誤答を分類
+  const sameFrom = q.distractor_choices.filter(d=>d.split('→')[0]===correctFrom);
+  const diffFrom = q.distractor_choices.filter(d=>d.split('→')[0]!==correctFrom);
+  // ランダムに「同じ誰から」を1個または2個含める
+  const includeSame = Math.random()<0.5 ? 1 : Math.min(2, sameFrom.length);
+  const samePicked = shuffle([...sameFrom]).slice(0, includeSame);
+  const remaining = 3 - samePicked.length;
+  const diffPicked = shuffle([...diffFrom]).slice(0, remaining);
+  // diffが足りない場合sameで補完
+  const extra = 3 - samePicked.length - diffPicked.length;
+  const extraPicked = extra>0 ? shuffle([...sameFrom].filter(d=>!samePicked.includes(d))).slice(0,extra) : [];
+  return [correct, ...samePicked, ...diffPicked, ...extraPicked].slice(0,4);
+}
+
+function advanceQuestion(){
+  // 使用しないが互換のため残す
+}
+
+function showResult(){
+  document.getElementById('screen-quiz').classList.add('hidden');
+  document.getElementById('screen-result').classList.remove('hidden');
+  const c=stats.correct+stats.self_ok;
+  const w=stats.wrong+stats.self_ng;
+  const pct=w+c>0?Math.round(c/(c+w)*100):100;
+  document.getElementById('result-badge').textContent=pct>=80?'🎉':pct>=60?'👍':'📖';
+  document.getElementById('result-sub').textContent=`正答率 ${pct}%`;
+  document.getElementById('result-score').textContent=`${c} 問正解 / ${c+w} 問中`;
+  document.getElementById('result-details').innerHTML=`
+    <div class="result-row"><span>選択問題 正解</span><span>${stats.correct} 問</span></div>
+    <div class="result-row"><span>選択問題 不正解</span><span>${stats.wrong} 問</span></div>
+    <div class="result-row"><span>和訳 自己○</span><span>${stats.self_ok} 問</span></div>
+    <div class="result-row"><span>和訳 自己✕</span><span>${stats.self_ng} 問</span></div>`;
+}
+
+function restartQuiz(){
+  document.getElementById('screen-result').classList.add('hidden');
+  document.getElementById('screen-start').classList.remove('hidden');
+}
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+init();
+</script>
+</body>
+</html>
