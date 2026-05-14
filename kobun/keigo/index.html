@@ -77,6 +77,11 @@ main{width:100%;max-width:760px;padding:28px 16px 60px}
 .choice-btn:hover:not(:disabled){background:#ede4d4;border-color:var(--gold)}
 .choice-btn.selected-pending{background:#e8e0f0;border-color:var(--son);color:var(--son);font-weight:bold}
 .result-label{font-size:.92rem;font-weight:bold;margin-top:8px;padding:4px 0}
+.choice-btn.unknown{
+  margin-top:6px;background:transparent;border-style:dashed;
+  color:var(--text-sub);font-size:.85rem;
+}
+.choice-btn.unknown:hover:not(:disabled){background:var(--surface2);border-color:var(--text-sub)}
 .result-correct{color:var(--correct)}
 .result-wrong{color:var(--wrong)}
 .choice-btn.correct{background:#e6f4ea;border-color:var(--correct);color:var(--correct)}
@@ -1405,12 +1410,25 @@ function renderPairBlock(q1, q2, q3){
       cd1.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected-pending'));
       btn.classList.add('selected-pending');
       sel1=c;
-      // Q2がreason_by_answerのとき選択肢をリアルタイム更新
       if(q2.reason_by_answer) updateQ2Block(sel1);
       checkEnableConfirm();
     };
     cd1.appendChild(btn);
   });
+  // 「わからない」ボタン
+  {
+    const ub=document.createElement('button');
+    ub.className='choice-btn unknown';
+    ub.textContent='？ わからない';
+    ub.onclick=()=>{
+      cd1.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected-pending'));
+      ub.classList.add('selected-pending');
+      sel1='__UNKNOWN__';
+      if(q2.reason_by_answer) updateQ2Block('__UNKNOWN__');
+      checkEnableConfirm();
+    };
+    cd1.appendChild(ub);
+  }
   div1.appendChild(cd1);
   block.appendChild(div1);
 
@@ -1440,6 +1458,19 @@ function renderPairBlock(q1, q2, q3){
       };
       cd2.appendChild(btn);
     });
+    // 「わからない」ボタン
+    {
+      const ub=document.createElement('button');
+      ub.className='choice-btn unknown';
+      ub.textContent='？ わからない';
+      ub.onclick=()=>{
+        cd2.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected-pending'));
+        ub.classList.add('selected-pending');
+        sel2='__UNKNOWN__';
+        checkEnableConfirm();
+      };
+      cd2.appendChild(ub);
+    }
   }
   div2.appendChild(cd2);
   block.appendChild(div2);
@@ -1468,6 +1499,19 @@ function renderPairBlock(q1, q2, q3){
       };
       cd.appendChild(btn);
     });
+    // 「わからない」ボタン
+    {
+      const ub=document.createElement('button');
+      ub.className='choice-btn unknown';
+      ub.textContent='？ わからない';
+      ub.onclick=()=>{
+        cd.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected-pending'));
+        ub.classList.add('selected-pending');
+        sel2='__UNKNOWN__';
+        checkEnableConfirm();
+      };
+      cd.appendChild(ub);
+    }
     checkEnableConfirm();
   }
 
@@ -1504,6 +1548,14 @@ function renderPairBlock(q1, q2, q3){
     });
     const ok1 = sel1===c1;
     if(ok1){ stats.correct++; } else { stats.wrong++; currentItem.ex._wrong=true; }
+    // わからない→正解を表示
+    if(sel1==='__UNKNOWN__'){
+      cd1.querySelectorAll('.choice-btn').forEach(btn=>{
+        btn.disabled=true;
+        btn.classList.remove('selected-pending');
+        if(btn.textContent===c1) btn.classList.add('correct');
+      });
+    }
     addResultLabel(div1, ok1);
     if(q1.explanation){
       const e=document.createElement('div');
@@ -1524,6 +1576,14 @@ function renderPairBlock(q1, q2, q3){
     });
     const ok2 = sel2===c2;
     if(ok2){ stats.correct++; } else { stats.wrong++; currentItem.ex._wrong=true; }
+    // わからない→正解を表示
+    if(sel2==='__UNKNOWN__'){
+      cd2el.querySelectorAll('.choice-btn').forEach(btn=>{
+        btn.disabled=true;
+        btn.classList.remove('selected-pending');
+        if(btn.textContent===c2) btn.classList.add('correct');
+      });
+    }
     addResultLabel(div2, ok2);
     if(q2data.explanation){
       const e=document.createElement('div');
