@@ -275,6 +275,12 @@ footer{width:100%;background:var(--surface2);border-top:1px solid var(--border);
 // 37例文・111問
 // ================================================================
 
+// ================================================================
+// つばめ古文 敬語演習 KEIGO_DATA v3.0
+// 教材 p.114〜125 準拠（MDファイル「古典_敬語.md」より正確に起こし）
+// 37例文・111問
+// ================================================================
+
 const KEIGO_DATA = [
 
   // ══════════════════════════════════════════════════════
@@ -285,7 +291,8 @@ const KEIGO_DATA = [
     word_id: "tamafu_son",
     word: "たまふ（給ふ・賜ふ）四段",
     category: "尊敬語",
-    examples: [{
+    examples: [
+    {
       example_id: "tamafu_son_01",
       text: "そのわたりの山がつまで、（光源氏ハ）さるべき物ども賜ひ、御誦経などとして出でたまふ。",
       highlight: "賜ひ",
@@ -305,6 +312,29 @@ const KEIGO_DATA = [
         { q_id:"ts01q3", type:"translation",
           question:"傍線部「賜ひ」を現代語訳せよ。",
           answer_format:"self_check", model_answer:"お与えになり",
+          explanation:"" }
+      ]
+    },
+    {
+      example_id: "tamafu_son_02",
+      text: "そのわたりの山がつまで、（光源氏ハ）さるべき物ども賜ひ、御誦経などとして出でたまふ。",
+      highlight: "たまふ",
+      source: "源氏物語・若紫",
+      questions: [
+        { q_id:"ts02q1", type:"category",
+          question:"傍線部「たまふ」の敬語の種類を答えよ。",
+          answer_format:"select", choices:["尊敬語","謙譲語","丁寧語"],
+          correct_answer:"尊敬語",
+          explanation:"補助動詞「たまふ」が四段活用のとき尊敬語（〜なさる）。" },
+        { q_id:"ts02q2", type:"direction",
+          question:"「たまふ」は誰から誰への敬意を表しているか。",
+          answer_format:"select",
+          choices:["書き手→光源氏","書き手→山がつ（里人）","光源氏→紫の上"],
+          correct_answer:"書き手→光源氏",
+          distractor_choices:["書き手→紫の上","書き手→山がつ（里人）","紫の上→光源氏","山がつ→光源氏","帝→光源氏"] },
+        { q_id:"ts02q3", type:"translation",
+          question:"傍線部「たまふ」を現代語訳せよ。",
+          answer_format:"self_check", model_answer:"出ていらっしゃる・お出になる",
           explanation:"" }
       ]
     }]
@@ -497,7 +527,7 @@ const KEIGO_DATA = [
             answer_format:"select", choices:["書き手→帝の姫君","帝の姫君→作者","書き手→帝"],
             correct_answer:"書き手→帝の姫君",
             explanation:"書き手から、動作をする人（帝の姫君）への敬意。",
-            distractor_choices:["書き手→帝","書き手→作者","帝の姫君→書き手","帝→帝の姫君","作者→帝の姫君"] },
+            distractor_choices:["書き手→帝","大納言→帝の姫君","帝の姫君→書き手","帝→帝の姫君","帝の姫君→帝"] },
           { q_id:"obosu01q3", type:"translation",
             question:"傍線部「思され」を現代語訳せよ。",
             answer_format:"self_check", model_answer:"お思いになったので",
@@ -520,7 +550,7 @@ const KEIGO_DATA = [
             answer_format:"select", choices:["書き手→帝（花山天皇）","帝（花山天皇）→大納言","書き手→作者"],
             correct_answer:"書き手→帝（花山天皇）",
             explanation:"書き手から、動作をする人（帝）への敬意。",
-            distractor_choices:["書き手→大納言","書き手→作者","帝（花山天皇）→大納言","大納言→帝（花山天皇）","作者→帝（花山天皇）"] },
+            distractor_choices:["書き手→大納言","書き手→作者","帝（花山天皇）→大納言","大納言→帝（花山天皇）","大納言→書き手"] },
           { q_id:"obosu02q3", type:"translation",
             question:"傍線部「思し召し」を現代語訳せよ。",
             answer_format:"self_check", model_answer:"お思いになったのであろうか",
@@ -792,7 +822,7 @@ const KEIGO_DATA = [
             answer_format:"select", choices:["書き手（私）→薬師仏","薬師仏→書き手（私）","書き手→光源氏"],
             correct_answer:"書き手（私）→薬師仏",
             explanation:"書き手（私）から、動作の受け手（薬師仏）への敬意。",
-            distractor_choices:["書き手（私）→光源氏","書き手（私）→作者","薬師仏→書き手（私）","作者→薬師仏","光源氏→薬師仏"] },
+            distractor_choices:["書き手（私）→光源氏","書き手（私）→作者","薬師仏→書き手（私）","大納言→薬師仏","光源氏→薬師仏"] },
           { q_id:"tateken02q3", type:"translation",
             question:"傍線部「奉る」を現代語訳せよ。",
             answer_format:"self_check", model_answer:"申し上げる・〜し申し上げる",
@@ -823,7 +853,7 @@ const KEIGO_DATA = [
             answer_format:"select", choices:["蔵人→天皇","天皇→蔵人","書き手→作者"],
             correct_answer:"蔵人→天皇",
             explanation:"話し手（蔵人）から、お側にひかえる相手（天皇）への敬意。",
-            distractor_choices:["蔵人→少納言","天皇→蔵人","書き手→天皇","書き手→蔵人","蔵人→帝"] },
+            distractor_choices:["蔵人→少納言","天皇→蔵人","書き手→天皇","書き手→蔵人","御前のかた→蔵人"] },
           { q_id:"sabk01q3", type:"translation",
             question:"傍線部「侍る」を現代語訳せよ。",
             answer_format:"self_check", model_answer:"お側にひかえている",
@@ -954,7 +984,7 @@ const KEIGO_DATA = [
             answer_format:"select", choices:["憶良→宴席の主","宴席の主→憶良","書き手→作者"],
             correct_answer:"憶良→宴席の主",
             explanation:"話し手（憶良）から、退出する場所の主（宴席の主）への敬意。",
-            distractor_choices:["憶良→主人","宴席の主→憶良","書き手→憶良","書き手→宴席の主","憶良→帝"] },
+            distractor_choices:["憶良の付き人→憶良","宴席の主→憶良","書き手→憶良","書き手→宴席の主","憶良→帝"] },
           { q_id:"makaru02q3", type:"translation",
             question:"傍線部「罷ら」を現代語訳せよ。",
             answer_format:"self_check", model_answer:"退出しよう",
@@ -1070,7 +1100,7 @@ const KEIGO_DATA = [
             answer_format:"select", choices:["道長→花山天皇","花山天皇→道長","書き手→作者"],
             correct_answer:"道長→花山天皇",
             explanation:"話し手（道長）から聞き手（花山天皇）への敬意。",
-            distractor_choices:["道長→帝","花山天皇→道長","書き手→花山天皇","書き手→道長","道長→作者"] },
+            distractor_choices:["民衆→花山天皇","花山天皇→道長","書き手→花山天皇","書き手→道長","道長→作者"] },
           { q_id:"habet02q3", type:"translation",
             question:"傍線部「侍ら」を現代語訳せよ。",
             answer_format:"self_check", model_answer:"ございましょう",
