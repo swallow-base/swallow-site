@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>つばめ英語 — 接尾辞演習 v1.3</title>
+<title>つばめ英語 — 接尾辞演習 v1.4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -353,6 +353,220 @@
     opacity: 0.35;
   }
 
+  /* 「わからない」ボタン */
+  .dontknow-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.92em;
+    font-weight: 500;
+    background: var(--paper);
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--subtle);
+    margin-bottom: 12px;
+  }
+
+  .dontknow-btn:hover:not(:disabled) {
+    background: var(--highlight);
+    border-color: var(--subtle);
+    border-style: solid;
+    color: var(--ink);
+  }
+
+  .dontknow-btn:disabled { cursor: default; }
+
+  .dontknow-btn.dimmed { opacity: 0.35; }
+
+  /* レビュー画面 */
+  .review-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px 28px;
+  }
+
+  .review-card h2 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-align: center;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+
+  .review-card h2::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--rule-gold);
+    margin: 14px auto 0;
+  }
+
+  .review-summary {
+    text-align: center;
+    color: var(--subtle);
+    font-size: 0.92em;
+    margin: 14px 0 24px;
+  }
+
+  .review-summary .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 1.4em;
+    margin: 0 3px;
+  }
+
+  .wrong-list {
+    margin-bottom: 28px;
+  }
+
+  .wrong-item {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  .wrong-item-header {
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.15s;
+  }
+
+  .wrong-item-header:hover {
+    background: var(--highlight);
+  }
+
+  .wrong-item-target {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4em;
+    font-weight: 500;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+
+  .wrong-item-meta {
+    font-size: 0.82em;
+    color: var(--subtle);
+    flex-grow: 1;
+    text-align: right;
+  }
+
+  .wrong-item-meta .user-ans {
+    color: var(--wrong);
+    font-weight: 700;
+  }
+
+  .wrong-item-meta .correct-ans {
+    color: var(--correct);
+    font-weight: 700;
+  }
+
+  .wrong-item-toggle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4em;
+    color: var(--subtle);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .wrong-item.expanded .wrong-item-toggle {
+    transform: rotate(45deg);
+  }
+
+  .wrong-item-body {
+    display: none;
+    padding: 16px 18px 18px;
+    border-top: 1px solid var(--border-soft);
+    background: var(--bg);
+    font-size: 0.9em;
+    line-height: 1.8;
+  }
+
+  .wrong-item.expanded .wrong-item-body {
+    display: block;
+  }
+
+  .wrong-item-body .label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    margin-right: 6px;
+    font-size: 0.92em;
+  }
+
+  .wrong-item-body code {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    background: var(--highlight);
+    padding: 1px 8px;
+    border-radius: 2px;
+    color: var(--ink);
+  }
+
+  .wrong-item-body .note {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 3px 3px 0;
+    font-size: 0.92em;
+    color: var(--ink-soft);
+  }
+
+  .review-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .review-actions button {
+    width: 100%;
+    padding: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.98em;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+
+  .review-actions .primary-btn {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+  }
+
+  .review-actions .primary-btn:hover {
+    background: var(--accent);
+  }
+
+  .review-actions .secondary-btn {
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  .review-actions .secondary-btn:hover {
+    background: var(--highlight);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
   .submit-btn {
     display: none;
     width: 100%;
@@ -607,7 +821,9 @@
   <div id="quizScreen" class="quiz-screen">
     <div class="quiz-header">
       <button class="back-btn" onclick="backToMode()">← モード選択へ</button>
-      <div class="progress">残り <strong id="remaining">0</strong> / 正解 <strong id="correct">0</strong></div>
+      <div class="progress">
+        <span id="roundLabel"></span>残り <strong id="remaining">0</strong> / 正解 <strong id="correct">0</strong>
+      </div>
     </div>
 
     <div class="question-card">
@@ -623,6 +839,8 @@
       <button class="choice-btn" data-pos="adverb" onclick="selectChoice('adverb')">副詞</button>
     </div>
 
+    <button class="dontknow-btn" id="dontknowBtn" onclick="selectDontKnow()">わからない</button>
+
     <button class="submit-btn" id="submitBtn" onclick="submitMulti()">決定</button>
 
     <div class="feedback" id="feedback">
@@ -633,11 +851,26 @@
     <button class="next-btn" id="nextBtn" onclick="nextQuestion()" style="display:none;">次の問題へ →</button>
   </div>
 
+  <!-- レビュー画面(間違えた問題リスト) -->
+  <div id="reviewScreen" class="quiz-screen">
+    <div class="review-card">
+      <h2 id="reviewTitle">1周目の結果</h2>
+      <div class="review-summary" id="reviewSummary"></div>
+
+      <div class="wrong-list" id="wrongList"></div>
+
+      <div class="review-actions">
+        <button class="primary-btn" onclick="startNextRound()">間違えた問題のみもう一度</button>
+        <button class="secondary-btn" onclick="endSession()">このまま終了する</button>
+      </div>
+    </div>
+  </div>
+
   <!-- 完了画面 -->
   <div id="completeScreen" class="quiz-screen">
     <div class="complete-card">
-      <h2>すべて完了</h2>
-      <p>すべての問題に正解しました。間違えた問題は再出題されていました。</p>
+      <h2>セッション終了</h2>
+      <p>お疲れさまでした。以下はこのセッション全体の累計です。</p>
       <div class="stats">
         <div class="stat-item">
           <div class="stat-num" id="totalAttempts">0</div>
@@ -658,7 +891,7 @@
   </div>
 
   <footer>
-    SWALLOW-BASE — Suffix Training v1.3
+    SWALLOW-BASE — Suffix Training v1.4
   </footer>
 
 </div>
@@ -802,12 +1035,14 @@ const WORD_DATA = [
    ============================================ */
 
 let currentMode = null;
-let queue = [];
+let currentRound = 0;          // 現在の周回数(1=1周目, 2=2周目...)
+let currentQueue = [];         // 現在の周回で残っている出題キュー
+let wrongList = [];            // 現在の周回で間違えた問題のリスト
 let currentQuestion = null;
-let totalAttempts = 0;
-let totalCorrect = 0;
+let totalAttempts = 0;         // セッション全体の累計
+let totalCorrect = 0;          // セッション全体の累計
 let answered = false;
-let multiSelected = new Set();   // 複数選択時の選択状態
+let multiSelected = new Set();
 
 /* ============================================
    問題プール生成
@@ -853,20 +1088,45 @@ function shuffle(arr) {
 
 function startQuiz(mode) {
   currentMode = mode;
-  const pool = buildPool(mode);
-  queue = shuffle(pool);
   totalAttempts = 0;
   totalCorrect = 0;
+  const pool = buildPool(mode);
+  startRound(pool, 1);
+}
+
+function startRound(questions, roundNum) {
+  currentRound = roundNum;
+  // 各問題に答えの記録フィールドを付ける(新しいオブジェクト)
+  currentQueue = shuffle(questions).map(q => ({
+    ...q,
+    userAnswer: null,
+    isCorrect: null
+  }));
+  wrongList = [];
   
+  // 画面切り替え
   document.getElementById('modeSelect').style.display = 'none';
+  document.getElementById('reviewScreen').classList.remove('active');
   document.getElementById('completeScreen').classList.remove('active');
   document.getElementById('quizScreen').classList.add('active');
   
   showNextQuestion();
 }
 
+function startNextRound() {
+  // 間違えた問題のみで次の周回
+  // wrongListをコピーして次の周回のpoolにする(元の記録は破棄して新たに採る)
+  const nextPool = wrongList.map(q => {
+    // 元の問題データを復元(userAnswer等は除く)
+    const { userAnswer, isCorrect, ...orig } = q;
+    return orig;
+  });
+  startRound(nextPool, currentRound + 1);
+}
+
 function backToMode() {
   document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('reviewScreen').classList.remove('active');
   document.getElementById('completeScreen').classList.remove('active');
   document.getElementById('modeSelect').style.display = 'block';
   updateCounts();
@@ -877,16 +1137,17 @@ function restartQuiz() {
 }
 
 function showNextQuestion() {
-  if (queue.length === 0) {
-    showComplete();
+  if (currentQueue.length === 0) {
+    // 周回終了 → レビュー画面か完了画面へ
+    onRoundEnd();
     return;
   }
   
-  currentQuestion = queue[0];
+  currentQuestion = currentQueue[0];
   answered = false;
   multiSelected = new Set();
   
-  // ターゲット表示(targetNoteは小さく添える)
+  // ターゲット表示
   const targetEl = document.getElementById('qTarget');
   if (currentQuestion.targetNote) {
     targetEl.innerHTML = currentQuestion.target + '<span class="target-note">(' + currentQuestion.targetNote + ')</span>';
@@ -894,7 +1155,6 @@ function showNextQuestion() {
     targetEl.textContent = currentQuestion.target;
   }
   
-  // 単語長による調整
   if (currentQuestion.target.length > 11) {
     targetEl.classList.add('small');
   } else {
@@ -923,6 +1183,12 @@ function showNextQuestion() {
     btn.className = 'choice-btn';
   });
   
+  // 「わからない」ボタンリセット
+  const dontknowBtn = document.getElementById('dontknowBtn');
+  dontknowBtn.disabled = false;
+  dontknowBtn.classList.remove('dimmed');
+  dontknowBtn.style.display = 'block';
+  
   // 決定ボタン
   const submitBtn = document.getElementById('submitBtn');
   if (currentQuestion.multi) {
@@ -939,9 +1205,25 @@ function showNextQuestion() {
   updateProgress();
 }
 
+function onRoundEnd() {
+  if (wrongList.length === 0) {
+    // 全問正解 → セッション終了
+    showComplete();
+  } else {
+    // 間違いあり → レビュー画面
+    showReviewScreen();
+  }
+}
+
 function updateProgress() {
-  document.getElementById('remaining').textContent = queue.length;
+  document.getElementById('remaining').textContent = currentQueue.length;
   document.getElementById('correct').textContent = totalCorrect;
+  const roundLabel = document.getElementById('roundLabel');
+  if (currentRound >= 2) {
+    roundLabel.innerHTML = `<span style="color: var(--accent); font-weight: 700;">${currentRound}周目</span> ・ `;
+  } else {
+    roundLabel.innerHTML = '';
+  }
 }
 
 function updateCounts() {
@@ -968,12 +1250,16 @@ function selectChoice(choice) {
       multiSelected.add(choice);
       btn.classList.add('selected');
     }
-    // 決定ボタンの有効/無効
     document.getElementById('submitBtn').disabled = multiSelected.size === 0;
   } else {
-    // 単一選択モード: 即判定
     judgeAnswer([choice]);
   }
+}
+
+function selectDontKnow() {
+  if (answered) return;
+  // 「わからない」は即座に不正解として判定
+  judgeAnswer(['__dontknow__']);
 }
 
 function submitMulti() {
@@ -985,16 +1271,24 @@ function judgeAnswer(selectedArr) {
   answered = true;
   totalAttempts++;
   
+  const isDontKnow = selectedArr.length === 1 && selectedArr[0] === '__dontknow__';
   const correctSet = new Set(currentQuestion.answers);
-  const selectedSet = new Set(selectedArr);
+  const selectedSet = new Set(isDontKnow ? [] : selectedArr);
   
-  // 完全一致で正解判定(複数選択の場合は過不足なし)
-  let isCorrect = correctSet.size === selectedSet.size;
-  if (isCorrect) {
-    for (const a of correctSet) {
-      if (!selectedSet.has(a)) { isCorrect = false; break; }
+  // 正誤判定: 「わからない」は不正解、それ以外は完全一致で正解
+  let isCorrect = false;
+  if (!isDontKnow) {
+    isCorrect = correctSet.size === selectedSet.size;
+    if (isCorrect) {
+      for (const a of correctSet) {
+        if (!selectedSet.has(a)) { isCorrect = false; break; }
+      }
     }
   }
+  
+  // 問題に記録
+  currentQuestion.userAnswer = isDontKnow ? ['__dontknow__'] : [...selectedSet];
+  currentQuestion.isCorrect = isCorrect;
   
   // ボタンスタイル更新
   document.querySelectorAll('.choice-btn').forEach(btn => {
@@ -1003,16 +1297,11 @@ function judgeAnswer(selectedArr) {
     btn.classList.remove('selected');
     
     if (correctSet.has(pos)) {
-      // 正解の選択肢
-      if (selectedSet.has(pos)) {
-        btn.classList.add('correct');
-      } else {
-        // 選び漏れた正解
-        btn.classList.add('correct');
+      btn.classList.add('correct');
+      if (!selectedSet.has(pos)) {
         btn.classList.add('dimmed');
       }
     } else {
-      // 不正解の選択肢
       if (selectedSet.has(pos)) {
         btn.classList.add('wrong');
       } else {
@@ -1020,6 +1309,15 @@ function judgeAnswer(selectedArr) {
       }
     }
   });
+  
+  // 「わからない」ボタン無効化
+  const dontknowBtn = document.getElementById('dontknowBtn');
+  dontknowBtn.disabled = true;
+  if (isDontKnow) {
+    dontknowBtn.classList.add('dimmed');
+  } else {
+    dontknowBtn.classList.add('dimmed');
+  }
   
   // 決定ボタンを隠す
   document.getElementById('submitBtn').classList.remove('show');
@@ -1034,7 +1332,7 @@ function judgeAnswer(selectedArr) {
     resultEl.textContent = '正解';
     resultEl.className = 'feedback-result correct';
   } else {
-    resultEl.textContent = '不正解';
+    resultEl.textContent = isDontKnow ? 'わからない(不正解扱い)' : '不正解';
     resultEl.className = 'feedback-result wrong';
   }
   
@@ -1043,14 +1341,11 @@ function judgeAnswer(selectedArr) {
   
   document.getElementById('nextBtn').style.display = 'block';
   
-  // キュー処理
-  if (isCorrect) {
-    queue.shift();
-  } else {
-    const wrong = queue.shift();
-    const insertPos = Math.min(queue.length, 3 + Math.floor(Math.random() * 3));
-    queue.splice(insertPos, 0, wrong);
+  // キュー処理: 1問1回出題、不正解はwrongListに追加
+  if (!isCorrect) {
+    wrongList.push(currentQuestion);
   }
+  currentQueue.shift();
   
   updateProgress();
 }
@@ -1087,8 +1382,77 @@ function nextQuestion() {
   showNextQuestion();
 }
 
+/* ============================================
+   レビュー画面
+   ============================================ */
+
+function showReviewScreen() {
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('completeScreen').classList.remove('active');
+  document.getElementById('reviewScreen').classList.add('active');
+  
+  document.getElementById('reviewTitle').textContent = `${currentRound}周目の結果`;
+  
+  const totalThisRound = currentRound === 1 ? buildPool(currentMode).length : 
+    (wrongList.length > 0 ? null : 0);
+  // 周回ごとの出題数は、1周目=全問、2周目以降=前周のwrong数
+  // ただしこの時点で currentQueue は空、wrongListに記録あり
+  // 周の出題数は wrongList の集計から逆算するのは難しいので、別途記録すべきだが、
+  // シンプルに wrongList.length(間違い数)だけ表示する
+  
+  const summaryEl = document.getElementById('reviewSummary');
+  summaryEl.innerHTML = `間違えた問題: <span class="num">${wrongList.length}</span> 問<br>タップで解説を表示できます。`;
+  
+  // 間違いリストを表示
+  const wrongListEl = document.getElementById('wrongList');
+  wrongListEl.innerHTML = '';
+  
+  const posLabel = { noun: '名詞', adjective: '形容詞', adverb: '副詞' };
+  
+  wrongList.forEach((q, idx) => {
+    const item = document.createElement('div');
+    item.className = 'wrong-item';
+    
+    // ユーザーの解答表示
+    let userAnsStr;
+    if (q.userAnswer.length === 1 && q.userAnswer[0] === '__dontknow__') {
+      userAnsStr = 'わからない';
+    } else {
+      userAnsStr = q.userAnswer.map(a => posLabel[a]).join('・');
+    }
+    const correctAnsStr = q.answers.map(a => posLabel[a]).join('・');
+    
+    item.innerHTML = `
+      <div class="wrong-item-header" onclick="toggleWrongItem(${idx})">
+        <span class="wrong-item-target">${q.target}</span>
+        <span class="wrong-item-meta">
+          あなた: <span class="user-ans">${userAnsStr}</span> / 正解: <span class="correct-ans">${correctAnsStr}</span>
+        </span>
+        <span class="wrong-item-toggle">+</span>
+      </div>
+      <div class="wrong-item-body">
+        ${buildFeedback(q)}
+      </div>
+    `;
+    
+    wrongListEl.appendChild(item);
+  });
+}
+
+function toggleWrongItem(idx) {
+  const items = document.querySelectorAll('.wrong-item');
+  if (items[idx]) {
+    items[idx].classList.toggle('expanded');
+  }
+}
+
+function endSession() {
+  showComplete();
+}
+
 function showComplete() {
   document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('reviewScreen').classList.remove('active');
   document.getElementById('completeScreen').classList.add('active');
   
   document.getElementById('totalAttempts').textContent = totalAttempts;
