@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>つばめ英語 — 前置詞演習 v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c2436;
+    --ink-soft: #3a4257;
+    --paper: #fefdfb;
+    --bg: #f5f3ee;
+    --accent: #8a1f2b;
+    --accent-deep: #6b1620;
+    --subtle: #6e6a5f;
+    --border: #c9c3b3;
+    --border-soft: #e0dccf;
+    --correct: #1f5d3f;
+    --wrong: #8a1f2b;
+    --highlight: #f7f1de;
+    --rule-gold: #a08940;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+    padding: 24px 16px 80px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 30%, rgba(160,137,64,0.02) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 70%, rgba(28,36,54,0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 36px;
+    padding: 28px 0 24px;
+    position: relative;
+  }
+
+  header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--rule-gold);
+    margin: 18px auto 0;
+  }
+
+  .title-main {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.45em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+  }
+
+  .title-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1em;
+    color: var(--subtle);
+    letter-spacing: 0.18em;
+    margin-top: 8px;
+  }
+
+  /* モード選択画面 */
+  .mode-select {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px 28px;
+    box-shadow: 0 1px 0 var(--border-soft), 0 4px 20px rgba(28,36,54,0.04);
+  }
+
+  .home-link {
+    display: inline-block;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85em;
+    color: var(--subtle);
+    text-decoration: none;
+    margin-bottom: 18px;
+    letter-spacing: 0.04em;
+    transition: color 0.15s;
+  }
+
+  .home-link:hover { color: var(--accent); }
+
+  .mode-select h2 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    margin-bottom: 28px;
+    text-align: center;
+    color: var(--ink);
+    letter-spacing: 0.1em;
+  }
+
+  .mode-select h2::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--border);
+    margin: 12px auto 0;
+  }
+
+  .mode-btn {
+    display: block;
+    width: 100%;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    font-family: 'Noto Sans JP', sans-serif;
+    position: relative;
+  }
+
+  .mode-btn:hover {
+    border-color: var(--accent);
+    background: var(--highlight);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(28,36,54,0.06);
+  }
+
+  .mode-btn .mode-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2em;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+    line-height: 1;
+  }
+
+  .mode-btn .mode-title {
+    font-size: 1.02em;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 8px 0 6px;
+  }
+
+  .mode-btn .mode-desc {
+    font-size: 0.85em;
+    color: var(--subtle);
+    line-height: 1.6;
+  }
+
+  .mode-btn .mode-count {
+    font-size: 0.78em;
+    color: var(--subtle);
+    margin-top: 8px;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  /* クイズ画面 */
+  .quiz-screen { display: none; }
+  .quiz-screen.active { display: block; }
+
+  .quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 12px 18px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+
+  .back-btn {
+    background: none;
+    border: none;
+    color: var(--subtle);
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.9em;
+    padding: 4px 8px;
+  }
+
+  .back-btn:hover { color: var(--accent); }
+
+  .progress {
+    color: var(--subtle);
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+  }
+
+  .progress strong {
+    color: var(--ink);
+    font-weight: 600;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25em;
+    margin: 0 2px;
+  }
+
+  .question-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px 28px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .question-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.78em;
+    font-weight: 500;
+    color: var(--subtle);
+    letter-spacing: 0.35em;
+    margin-bottom: 4px;
+    text-align: center;
+    padding-left: 0.35em;
+  }
+
+  .question-label::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--rule-gold);
+    margin: 10px auto 0;
+  }
+
+  /* モードA/C: 前置詞単体表示 */
+  .question-target {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2em;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: center;
+    padding: 18px 0 8px;
+    letter-spacing: 0.01em;
+  }
+
+  .question-target.small { font-size: 2.5em; }
+
+  /* モードB: 例文表示 */
+  .question-sentence {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8em;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: center;
+    padding: 18px 8px 6px;
+    line-height: 1.5;
+  }
+
+  .question-sentence .blank {
+    display: inline-block;
+    min-width: 2.2em;
+    border-bottom: 2px solid var(--accent);
+    margin: 0 0.12em;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .question-gloss {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.6em;
+    color: var(--subtle);
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+
+  .question-prompt {
+    text-align: center;
+    color: var(--subtle);
+    font-size: 0.92em;
+    margin-top: 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .choices.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .choice-btn {
+    padding: 16px 12px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--ink);
+  }
+
+  /* モードB選択肢(前置詞)は英字装飾 */
+  .choice-btn.prep {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+
+  .choice-btn:hover:not(:disabled) {
+    background: var(--highlight);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .choice-btn:disabled { cursor: default; }
+
+  .choice-btn.correct {
+    background: #e3eee7;
+    border-color: var(--correct);
+    border-width: 2px;
+    color: var(--correct);
+    font-weight: 700;
+  }
+
+  .choice-btn.wrong {
+    background: #f3dee0;
+    border-color: var(--wrong);
+    border-width: 2px;
+    color: var(--wrong);
+  }
+
+  .choice-btn.dimmed { opacity: 0.35; }
+
+  .dontknow-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.92em;
+    font-weight: 500;
+    background: var(--paper);
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--subtle);
+    margin-bottom: 12px;
+  }
+
+  .dontknow-btn:hover:not(:disabled) {
+    background: var(--highlight);
+    border-color: var(--subtle);
+    border-style: solid;
+    color: var(--ink);
+  }
+
+  .dontknow-btn:disabled { cursor: default; }
+  .dontknow-btn.dimmed { opacity: 0.35; }
+
+  /* レビュー画面 */
+  .review-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px 28px;
+  }
+
+  .review-card h2 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-align: center;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+
+  .review-card h2::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--rule-gold);
+    margin: 14px auto 0;
+  }
+
+  .review-summary {
+    text-align: center;
+    color: var(--subtle);
+    font-size: 0.92em;
+    margin: 14px 0 24px;
+  }
+
+  .review-summary .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 1.4em;
+    margin: 0 3px;
+  }
+
+  .wrong-list { margin-bottom: 28px; }
+
+  .wrong-item {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  .wrong-item-header {
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.15s;
+  }
+
+  .wrong-item-header:hover { background: var(--highlight); }
+
+  .wrong-item-target {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3em;
+    font-weight: 500;
+    color: var(--ink);
+    flex-shrink: 0;
+    font-style: italic;
+  }
+
+  .wrong-item-target.sentence {
+    font-size: 1.05em;
+    font-style: normal;
+  }
+
+  .wrong-item-meta {
+    font-size: 0.82em;
+    color: var(--subtle);
+    flex-grow: 1;
+    text-align: right;
+  }
+
+  .wrong-item-meta .user-ans { color: var(--wrong); font-weight: 700; }
+  .wrong-item-meta .correct-ans { color: var(--correct); font-weight: 700; }
+
+  .wrong-item-toggle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4em;
+    color: var(--subtle);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .wrong-item.expanded .wrong-item-toggle { transform: rotate(45deg); }
+
+  .wrong-item-body {
+    display: none;
+    padding: 16px 18px 18px;
+    border-top: 1px solid var(--border-soft);
+    background: var(--bg);
+    font-size: 0.9em;
+    line-height: 1.8;
+  }
+
+  .wrong-item.expanded .wrong-item-body { display: block; }
+
+  .wrong-item-body .label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    margin-right: 6px;
+    font-size: 0.92em;
+  }
+
+  .wrong-item-body code {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    background: var(--highlight);
+    padding: 1px 8px;
+    border-radius: 2px;
+    color: var(--ink);
+  }
+
+  .wrong-item-body .note {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 3px 3px 0;
+    font-size: 0.92em;
+    color: var(--ink-soft);
+  }
+
+  .review-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .review-actions button {
+    width: 100%;
+    padding: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.98em;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+
+  .review-actions .primary-btn {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+  }
+
+  .review-actions .primary-btn:hover { background: var(--accent); }
+
+  .review-actions .secondary-btn {
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  .review-actions .secondary-btn:hover {
+    background: var(--highlight);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* 解説 */
+  .feedback {
+    display: none;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .feedback.show { display: block; }
+
+  .feedback::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--rule-gold);
+    border-radius: 3px 0 0 3px;
+  }
+
+  .feedback-result {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    margin-bottom: 14px;
+    font-size: 1.1em;
+    letter-spacing: 0.1em;
+  }
+
+  .feedback-result.correct { color: var(--correct); }
+  .feedback-result.wrong { color: var(--wrong); }
+
+  .feedback-body {
+    font-size: 0.92em;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+
+  .feedback-row { margin-bottom: 4px; }
+
+  .feedback-body .label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    margin-right: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .feedback-body code {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    background: var(--highlight);
+    padding: 1px 8px;
+    border-radius: 2px;
+    font-size: 1.05em;
+    color: var(--ink);
+  }
+
+  .feedback-body .note {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: var(--highlight);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 3px 3px 0;
+    font-size: 0.9em;
+    color: var(--ink-soft);
+  }
+
+  .next-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.98em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    letter-spacing: 0.1em;
+  }
+
+  .next-btn:hover { background: var(--accent); }
+
+  /* 完了画面 */
+  .complete-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 48px 28px;
+    text-align: center;
+  }
+
+  .complete-card h2 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+  }
+
+  .complete-card h2::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--rule-gold);
+    margin: 14px auto 0;
+  }
+
+  .complete-card p {
+    color: var(--subtle);
+    margin: 16px 0 24px;
+    font-size: 0.92em;
+  }
+
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    margin: 24px 0 32px;
+  }
+
+  .stat-item .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6em;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-item .stat-label {
+    font-size: 0.8em;
+    color: var(--subtle);
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .restart-btn {
+    padding: 12px 28px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.92em;
+    cursor: pointer;
+    margin: 0 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .restart-btn:hover { background: var(--accent); }
+
+  .restart-btn.secondary {
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  .restart-btn.secondary:hover {
+    background: var(--highlight);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    color: var(--subtle);
+    font-size: 0.72em;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    letter-spacing: 0.25em;
+  }
+
+  footer::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--border);
+    margin: 0 auto 16px;
+  }
+
+  .origin-note {
+    text-align: center;
+    font-size: 0.74em;
+    color: var(--subtle);
+    margin-top: 10px;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 480px) {
+    .title-main { font-size: 1.3em; }
+    .question-target { font-size: 2.6em; }
+    .question-target.small { font-size: 2em; }
+    .question-sentence { font-size: 1.35em; }
+    .choices { grid-template-columns: 1fr 1fr; }
+    .choices.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .stats { gap: 22px; }
+    .stat-item .stat-num { font-size: 2.1em; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="title-main">つばめ英語 — 前置詞演習</div>
+    <div class="title-sub">Preposition Training</div>
+  </header>
+
+  <!-- モード選択 -->
+  <div id="modeSelect" class="mode-select">
+    <a class="home-link" href="../">← 演習一覧へ</a>
+    <h2>モードを選んでください</h2>
+    <button class="mode-btn" onclick="startQuiz('A')">
+      <div class="mode-label">A.</div>
+      <div class="mode-title">前置詞からコアイメージを答える</div>
+      <div class="mode-desc">表示される前置詞(例: in, at, by)の「コアイメージ(基本イメージ)」を選びます。</div>
+      <div class="mode-count" id="countA"></div>
+    </button>
+    <button class="mode-btn" onclick="startQuiz('B')">
+      <div class="mode-label">B.</div>
+      <div class="mode-title">例文の空所に入る前置詞を答える</div>
+      <div class="mode-desc">前置詞が空所になった例文を見て、当てはまる前置詞を選びます。1回ごとに全108問からランダムに30問を出題します。</div>
+      <div class="mode-count" id="countB"></div>
+    </button>
+    <button class="mode-btn" onclick="startQuiz('C')">
+      <div class="mode-label">C.</div>
+      <div class="mode-title">前置詞からコアイメージを答える(発展)</div>
+      <div class="mode-desc">資料外の前置詞(例: between, through, against)のコアイメージを選びます。誤答にはモードAの語のイメージも混ざります。</div>
+      <div class="mode-count" id="countC"></div>
+    </button>
+  </div>
+
+  <!-- クイズ画面 -->
+  <div id="quizScreen" class="quiz-screen">
+    <div class="quiz-header">
+      <button class="back-btn" onclick="backToMode()">← モード選択へ</button>
+      <div class="progress">
+        <span id="roundLabel"></span>残り <strong id="remaining">0</strong> / 正解 <strong id="correct">0</strong>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-label">問題</div>
+      <div class="question-target" id="qTarget"></div>
+      <div class="question-sentence" id="qSentence" style="display:none;"></div>
+      <div class="question-gloss" id="qGloss" style="display:none;"></div>
+      <div class="question-prompt" id="qPrompt"></div>
+    </div>
+
+    <div class="choices" id="choices"></div>
+
+    <button class="dontknow-btn" id="dontknowBtn" onclick="selectDontKnow()">わからない</button>
+
+    <div class="feedback" id="feedback">
+      <div class="feedback-result" id="feedbackResult"></div>
+      <div class="feedback-body" id="feedbackBody"></div>
+    </div>
+
+    <button class="next-btn" id="nextBtn" onclick="nextQuestion()" style="display:none;">次の問題へ →</button>
+  </div>
+
+  <!-- レビュー画面 -->
+  <div id="reviewScreen" class="quiz-screen">
+    <div class="review-card">
+      <h2 id="reviewTitle">1周目の結果</h2>
+      <div class="review-summary" id="reviewSummary"></div>
+      <div class="wrong-list" id="wrongList"></div>
+      <div class="review-actions">
+        <button class="primary-btn" onclick="startNextRound()">間違えた問題のみもう一度</button>
+        <button class="secondary-btn" onclick="endSession()">このまま終了する</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 完了画面 -->
+  <div id="completeScreen" class="quiz-screen">
+    <div class="complete-card">
+      <h2>セッション終了</h2>
+      <p>お疲れさまでした。以下はこのセッション全体の累計です。</p>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-num" id="totalAttempts">0</div>
+          <div class="stat-label">総解答数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="totalCorrect">0</div>
+          <div class="stat-label">正解数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="accuracy">0%</div>
+          <div class="stat-label">正答率</div>
+        </div>
+      </div>
+      <button class="restart-btn" onclick="restartQuiz()">もう一度</button>
+      <button class="restart-btn secondary" onclick="backToMode()">モード選択へ</button>
+    </div>
+  </div>
+
+  <footer>
+    SWALLOW-BASE — Preposition Training v1.0
+  </footer>
+  <div class="origin-note">※モードCの前置詞・コアイメージは当塾オリジナルの補足です(資料には未収録)。</div>
+
+</div>
+
+<script>
+/* ============================================
+   前置詞マスタ
+   id: 内部ID / disp: 表示語 / core: コアイメージラベル
+   group: 'A'(資料16語) / 'C'(発展10語)
+   ============================================ */
+const PREP_MASTER = [
+  // --- モードA: 資料16語 ---
+  { id: 'at',     disp: 'at',     core: '一点を指す',          group: 'A' },
+  { id: 'on',     disp: 'on',     core: '接触している',        group: 'A' },
+  { id: 'by',     disp: 'by',     core: '近接',                group: 'A' },
+  { id: 'to',     disp: 'to',     core: '方向・到達',          group: 'A' },
+  { id: 'for',    disp: 'for',    core: '前に（方向・目的）',  group: 'A' },
+  { id: 'from',   disp: 'from',   core: '起点',                group: 'A' },
+  { id: 'of',     disp: 'of',     core: '分離',                group: 'A' },
+  { id: 'off',    disp: 'off',    core: '分離',                group: 'A' },
+  { id: 'above',  disp: 'above',  core: 'ある所より上',        group: 'A' },
+  { id: 'over',   disp: 'over',   core: '対象の上を覆う',      group: 'A' },
+  { id: 'under',  disp: 'under',  core: '真下に',              group: 'A' },
+  { id: 'in',     disp: 'in',     core: 'ある範囲の内側',      group: 'A' },
+  { id: 'out',    disp: 'out',    core: '（中から）外へ',      group: 'A' },
+  { id: 'beside', disp: 'beside', core: '横にある',            group: 'A' },
+  { id: 'with',   disp: 'with',   core: '同伴',                group: 'A' },
+  { id: 'up',     disp: 'up',     core: '上に（ある・向かう）',group: 'A' },
+  // --- モードC: 発展10語(当塾オリジナル補足) ---
+  { id: 'between', disp: 'between', core: '二つの間にある',        group: 'C' },
+  { id: 'around',  disp: 'around',  core: '周りを取り囲む',        group: 'C' },
+  { id: 'through', disp: 'through', core: '端から端へ突き抜ける',  group: 'C' },
+  { id: 'against', disp: 'against', core: 'ぶつかり対抗する',      group: 'C' },
+  { id: 'behind',  disp: 'behind',  core: '背後にある',            group: 'C' },
+  { id: 'before',  disp: 'before',  core: '時間的に前にある',      group: 'C' },
+  { id: 'along',   disp: 'along',   core: '線に沿って進む',        group: 'C' },
+  { id: 'into',    disp: 'into',    core: '外から内へ入る',        group: 'C' },
+  { id: 'during',  disp: 'during',  core: 'ある期間の中ずっと',    group: 'C' },
+  { id: 'beneath', disp: 'beneath', core: 'すぐ下に接する',        group: 'C' },
+];
+
+const MASTER_BY_ID = {};
+PREP_MASTER.forEach(p => MASTER_BY_ID[p.id] = p);
+
+/* ============================================
+   モードB: 例文データ(全108問)
+   prep: 正解前置詞id / sentence: 例文(___が空所) / gloss: 和訳 / note: 補足(任意)
+   ============================================ */
+const SENTENCE_DATA = [
+  // at
+  { prep:'at', sentence:'arrive ___ the station', gloss:'駅に到着する', note:'場所が駅などの比較的狭い地点のときは <code>at</code>。広い範囲(都市など)なら <code>in</code> を使う。' },
+  { prep:'at', sentence:'___ the end of May', gloss:'5月の終わりに' },
+  { prep:'at', sentence:'aim ___ ~', gloss:'〜を狙う／〜を目指す' },
+  { prep:'at', sentence:'___ the rate of 3 times per minute', gloss:'1分間に3回の割合で' },
+  { prep:'at', sentence:'___ work', gloss:'仕事中(⇔ at play)' },
+  { prep:'at', sentence:'I was pleased ___ the news.', gloss:'その知らせに喜んだ。' },
+  { prep:'at', sentence:'feel ___ ease', gloss:'安心する' },
+  // on
+  { prep:'on', sentence:'a picture ___ the wall', gloss:'壁に掛かっている絵' },
+  { prep:'on', sentence:'He turned up (just) ___ time.', gloss:'彼は時間通りに現れた。' },
+  { prep:'on', sentence:'depend ___ ~', gloss:'〜に依存する' },
+  { prep:'on', sentence:'be based ___ ~', gloss:'〜に基づく' },
+  { prep:'on', sentence:'___ TV', gloss:'テレビで' },
+  { prep:'on', sentence:'___ foot', gloss:'徒歩で' },
+  { prep:'on', sentence:'a book ___ politics', gloss:'政治に関する本' },
+  // by
+  { prep:'by', sentence:'He stands ___ the door.', gloss:'彼はドアのそばに立っている。', note:'<code>by</code> は「手を伸ばせば届く距離」。<code>near</code>(離れていない)、<code>beside</code>(横に接している) と紛らわしいので注意。' },
+  { prep:'by', sentence:'pay ___ credit card', gloss:'クレジットカードで支払う' },
+  { prep:'by', sentence:'It was translated ___ a well-known writer.', gloss:'有名な作家によって翻訳された。' },
+  { prep:'by', sentence:'She caught him ___ the arm.', gloss:'彼女は彼の腕をつかんだ。' },
+  { prep:'by', sentence:'We arrived in Tokyo ___ way of Osaka.', gloss:'大阪経由で東京に到着した。' },
+  { prep:'by', sentence:'Produce and meat are sold ___ the kilo.', gloss:'農産物と肉はキロ単位で売られる。' },
+  { prep:'by', sentence:"Don't judge him ___ his appearance.", gloss:'見かけで判断してはいけない。' },
+  { prep:'by', sentence:'Come home ___ 7.', gloss:'7時までに帰宅しなさい。', note:'期限の <code>by</code>(7時までに完了)。継続の <code>until/till</code>(7時までずっと)と区別する。' },
+  { prep:'by', sentence:'I missed the train ___ a minute.', gloss:'1分差で列車に乗り遅れた。' },
+  // to
+  { prep:'to', sentence:'The river runs down ___ the sea.', gloss:'その川は海まで流れている。' },
+  { prep:'to', sentence:'be frozen ___ death', gloss:'凍え死ぬ' },
+  { prep:'to', sentence:'He read the book cover ___ cover.', gloss:'彼はその本を最初から最後まで読んだ。' },
+  { prep:'to', sentence:'The color of the dress is ___ her taste.', gloss:'そのドレスの色は彼女の好みに合っている。' },
+  { prep:'to', sentence:'an answer ___ the question', gloss:'質問に対する答え' },
+  { prep:'to', sentence:'I prefer coffee ___ tea.', gloss:'お茶よりコーヒーが好きです。' },
+  // for
+  { prep:'for', sentence:'I paid 1000 yen ___ the book.', gloss:'その本に1000円払った。' },
+  { prep:'for', sentence:"I'm acting ___ my client.", gloss:'依頼人の代理を務めている。' },
+  { prep:'for', sentence:'What can I do ___ you?', gloss:'何をすればいいですか。' },
+  { prep:'for', sentence:'I am ___ the plan.', gloss:'その計画に賛成です。' },
+  { prep:'for', sentence:'go out ___ a walk', gloss:'散歩に出かける' },
+  { prep:'for', sentence:'He was praised ___ saving a dog.', gloss:'犬を助けたことでほめられた。' },
+  { prep:'for', sentence:"I'm leaving ___ Tokyo.", gloss:'東京へ出発する。', note:'方向の <code>for</code>(到達は意味しない)。到達まで表す <code>to</code> と区別する。' },
+  { prep:'for', sentence:'I study English ___ 60 minutes every day.', gloss:'毎日60分英語を勉強する。' },
+  { prep:'for', sentence:'She looks young ___ her age.', gloss:'彼女は年の割には若く見える。' },
+  // from
+  { prep:'from', sentence:'I walked ___ the station to the library.', gloss:'駅から図書館まで歩いた。' },
+  { prep:'from', sentence:'___ now on', gloss:'今からずっと' },
+  { prep:'from', sentence:'She is ___ Kyoto.', gloss:'彼女は京都出身です。' },
+  { prep:'from', sentence:'The word derives ___ Japanese.', gloss:'その言葉は日本語に由来する。' },
+  { prep:'from', sentence:'Paper is made ___ wood.', gloss:'紙は木からできている。', note:'原料が質的に変化して見た目で分からない場合は <code>made from</code>。材料がそのまま残る場合は <code>made of</code>。' },
+  { prep:'from', sentence:"___ one's point of view", gloss:'〜の見地からすれば' },
+  { prep:'from', sentence:'die ___ starvation', gloss:'餓死する', note:'資料は <code>die from</code> で収録。外的要因(飢餓・けがなど)は <code>from</code>、病気は <code>die of</code> が一般的だが、近年は区別が曖昧になりつつある。' },
+  { prep:'from', sentence:'Two ___ ten leaves eight.', gloss:'10引く2は8。' },
+  { prep:'from', sentence:'tell A ___ B', gloss:'AをBと区別する' },
+  // of
+  { prep:'of', sentence:'He robbed me ___ my money.', gloss:'彼は私のお金を奪った。' },
+  { prep:'of', sentence:'the legs ___ a chair', gloss:'椅子の脚' },
+  { prep:'of', sentence:'a man ___ courage', gloss:'勇気のある人' },
+  { prep:'of', sentence:'a man ___ New York', gloss:'ニューヨーク出身の男' },
+  { prep:'of', sentence:'die ___ cancer', gloss:'ガンで死ぬ', note:'病気が原因の場合は <code>die of</code> が伝統的。外的要因は <code>die from</code>。' },
+  { prep:'of', sentence:'It was brave ___ you to tell the truth.', gloss:'本当のことを話すとは君は勇敢だ。' },
+  { prep:'of', sentence:'a table ___ wood', gloss:'木製テーブル', note:'材料が形を保って残る場合は <code>of</code>。質的に変化する場合は <code>made from</code>。' },
+  { prep:'of', sentence:'The class consists ___ 35 students.', gloss:'そのクラスは35人から成る。' },
+  { prep:'of', sentence:'the news ___ his coming', gloss:'彼がやってくるという知らせ' },
+  { prep:'of', sentence:'a book ___ travels', gloss:'旅行に関する本' },
+  { prep:'of', sentence:'the rise ___ democracy', gloss:'民主主義の台頭' },
+  // off
+  { prep:'off', sentence:'one mile ___ the main road', gloss:'幹線道路から1マイル離れて' },
+  { prep:'off', sentence:'get ___ the subject', gloss:'本題からはずれる' },
+  { prep:'off', sentence:'___ duty', gloss:'非番で(⇔ on duty)' },
+  { prep:'off', sentence:'go ___', gloss:'去る、爆発する' },
+  { prep:'off', sentence:'have a day ___', gloss:'1日休みを取る' },
+  { prep:'off', sentence:'leave ___', gloss:'終わる、〜をやめる' },
+  { prep:'off', sentence:'lay ___ ~', gloss:'〜を一時解雇する' },
+  // above
+  { prep:'above', sentence:'There is a waterfall ___ the bridge.', gloss:'橋の上手に滝がある。', note:'<code>above</code> は接触せず「ある所より上」。覆う意味の <code>over</code> と区別する。' },
+  { prep:'above', sentence:'fifty meters ___ sea level', gloss:'海抜50メートル' },
+  { prep:'above', sentence:'Health is ___ wealth.', gloss:'健康は富に勝る。' },
+  { prep:'above', sentence:'He is ___ telling lies.', gloss:'彼は嘘をつくような人ではない。' },
+  // over
+  { prep:'over', sentence:'A lot of seagulls are flying ___ the sea.', gloss:'たくさんのカモメが海の上を飛んでいる。', note:'<code>over</code> は対象を覆うイメージ。単に「より上」の <code>above</code> と区別する。' },
+  { prep:'over', sentence:'Who is ___ you at the office?', gloss:'職場では誰があなたの上司ですか。' },
+  { prep:'over', sentence:'Tom and I had a talk ___ a cup of coffee.', gloss:'トムと私はコーヒーを飲みながら話した。' },
+  { prep:'over', sentence:'walk ___ the mountain', gloss:'山を越える', note:'「端から端へ」の <code>over</code>。貫通する <code>through</code>、平面を横切る <code>across</code> と区別する。' },
+  { prep:'over', sentence:'travel ___ Europe', gloss:'ヨーロッパ中を旅する' },
+  { prep:'over', sentence:'talk ___ the matter', gloss:'その問題に関して話す' },
+  { prep:'over', sentence:'He wrote the book ___ three years.', gloss:'彼はその本を3年間にわたって書いた。' },
+  // under
+  { prep:'under', sentence:'___ the tree', gloss:'その木の下に(で)' },
+  { prep:'under', sentence:'Nobody ___ 20 is allowed to buy alcohol.', gloss:'20歳未満の方はアルコールを購入できない。' },
+  { prep:'under', sentence:'The building is still ___ construction.', gloss:'その建物はまだ建築中だ。' },
+  { prep:'under', sentence:'a field ___ water', gloss:'冠水した畑' },
+  { prep:'under', sentence:'___ international law', gloss:'国際法に基づいて' },
+  { prep:'under', sentence:'I was fishing ___ the bridge.', gloss:'私は橋の下で釣りをしていた。', note:'<code>under</code> は「真下」。単に低い位置を表す <code>below</code> と区別する(below なら「橋の下流で」のニュアンス)。' },
+  // in
+  { prep:'in', sentence:'___ the north of the city', gloss:'都市の北に' },
+  { prep:'in', sentence:'___ the rain', gloss:'雨に降られて' },
+  { prep:'in', sentence:'___ love', gloss:'恋をして' },
+  { prep:'in', sentence:'get ___ a car', gloss:'車に乗る' },
+  { prep:'in', sentence:'a woman ___ white', gloss:'白い服を着ている女性' },
+  { prep:'in', sentence:'speak ___ English', gloss:'英語で話す' },
+  { prep:'in', sentence:'stand ___ a line', gloss:'一列になって立つ' },
+  { prep:'in', sentence:'He will come here ___ ten days.', gloss:'10日たてば彼はここに来ます。', note:'現時点を基準に「〜後」を表す <code>in</code>。過去の出来事にも使える <code>after</code> と区別する。' },
+  // out
+  { prep:'out', sentence:'look ___ the window', gloss:'窓から外を見る' },
+  { prep:'out', sentence:'fight it ___', gloss:'最後まで戦う' },
+  { prep:'out', sentence:'inside ___', gloss:'裏返しに' },
+  // beside
+  { prep:'beside', sentence:'a tennis court ___ the house', gloss:'家のそばにあるテニスコート' },
+  { prep:'beside', sentence:'Your house looks big ___ mine.', gloss:'あなたの家は私の家と比べると大きく見える。' },
+  { prep:'beside', sentence:'Your answer is ___ the point.', gloss:'君の答えは的外れである。' },
+  // with
+  { prep:'with', sentence:'I want to be ___ you.', gloss:'あなたと一緒にいたい。' },
+  { prep:'with', sentence:'I agree ___ you.', gloss:'私はあなたに賛成します。' },
+  { prep:'with', sentence:'a man ___ black hair', gloss:'黒い髪の男' },
+  { prep:'with', sentence:'Someone broke the window ___ a hammer.', gloss:'誰かがハンマーで窓を壊した。' },
+  { prep:'with', sentence:'He jumped ___ joy.', gloss:'彼は飛び上がって喜んだ。' },
+  { prep:'with', sentence:"What's the matter ___ you?", gloss:'どうしたんですか。' },
+  { prep:'with', sentence:'He had a quarrel ___ his sister.', gloss:'彼は妹と喧嘩した。', note:'同伴の <code>with</code>。対立を明確に表す <code>against</code> と区別する(We fought against the invaders.)。' },
+  { prep:'with', sentence:'He listened to the story ___ his eyes shining.', gloss:'彼は目を輝かせながら話を聞いた。' },
+  // up
+  { prep:'up', sentence:'climb ___ a ladder', gloss:'梯子をのぼる' },
+  { prep:'up', sentence:'His room is ___ the stairs.', gloss:'彼の部屋は階段を上がったところにある。' },
+  { prep:'up', sentence:'look ___ at the sky', gloss:'空を見上げる' },
+  { prep:'up', sentence:'go ___ to London', gloss:'ロンドンに行く' },
+];
+
+/* セッションあたりの最大出題数 */
+const SESSION_SIZE = 30;
+
+/* ============================================
+   状態管理
+   ============================================ */
+let currentMode = null;
+let currentRound = 0;
+let currentQueue = [];
+let wrongList = [];
+let currentQuestion = null;
+let totalAttempts = 0;
+let totalCorrect = 0;
+let answered = false;
+
+/* ============================================
+   ユーティリティ
+   ============================================ */
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ============================================
+   選択肢生成
+   ============================================ */
+
+// モードA/C: コアイメージ選択肢。正解coreを必ず含め、誤答は重複ラベルを排除。
+function buildCoreChoices(correctPrep, distractorPool, numChoices) {
+  const usedLabels = new Set([correctPrep.core]);
+  const choices = [{ value: correctPrep.core, isCorrect: true }];
+  const pool = shuffle(distractorPool.filter(p => p.id !== correctPrep.id));
+  for (const p of pool) {
+    if (choices.length >= numChoices) break;
+    if (usedLabels.has(p.core)) continue; // of/off など同一ラベルの重複を排除
+    usedLabels.add(p.core);
+    choices.push({ value: p.core, isCorrect: false });
+  }
+  return shuffle(choices);
+}
+
+// モードB: 前置詞選択肢。誤答は資料16語から。
+function buildPrepChoices(correctPrep, numChoices) {
+  const pool = shuffle(PREP_MASTER.filter(p => p.group === 'A' && p.id !== correctPrep.id));
+  const choices = [{ value: correctPrep.id, disp: correctPrep.disp, isCorrect: true }];
+  for (const p of pool) {
+    if (choices.length >= numChoices) break;
+    choices.push({ value: p.id, disp: p.disp, isCorrect: false });
+  }
+  return shuffle(choices);
+}
+
+/* ============================================
+   問題プール生成
+   ============================================ */
+function buildPool(mode) {
+  if (mode === 'A' || mode === 'C') {
+    const group = mode === 'A' ? 'A' : 'C';
+    const distractorPool = mode === 'A'
+      ? PREP_MASTER.filter(p => p.group === 'A')
+      : PREP_MASTER.slice(); // モードCは16語+発展10語から誤答を作る
+    return PREP_MASTER.filter(p => p.group === group).map(p => ({
+      kind: 'core',
+      prepId: p.id,
+      disp: p.disp,
+      answerLabel: p.core,
+      distractorPool: distractorPool,
+    }));
+  } else {
+    return SENTENCE_DATA.map(s => ({
+      kind: 'sentence',
+      prepId: s.prep,
+      sentence: s.sentence,
+      gloss: s.gloss,
+      note: s.note || null,
+      answerDisp: MASTER_BY_ID[s.prep].disp,
+    }));
+  }
+}
+
+/* ============================================
+   画面遷移
+   ============================================ */
+function startQuiz(mode) {
+  currentMode = mode;
+  totalAttempts = 0;
+  totalCorrect = 0;
+  let pool = buildPool(mode);
+  pool = shuffle(pool).slice(0, SESSION_SIZE); // 母数がSESSION_SIZE未満なら全問
+  startRound(pool, 1);
+}
+
+function startRound(questions, roundNum) {
+  currentRound = roundNum;
+  currentQueue = shuffle(questions).map(q => ({
+    ...q,
+    userAnswer: null,
+    isCorrect: null,
+    choices: null, // この周回で選択肢を固定
+  }));
+  wrongList = [];
+
+  document.getElementById('modeSelect').style.display = 'none';
+  document.getElementById('reviewScreen').classList.remove('active');
+  document.getElementById('completeScreen').classList.remove('active');
+  document.getElementById('quizScreen').classList.add('active');
+
+  showNextQuestion();
+}
+
+function startNextRound() {
+  const nextPool = wrongList.map(q => {
+    const { userAnswer, isCorrect, choices, ...orig } = q;
+    return orig;
+  });
+  startRound(nextPool, currentRound + 1);
+}
+
+function backToMode() {
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('reviewScreen').classList.remove('active');
+  document.getElementById('completeScreen').classList.remove('active');
+  document.getElementById('modeSelect').style.display = 'block';
+  updateCounts();
+}
+
+function restartQuiz() { startQuiz(currentMode); }
+
+function showNextQuestion() {
+  if (currentQueue.length === 0) {
+    onRoundEnd();
+    return;
+  }
+
+  currentQuestion = currentQueue[0];
+  answered = false;
+
+  const targetEl = document.getElementById('qTarget');
+  const sentenceEl = document.getElementById('qSentence');
+  const glossEl = document.getElementById('qGloss');
+  const promptEl = document.getElementById('qPrompt');
+  const choicesEl = document.getElementById('choices');
+
+  if (!currentQuestion.choices) {
+    const correctPrep = MASTER_BY_ID[currentQuestion.prepId];
+    if (currentQuestion.kind === 'core') {
+      currentQuestion.choices = buildCoreChoices(correctPrep, currentQuestion.distractorPool, 4);
+    } else {
+      currentQuestion.choices = buildPrepChoices(correctPrep, 4);
+    }
+  }
+
+  if (currentQuestion.kind === 'core') {
+    targetEl.style.display = 'block';
+    targetEl.textContent = currentQuestion.disp;
+    targetEl.classList.toggle('small', currentQuestion.disp.length > 8);
+    sentenceEl.style.display = 'none';
+    glossEl.style.display = 'none';
+    promptEl.textContent = 'この前置詞のコアイメージは?';
+  } else {
+    targetEl.style.display = 'none';
+    sentenceEl.style.display = 'block';
+    sentenceEl.innerHTML = currentQuestion.sentence.replace('___', '<span class="blank">?</span>');
+    glossEl.style.display = 'block';
+    glossEl.textContent = currentQuestion.gloss;
+    promptEl.textContent = '空所に入る前置詞は?';
+  }
+
+  choicesEl.innerHTML = '';
+  choicesEl.className = 'choices' + (currentQuestion.choices.length === 3 ? ' cols-3' : '');
+  currentQuestion.choices.forEach((c, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn' + (currentQuestion.kind === 'sentence' ? ' prep' : '');
+    btn.dataset.idx = idx;
+    btn.textContent = currentQuestion.kind === 'sentence' ? c.disp : c.value;
+    btn.onclick = () => selectChoice(idx);
+    choicesEl.appendChild(btn);
+  });
+
+  const dontknowBtn = document.getElementById('dontknowBtn');
+  dontknowBtn.disabled = false;
+  dontknowBtn.classList.remove('dimmed');
+  dontknowBtn.style.display = 'block';
+
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('nextBtn').style.display = 'none';
+
+  updateProgress();
+}
+
+function onRoundEnd() {
+  if (wrongList.length === 0) showComplete();
+  else showReviewScreen();
+}
+
+function updateProgress() {
+  document.getElementById('remaining').textContent = currentQueue.length;
+  document.getElementById('correct').textContent = totalCorrect;
+  const roundLabel = document.getElementById('roundLabel');
+  if (currentRound >= 2) {
+    roundLabel.innerHTML = `<span style="color: var(--accent); font-weight: 700;">${currentRound}周目</span> ・ `;
+  } else {
+    roundLabel.innerHTML = '';
+  }
+}
+
+function updateCounts() {
+  const aCount = PREP_MASTER.filter(p => p.group === 'A').length;
+  const cCount = PREP_MASTER.filter(p => p.group === 'C').length;
+  document.getElementById('countA').textContent = `収録: ${aCount}問`;
+  document.getElementById('countB').textContent = `収録: ${SENTENCE_DATA.length}問(毎回${SESSION_SIZE}問を出題)`;
+  document.getElementById('countC').textContent = `収録: ${cCount}問`;
+}
+
+/* ============================================
+   解答処理
+   ============================================ */
+function selectChoice(idx) {
+  if (answered) return;
+  judgeAnswer(idx);
+}
+
+function selectDontKnow() {
+  if (answered) return;
+  judgeAnswer(-1);
+}
+
+function judgeAnswer(selectedIdx) {
+  answered = true;
+  totalAttempts++;
+
+  const isDontKnow = selectedIdx === -1;
+  const isCorrect = !isDontKnow && currentQuestion.choices[selectedIdx].isCorrect;
+
+  currentQuestion.userAnswer = selectedIdx;
+  currentQuestion.isCorrect = isCorrect;
+
+  document.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.disabled = true;
+    const i = parseInt(btn.dataset.idx, 10);
+    const c = currentQuestion.choices[i];
+    if (c.isCorrect) {
+      btn.classList.add('correct');
+      if (i !== selectedIdx) btn.classList.add('dimmed');
+    } else {
+      if (i === selectedIdx) btn.classList.add('wrong');
+      else btn.classList.add('dimmed');
+    }
+  });
+
+  const dontknowBtn = document.getElementById('dontknowBtn');
+  dontknowBtn.disabled = true;
+  dontknowBtn.classList.add('dimmed');
+
+  const feedback = document.getElementById('feedback');
+  const resultEl = document.getElementById('feedbackResult');
+  const bodyEl = document.getElementById('feedbackBody');
+
+  if (isCorrect) {
+    totalCorrect++;
+    resultEl.textContent = '正解';
+    resultEl.className = 'feedback-result correct';
+  } else {
+    resultEl.textContent = isDontKnow ? 'わからない(不正解扱い)' : '不正解';
+    resultEl.className = 'feedback-result wrong';
+  }
+
+  bodyEl.innerHTML = buildFeedback(currentQuestion);
+  feedback.classList.add('show');
+
+  document.getElementById('nextBtn').style.display = 'block';
+
+  if (!isCorrect) wrongList.push(currentQuestion);
+  currentQueue.shift();
+
+  updateProgress();
+}
+
+function buildFeedback(q) {
+  let html = '';
+  const prep = MASTER_BY_ID[q.prepId];
+
+  if (q.kind === 'core') {
+    html += `<div class="feedback-row"><span class="label">前置詞:</span><code>${prep.disp}</code></div>`;
+    html += `<div class="feedback-row"><span class="label">コアイメージ:</span>${prep.core}</div>`;
+    if (prep.group === 'C') {
+      html += `<div class="note">この語のコアイメージは当塾オリジナルの補足です(資料には未収録)。</div>`;
+    }
+  } else {
+    const filled = q.sentence.replace('___', `<code>${prep.disp}</code>`);
+    html += `<div class="feedback-row"><span class="label">正解:</span><code>${prep.disp}</code></div>`;
+    html += `<div class="feedback-row"><span class="label">例文:</span>${filled}</div>`;
+    html += `<div class="feedback-row"><span class="label">意味:</span>${q.gloss}</div>`;
+    html += `<div class="feedback-row"><span class="label">コアイメージ:</span>${prep.core}</div>`;
+    if (q.note) html += `<div class="note">${q.note}</div>`;
+  }
+  return html;
+}
+
+function nextQuestion() { showNextQuestion(); }
+
+/* ============================================
+   レビュー画面
+   ============================================ */
+function showReviewScreen() {
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('completeScreen').classList.remove('active');
+  document.getElementById('reviewScreen').classList.add('active');
+
+  document.getElementById('reviewTitle').textContent = `${currentRound}周目の結果`;
+  document.getElementById('reviewSummary').innerHTML =
+    `間違えた問題: <span class="num">${wrongList.length}</span> 問<br>タップで解説を表示できます。`;
+
+  const wrongListEl = document.getElementById('wrongList');
+  wrongListEl.innerHTML = '';
+
+  wrongList.forEach((q, idx) => {
+    const prep = MASTER_BY_ID[q.prepId];
+    const item = document.createElement('div');
+    item.className = 'wrong-item';
+
+    let headTarget, userAnsStr, correctAnsStr, targetClass;
+    if (q.kind === 'core') {
+      headTarget = prep.disp;
+      targetClass = 'wrong-item-target';
+      correctAnsStr = prep.core;
+      userAnsStr = q.userAnswer === -1 ? 'わからない' : q.choices[q.userAnswer].value;
+    } else {
+      headTarget = q.sentence.replace('___', '____');
+      targetClass = 'wrong-item-target sentence';
+      correctAnsStr = prep.disp;
+      userAnsStr = q.userAnswer === -1 ? 'わからない' : q.choices[q.userAnswer].disp;
+    }
+
+    item.innerHTML = `
+      <div class="wrong-item-header" onclick="toggleWrongItem(${idx})">
+        <span class="${targetClass}">${headTarget}</span>
+        <span class="wrong-item-meta">
+          あなた: <span class="user-ans">${userAnsStr}</span> / 正解: <span class="correct-ans">${correctAnsStr}</span>
+        </span>
+        <span class="wrong-item-toggle">+</span>
+      </div>
+      <div class="wrong-item-body">
+        ${buildFeedback(q)}
+      </div>
+    `;
+    wrongListEl.appendChild(item);
+  });
+}
+
+function toggleWrongItem(idx) {
+  const items = document.querySelectorAll('.wrong-item');
+  if (items[idx]) items[idx].classList.toggle('expanded');
+}
+
+function endSession() { showComplete(); }
+
+function showComplete() {
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('reviewScreen').classList.remove('active');
+  document.getElementById('completeScreen').classList.add('active');
+
+  document.getElementById('totalAttempts').textContent = totalAttempts;
+  document.getElementById('totalCorrect').textContent = totalCorrect;
+  const acc = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
+  document.getElementById('accuracy').textContent = acc + '%';
+}
+
+/* 初期化 */
+updateCounts();
+</script>
+</body>
+</html>

@@ -3,26 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>つばめ英語 — 接尾辞演習 v1.4</title>
+<title>つばめ英語 — 演習一覧</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* 英語参考書・辞書を意識した配色 */
-    --ink: #1c2436;           /* 深いインクブルー */
+    --ink: #1c2436;
     --ink-soft: #3a4257;
-    --paper: #fefdfb;         /* 紙の白 */
-    --bg: #f5f3ee;            /* 古い洋書のクリーム色 */
-    --accent: #8a1f2b;        /* オックスフォード赤 */
+    --paper: #fefdfb;
+    --bg: #f5f3ee;
+    --accent: #8a1f2b;
     --accent-deep: #6b1620;
     --subtle: #6e6a5f;
     --border: #c9c3b3;
     --border-soft: #e0dccf;
-    --correct: #1f5d3f;
-    --wrong: #8a1f2b;
     --highlight: #f7f1de;
-    --rule-gold: #a08940;     /* 装飾線のゴールド */
+    --rule-gold: #a08940;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,7 +33,6 @@
     padding: 24px 16px 80px;
   }
 
-  /* 紙のテクスチャ感を出すための微妙な背景 */
   body::before {
     content: '';
     position: fixed;
@@ -56,9 +52,36 @@
 
   header {
     text-align: center;
-    margin-bottom: 36px;
-    padding: 28px 0 24px;
+    margin-bottom: 16px;
+    padding: 40px 0 28px;
     position: relative;
+  }
+
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.82em;
+    letter-spacing: 0.4em;
+    color: var(--subtle);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .title-main {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 2em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+  }
+
+  .title-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15em;
+    color: var(--subtle);
+    letter-spacing: 0.2em;
+    margin-top: 10px;
   }
 
   header::after {
@@ -67,541 +90,40 @@
     width: 60px;
     height: 1px;
     background: var(--rule-gold);
-    margin: 18px auto 0;
+    margin: 22px auto 0;
   }
 
-  .title-main {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.45em;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--ink);
+  .lead {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.95em;
+    margin-bottom: 34px;
+    letter-spacing: 0.03em;
   }
 
-  .title-jp {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.7em;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    color: var(--subtle);
-    margin-top: 8px;
-    text-transform: none;
+  /* アプリ選択カード */
+  .app-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
 
-  .title-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1em;
-    color: var(--subtle);
-    letter-spacing: 0.18em;
-    margin-top: 8px;
-  }
-
-  /* モード選択画面 */
-  .mode-select {
+  .app-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
     background: var(--paper);
     border: 1px solid var(--border);
     border-radius: 4px;
-    padding: 36px 28px;
+    padding: 30px 30px 26px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.22s ease;
     box-shadow: 0 1px 0 var(--border-soft), 0 4px 20px rgba(28,36,54,0.04);
   }
 
-  .mode-select h2 {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1em;
-    font-weight: 500;
-    margin-bottom: 28px;
-    text-align: center;
-    color: var(--ink);
-    letter-spacing: 0.1em;
-  }
-
-  .mode-select h2::after {
-    content: '';
-    display: block;
-    width: 30px;
-    height: 1px;
-    background: var(--border);
-    margin: 12px auto 0;
-  }
-
-  .mode-btn {
-    display: block;
-    width: 100%;
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 22px 26px;
-    margin-bottom: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: left;
-    font-family: 'Noto Sans JP', sans-serif;
-    position: relative;
-  }
-
-  .mode-btn:hover {
-    border-color: var(--accent);
-    background: var(--highlight);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(28,36,54,0.06);
-  }
-
-  .mode-btn .mode-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2em;
-    font-weight: 600;
-    font-style: italic;
-    color: var(--accent);
-    letter-spacing: 0.05em;
-    margin-bottom: 2px;
-    line-height: 1;
-  }
-
-  .mode-btn .mode-title {
-    font-size: 1.02em;
-    font-weight: 700;
-    color: var(--ink);
-    margin: 8px 0 6px;
-  }
-
-  .mode-btn .mode-desc {
-    font-size: 0.85em;
-    color: var(--subtle);
-    line-height: 1.6;
-  }
-
-  .mode-btn .mode-count {
-    font-size: 0.78em;
-    color: var(--subtle);
-    margin-top: 8px;
-    font-family: 'Noto Sans JP', sans-serif;
-    letter-spacing: 0.05em;
-  }
-
-  /* クイズ画面 */
-  .quiz-screen { display: none; }
-  .quiz-screen.active { display: block; }
-
-  .quiz-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 12px 18px;
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-size: 0.85em;
-  }
-
-  .back-btn {
-    background: none;
-    border: none;
-    color: var(--subtle);
-    cursor: pointer;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.9em;
-    padding: 4px 8px;
-  }
-
-  .back-btn:hover { color: var(--accent); }
-
-  .progress {
-    color: var(--subtle);
-    font-family: 'Noto Sans JP', sans-serif;
-    letter-spacing: 0.05em;
-    font-size: 0.9em;
-  }
-
-  .progress strong {
-    color: var(--ink);
-    font-weight: 600;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25em;
-    margin: 0 2px;
-  }
-
-  .question-card {
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 32px 28px;
-    margin-bottom: 16px;
-    position: relative;
-  }
-
-  .question-label {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.78em;
-    font-weight: 500;
-    color: var(--subtle);
-    letter-spacing: 0.35em;
-    margin-bottom: 4px;
-    text-align: center;
-    padding-left: 0.35em;
-  }
-
-  .question-label::after {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--rule-gold);
-    margin: 10px auto 0;
-  }
-
-  .question-target {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.2em;
-    font-weight: 500;
-    color: var(--ink);
-    text-align: center;
-    padding: 18px 0 8px;
-    letter-spacing: 0.01em;
-  }
-
-  .question-target.small {
-    font-size: 2.5em;
-  }
-
-  .question-target .target-note {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.32em;
-    font-weight: 500;
-    color: var(--subtle);
-    margin-left: 8px;
-    vertical-align: middle;
-    letter-spacing: 0.05em;
-  }
-
-  .question-prompt {
-    text-align: center;
-    color: var(--subtle);
-    font-size: 0.92em;
-    margin-top: 4px;
-    font-family: 'Noto Sans JP', sans-serif;
-  }
-
-  .multi-notice {
-    display: none;
-    margin-top: 10px;
-    padding: 8px 14px;
-    background: var(--highlight);
-    border: 1px solid var(--rule-gold);
-    border-radius: 3px;
-    color: var(--accent-deep);
-    font-size: 0.88em;
-    font-weight: 700;
-    text-align: center;
-  }
-
-  .multi-notice.show { display: block; }
-
-  .choices {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-
-  .choice-btn {
-    padding: 16px 12px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1em;
-    font-weight: 500;
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.15s;
-    color: var(--ink);
-  }
-
-  .choice-btn:hover:not(:disabled) {
-    background: var(--highlight);
-    border-color: var(--accent);
-    transform: translateY(-1px);
-  }
-
-  .choice-btn:disabled { cursor: default; }
-
-  .choice-btn.selected {
-    background: var(--highlight);
-    border-color: var(--accent);
-    border-width: 2px;
-    color: var(--accent-deep);
-    font-weight: 700;
-  }
-
-  .choice-btn.correct {
-    background: #e3eee7;
-    border-color: var(--correct);
-    border-width: 2px;
-    color: var(--correct);
-    font-weight: 700;
-  }
-
-  .choice-btn.wrong {
-    background: #f3dee0;
-    border-color: var(--wrong);
-    border-width: 2px;
-    color: var(--wrong);
-  }
-
-  .choice-btn.dimmed {
-    opacity: 0.35;
-  }
-
-  /* 「わからない」ボタン */
-  .dontknow-btn {
-    width: 100%;
-    padding: 12px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.92em;
-    font-weight: 500;
-    background: var(--paper);
-    border: 1px dashed var(--border);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.15s;
-    color: var(--subtle);
-    margin-bottom: 12px;
-  }
-
-  .dontknow-btn:hover:not(:disabled) {
-    background: var(--highlight);
-    border-color: var(--subtle);
-    border-style: solid;
-    color: var(--ink);
-  }
-
-  .dontknow-btn:disabled { cursor: default; }
-
-  .dontknow-btn.dimmed { opacity: 0.35; }
-
-  /* レビュー画面 */
-  .review-card {
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 36px 28px;
-  }
-
-  .review-card h2 {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.2em;
-    font-weight: 700;
-    margin-bottom: 8px;
-    text-align: center;
-    color: var(--ink);
-    letter-spacing: 0.05em;
-  }
-
-  .review-card h2::after {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--rule-gold);
-    margin: 14px auto 0;
-  }
-
-  .review-summary {
-    text-align: center;
-    color: var(--subtle);
-    font-size: 0.92em;
-    margin: 14px 0 24px;
-  }
-
-  .review-summary .num {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    color: var(--accent);
-    font-size: 1.4em;
-    margin: 0 3px;
-  }
-
-  .wrong-list {
-    margin-bottom: 28px;
-  }
-
-  .wrong-item {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    margin-bottom: 10px;
-    overflow: hidden;
-    background: var(--paper);
-  }
-
-  .wrong-item-header {
-    padding: 14px 18px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    transition: background 0.15s;
-  }
-
-  .wrong-item-header:hover {
-    background: var(--highlight);
-  }
-
-  .wrong-item-target {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4em;
-    font-weight: 500;
-    color: var(--ink);
-    flex-shrink: 0;
-  }
-
-  .wrong-item-meta {
-    font-size: 0.82em;
-    color: var(--subtle);
-    flex-grow: 1;
-    text-align: right;
-  }
-
-  .wrong-item-meta .user-ans {
-    color: var(--wrong);
-    font-weight: 700;
-  }
-
-  .wrong-item-meta .correct-ans {
-    color: var(--correct);
-    font-weight: 700;
-  }
-
-  .wrong-item-toggle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4em;
-    color: var(--subtle);
-    transition: transform 0.2s;
-    flex-shrink: 0;
-    line-height: 1;
-  }
-
-  .wrong-item.expanded .wrong-item-toggle {
-    transform: rotate(45deg);
-  }
-
-  .wrong-item-body {
-    display: none;
-    padding: 16px 18px 18px;
-    border-top: 1px solid var(--border-soft);
-    background: var(--bg);
-    font-size: 0.9em;
-    line-height: 1.8;
-  }
-
-  .wrong-item.expanded .wrong-item-body {
-    display: block;
-  }
-
-  .wrong-item-body .label {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 700;
-    color: var(--accent);
-    margin-right: 6px;
-    font-size: 0.92em;
-  }
-
-  .wrong-item-body code {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 500;
-    background: var(--highlight);
-    padding: 1px 8px;
-    border-radius: 2px;
-    color: var(--ink);
-  }
-
-  .wrong-item-body .note {
-    margin-top: 10px;
-    padding: 10px 12px;
-    background: var(--paper);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 3px 3px 0;
-    font-size: 0.92em;
-    color: var(--ink-soft);
-  }
-
-  .review-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .review-actions button {
-    width: 100%;
-    padding: 14px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.98em;
-    font-weight: 500;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.05em;
-  }
-
-  .review-actions .primary-btn {
-    background: var(--ink);
-    color: var(--paper);
-    border: none;
-  }
-
-  .review-actions .primary-btn:hover {
-    background: var(--accent);
-  }
-
-  .review-actions .secondary-btn {
-    background: var(--paper);
-    color: var(--ink);
-    border: 1px solid var(--border);
-  }
-
-  .review-actions .secondary-btn:hover {
-    background: var(--highlight);
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .submit-btn {
-    display: none;
-    width: 100%;
-    padding: 14px;
-    background: var(--ink);
-    color: var(--paper);
-    border: none;
-    border-radius: 4px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.98em;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
-    letter-spacing: 0.1em;
-    margin-bottom: 12px;
-  }
-
-  .submit-btn:hover { background: var(--accent); }
-  .submit-btn:disabled { background: var(--subtle); cursor: default; opacity: 0.6; }
-  .submit-btn.show { display: block; }
-
-  /* 解説 */
-  .feedback {
-    display: none;
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 22px 26px;
-    margin-bottom: 16px;
-    position: relative;
-  }
-
-  .feedback.show { display: block; }
-
-  .feedback::before {
+  /* 左端のゴールド罫線 */
+  .app-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -609,157 +131,83 @@
     width: 3px;
     height: 100%;
     background: var(--rule-gold);
-    border-radius: 3px 0 0 3px;
+    opacity: 0.55;
+    transition: opacity 0.22s ease, width 0.22s ease;
   }
 
-  .feedback-result {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 700;
-    margin-bottom: 14px;
-    font-size: 1.1em;
-    letter-spacing: 0.1em;
+  .app-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 26px rgba(28,36,54,0.09);
   }
 
-  .feedback-result.correct { color: var(--correct); }
-  .feedback-result.wrong { color: var(--wrong); }
-
-  .feedback-body {
-    font-size: 0.92em;
-    line-height: 1.85;
-    color: var(--ink);
+  .app-card:hover::before {
+    opacity: 1;
+    width: 5px;
+    background: var(--accent);
   }
 
-  .feedback-row {
-    margin-bottom: 4px;
-  }
-
-  .feedback-body .label {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 700;
-    color: var(--accent);
-    margin-right: 8px;
-    letter-spacing: 0.05em;
-  }
-
-  .feedback-body code {
+  .app-index {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-weight: 500;
-    background: var(--highlight);
-    padding: 1px 8px;
-    border-radius: 2px;
-    font-size: 1.05em;
-    color: var(--ink);
-  }
-
-  .feedback-body .note {
-    margin-top: 12px;
-    padding: 12px 14px;
-    background: var(--highlight);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 3px 3px 0;
     font-size: 0.9em;
-    color: var(--ink-soft);
-  }
-
-  .next-btn {
-    width: 100%;
-    padding: 14px;
-    background: var(--ink);
-    color: var(--paper);
-    border: none;
-    border-radius: 4px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.98em;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
-    letter-spacing: 0.1em;
-  }
-
-  .next-btn:hover { background: var(--accent); }
-
-  /* 完了画面 */
-  .complete-card {
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 48px 28px;
-    text-align: center;
-  }
-
-  .complete-card h2 {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.3em;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--ink);
-    letter-spacing: 0.08em;
-  }
-
-  .complete-card h2::after {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--rule-gold);
-    margin: 14px auto 0;
-  }
-
-  .complete-card p {
+    letter-spacing: 0.2em;
     color: var(--subtle);
-    margin: 16px 0 24px;
-    font-size: 0.92em;
+    margin-bottom: 6px;
   }
 
-  .stats {
-    display: flex;
-    justify-content: center;
-    gap: 36px;
-    margin: 24px 0 32px;
-  }
-
-  .stat-item .stat-num {
+  .app-name-en {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.6em;
-    font-weight: 500;
+    font-size: 2.4em;
+    font-weight: 600;
+    font-style: italic;
     color: var(--accent);
-    line-height: 1;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
   }
 
-  .stat-item .stat-label {
-    font-size: 0.8em;
-    color: var(--subtle);
-    letter-spacing: 0.05em;
-    margin-top: 6px;
+  .app-name-jp {
     font-family: 'Noto Sans JP', sans-serif;
-  }
-
-  .restart-btn {
-    padding: 12px 28px;
-    background: var(--ink);
-    color: var(--paper);
-    border: none;
-    border-radius: 4px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.92em;
-    cursor: pointer;
-    margin: 0 6px;
-    letter-spacing: 0.05em;
-  }
-
-  .restart-btn:hover { background: var(--accent); }
-
-  .restart-btn.secondary {
-    background: var(--paper);
+    font-size: 1.15em;
+    font-weight: 700;
     color: var(--ink);
-    border: 1px solid var(--border);
+    margin: 10px 0 8px;
+    letter-spacing: 0.04em;
   }
 
-  .restart-btn.secondary:hover {
-    background: var(--highlight);
-    border-color: var(--accent);
+  .app-desc {
+    font-size: 0.9em;
+    color: var(--subtle);
+    line-height: 1.7;
+    max-width: 90%;
+  }
+
+  .app-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .app-modes {
+    font-size: 0.78em;
+    color: var(--subtle);
+    letter-spacing: 0.04em;
+  }
+
+  .app-enter {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.88em;
+    font-weight: 700;
     color: var(--accent);
+    letter-spacing: 0.05em;
+    transition: transform 0.22s ease;
+  }
+
+  .app-card:hover .app-enter {
+    transform: translateX(4px);
   }
 
   footer {
@@ -784,11 +232,9 @@
 
   @media (max-width: 480px) {
     .title-main { font-size: 1.6em; }
-    .question-target { font-size: 2.4em; }
-    .question-target.small { font-size: 1.9em; }
-    .choices { grid-template-columns: 1fr; }
-    .stats { gap: 22px; }
-    .stat-item .stat-num { font-size: 2.1em; }
+    .app-name-en { font-size: 2em; }
+    .app-desc { max-width: 100%; }
+    .app-card { padding: 26px 22px 22px; }
   }
 </style>
 </head>
@@ -796,673 +242,47 @@
 <div class="container">
 
   <header>
-    <div class="title-main">つばめ英語 — 接尾辞演習</div>
-    <div class="title-sub">Suffix Training</div>
+    <div class="brand">Swallow-Base</div>
+    <div class="title-main">つばめ英語</div>
+    <div class="title-sub">English Training</div>
   </header>
 
-  <!-- モード選択 -->
-  <div id="modeSelect" class="mode-select">
-    <h2>モードを選んでください</h2>
-    <button class="mode-btn" onclick="startQuiz('A')">
-      <div class="mode-label">A.</div>
-      <div class="mode-title">接尾辞から品詞を答える</div>
-      <div class="mode-desc">表示される接尾辞(例: -tion, -ful, -ly)から、名詞・形容詞・副詞のどれを作るかを答えます。</div>
-      <div class="mode-count" id="countA"></div>
-    </button>
-    <button class="mode-btn" onclick="startQuiz('B')">
-      <div class="mode-label">B.</div>
-      <div class="mode-title">単語から品詞を答える</div>
-      <div class="mode-desc">表示される英単語(例: information, friendly)が、名詞・形容詞・副詞のどれかを答えます。</div>
-      <div class="mode-count" id="countB"></div>
-    </button>
-  </div>
+  <p class="lead">取り組みたい演習を選んでください。</p>
 
-  <!-- クイズ画面 -->
-  <div id="quizScreen" class="quiz-screen">
-    <div class="quiz-header">
-      <button class="back-btn" onclick="backToMode()">← モード選択へ</button>
-      <div class="progress">
-        <span id="roundLabel"></span>残り <strong id="remaining">0</strong> / 正解 <strong id="correct">0</strong>
+  <div class="app-grid">
+
+    <a class="app-card" href="suffix/">
+      <div class="app-index">I.</div>
+      <div class="app-name-en">Suffix</div>
+      <div class="app-name-jp">接尾辞演習</div>
+      <div class="app-desc">
+        -tion / -ful / -ly などの接尾辞や単語から、名詞・形容詞・副詞のいずれを作るかを答える演習。-ly で終わる形容詞の例外も扱います。
       </div>
-    </div>
-
-    <div class="question-card">
-      <div class="question-label">問題</div>
-      <div class="question-target" id="qTarget"></div>
-      <div class="question-prompt" id="qPrompt">この語が作る(またはこの語の)品詞は?</div>
-      <div class="multi-notice" id="multiNotice">複数選択可 — 当てはまるものをすべて選択してください</div>
-    </div>
-
-    <div class="choices">
-      <button class="choice-btn" data-pos="noun" onclick="selectChoice('noun')">名詞</button>
-      <button class="choice-btn" data-pos="adjective" onclick="selectChoice('adjective')">形容詞</button>
-      <button class="choice-btn" data-pos="adverb" onclick="selectChoice('adverb')">副詞</button>
-    </div>
-
-    <button class="dontknow-btn" id="dontknowBtn" onclick="selectDontKnow()">わからない</button>
-
-    <button class="submit-btn" id="submitBtn" onclick="submitMulti()">決定</button>
-
-    <div class="feedback" id="feedback">
-      <div class="feedback-result" id="feedbackResult"></div>
-      <div class="feedback-body" id="feedbackBody"></div>
-    </div>
-
-    <button class="next-btn" id="nextBtn" onclick="nextQuestion()" style="display:none;">次の問題へ →</button>
-  </div>
-
-  <!-- レビュー画面(間違えた問題リスト) -->
-  <div id="reviewScreen" class="quiz-screen">
-    <div class="review-card">
-      <h2 id="reviewTitle">1周目の結果</h2>
-      <div class="review-summary" id="reviewSummary"></div>
-
-      <div class="wrong-list" id="wrongList"></div>
-
-      <div class="review-actions">
-        <button class="primary-btn" onclick="startNextRound()">間違えた問題のみもう一度</button>
-        <button class="secondary-btn" onclick="endSession()">このまま終了する</button>
+      <div class="app-foot">
+        <span class="app-modes">2モード ・ 接尾辞 → 品詞 / 単語 → 品詞</span>
+        <span class="app-enter">演習へ →</span>
       </div>
-    </div>
-  </div>
+    </a>
 
-  <!-- 完了画面 -->
-  <div id="completeScreen" class="quiz-screen">
-    <div class="complete-card">
-      <h2>セッション終了</h2>
-      <p>お疲れさまでした。以下はこのセッション全体の累計です。</p>
-      <div class="stats">
-        <div class="stat-item">
-          <div class="stat-num" id="totalAttempts">0</div>
-          <div class="stat-label">総解答数</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num" id="totalCorrect">0</div>
-          <div class="stat-label">正解数</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num" id="accuracy">0%</div>
-          <div class="stat-label">正答率</div>
-        </div>
+    <a class="app-card" href="preposition/">
+      <div class="app-index">II.</div>
+      <div class="app-name-en">Preposition</div>
+      <div class="app-name-jp">前置詞演習</div>
+      <div class="app-desc">
+        in / at / by などの前置詞のコアイメージや、例文の空所に入る前置詞を答える演習。発展として資料外の前置詞も扱う3モード構成です。
       </div>
-      <button class="restart-btn" onclick="restartQuiz()">もう一度</button>
-      <button class="restart-btn secondary" onclick="backToMode()">モード選択へ</button>
-    </div>
+      <div class="app-foot">
+        <span class="app-modes">3モード ・ コアイメージ / 空所補充 / 発展</span>
+        <span class="app-enter">演習へ →</span>
+      </div>
+    </a>
+
   </div>
 
   <footer>
-    SWALLOW-BASE — Suffix Training v1.4
+    SWALLOW-BASE — English
   </footer>
 
 </div>
-
-<script>
-/* ============================================
-   データ
-   ============================================ */
-
-// モードA: 接尾辞データ
-// answers: 正解品詞の配列(複数選択対応)
-// multi: trueなら複数選択可問題
-const SUFFIX_DATA = [
-  // 名詞を作る接尾辞 (教材)
-  { suffix: '-tion', answers: ['noun'], example: 'information', meaning: '動作・状態を表す名詞を作る' },
-  { suffix: '-sion', answers: ['noun'], example: 'decision', meaning: '動作・状態を表す名詞を作る' },
-  { suffix: '-ty', answers: ['noun'], example: 'beauty', meaning: '性質・状態を表す名詞を作る' },
-  { suffix: '-th', answers: ['noun'], example: 'health', meaning: '性質・状態を表す名詞を作る(warmth, depth, lengthなど限られた語のみ)' },
-  { suffix: '-ment', answers: ['noun'], example: 'supplement', meaning: '動作・結果を表す名詞を作る' },
-  { suffix: '-ness', answers: ['noun'], example: 'kindness', meaning: '性質・状態を表す名詞を作る' },
-  { suffix: '-ance', answers: ['noun'], example: 'entrance', meaning: '動作・状態を表す名詞を作る' },
-  { suffix: '-cy', answers: ['noun'], example: 'policy', meaning: '状態・性質を表す名詞を作る' },
-  { suffix: '-er', answers: ['noun'], example: 'employer', meaning: '〜する人/物を表す名詞を作る' },
-  { suffix: '-or', answers: ['noun'], example: 'doctor', meaning: '〜する人/物を表す名詞を作る' },
-  { suffix: '-ee', answers: ['noun'], example: 'employee', meaning: '〜される人を表す名詞を作る' },
-  { suffix: '-ist', answers: ['noun'], example: 'scientist', meaning: '〜する人を表す名詞を作る' },
-  { suffix: '-ism', answers: ['noun'], example: 'tourism', meaning: '〜主義・思想・活動を表す名詞を作る' },
-
-  // -ing は名詞・形容詞の両方 (複数選択)
-  { suffix: '-ing', answers: ['noun', 'adjective'], multi: true,
-    example: '<code>learning</code>(名詞: 学ぶこと) / <code>interesting</code>(形容詞: 興味深い)',
-    meaning: '動名詞由来なら名詞、現在分詞由来なら形容詞。文脈で判断する。' },
-
-  // 形容詞を作る接尾辞 (教材)
-  { suffix: '-able', answers: ['adjective'], example: 'possible', meaning: '〜できる、〜可能な' },
-  { suffix: '-ible', answers: ['adjective'], example: 'possible', meaning: '〜できる、〜可能な' },
-  { suffix: '-al', answers: ['adjective'], example: 'financial', meaning: '〜に関する' },
-  { suffix: '-ant', answers: ['adjective'], example: 'brilliant', meaning: '〜する性質の' },
-  { suffix: '-ent', answers: ['adjective'], example: 'independent', meaning: '〜する性質の' },
-  { suffix: '-ar', answers: ['adjective'], example: 'similar', meaning: '〜のような' },
-  { suffix: '-ed', answers: ['adjective'], example: 'limited',
-    meaning: '過去分詞由来の形容詞で受動の意味(〜された)。動詞の過去形・過去分詞でもあるが、教材の枠組みでは形容詞用法を扱う。' },
-  { suffix: '-ful', answers: ['adjective'], example: 'successful', meaning: '〜に満ちた' },
-  { suffix: '-ic', answers: ['adjective'], example: 'basic', meaning: '〜的な、〜に関する' },
-  { suffix: '-ical', answers: ['adjective'], example: 'basic', meaning: '〜的な、〜に関する' },
-  { suffix: '-ive', answers: ['adjective'], example: 'massive', meaning: '〜の性質を持つ' },
-  { suffix: '-less', answers: ['adjective'], example: 'useless', meaning: '〜のない' },
-  { suffix: '-ory', answers: ['adjective'], example: 'introductory', meaning: '〜の性質の' },
-  { suffix: '-ous', answers: ['adjective'], example: 'enormous', meaning: '〜に満ちた' },
-  { suffix: '-y', answers: ['adjective'], example: 'busy', meaning: '〜の性質を持つ' },
-  { suffix: '-esque', answers: ['adjective'], example: 'picturesque', meaning: '〜のような・〜風の' },
-
-  // 副詞 -ly (基本) + 例外の暗記リスト
-  { suffix: '-ly', answers: ['adverb'], example: 'quickly', targetNote: '基本',
-    meaning: '形容詞+ly = 副詞。これが基本ルール。',
-    note: 'ただし<strong>-lyで終わるが形容詞である例外語</strong>があり、以下は暗記する必要がある:<br><code>friendly</code> / <code>lovely</code> / <code>costly</code> / <code>elderly</code> / <code>lonely</code> / <code>silly</code> / <code>weekly</code> / <code>monthly</code> / <code>yearly</code>。<br>「名詞+lyは形容詞」という目安はあるが、例外もあるため語ごとに覚える方が確実。' },
-];
-
-// モードB: 単語データ
-// answers: 正解品詞の配列(複数選択対応の単語はここでは無し)
-const WORD_DATA = [
-  // 名詞 (教材)
-  { word: 'information', answers: ['noun'], suffix: '-tion', meaning: '動作・状態を表す名詞を作る' },
-  { word: 'decision', answers: ['noun'], suffix: '-sion', meaning: '動作・状態を表す名詞を作る' },
-  { word: 'beauty', answers: ['noun'], suffix: '-ty', meaning: '性質・状態を表す名詞を作る' },
-  { word: 'health', answers: ['noun'], suffix: '-th', meaning: '性質・状態を表す名詞を作る' },
-  { word: 'supplement', answers: ['noun'], suffix: '-ment', meaning: '動作・結果を表す名詞を作る' },
-  { word: 'kindness', answers: ['noun'], suffix: '-ness', meaning: '性質・状態を表す名詞を作る' },
-  { word: 'entrance', answers: ['noun'], suffix: '-ance', meaning: '動作・状態を表す名詞を作る' },
-  { word: 'policy', answers: ['noun'], suffix: '-cy', meaning: '状態・性質を表す名詞を作る' },
-  { word: 'employer', answers: ['noun'], suffix: '-er', meaning: '〜する人/物を表す名詞を作る' },
-  { word: 'doctor', answers: ['noun'], suffix: '-or', meaning: '〜する人/物を表す名詞を作る' },
-  { word: 'employee', answers: ['noun'], suffix: '-ee', meaning: '〜される人を表す名詞を作る' },
-  { word: 'scientist', answers: ['noun'], suffix: '-ist', meaning: '〜する人を表す名詞を作る' },
-  { word: 'tourism', answers: ['noun'], suffix: '-ism', meaning: '〜主義・思想・活動を表す名詞を作る' },
-  { word: 'learning', answers: ['noun'], suffix: '-ing',
-    meaning: '-ingは名詞・形容詞の両方を作るが、learningは「学ぶこと」を意味する動名詞由来の名詞。' },
-
-  // 形容詞 (教材)
-  { word: 'possible', answers: ['adjective'], suffix: '-ible', meaning: '〜できる、〜可能な' },
-  { word: 'financial', answers: ['adjective'], suffix: '-al', meaning: '〜に関する' },
-  { word: 'brilliant', answers: ['adjective'], suffix: '-ant', meaning: '〜する性質の' },
-  { word: 'independent', answers: ['adjective'], suffix: '-ent', meaning: '〜する性質の' },
-  { word: 'similar', answers: ['adjective'], suffix: '-ar', meaning: '〜のような' },
-  { word: 'limited', answers: ['adjective'], suffix: '-ed',
-    meaning: '過去分詞由来の形容詞(受動の意味: 〜された)。動詞の過去形・過去分詞でもある。' },
-  { word: 'interesting', answers: ['adjective'], suffix: '-ing',
-    meaning: '現在分詞由来の形容詞(能動の意味: 〜させる)。動名詞のlearningと区別。' },
-  { word: 'successful', answers: ['adjective'], suffix: '-ful', meaning: '〜に満ちた' },
-  { word: 'basic', answers: ['adjective'], suffix: '-ic', meaning: '〜的な、〜に関する' },
-  { word: 'massive', answers: ['adjective'], suffix: '-ive', meaning: '〜の性質を持つ' },
-  { word: 'useless', answers: ['adjective'], suffix: '-less', meaning: '〜のない' },
-  { word: 'introductory', answers: ['adjective'], suffix: '-ory', meaning: '〜の性質の' },
-  { word: 'enormous', answers: ['adjective'], suffix: '-ous', meaning: '〜に満ちた' },
-  { word: 'busy', answers: ['adjective'], suffix: '-y', meaning: '〜の性質を持つ' },
-  { word: 'picturesque', answers: ['adjective'], suffix: '-esque', meaning: '〜のような・〜風の' },
-
-  // 形容詞 (-lyで終わる形容詞: 例外として暗記すべき語)
-  // 共通方針: -lyは基本的に副詞。以下の語は例外として形容詞であることを覚える。
-  { word: 'friendly', answers: ['adjective'], suffix: '-ly',
-    meaning: '「親しみやすい」という形容詞。<strong>-lyで終わるが形容詞</strong>の例外語の一つ。',
-    note: '<strong>-lyは基本的に副詞</strong>だが、以下の語は形容詞として暗記する: <code>friendly</code> / <code>lovely</code> / <code>costly</code> / <code>elderly</code> / <code>lonely</code> / <code>silly</code> / <code>weekly</code> / <code>monthly</code> / <code>yearly</code>。<br>目安として「名詞+ly」のパターンが多いが、例外もあるので語ごとに覚える方が確実。' },
-  { word: 'lovely', answers: ['adjective'], suffix: '-ly',
-    meaning: '「素敵な、愛らしい」という形容詞。<strong>-lyで終わるが形容詞</strong>の例外語の一つ。',
-    note: '-lyの形容詞リスト: <code>friendly</code> / <code>lovely</code> / <code>costly</code> / <code>elderly</code> / <code>lonely</code> / <code>silly</code> / <code>weekly</code> / <code>monthly</code> / <code>yearly</code>。<br>副詞形は存在しない(「lovelyly」のような形は不可)。' },
-  { word: 'costly', answers: ['adjective'], suffix: '-ly',
-    meaning: '「高価な、費用のかかる」という形容詞。<strong>-lyで終わるが形容詞</strong>の例外語の一つ。',
-    note: '-lyの形容詞リスト: <code>friendly</code> / <code>lovely</code> / <code>costly</code> / <code>elderly</code> / <code>lonely</code> / <code>silly</code> / <code>weekly</code> / <code>monthly</code> / <code>yearly</code>。' },
-  { word: 'elderly', answers: ['adjective'], suffix: '-ly',
-    meaning: '「年配の、高齢の」という形容詞。<strong>-lyで終わるが形容詞</strong>の例外語の一つ。',
-    note: '-lyの形容詞リスト: <code>friendly</code> / <code>lovely</code> / <code>costly</code> / <code>elderly</code> / <code>lonely</code> / <code>silly</code> / <code>weekly</code> / <code>monthly</code> / <code>yearly</code>。<br><code>the elderly</code>で「お年寄り(集合)」を表す用法もある。' },
-  { word: 'lonely', answers: ['adjective'], suffix: '-ly',
-    meaning: '「孤独な、寂しい」という形容詞。<strong>-lyで終わるが形容詞</strong>の例外語の一つ。',
-    note: '-lyの形容詞リスト: <code>friendly</code> / <code>lovely</code> / <code>costly</code> / <code>elderly</code> / <code>lonely</code> / <code>silly</code> / <code>weekly</code> / <code>monthly</code> / <code>yearly</code>。' },
-  { word: 'silly', answers: ['adjective'], suffix: '-ly',
-    meaning: '「愚かな、ばかげた」という形容詞。<strong>-lyで終わるが形容詞</strong>の例外語の一つ。',
-    note: '-lyの形容詞リスト: <code>friendly</code> / <code>lovely</code> / <code>costly</code> / <code>elderly</code> / <code>lonely</code> / <code>silly</code> / <code>weekly</code> / <code>monthly</code> / <code>yearly</code>。' },
-  { word: 'weekly', answers: ['adjective'], suffix: '-ly',
-    meaning: '「毎週の、週1回の」という形容詞。<strong>-lyで終わるが形容詞</strong>の例外語の一つ。',
-    note: '-lyの形容詞リスト: <code>friendly</code> / <code>lovely</code> / <code>costly</code> / <code>elderly</code> / <code>lonely</code> / <code>silly</code> / <code>weekly</code> / <code>monthly</code> / <code>yearly</code>。<br>同様に<code>monthly</code>(毎月の), <code>yearly</code>(毎年の)も形容詞。なお副詞用法もある(<code>weekly</code>=毎週)が、入試では形容詞での出題が中心。' },
-  { word: 'monthly', answers: ['adjective'], suffix: '-ly',
-    meaning: '「毎月の、月1回の」という形容詞。<strong>-lyで終わるが形容詞</strong>の例外語の一つ。',
-    note: '-lyの形容詞リスト: <code>friendly</code> / <code>lovely</code> / <code>costly</code> / <code>elderly</code> / <code>lonely</code> / <code>silly</code> / <code>weekly</code> / <code>monthly</code> / <code>yearly</code>。' },
-  { word: 'yearly', answers: ['adjective'], suffix: '-ly',
-    meaning: '「毎年の、年1回の」という形容詞。<strong>-lyで終わるが形容詞</strong>の例外語の一つ。',
-    note: '-lyの形容詞リスト: <code>friendly</code> / <code>lovely</code> / <code>costly</code> / <code>elderly</code> / <code>lonely</code> / <code>silly</code> / <code>weekly</code> / <code>monthly</code> / <code>yearly</code>。' },
-
-  // 副詞 (-lyの基本: 形容詞+ly = 副詞)
-  { word: 'quickly', answers: ['adverb'], suffix: '-ly',
-    meaning: '「速く」という副詞。<code>quick</code>(形容詞)+ly。<strong>-lyは基本的に副詞</strong>。' },
-  { word: 'carefully', answers: ['adverb'], suffix: '-ly',
-    meaning: '「注意深く」という副詞。<code>careful</code>(形容詞)+ly。<strong>-lyは基本的に副詞</strong>。' },
-  { word: 'easily', answers: ['adverb'], suffix: '-ly',
-    meaning: '「簡単に」という副詞。<code>easy</code>→<code>easily</code>(yで終わる形容詞は語末のyをiに変えて-lyを付ける)。' },
-  { word: 'basically', answers: ['adverb'], suffix: '-ally',
-    meaning: '「基本的に」という副詞。形容詞が<code>-ic</code>で終わるときは<code>-ally</code>を付けて副詞にする(原則)。' },
-];
-
-/* ============================================
-   状態管理
-   ============================================ */
-
-let currentMode = null;
-let currentRound = 0;          // 現在の周回数(1=1周目, 2=2周目...)
-let currentQueue = [];         // 現在の周回で残っている出題キュー
-let wrongList = [];            // 現在の周回で間違えた問題のリスト
-let currentQuestion = null;
-let totalAttempts = 0;         // セッション全体の累計
-let totalCorrect = 0;          // セッション全体の累計
-let answered = false;
-let multiSelected = new Set();
-
-/* ============================================
-   問題プール生成
-   ============================================ */
-
-function buildPool(mode) {
-  if (mode === 'A') {
-    return SUFFIX_DATA.map(item => ({
-      target: item.suffix,
-      targetNote: item.targetNote || null,
-      answers: item.answers,
-      multi: item.multi || false,
-      example: item.example,
-      meaning: item.meaning,
-      note: item.note || null,
-      type: 'suffix'
-    }));
-  } else {
-    return WORD_DATA.map(item => ({
-      target: item.word,
-      answers: item.answers,
-      multi: false,
-      suffix: item.suffix,
-      meaning: item.meaning,
-      note: item.note || null,
-      type: 'word'
-    }));
-  }
-}
-
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-/* ============================================
-   画面遷移
-   ============================================ */
-
-function startQuiz(mode) {
-  currentMode = mode;
-  totalAttempts = 0;
-  totalCorrect = 0;
-  const pool = buildPool(mode);
-  startRound(pool, 1);
-}
-
-function startRound(questions, roundNum) {
-  currentRound = roundNum;
-  // 各問題に答えの記録フィールドを付ける(新しいオブジェクト)
-  currentQueue = shuffle(questions).map(q => ({
-    ...q,
-    userAnswer: null,
-    isCorrect: null
-  }));
-  wrongList = [];
-  
-  // 画面切り替え
-  document.getElementById('modeSelect').style.display = 'none';
-  document.getElementById('reviewScreen').classList.remove('active');
-  document.getElementById('completeScreen').classList.remove('active');
-  document.getElementById('quizScreen').classList.add('active');
-  
-  showNextQuestion();
-}
-
-function startNextRound() {
-  // 間違えた問題のみで次の周回
-  // wrongListをコピーして次の周回のpoolにする(元の記録は破棄して新たに採る)
-  const nextPool = wrongList.map(q => {
-    // 元の問題データを復元(userAnswer等は除く)
-    const { userAnswer, isCorrect, ...orig } = q;
-    return orig;
-  });
-  startRound(nextPool, currentRound + 1);
-}
-
-function backToMode() {
-  document.getElementById('quizScreen').classList.remove('active');
-  document.getElementById('reviewScreen').classList.remove('active');
-  document.getElementById('completeScreen').classList.remove('active');
-  document.getElementById('modeSelect').style.display = 'block';
-  updateCounts();
-}
-
-function restartQuiz() {
-  startQuiz(currentMode);
-}
-
-function showNextQuestion() {
-  if (currentQueue.length === 0) {
-    // 周回終了 → レビュー画面か完了画面へ
-    onRoundEnd();
-    return;
-  }
-  
-  currentQuestion = currentQueue[0];
-  answered = false;
-  multiSelected = new Set();
-  
-  // ターゲット表示
-  const targetEl = document.getElementById('qTarget');
-  if (currentQuestion.targetNote) {
-    targetEl.innerHTML = currentQuestion.target + '<span class="target-note">(' + currentQuestion.targetNote + ')</span>';
-  } else {
-    targetEl.textContent = currentQuestion.target;
-  }
-  
-  if (currentQuestion.target.length > 11) {
-    targetEl.classList.add('small');
-  } else {
-    targetEl.classList.remove('small');
-  }
-  
-  // プロンプト
-  const promptEl = document.getElementById('qPrompt');
-  if (currentMode === 'A') {
-    promptEl.textContent = 'この接尾辞が作る品詞は?';
-  } else {
-    promptEl.textContent = 'この単語の品詞は?';
-  }
-  
-  // 複数選択通知
-  const multiNotice = document.getElementById('multiNotice');
-  if (currentQuestion.multi) {
-    multiNotice.classList.add('show');
-  } else {
-    multiNotice.classList.remove('show');
-  }
-  
-  // 選択肢リセット
-  document.querySelectorAll('.choice-btn').forEach(btn => {
-    btn.disabled = false;
-    btn.className = 'choice-btn';
-  });
-  
-  // 「わからない」ボタンリセット
-  const dontknowBtn = document.getElementById('dontknowBtn');
-  dontknowBtn.disabled = false;
-  dontknowBtn.classList.remove('dimmed');
-  dontknowBtn.style.display = 'block';
-  
-  // 決定ボタン
-  const submitBtn = document.getElementById('submitBtn');
-  if (currentQuestion.multi) {
-    submitBtn.classList.add('show');
-    submitBtn.disabled = true;
-  } else {
-    submitBtn.classList.remove('show');
-  }
-  
-  // フィードバック非表示
-  document.getElementById('feedback').classList.remove('show');
-  document.getElementById('nextBtn').style.display = 'none';
-  
-  updateProgress();
-}
-
-function onRoundEnd() {
-  if (wrongList.length === 0) {
-    // 全問正解 → セッション終了
-    showComplete();
-  } else {
-    // 間違いあり → レビュー画面
-    showReviewScreen();
-  }
-}
-
-function updateProgress() {
-  document.getElementById('remaining').textContent = currentQueue.length;
-  document.getElementById('correct').textContent = totalCorrect;
-  const roundLabel = document.getElementById('roundLabel');
-  if (currentRound >= 2) {
-    roundLabel.innerHTML = `<span style="color: var(--accent); font-weight: 700;">${currentRound}周目</span> ・ `;
-  } else {
-    roundLabel.innerHTML = '';
-  }
-}
-
-function updateCounts() {
-  document.getElementById('countA').textContent = 
-    `収録: ${SUFFIX_DATA.length}問`;
-  document.getElementById('countB').textContent = 
-    `収録: ${WORD_DATA.length}問`;
-}
-
-/* ============================================
-   解答処理
-   ============================================ */
-
-function selectChoice(choice) {
-  if (answered) return;
-  
-  if (currentQuestion.multi) {
-    // 複数選択モード: トグル
-    const btn = document.querySelector(`.choice-btn[data-pos="${choice}"]`);
-    if (multiSelected.has(choice)) {
-      multiSelected.delete(choice);
-      btn.classList.remove('selected');
-    } else {
-      multiSelected.add(choice);
-      btn.classList.add('selected');
-    }
-    document.getElementById('submitBtn').disabled = multiSelected.size === 0;
-  } else {
-    judgeAnswer([choice]);
-  }
-}
-
-function selectDontKnow() {
-  if (answered) return;
-  // 「わからない」は即座に不正解として判定
-  judgeAnswer(['__dontknow__']);
-}
-
-function submitMulti() {
-  if (answered || multiSelected.size === 0) return;
-  judgeAnswer([...multiSelected]);
-}
-
-function judgeAnswer(selectedArr) {
-  answered = true;
-  totalAttempts++;
-  
-  const isDontKnow = selectedArr.length === 1 && selectedArr[0] === '__dontknow__';
-  const correctSet = new Set(currentQuestion.answers);
-  const selectedSet = new Set(isDontKnow ? [] : selectedArr);
-  
-  // 正誤判定: 「わからない」は不正解、それ以外は完全一致で正解
-  let isCorrect = false;
-  if (!isDontKnow) {
-    isCorrect = correctSet.size === selectedSet.size;
-    if (isCorrect) {
-      for (const a of correctSet) {
-        if (!selectedSet.has(a)) { isCorrect = false; break; }
-      }
-    }
-  }
-  
-  // 問題に記録
-  currentQuestion.userAnswer = isDontKnow ? ['__dontknow__'] : [...selectedSet];
-  currentQuestion.isCorrect = isCorrect;
-  
-  // ボタンスタイル更新
-  document.querySelectorAll('.choice-btn').forEach(btn => {
-    btn.disabled = true;
-    const pos = btn.dataset.pos;
-    btn.classList.remove('selected');
-    
-    if (correctSet.has(pos)) {
-      btn.classList.add('correct');
-      if (!selectedSet.has(pos)) {
-        btn.classList.add('dimmed');
-      }
-    } else {
-      if (selectedSet.has(pos)) {
-        btn.classList.add('wrong');
-      } else {
-        btn.classList.add('dimmed');
-      }
-    }
-  });
-  
-  // 「わからない」ボタン無効化
-  const dontknowBtn = document.getElementById('dontknowBtn');
-  dontknowBtn.disabled = true;
-  if (isDontKnow) {
-    dontknowBtn.classList.add('dimmed');
-  } else {
-    dontknowBtn.classList.add('dimmed');
-  }
-  
-  // 決定ボタンを隠す
-  document.getElementById('submitBtn').classList.remove('show');
-  
-  // フィードバック表示
-  const feedback = document.getElementById('feedback');
-  const resultEl = document.getElementById('feedbackResult');
-  const bodyEl = document.getElementById('feedbackBody');
-  
-  if (isCorrect) {
-    totalCorrect++;
-    resultEl.textContent = '正解';
-    resultEl.className = 'feedback-result correct';
-  } else {
-    resultEl.textContent = isDontKnow ? 'わからない(不正解扱い)' : '不正解';
-    resultEl.className = 'feedback-result wrong';
-  }
-  
-  bodyEl.innerHTML = buildFeedback(currentQuestion);
-  feedback.classList.add('show');
-  
-  document.getElementById('nextBtn').style.display = 'block';
-  
-  // キュー処理: 1問1回出題、不正解はwrongListに追加
-  if (!isCorrect) {
-    wrongList.push(currentQuestion);
-  }
-  currentQueue.shift();
-  
-  updateProgress();
-}
-
-function buildFeedback(q) {
-  const posLabel = { noun: '名詞', adjective: '形容詞', adverb: '副詞' };
-  let html = '';
-  
-  const answerStr = q.answers.map(a => posLabel[a]).join(' / ');
-  html += `<div class="feedback-row"><span class="label">品詞:</span>${answerStr}</div>`;
-  
-  if (q.type === 'suffix') {
-    html += `<div class="feedback-row"><span class="label">例:</span>${q.example.includes('<code>') ? q.example : '<code>' + q.example + '</code>'}</div>`;
-    if (q.meaning) {
-      html += `<div class="feedback-row"><span class="label">意味:</span>${q.meaning}</div>`;
-    }
-  } else {
-    if (q.suffix) {
-      html += `<div class="feedback-row"><span class="label">接尾辞:</span><code>${q.suffix}</code></div>`;
-    }
-    if (q.meaning) {
-      html += `<div class="feedback-row"><span class="label">意味:</span>${q.meaning}</div>`;
-    }
-  }
-  
-  if (q.note) {
-    html += `<div class="note">${q.note}</div>`;
-  }
-  
-  return html;
-}
-
-function nextQuestion() {
-  showNextQuestion();
-}
-
-/* ============================================
-   レビュー画面
-   ============================================ */
-
-function showReviewScreen() {
-  document.getElementById('quizScreen').classList.remove('active');
-  document.getElementById('completeScreen').classList.remove('active');
-  document.getElementById('reviewScreen').classList.add('active');
-  
-  document.getElementById('reviewTitle').textContent = `${currentRound}周目の結果`;
-  
-  const totalThisRound = currentRound === 1 ? buildPool(currentMode).length : 
-    (wrongList.length > 0 ? null : 0);
-  // 周回ごとの出題数は、1周目=全問、2周目以降=前周のwrong数
-  // ただしこの時点で currentQueue は空、wrongListに記録あり
-  // 周の出題数は wrongList の集計から逆算するのは難しいので、別途記録すべきだが、
-  // シンプルに wrongList.length(間違い数)だけ表示する
-  
-  const summaryEl = document.getElementById('reviewSummary');
-  summaryEl.innerHTML = `間違えた問題: <span class="num">${wrongList.length}</span> 問<br>タップで解説を表示できます。`;
-  
-  // 間違いリストを表示
-  const wrongListEl = document.getElementById('wrongList');
-  wrongListEl.innerHTML = '';
-  
-  const posLabel = { noun: '名詞', adjective: '形容詞', adverb: '副詞' };
-  
-  wrongList.forEach((q, idx) => {
-    const item = document.createElement('div');
-    item.className = 'wrong-item';
-    
-    // ユーザーの解答表示
-    let userAnsStr;
-    if (q.userAnswer.length === 1 && q.userAnswer[0] === '__dontknow__') {
-      userAnsStr = 'わからない';
-    } else {
-      userAnsStr = q.userAnswer.map(a => posLabel[a]).join('・');
-    }
-    const correctAnsStr = q.answers.map(a => posLabel[a]).join('・');
-    
-    item.innerHTML = `
-      <div class="wrong-item-header" onclick="toggleWrongItem(${idx})">
-        <span class="wrong-item-target">${q.target}</span>
-        <span class="wrong-item-meta">
-          あなた: <span class="user-ans">${userAnsStr}</span> / 正解: <span class="correct-ans">${correctAnsStr}</span>
-        </span>
-        <span class="wrong-item-toggle">+</span>
-      </div>
-      <div class="wrong-item-body">
-        ${buildFeedback(q)}
-      </div>
-    `;
-    
-    wrongListEl.appendChild(item);
-  });
-}
-
-function toggleWrongItem(idx) {
-  const items = document.querySelectorAll('.wrong-item');
-  if (items[idx]) {
-    items[idx].classList.toggle('expanded');
-  }
-}
-
-function endSession() {
-  showComplete();
-}
-
-function showComplete() {
-  document.getElementById('quizScreen').classList.remove('active');
-  document.getElementById('reviewScreen').classList.remove('active');
-  document.getElementById('completeScreen').classList.add('active');
-  
-  document.getElementById('totalAttempts').textContent = totalAttempts;
-  document.getElementById('totalCorrect').textContent = totalCorrect;
-  const acc = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
-  document.getElementById('accuracy').textContent = acc + '%';
-}
-
-/* 初期化 */
-updateCounts();
-</script>
 </body>
 </html>
