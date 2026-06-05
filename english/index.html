@@ -147,13 +147,18 @@
     background: var(--accent);
   }
 
-  .app-index {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.9em;
-    letter-spacing: 0.2em;
-    color: var(--subtle);
-    margin-bottom: 6px;
+  /* カード上部: アイコンの行 */
+  .app-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .app-icon {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
   }
 
   .app-name-en {
@@ -252,11 +257,20 @@
   <div class="app-grid">
 
     <a class="app-card" href="suffix/">
-      <div class="app-index">I.</div>
+      <div class="app-head">
+        <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="9" width="36" height="30" rx="2" stroke="var(--ink)" stroke-width="1.5"/>
+          <line x1="24" y1="9" x2="24" y2="39" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="15" y="28" font-family="'Cormorant Garamond', serif" font-style="italic" font-size="13" fill="var(--accent)" text-anchor="middle">A</text>
+          <text x="33" y="28" font-family="'Noto Sans JP', sans-serif" font-size="12" fill="var(--accent)" text-anchor="middle">字</text>
+          <line x1="10" y1="33" x2="20" y2="33" stroke="var(--rule-gold)" stroke-width="1"/>
+          <line x1="28" y1="33" x2="38" y2="33" stroke="var(--rule-gold)" stroke-width="1"/>
+        </svg>
+      </div>
       <div class="app-name-en">Suffix</div>
       <div class="app-name-jp">接尾辞演習</div>
       <div class="app-desc">
-        -tion / -ful / -ly などの接尾辞や単語から、名詞・形容詞・副詞のいずれを作るかを答える演習。-ly で終わる形容詞の例外も扱います。
+        -tion / -ful / -ly などの接尾辞や単語から、名詞・形容詞・副詞のいずれを作るかを答える演習です。
       </div>
       <div class="app-foot">
         <span class="app-modes">2モード ・ 接尾辞 → 品詞 / 単語 → 品詞</span>
@@ -265,11 +279,22 @@
     </a>
 
     <a class="app-card" href="preposition/">
-      <div class="app-index">II.</div>
+      <div class="app-head">
+        <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="17" stroke="var(--ink)" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="2.5" fill="var(--accent)"/>
+          <path d="M24 24 L31 14" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M24 24 L17 30" stroke="var(--rule-gold)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="24" y1="5" x2="24" y2="9" stroke="var(--ink)" stroke-width="1.5"/>
+          <line x1="24" y1="39" x2="24" y2="43" stroke="var(--ink)" stroke-width="1.5"/>
+          <line x1="5" y1="24" x2="9" y2="24" stroke="var(--ink)" stroke-width="1.5"/>
+          <line x1="39" y1="24" x2="43" y2="24" stroke="var(--ink)" stroke-width="1.5"/>
+        </svg>
+      </div>
       <div class="app-name-en">Preposition</div>
       <div class="app-name-jp">前置詞演習</div>
       <div class="app-desc">
-        in / at / by などの前置詞のコアイメージや、例文の空所に入る前置詞を答える演習。発展として資料外の前置詞も扱う3モード構成です。
+        in / at / by などの前置詞のコアイメージや、例文の空所に入る前置詞を答える演習です。
       </div>
       <div class="app-foot">
         <span class="app-modes">3モード ・ コアイメージ / 空所補充 / 発展</span>
