@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>つばめ古文 — 古文単語演習 v1.0</title>
+<title>つばめ古文 — 古文単語演習 v1.1</title>
 <style>
   :root{
     --paper:#f5f0e6;
@@ -213,6 +213,13 @@
   }
   .feedback.show{display:block;animation:fade .25s}
   .feedback .verdict{font-weight:600;font-family:system-ui,sans-serif;letter-spacing:.04em;margin-bottom:6px}
+  .verdict-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+  .verdict-row .verdict{margin-bottom:0}
+  .word-no{
+    font-family:system-ui,sans-serif;font-size:.8rem;color:var(--ink-soft);
+    letter-spacing:.03em;
+  }
+  .word-no b{color:var(--ink)}
   .feedback.ok .verdict{color:var(--ok)}
   .feedback.ng .verdict{color:var(--ng)}
   .feedback .ans{color:var(--ink-soft);font-size:.88rem}
@@ -241,6 +248,12 @@
     border-radius:10px;padding:13px 15px;margin-bottom:10px;
   }
   .rev-q{font-size:1.05rem;font-weight:600;margin-bottom:3px}
+  .rev-no{
+    display:inline-block;font-family:system-ui,sans-serif;font-size:.7rem;font-weight:600;
+    color:#fff;background:var(--enji);border-radius:6px;padding:1px 7px;margin-right:8px;
+    letter-spacing:.03em;vertical-align:middle;
+  }
+  .rev-no.inline{background:var(--gold);margin-right:7px}
   .rev-q .uline{font-size:1rem}
   .rev-meta{font-size:.74rem;color:var(--ink-soft);font-family:system-ui,sans-serif;margin-bottom:6px}
   .rev-line{font-size:.85rem;margin:6px 0 0;display:flex;gap:8px;align-items:baseline}
@@ -295,7 +308,7 @@
       <span class="sub">古文単語</span>
     </div>
     <div class="nav-group">
-      <span class="ver">v1.0</span>
+      <span class="ver">v1.1</span>
       <a class="home-btn nav-tango" href="https://swallow-base.com/kobun/tango/">単語トップ</a>
       <a class="home-btn nav-kobun" href="https://swallow-base.com/kobun/">⌂ 古文</a>
     </div>
@@ -363,7 +376,7 @@
 
 </div>
 
-<footer>SWALLOW-BASE — つばめ古文 ／ 古文単語演習 v1.0</footer>
+<footer>SWALLOW-BASE — つばめ古文 ／ 古文単語演習 v1.1</footer>
 
 <!-- modal -->
 <div class="modal-bg" id="modal">
@@ -586,7 +599,11 @@ function submitAnswer(){
   // feedback
   const fb=$('#q-feedback');
   fb.classList.add('show',correct?'ok':'ng');
-  let html='<div class="verdict">'+(correct?'正解':'不正解')+'</div>';
+  const noLabel=wordNo(q.word);
+  let html='<div class="verdict-row">'+
+    '<span class="verdict">'+(correct?'正解':'不正解')+'</span>'+
+    '<span class="word-no">No.'+noLabel+'　'+esc(q.headword)+(q.kanji?'（'+esc(q.kanji)+'）':'')+'</span>'+
+    '</div>';
   html+='<div class="gloss-label">正しい意味</div>';
   html+='<ul class="gloss-list">'+q.correct.map(g=>'<li>'+esc(g)+'</li>').join('')+'</ul>';
   if(q.mode==='B'&&q.ex.translation){
@@ -630,11 +647,11 @@ function showResult(){
       const q=w.q;
       let qline,meta;
       if(q.mode==='A'){
-        qline=esc(q.headword)+(q.kanji?'　<span style="font-size:.85rem;color:var(--ink-soft)">'+esc(q.kanji)+'</span>':'');
+        qline='<span class="rev-no">No.'+wordNo(q.word)+'</span>'+esc(q.headword)+(q.kanji?'　<span style="font-size:.85rem;color:var(--ink-soft)">'+esc(q.kanji)+'</span>':'');
         meta='モードA ／ '+q.pos;
       }else{
         qline=markHeadword(q.ex.text,q.ex.headword_form);
-        meta='モードB ／ '+q.pos+(q.ex.source?' ／ 〔'+esc(q.ex.source)+'〕':'');
+        meta='<span class="rev-no inline">No.'+wordNo(q.word)+'</span>モードB ／ '+q.pos+' ／ '+esc(q.headword)+(q.ex.source?' ／ 〔'+esc(q.ex.source)+'〕':'');
       }
       const correctHtml = q.correct.length>1
         ? '<ul class="gloss-list" style="margin-top:2px">'+q.correct.map(g=>'<li>'+esc(g)+'</li>').join('')+'</ul>'
@@ -674,6 +691,7 @@ function goHome(){show('home');}
 
 /* ---------- helpers ---------- */
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function wordNo(w){return w&&w.no?String(parseInt(w.no,10)):'';}
 function markHeadword(text,form){
   const i=text.indexOf(form);
   if(i<0)return esc(text);
