@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ギリシア・ローマ文化史 演習 ─ つばめ学習舎</title>
+<meta name="description" content="つばめ学習舎の大学受験向け ギリシア・ローマ文化史 演習ツール。教材に準拠した一問一答や区分分類で、ギリシア・ヘレニズム・ローマの文化史を練習できます。">
+
+<!-- 検索エンジンに載せたくない内部用ツールのため除外。公開して検索に出したい場合は次の1行を削除してください -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- 正規URL（/history フォルダに index.html として置いた場合） -->
+<link rel="canonical" href="https://swallow-base.com/history/greco-roman/">
+<meta name="theme-color" content="#2a3340">
+
+<!-- SNSなどで共有したときの表示（OGP） -->
+<meta property="og:title" content="ギリシア・ローマ文化史 演習 ─ つばめ学習舎">
+<meta property="og:description" content="教材準拠の ギリシア・ローマ文化史 演習ツール。一問一答・区分分類などで練習できます。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://swallow-base.com/history/greco-roman/">
+<meta property="og:site_name" content="つばめ学習舎">
+<meta property="og:locale" content="ja_JP">
+<!-- サムネイル画像を用意したら、次の形で追加できます（絶対URL推奨）
+<meta property="og:image" content="https://swallow-base.com/history/greco-roman/ogp.png"> -->
+
+<!-- favicon（朱印「演」。外部ファイル不要のインラインSVG） -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%23355f7e'/><text x='16' y='24' font-family='serif' font-size='19' fill='white' text-anchor='middle'>演</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2a3340;
+  --ink-soft:#5a6470;
+  --paper:#e9e4d6;
+  --paper-card:#faf8f2;
+  --line:#d5cfbf;
+  --seal:#355f7e;
+  --seal-soft:#4a7593;
+  --gold:#b5893a;
+  /* 時代色 */
+  --e-shunju:#5f8290;
+  --e-kan:#a8553f;
+  --e-nanboku:#6c7e58;
+  --e-tou:#b9923f;
+  --e-sou:#7d96a0;
+  --e-min:#3f5a7a;
+  --e-shin:#6e4c6b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+  min-height:100vh;
+  background-image:radial-gradient(circle at 20% 10%,rgba(255,255,255,.4),transparent 40%);
+}
+.wrap{max-width:760px;margin:0 auto;padding:24px 18px 80px}
+.serif{font-family:"Noto Serif JP",serif}
+
+/* ヘッダ */
+header.top{display:flex;align-items:baseline;gap:14px;padding:8px 2px 20px;border-bottom:2px solid var(--ink);margin-bottom:26px}
+header.top .mark{
+  font-family:"Noto Serif JP",serif;font-weight:700;font-size:13px;color:#fff;
+  background:var(--seal);padding:7px 9px;border-radius:3px;letter-spacing:.12em;line-height:1.3;
+  writing-mode:vertical-rl;text-orientation:upright;
+}
+header.top h1{font-family:"Noto Serif JP",serif;font-weight:700;font-size:21px;letter-spacing:.04em}
+header.top .sub{font-size:12px;color:var(--ink-soft);margin-top:3px;letter-spacing:.08em}
+header.top .home-link{margin-left:auto;align-self:center;font-size:12px;color:var(--seal);text-decoration:none;border:1px solid var(--line);padding:6px 12px;border-radius:6px;white-space:nowrap;font-weight:600;letter-spacing:.04em;transition:.12s}
+header.top .home-link:hover{background:#eef3f7;border-color:var(--seal)}
+
+/* 開始画面 */
+.lead{font-size:13.5px;color:var(--ink-soft);margin-bottom:22px;max-width:60ch}
+.section-label{font-family:"Noto Serif JP",serif;font-size:12px;letter-spacing:.22em;color:var(--gold);margin:26px 0 12px;font-weight:600}
+
+.modes{display:grid;gap:12px}
+.mode-card{
+  text-align:left;background:var(--paper-card);border:1px solid var(--line);border-radius:7px;
+  padding:16px 18px;cursor:pointer;transition:.15s;display:flex;gap:15px;align-items:flex-start;width:100%;
+  font-family:inherit;color:inherit;
+}
+.mode-card:hover{border-color:var(--ink);transform:translateY(-1px)}
+.mode-card:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.mode-card .code{font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px;color:var(--seal);min-width:30px;padding-top:1px}
+.mode-card .body .t{font-weight:700;font-size:15px;margin-bottom:3px}
+.mode-card .body .d{font-size:12.5px;color:var(--ink-soft);line-height:1.6}
+
+/* 時代フィルタ */
+.eras{display:flex;flex-wrap:wrap;gap:8px}
+.era-chip{
+  font-family:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper-card);
+  padding:7px 14px;border-radius:20px;cursor:pointer;color:var(--ink-soft);transition:.12s;font-weight:500;
+}
+.era-chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.era-chip:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.hint{font-size:11.5px;color:var(--ink-soft);margin-top:9px}
+
+/* クイズ画面 */
+.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.btn-back{font-family:inherit;font-size:12.5px;background:none;border:none;color:var(--ink-soft);cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+.btn-back:hover{color:var(--ink)}
+.progress{font-size:12px;color:var(--ink-soft);font-family:"Noto Serif JP",serif;letter-spacing:.05em}
+.score-tag{font-size:12px;color:var(--seal);font-weight:700}
+
+.card{background:var(--paper-card);border:1px solid var(--line);border-radius:9px;padding:22px 20px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+
+.era-badge{display:inline-block;font-size:11px;font-weight:700;color:#fff;padding:3px 10px;border-radius:3px;letter-spacing:.08em;margin-bottom:14px}
+
+.prompt-label{font-size:11px;letter-spacing:.18em;color:var(--gold);font-weight:600;font-family:"Noto Serif JP",serif;margin-bottom:8px}
+.prompt-desc{font-size:15.5px;line-height:1.85;margin-bottom:4px}
+.prompt-term{font-family:"Noto Serif JP",serif;font-size:30px;font-weight:700;letter-spacing:.04em;line-height:1.3}
+.prompt-term .rb{font-size:13px;color:var(--ink-soft);font-weight:400;display:block;letter-spacing:.1em;margin-bottom:2px}
+.prompt-sub{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
+
+/* 選択肢 */
+.opts{display:grid;gap:9px;margin-top:18px}
+.opt{
+  font-family:inherit;text-align:left;background:#fff;border:1px solid var(--line);border-radius:6px;
+  padding:12px 15px;cursor:pointer;font-size:14.5px;color:var(--ink);transition:.12s;width:100%;display:flex;gap:10px;align-items:center;
+}
+.opt .mk{font-family:"Noto Serif JP",serif;color:var(--ink-soft);font-size:13px;min-width:18px}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt:focus-visible{outline:2px solid var(--seal);outline-offset:1px}
+.opt:disabled{cursor:default}
+.opt.correct{background:#eef3ea;border-color:var(--e-nanboku);color:#33421f}
+.opt.wrong{background:#f6e9e6;border-color:var(--seal);color:#6e2a1e}
+.opt.dim{opacity:.5}
+.opt.dk{color:var(--ink-soft)}
+.opt.dk .mk{color:var(--seal);font-weight:700}
+.opt.selected{border-color:var(--seal);background:#eef3f7;box-shadow:inset 0 0 0 2px rgba(53,95,126,.22)}
+.opt .badge{margin-left:auto;font-size:11px;font-weight:700;padding:2px 9px;border-radius:11px;white-space:nowrap;letter-spacing:.03em}
+.opt .badge.your{background:#e7ddca;color:#6b573a}
+.opt .badge.ans{background:#3f7d52;color:#fff}
+.opt .badge+.badge{margin-left:6px}
+
+/* モードB：複数設問ブロック */
+.qblock{border-top:1px dashed var(--line);padding-top:16px;margin-top:16px}
+.qblock:first-of-type{border-top:none;padding-top:4px;margin-top:8px}
+.q-ask{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:10px}
+.q-ask .q-no{color:var(--seal);font-family:"Noto Serif JP",serif;margin-right:6px}
+
+/* 解説 */
+.explain{margin-top:18px;background:#fbf6ea;border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:13px 15px;font-size:13px;line-height:1.8;color:var(--ink-soft)}
+.explain b{color:var(--ink)}
+.explain .ttl{font-family:"Noto Serif JP",serif;font-weight:700;color:var(--gold);font-size:11px;letter-spacing:.14em;display:block;margin-bottom:5px}
+
+/* 正誤の明示 */
+.verdict{display:flex;align-items:center;gap:9px;font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px;padding:11px 18px;border-radius:7px;margin-top:18px;letter-spacing:.1em}
+.verdict .ic{font-size:20px;line-height:1}
+.verdict.ok{background:#e7efe0;color:#3a5a22;border:1.5px solid var(--e-nanboku)}
+.verdict.ng{background:#f4e3df;color:#8a3322;border:1.5px solid var(--seal)}
+
+/* アクションボタン */
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{font-family:inherit;font-size:14px;font-weight:700;border-radius:6px;padding:11px 22px;cursor:pointer;border:1px solid var(--ink);transition:.12s}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:#000}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:rgba(0,0,0,.04)}
+.btn:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.btn:disabled{opacity:.4;cursor:default}
+
+/* 完了画面 */
+.done{text-align:center;padding:30px 10px}
+.done .big{font-family:"Noto Serif JP",serif;font-size:34px;font-weight:700;margin:10px 0}
+.done .lbl{font-size:12px;letter-spacing:.18em;color:var(--gold);font-family:"Noto Serif JP",serif}
+.done p{font-size:13.5px;color:var(--ink-soft);margin:14px 0 24px}
+.wrong-list{text-align:left;background:#fbf6ea;border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:18px auto;max-width:520px}
+.wrong-list .wl-ttl{font-family:"Noto Serif JP",serif;font-weight:700;font-size:13px;color:var(--seal);margin-bottom:10px}
+.wrong-list ul{list-style:none}
+.wrong-list li{font-size:14px;padding:7px 2px;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.wrong-list li:last-child{border-bottom:none}
+.wrong-list li .rd{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+
+footer{margin-top:40px;font-size:11px;color:var(--ink-soft);text-align:center;line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
+
+.hidden{display:none!important}
+
+@media (max-width:480px){
+  .prompt-term{font-size:25px}
+  .wrap{padding:18px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="mark">演習</div>
+    <div>
+      <h1>ギリシア・ローマ文化史</h1>
+      <div class="sub">つばめ学習舎 ── 教材準拠の出題</div>
+    </div>
+    <a class="home-link" href="../">⌂ 世界史トップ</a>
+  </header>
+
+  <!-- 開始画面 -->
+  <div id="start">
+    <p class="lead">出題はすべて、配布した教材資料に記載のある事項に限定しています。誤りの選択肢も同じ範囲の語から作られています。出題形式を選んで演習を始めてください。</p>
+
+    <div class="section-label">出題形式</div>
+    <div class="modes" id="modeList"></div>
+
+    <div class="actions" style="margin-top:24px">
+      <button class="btn btn-primary" id="startBtn">演習を始める</button>
+    </div>
+  </div>
+
+  <!-- クイズ画面 -->
+  <div id="quiz" class="hidden">
+    <div class="quiz-top">
+      <button class="btn-back" id="backBtn">← 形式の選択に戻る</button>
+      <div>
+        <span class="progress" id="progress"></span>
+        <span class="score-tag" id="scoreTag"></span>
+      </div>
+    </div>
+    <div id="quizBody"></div>
+  </div>
+
+  <!-- 完了画面 -->
+  <div id="done" class="hidden">
+    <div class="done">
+      <div class="lbl">演習終了</div>
+      <div class="big" id="doneScore"></div>
+      <p id="doneMsg"></p>
+      <div id="wrongArea"></div>
+    </div>
+  </div>
+
+  <footer>
+    出題内容は教材資料の範囲に準拠／別名・補足は解説欄に記載<br>
+    つばめ学習舎・授業用演習ツール
+  </footer>
+</div>
+
+<script>
+/* ===================================================================
+   データ：各語は資料1〜4と照合済み。
+   era … 時代（景徳鎮のみ複数）。person/work … リスト内で相互に問える相手のid。
+   note … 解説に出す補足（別名・リスト外の作者・複数時代の注記など）。
+   =================================================================== */
+const DATA = [
+/* ===== ギリシア ===== */
+/* 文学 */
+{id:"homeros",term:"ホメロス",read:"ほめろす",era:["ギリシア"],genre:"文学",type:"人物",
+ desc:"叙事詩『イリアス』『オデュッセイア』を残した。トロイア戦争を題材とする。"},
+{id:"hesiodos",term:"ヘシオドス",read:"へしおどす",era:["ギリシア"],genre:"文学",type:"人物",
+ desc:"『神統記』（神々の系譜）、『労働と日々』（市民への教訓）を残した。"},
+{id:"sappho",term:"サッフォー",read:"さっふぉー",era:["ギリシア"],genre:"文学",type:"人物",
+ desc:"レスボス島の女性詩人。情熱的な叙情詩を残した。"},
+{id:"aischylos",term:"アイスキュロス",read:"あいすきゅろす",era:["ギリシア"],genre:"文学",type:"人物",
+ desc:"悲劇『アガメムノン』。雄大で格調高い作品で知られる。"},
+{id:"sophokles",term:"ソフォクレス",read:"そふぉくれす",era:["ギリシア"],genre:"文学",type:"人物",
+ desc:"悲劇『オイディプス王』。高貴な人間像を描いた。"},
+{id:"euripides",term:"エウリピデス",read:"えうりぴです",era:["ギリシア"],genre:"文学",type:"人物",
+ desc:"悲劇『メデイア』。人間の心理を深く描写した。"},
+{id:"aristophanes",term:"アリストファネス",read:"ありすとふぁねす",era:["ギリシア"],genre:"文学",type:"人物",
+ desc:"喜劇『女の平和』『女の議会』。社会世相やソフィストを風刺した。"},
+/* 哲学・思想 */
+{id:"sophist",term:"ソフィスト",read:"そふぃすと",era:["ギリシア"],genre:"哲学・思想",type:"概念",
+ desc:"弁論術を教えた職業教師。相手をいかに説得するかを教えた。",
+ note:"代表的な人物がプロタゴラス。"},
+{id:"protagoras",term:"プロタゴラス",read:"ぷろたごらす",era:["ギリシア"],genre:"哲学・思想",type:"人物",
+ desc:"ソフィスト。「万物の尺度は人間」と説き、真理の主観性を主張した。"},
+{id:"sokrates",term:"ソクラテス",read:"そくらてす",era:["ギリシア"],genre:"哲学・思想",type:"人物",
+ desc:"「汝自身を知れ」。問答を通じて真理の客観性を説いた西洋哲学の祖。"},
+{id:"platon",term:"プラトン",read:"ぷらとん",era:["ギリシア"],genre:"哲学・思想",type:"人物",
+ desc:"イデア論を説き、哲人による理想政治を主張。『国家』、アカデメイアを開設した。"},
+{id:"aristoteles",term:"アリストテレス",read:"ありすとてれす",era:["ギリシア"],genre:"哲学・思想",type:"人物",
+ desc:"諸学問を体系化した「万学の祖」。『政治学』。アレクサンドロスの師。"},
+/* 自然科学 */
+{id:"thales",term:"タレス",read:"たれす",era:["ギリシア"],genre:"自然科学",type:"人物",
+ desc:"万物の根源を水と考えた、イオニア自然哲学の祖。"},
+{id:"pythagoras",term:"ピタゴラス",read:"ぴたごらす",era:["ギリシア"],genre:"自然科学",type:"人物",
+ desc:"万物の根源を数とし、「ピタゴラスの定理」で知られる。"},
+{id:"herakleitos",term:"ヘラクレイトス",read:"へらくれいとす",era:["ギリシア"],genre:"自然科学",type:"人物",
+ desc:"万物の根源を火とし、「万物は流転する」と説いた。"},
+{id:"demokritos",term:"デモクリトス",read:"でもくりとす",era:["ギリシア"],genre:"自然科学",type:"人物",
+ desc:"万物の根源を原子（アトム）とする原子論・唯物論の祖。"},
+{id:"hippokrates",term:"ヒッポクラテス",read:"ひっぽくらてす",era:["ギリシア"],genre:"自然科学",type:"人物",
+ desc:"臨床を重視した「西洋医学の父」。"},
+/* 彫刻美術 */
+{id:"pheidias",term:"フェイディアス",read:"ふぇいでぃあす",era:["ギリシア"],genre:"彫刻美術",type:"人物",
+ desc:"パルテノン神殿のアテナ女神像を制作し、神殿彫刻を監督した。"},
+{id:"praxiteles",term:"プラクシテレス",read:"ぷらくしてれす",era:["ギリシア"],genre:"彫刻美術",type:"人物",
+ desc:"「ヘルメス神像」。若い神を好んで彫像化した。"},
+/* 歴史 */
+{id:"herodotos",term:"ヘロドトス",read:"へろどとす",era:["ギリシア"],genre:"歴史",type:"人物",
+ desc:"『歴史』。ペルシア戦争を物語的に記述した。"},
+{id:"thukydides",term:"トゥキディデス",read:"とぅきでぃです",era:["ギリシア"],genre:"歴史",type:"人物",
+ desc:"『歴史（戦史）』。ペロポネソス戦争を客観的に記述した。"},
+/* 建築 */
+{id:"parthenon",term:"パルテノン神殿",read:"ぱるてのんしんでん",era:["ギリシア"],genre:"建築",type:"概念",
+ desc:"アテネのアクロポリスに立つドーリア式神殿の傑作。アテネ民主政の最盛期を象徴する。"},
+
+/* ===== ヘレニズム ===== */
+/* 哲学・思想 */
+{id:"epikuros",term:"エピクロス",read:"えぴくろす",era:["ヘレニズム"],genre:"哲学・思想",type:"人物",
+ desc:"精神的快楽（心の平安）を人生の目的とする、エピクロス派の祖。"},
+{id:"zenon",term:"ゼノン",read:"ぜのん",era:["ヘレニズム"],genre:"哲学・思想",type:"人物",
+ desc:"禁欲を重んじて理性的境地を求める、ストア派の祖。"},
+{id:"epikuros_ha",term:"エピクロス派",read:"えぴくろすは",era:["ヘレニズム"],genre:"哲学・思想",type:"概念",person:"epikuros",
+ desc:"精神的快楽（アタラクシア）を人生の目的とする学派。"},
+{id:"stoa_ha",term:"ストア派",read:"すとあは",era:["ヘレニズム"],genre:"哲学・思想",type:"概念",person:"zenon",
+ desc:"禁欲による理性的境地（アパティア）を説く学派。世界市民主義に発展した。"},
+{id:"kosmopolitanism",term:"世界市民主義",read:"せかいしみんしゅぎ",era:["ヘレニズム"],genre:"哲学・思想",type:"概念",
+ desc:"ポリスの枠をこえ、普遍的な人間性を求める考え方（コスモポリタニズム）。"},
+/* 自然科学 */
+{id:"eratosthenes",term:"エラトステネス",read:"えらとすてねす",era:["ヘレニズム"],genre:"自然科学",type:"人物",
+ desc:"子午線（地球の円周）を測定した。"},
+{id:"aristarchos",term:"アリスタルコス",read:"ありすたるこす",era:["ヘレニズム"],genre:"自然科学",type:"人物",
+ desc:"地球の自転と公転（太陽中心説）を説いた。"},
+{id:"eukleides",term:"エウクレイデス",read:"えうくれいです",era:["ヘレニズム"],genre:"自然科学",type:"人物",
+ desc:"平面幾何学を集大成した。「ユークリッド幾何学」の創始者。"},
+{id:"archimedes",term:"アルキメデス",read:"あるきめです",era:["ヘレニズム"],genre:"自然科学",type:"人物",
+ desc:"浮力・てこの原理など、数学・物理学の原理を発見した。"},
+{id:"museion",term:"ムセイオン",read:"むせいおん",era:["ヘレニズム"],genre:"自然科学",type:"概念",
+ desc:"アレクサンドリアの王立研究所。自然科学・人文科学の研究の中心となった。"},
+/* 彫刻美術 */
+{id:"milo_venus",term:"「ミロのヴィーナス」",read:"みろのゔぃーなす",era:["ヘレニズム"],genre:"彫刻美術",type:"作品",
+ desc:"ミロス島出土の女神アフロディテ像。女性美を表すヘレニズム彫刻の代表作。",
+ note:"作者不詳。"},
+{id:"laokoon",term:"「ラオコーン」",read:"らおこーん",era:["ヘレニズム"],genre:"彫刻美術",type:"作品",
+ desc:"トロイアの神官ラオコーンの場面を表したヘレニズム彫刻の傑作。",
+ note:"作者不詳。"},
+/* その他 */
+{id:"hellenism_culture",term:"ヘレニズム文化",read:"へれにずむぶんか",era:["ヘレニズム"],genre:"その他",type:"概念",
+ desc:"ギリシア文化とオリエント文化が融合した文化。世界市民主義・個人主義を特徴とする。"},
+
+/* ===== ローマ ===== */
+/* 文学 */
+{id:"vergilius",term:"ウェルギリウス",read:"うぇるぎりうす",era:["ローマ"],genre:"文学",type:"人物",
+ desc:"ローマ建国の叙事詩『アエネイス』を残した。"},
+{id:"horatius",term:"ホラティウス",read:"ほらてぃうす",era:["ローマ"],genre:"文学",type:"人物",
+ desc:"『叙情詩集』を残した。"},
+{id:"ovidius",term:"オウィディウス",read:"おうぃでぃうす",era:["ローマ"],genre:"文学",type:"人物",
+ desc:"『転身譜』『恋の技法』を残した。"},
+/* 歴史・地理 */
+{id:"polybios",term:"ポリビオス",read:"ぽりびおす",era:["ローマ"],genre:"歴史",type:"人物",
+ desc:"『歴史』。政体循環史観で知られる。"},
+{id:"livius",term:"リウィウス",read:"りうぃうす",era:["ローマ"],genre:"歴史",type:"人物",
+ desc:"『ローマ建国史』を著した。"},
+{id:"caesar",term:"カエサル",read:"かえさる",era:["ローマ"],genre:"歴史",type:"人物",
+ desc:"『ガリア戦記』（ラテン散文の名文）。ユリウス暦を制定した。"},
+{id:"tacitus",term:"タキトゥス",read:"たきとぅす",era:["ローマ"],genre:"歴史",type:"人物",
+ desc:"『年代記』『ゲルマニア』を著した。"},
+{id:"plutarchos",term:"プルタルコス",read:"ぷるたるこす",era:["ローマ"],genre:"歴史",type:"人物",
+ desc:"ギリシア・ローマの英雄を対比した『対比列伝』（『英雄伝』）を著した。",
+ note:"ギリシア系の人物だが、教材ではローマ文化一覧に記載。"},
+{id:"strabon",term:"ストラボン",read:"すとらぼん",era:["ローマ"],genre:"歴史",type:"人物",
+ desc:"『地理誌』。当時知られていた全世界の地誌を記述した。",
+ note:"ギリシア系の人物だが、教材ではローマ文化一覧に記載。"},
+/* 哲学・思想 */
+{id:"cicero",term:"キケロ",read:"きけろ",era:["ローマ"],genre:"哲学・思想",type:"人物",
+ desc:"共和政末期の弁論家・哲学者。『国家論』。その文章はラテン語散文の見本とされた。"},
+{id:"seneca",term:"セネカ",read:"せねか",era:["ローマ"],genre:"哲学・思想",type:"人物",
+ desc:"ストア派哲学者。『幸福論』。ネロ帝の師。"},
+{id:"epiktetos",term:"エピクテトス",read:"えぴくてとす",era:["ローマ"],genre:"哲学・思想",type:"人物",
+ desc:"ストア派の哲学者。"},
+{id:"marcus_aurelius",term:"マルクス＝アウレリウス＝アントニヌス",read:"まるくす＝あうれりうす＝あんとにぬす",era:["ローマ"],genre:"哲学・思想",type:"人物",
+ desc:"ストア派哲学者として知られる皇帝。『自省録』を残した。"},
+/* 自然科学 */
+{id:"plinius",term:"プリニウス",read:"ぷりにうす",era:["ローマ"],genre:"自然科学",type:"人物",
+ desc:"百科全書的な知識の集大成『博物誌』を著した。"},
+{id:"ptolemaios",term:"プトレマイオス",read:"ぷとれまいおす",era:["ローマ"],genre:"自然科学",type:"人物",
+ desc:"天動説を説いた。『天文学大全』。",
+ note:"ギリシア系の人物だが、教材ではローマ文化一覧に記載。"},
+{id:"julius_calendar",term:"ユリウス暦",read:"ゆりうすれき",era:["ローマ"],genre:"自然科学",type:"概念",person:"caesar",
+ desc:"カエサルが制定した太陽暦。のちのグレゴリウス暦（西暦）のもととなった。"},
+/* 法学 */
+{id:"tribonianus",term:"トリボニアヌス",read:"とりぼにあぬす",era:["ローマ"],genre:"法学",type:"人物",work:"roma_law_taizen",
+ desc:"ユスティニアヌス帝の命で『ローマ法大全』を編纂した。"},
+{id:"roma_law",term:"ローマ法",read:"ろーまほう",era:["ローマ"],genre:"法学",type:"概念",
+ desc:"十二表法を起源とし、のちに万民法へと発展したローマの法。近代に受け継がれた。"},
+{id:"roma_law_taizen",term:"ローマ法大全",read:"ろーまほうたいぜん",era:["ローマ"],genre:"法学",type:"概念",person:"tribonianus",
+ desc:"ユスティニアヌス帝がトリボニアヌスらに編纂させた、ローマ法の集大成。"},
+{id:"banminho",term:"万民法",read:"ばんみんほう",era:["ローマ"],genre:"法学",type:"概念",
+ desc:"帝国に住むすべての人民に適用される法。市民法から発展した。"},
+/* 建築 */
+{id:"colosseum",term:"コロッセウム",read:"ころっせうむ",era:["ローマ"],genre:"建築",type:"概念",
+ desc:"ローマの円形闘技場。剣闘士の戦いなどの見世物が行われた。"},
+/* 言語 */
+{id:"latin",term:"ラテン語",read:"らてんご",era:["ローマ"],genre:"言語",type:"概念",
+ desc:"ローマ人の言語。近代に至るまで教会や学術の国際的な公用語であった。"}
+];
+const KEY_MAP={
+  homeros:"『イリアス』",hesiodos:"『神統記』",sappho:"女性詩人",
+  aischylos:"『アガメムノン』",sophokles:"『オイディプス王』",euripides:"『メデイア』",aristophanes:"『女の平和』",
+  sokrates:"知徳合一",platon:"『国家』",aristoteles:"『政治学』",
+  thales:"イオニア学派の祖",pythagoras:"『ピタゴラスの定理』",herakleitos:"『万物は流転する』",demokritos:"原子論",hippokrates:"西洋医学の祖",
+  pheidias:"アテナ女神像",praxiteles:"ヘルメス神像",
+  herodotos:"『歴史』（ペルシア戦争史）",thukydides:"『歴史』（ペロポネソス戦争史）",
+  epikuros:"精神的快楽主義",zenon:"精神的禁欲主義",
+  eratosthenes:"地球の円周を計測",aristarchos:"太陽中心説",eukleides:"『ユークリッド幾何学』",archimedes:"『アルキメデスの原理』",
+  vergilius:"『アエネイス』",horatius:"『叙情詩集』",ovidius:"『転身譜』",
+  polybios:"『歴史』（政体循環史観）",livius:"『ローマ建国史』",caesar:"『ガリア戦記』",tacitus:"『ゲルマニア』",plutarchos:"『対比列伝』",strabon:"『地理誌』",
+  cicero:"『国家論』",seneca:"『幸福論』",marcus_aurelius:"『自省録』",
+  plinius:"『博物誌』",ptolemaios:"天動説",
+  tribonianus:"『ローマ法大全』"
+};
+DATA.forEach(d=>{if(KEY_MAP[d.id])d.key=KEY_MAP[d.id];});
+const ERA_ORDER=["ギリシア","ヘレニズム","ローマ"];
+const ERA_COLOR={"ギリシア":"#3f6f8a","ヘレニズム":"#b0843e","ローマ":"#9e4a3a"};
+const byId=id=>DATA.find(d=>d.id===id);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const sample=(arr,n)=>shuffle(arr).slice(0,n);
+
+const MODES=[
+  {id:"A",code:"A",t:"説明と語を結びつける",d:"説明から語を選ぶ問題と、語からその説明・作品を選ぶ問題が、両方向で出ます。"},
+  {id:"B",code:"B",t:"語の属性を答える",d:"語について、区分（ギリシア／ヘレニズム／ローマ）・ジャンル・人物や作品をまとめて答えます。"},
+  {id:"C",code:"C",t:"区分で分類する",d:"「この区分の文化はどれか」を、複数の語から選びます。"}
+];
+
+// モードA用：ジャンル別の誤答候補（教材リスト外の一般的な世界史用語。正解にはならない）
+const DISTRACTORS={
+  '文学':[['アナクレオン','あなくれおん'],['ピンダロス','ぴんだろす'],['メナンドロス','めなんどろす'],['テオクリトス','ておくりとす'],['ユウェナリス','ゆうぇなりす']],
+  '哲学・思想':[['アナクサゴラス','あなくさごらす'],['エンペドクレス','えんぺどくれす'],['パルメニデス','ぱるめにです'],['ディオゲネス','でぃおげねす'],['プロティノス','ぷろてぃのす']],
+  '自然科学':[['アナクシマンドロス','あなくしまんどろす'],['ヒッパルコス','ひっぱるこす'],['アポロニオス','あぽろにおす'],['ガレノス','がれのす'],['ヘロフィロス','へろふぃろす']],
+  '彫刻美術':[['ミュロン','みゅろん'],['ポリュクレイトス','ぽりゅくれいとす'],['リュシッポス','りゅしっぽす'],['スコパス','すこぱす']],
+  '歴史':[['クセノフォン','くせのふぉん'],['アッリアノス','あっりあのす'],['スエトニウス','すえとにうす'],['ディオドロス','でぃおどろす']],
+  '建築':[['パンテオン','ぱんておん'],['凱旋門','がいせんもん'],['ガール水道橋','がーるすいどうきょう'],['アッピア街道','あっぴあかいどう'],['アゴラ','あごら']],
+  '法学':[['十二表法','じゅうにひょうほう'],['市民法','しみんほう'],['ホルテンシウス法','ほるてんしうすほう'],['リキニウス法','りきにうすほう'],['自然法','しぜんほう']],
+  '言語':[['ギリシア語','ぎりしあご'],['コイネー','こいねー'],['フェニキア文字','ふぇにきあもじ'],['アラム語','あらむご']],
+  'その他':[['ギリシア文化','ぎりしあぶんか'],['ローマ文化','ろーまぶんか'],['ポリス','ぽりす'],['オリエント文化','おりえんとぶんか']]
+};
+
+// 1モードあたりの出題数（ここを変えれば全体に反映されます）
+const QCOUNT={A:20, B:20, Bp:20, C:20};
+
+// 状態
+let state={mode:null,pool:[],idx:0,total:0,correct:0,answeredCurrent:false,wrong:[]};
+
+// ---- 開始画面の構築 ----
+const modeList=document.getElementById('modeList');
+MODES.forEach(m=>{
+  const b=document.createElement('button');
+  b.className='mode-card';b.dataset.mode=m.id;
+  b.innerHTML=`<span class="code">${m.code}</span><span class="body"><span class="t">${m.t}</span><span class="d">${m.d}</span></span>`;
+  b.addEventListener('click',()=>{selectMode(m.id);});
+  modeList.appendChild(b);
+});
+function selectMode(id){
+  state.mode=id;
+  [...modeList.children].forEach(c=>c.style.borderColor=(c.dataset.mode===id)?'var(--ink)':'var(--line)');
+  [...modeList.children].forEach(c=>c.style.background=(c.dataset.mode===id)?'#fff':'var(--paper-card)');
+}
+
+document.getElementById('startBtn').addEventListener('click',start);
+document.getElementById('backBtn').addEventListener('click',goHome);
+
+function start(){
+  if(!state.mode){alert('出題形式を選んでください。');return;}
+  buildPool();
+  if(state.pool.length===0){alert('出題できる語がありません。');return;}
+  show('quiz');renderQuestion();
+}
+
+function inEras(){return true;}
+
+function buildPool(){
+  let items=DATA.slice();
+  if(state.mode==='Bp')items=items.filter(d=>d.type==='人物');
+  if(state.mode==='C'){
+    // 全時代を最低1回入れ、残りはランダムに補って指定問数ぶん出題（同じ時代が複数回出る）
+    let seq=ERA_ORDER.slice();
+    while(seq.length<QCOUNT.C)seq.push(ERA_ORDER[Math.floor(Math.random()*ERA_ORDER.length)]);
+    state.pool=shuffle(seq).slice(0,QCOUNT.C);
+  }else{
+    const cap=QCOUNT[state.mode]||12;
+    state.pool=shuffle(items).slice(0,Math.min(items.length,cap));
+  }
+  state.idx=0;state.total=state.pool.length;state.correct=0;state.wrong=[];
+}
+
+function show(which){
+  ['start','quiz','done'].forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==which));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function goHome(){show('start');}
+function addBadge(el,text,cls){el.insertAdjacentHTML('beforeend',`<span class="badge ${cls}">${text}</span>`);}
+
+function updateTop(){
+  document.getElementById('progress').textContent=`第 ${state.idx+1} 問 / 全 ${state.total} 問`;
+  document.getElementById('scoreTag').textContent=state.idx>0?`　正答 ${state.correct}`:'';
+}
+
+function explainHTML(d){
+  let parts=[];
+  parts.push(`区分：<b>${d.era.join('・')}</b>`);
+  parts.push(`ジャンル：<b>${d.genre}</b>`);
+  if(d.work){const w=byId(d.work);if(w)parts.push(`作品：<b>${w.term}</b>`);}
+  if(d.person){const p=byId(d.person);if(p)parts.push(`関連人物：<b>${p.term}</b>`);}
+  let s=`<div class="explain"><span class="ttl">解説</span><b>${d.term}</b>：${d.desc}`;
+  if(d.note)s+=`<br><span style="color:var(--ink-soft)">※ ${d.note}</span>`;
+  s+=`<br><br>${parts.join('　／　')}</div>`;
+  return s;
+}
+
+// ====== 出題ルーティング ======
+function renderQuestion(){
+  updateTop();state.answeredCurrent=false;
+  const m=state.mode;
+  if(m==='A')renderModeA();
+  else if(m==='C')renderModeC();
+  else renderModeB(); // B / Bp 共通
+}
+
+/* ---- モードA：説明 ↔ 語（双方向） ---- */
+function renderModeA(){
+  const d=state.pool[state.idx];
+  const dir=Math.random()<0.5?'toTerm':'toDesc';
+  const sameGenre=DATA.filter(x=>x.id!==d.id && x.genre===d.genre);
+  let distract;
+  if(dir==='toTerm'){
+    // 説明 → 語。誤答は同ジャンル（リスト内＋一般用語）。
+    const general=(DISTRACTORS[d.genre]||[]).map(t=>({term:t[0],read:t[1],id:'g_'+t[0]}));
+    let cand=shuffle([...sameGenre,...general]);
+    if(cand.length<3)cand=cand.concat(shuffle(DATA.filter(x=>x.id!==d.id&&!cand.includes(x))));
+    distract=cand.slice(0,3);
+  }else{
+    // 語 → 説明。選択肢は各語の説明文なので、リスト内（説明を持つ語）のみから誤答を作る。
+    let cand=shuffle(sameGenre);
+    if(cand.length<3)cand=cand.concat(shuffle(DATA.filter(x=>x.id!==d.id&&x.genre!==d.genre)));
+    distract=cand.slice(0,3);
+  }
+  let opts=shuffle([d,...distract]);
+  opts=[...opts,{id:'__dk__',dk:true,term:'わからない',desc:'わからない'}];
+  const promptLabel=dir==='toTerm'?'この説明にあてはまる語は？':'この語の説明として正しいものは？';
+  const promptMain=dir==='toTerm'
+    ? `<div class="prompt-desc">${d.desc}</div>`
+    : `<div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>`;
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">${promptLabel}</div>
+    ${promptMain}
+    <div class="opts" id="opts" style="margin-top:16px"></div>
+    <div class="actions"><button class="btn btn-primary" id="answerA" disabled>解答する</button></div>
+    <div id="afterA"></div>
+  </div>`;
+  const oc=document.getElementById('opts');
+  const marks=['一','二','三','四','五'];
+  let selIdx=-1;
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.dk?' dk':'');
+    let label;
+    if(o.dk)label='わからない';
+    else if(dir==='toTerm'){const rd=o.read?`<span style="color:var(--ink-soft);font-size:12px">（${o.read}）</span>`:'';label=`${o.term}${rd}`;}
+    else label=o.desc;
+    b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${label}</span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      selIdx=i;
+      [...oc.children].forEach(c=>c.classList.remove('selected'));
+      b.classList.add('selected');
+      document.getElementById('answerA').disabled=false;
+    });
+    oc.appendChild(b);
+  });
+  document.getElementById('answerA').addEventListener('click',()=>{
+    if(state.answeredCurrent||selIdx<0)return;
+    state.answeredCurrent=true;
+    const o=opts[selIdx];
+    const ok=o.id===d.id;
+    if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    [...oc.children].forEach((c,ci)=>{
+      c.disabled=true;c.classList.remove('selected');
+      const oo=opts[ci];
+      const isCorrect=oo.id===d.id;
+      const isPicked=(ci===selIdx);
+      if(isCorrect)c.classList.add('correct');
+      else if(isPicked && !oo.dk)c.classList.add('wrong');
+      else c.classList.add('dim');
+      if(isPicked && !oo.dk)addBadge(c,'あなたの解答','your');
+      if(isCorrect)addBadge(c,'正しい選択肢','ans');
+    });
+    document.getElementById('answerA').disabled=true;
+    document.getElementById('afterA').innerHTML=verdict(ok)+explainHTML(d)+nextBtnHTML();
+    bindNext();
+  });
+}
+
+/* ---- モードB：区分・ジャンル・人物/実績をまとめて答える ---- */
+function renderModeB(){
+  const d=state.pool[state.idx];
+  const questions=[buildKubunQuestion(d), buildGenreQuestion(d)];
+  let headerLabel, headerMain;
+  if(d.type==='人物' && d.key){
+    const dir=Math.random()<0.5?'name':'key';
+    if(dir==='name'){
+      // 人物名がお題 → 代表語（作品・特徴）を問う
+      headerLabel='次の人物について答えてください';
+      headerMain=`<div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>`;
+      questions.push(buildKeyQuestion(d));
+    }else{
+      // 代表語がお題 → 人物名を問う
+      headerLabel='次の語に関係する人物について答えてください';
+      headerMain=`<div class="prompt-term">${d.key}</div>`;
+      questions.push(buildPersonNameQuestion(d,d));
+    }
+  }else if(d.type==='人物'){
+    // 代表語を持たない人物は区分・ジャンルのみ
+    headerLabel='次の人物について答えてください';
+    headerMain=`<div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>`;
+  }else{
+    // 概念・作品。関連人物があれば人物も問う
+    headerLabel='次の語について答えてください';
+    headerMain=`<div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>`;
+    if(d.person){const p=byId(d.person);if(p)questions.push(buildPersonNameQuestion(d,p));}
+  }
+  renderModeB_multi(d,questions,headerLabel,headerMain);
+}
+
+function renderModeB_multi(d,questions,headerLabel,headerMain){
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">${headerLabel}</div>
+    ${headerMain}
+    <div id="qblocks"></div>
+    <div class="actions"><button class="btn btn-primary" id="gradeBtn">まとめて採点する</button></div>
+    <div id="afterB"></div>
+  </div>`;
+  const qb=document.getElementById('qblocks');
+  questions.forEach((q,qi)=>{
+    const blk=document.createElement('div');blk.className='qblock';
+    blk.innerHTML=`<div class="q-ask"><span class="q-no">問${qi+1}</span>${q.ask}</div><div class="opts" id="q${qi}"></div>`;
+    qb.appendChild(blk);
+    const oc=blk.querySelector('.opts');
+    const marks=['一','二','三','四','五'];
+    q.options.forEach((o,i)=>{
+      const b=document.createElement('button');
+      b.className='opt'+(o.dk?' dk':'');b.dataset.val=o.val;
+      b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.label}</span>`;
+      b.addEventListener('click',()=>{
+        if(q.locked)return;
+        [...oc.children].forEach(c=>c.classList.remove('selected'));
+        b.classList.add('selected');q.picked=o.val;
+      });
+      oc.appendChild(b);
+    });
+    q.el=oc;
+  });
+  document.getElementById('gradeBtn').addEventListener('click',()=>{
+    if(state.answeredCurrent)return;
+    if(questions.some(q=>q.picked==null)){
+      if(!confirm('未回答の設問があります。このまま採点しますか？'))return;
+    }
+    state.answeredCurrent=true;
+    let allOK=true;
+    questions.forEach(q=>{
+      q.locked=true;
+      const okThis=q.isEra?(q.validEras.includes(q.picked)):(q.picked===q.answer);
+      [...q.el.children].forEach(c=>{
+        c.disabled=true;c.classList.remove('selected');
+        const v=c.dataset.val;
+        const isAns=q.isEra?q.validEras.includes(v):(v===q.answer);
+        const isPicked=(v===q.picked);
+        if(isAns)c.classList.add('correct');
+        else if(isPicked && v!=='__dk__')c.classList.add('wrong');
+        else c.classList.add('dim');
+        if(isPicked && v!=='__dk__')addBadge(c,'あなたの解答','your');
+        if(isAns)addBadge(c,'正しい選択肢','ans');
+      });
+      if(!okThis)allOK=false;
+    });
+    if(allOK)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    document.getElementById('gradeBtn').disabled=true;
+    document.getElementById('afterB').innerHTML=
+      verdict(allOK)
+      +`<p style="font-size:12px;color:var(--ink-soft);margin:8px 0 0">${allOK?'すべての設問に正解しました。':'設問に誤りがあります（全問正解で1点）。'}</p>`
+      +explainHTML(d)+nextBtnHTML();
+    bindNext();
+  });
+}
+
+function buildKubunQuestion(d){
+  const correct=d.era[0];
+  const others=ERA_ORDER.filter(e=>!d.era.includes(e));
+  const opts=shuffle([correct,...others]).map(e=>({val:e,label:e}));
+  opts.push({val:'__dk__',label:'わからない',dk:true});
+  return {ask:'区分は？（ギリシア／ヘレニズム／ローマ）',options:opts,answer:correct,picked:null,locked:false,isEra:true,validEras:d.era};
+}
+function buildGenreQuestion(d){
+  const allG=[...new Set(DATA.map(x=>x.genre))];
+  const others=shuffle(allG.filter(g=>g!==d.genre)).slice(0,3);
+  const opts=shuffle([d.genre,...others]).map(g=>({val:g,label:g}));
+  opts.push({val:'__dk__',label:'わからない',dk:true});
+  return {ask:'ジャンルは？',options:opts,answer:d.genre,picked:null,locked:false};
+}
+function buildKeyQuestion(d){
+  const others=shuffle(DATA.filter(x=>x.id!==d.id&&x.key)).slice(0,3);
+  const opts=shuffle([d,...others]).map(x=>({val:x.id,label:x.key}));
+  opts.push({val:'__dk__',label:'わからない',dk:true});
+  return {ask:'代表的な作品・特徴は？',options:opts,answer:d.id,picked:null,locked:false};
+}
+function buildPersonNameQuestion(d,target){
+  const t=target;
+  const others=shuffle(DATA.filter(x=>x.id!==t.id&&x.type==='人物')).slice(0,3);
+  const opts=shuffle([t,...others]).map(x=>({val:x.id,label:`${x.term}（${x.read}）`}));
+  opts.push({val:'__dk__',label:'わからない',dk:true});
+  const ask=(t.id===d.id)?'この語に関係する人物は？':'関わった人物は？';
+  return {ask,options:opts,answer:t.id,picked:null,locked:false};
+}
+
+/* ---- モードC：時代で分類（複数選択） ---- */
+function renderModeC(){
+  const era=state.pool[state.idx];
+  const correctAll=DATA.filter(d=>d.era.includes(era));
+  const wrongAll=DATA.filter(d=>!d.era.includes(era));
+  // 5択。正解は1〜3個（その時代の語数の範囲で）
+  const nCorrect=Math.max(1,Math.min(3,correctAll.length,1+Math.floor(Math.random()*3)));
+  const chosenCorrect=sample(correctAll,nCorrect);
+  const chosenWrong=sample(wrongAll,5-nCorrect);
+  const items=shuffle([...chosenCorrect,...chosenWrong]);
+  const picked=new Set();
+
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">次のうち、<b style="color:var(--ink)">${era}</b>の文化にあてはまるものを<b style="color:var(--ink)">すべて</b>選んでください</div>
+    <div class="prompt-sub">あてはまる語は1つとは限りません。</div>
+    <div class="opts" id="optsC"></div>
+    <div class="actions"><button class="btn btn-primary" id="gradeC">採点する</button><button class="btn btn-ghost" id="dkC">わからない</button></div>
+    <div id="afterC"></div>
+  </div>`;
+  const oc=document.getElementById('optsC');
+  items.forEach(it=>{
+    const b=document.createElement('button');
+    b.className='opt';b.dataset.id=it.id;
+    b.innerHTML=`<span class="mk">□</span><span>${it.term}<span style="color:var(--ink-soft);font-size:12px">（${it.read}）</span></span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      const on=picked.has(it.id);
+      if(on){picked.delete(it.id);b.querySelector('.mk').textContent='□';b.classList.remove('selected');}
+      else{picked.add(it.id);b.querySelector('.mk').textContent='■';b.classList.add('selected');}
+    });
+    oc.appendChild(b);
+  });
+  function settleC(forceWrong){
+    if(state.answeredCurrent)return;state.answeredCurrent=true;
+    let ok=!forceWrong;
+    [...oc.children].forEach(c=>{
+      c.disabled=true;c.classList.remove('selected');
+      const isCorrect=items.find(x=>x.id===c.dataset.id).era.includes(era);
+      const chosen=!forceWrong && picked.has(c.dataset.id);
+      if(isCorrect&&chosen){c.classList.add('correct');addBadge(c,'あなたの解答','your');addBadge(c,'正しい選択肢','ans');}
+      else if(isCorrect&&!chosen){c.classList.add('correct');c.style.opacity='.7';if(!forceWrong)ok=false;addBadge(c,'正しい選択肢','ans');}
+      else if(!isCorrect&&chosen){c.classList.add('wrong');ok=false;addBadge(c,'あなたの解答','your');}
+      else c.classList.add('dim');
+    });
+    if(ok)state.correct++; else state.wrong.push({type:'era',era});
+    document.getElementById('gradeC').disabled=true;
+    document.getElementById('dkC').disabled=true;
+    const list=chosenCorrect.map(x=>x.term).join('、');
+    const tail=ok?'すべて正しく選べています。':(forceWrong?'「わからない」を選びました。':'取りこぼし・誤選択があります。');
+    document.getElementById('afterC').innerHTML=
+      verdict(ok)
+      +`<div class="explain"><span class="ttl">解説</span>${era}にあてはまるのは <b>${list}</b> です。${tail}<br><br>
+      <span style="color:var(--ink-soft);font-size:12px">※ 緑＝${era}の語、薄い緑＝選び落とした正解、赤＝誤って選んだ語。</span></div>`
+      +nextBtnHTML();
+    bindNext();
+  }
+  document.getElementById('gradeC').addEventListener('click',()=>settleC(false));
+  document.getElementById('dkC').addEventListener('click',()=>settleC(true));
+}
+
+// ---- 共通：正誤の明示 ----
+function verdict(ok){
+  return `<div class="verdict ${ok?'ok':'ng'}"><span class="ic">${ok?'○':'×'}</span><span>${ok?'正解':'不正解'}</span></div>`;
+}
+
+// ---- 共通：次へ ----
+function nextBtnHTML(){
+  const last=state.idx>=state.total-1;
+  return `<div class="actions"><button class="btn btn-primary" id="nextBtn">${last?'結果を見る':'次の問題へ →'}</button></div>`;
+}
+function bindNext(){
+  const nb=document.getElementById('nextBtn');
+  if(nb)nb.addEventListener('click',()=>{
+    state.idx++;
+    if(state.idx>=state.total)finish();
+    else renderQuestion();
+  });
+}
+
+function dedupWrong(arr){
+  const seen=new Set(),out=[];
+  arr.forEach(w=>{const k=w.type+':'+(w.id||w.era);if(!seen.has(k)){seen.add(k);out.push(w);}});
+  return out;
+}
+function finish(){
+  show('done');
+  document.getElementById('doneScore').textContent=`${state.correct} / ${state.total}`;
+  const r=state.total?state.correct/state.total:0;
+  let msg;
+  if(r===1)msg='全問正解です。';
+  else if(r>=0.7)msg='よく取れています。間違えた語を確認しておきましょう。';
+  else if(r>=0.4)msg='半ばまで来ています。間違えた箇所を中心に復習しましょう。';
+  else msg='まずは語を区分ごとに整理し直すとよいでしょう。';
+  document.getElementById('doneMsg').textContent=msg;
+
+  const uniq=dedupWrong(state.wrong);
+  const area=document.getElementById('wrongArea');
+  if(uniq.length===0){
+    area.innerHTML=`<div class="actions" style="justify-content:center">
+      <button class="btn btn-primary" id="againBtn">同じ形式でもう一度</button>
+      <button class="btn btn-ghost" id="homeBtn">形式を選び直す</button></div>`;
+  }else{
+    const rows=uniq.map(w=>{
+      if(w.type==='era')return `<li><span>${w.era}の文化（時代の分類）</span><span class="rd">モードC</span></li>`;
+      const d=byId(w.id);
+      return `<li><span>${d.term}</span><span class="rd">${d.read}</span></li>`;
+    }).join('');
+    area.innerHTML=`<div class="wrong-list">
+      <div class="wl-ttl">間違えた問題（${uniq.length}件）</div>
+      <ul>${rows}</ul></div>
+      <div class="actions" style="justify-content:center">
+        <button class="btn btn-primary" id="retryBtn">間違えた問題をもう一度（${uniq.length}問）</button>
+        <button class="btn btn-ghost" id="homeBtn">セッションを終了する</button></div>`;
+    document.getElementById('retryBtn').addEventListener('click',retryWrong);
+  }
+  const ag=document.getElementById('againBtn');if(ag)ag.addEventListener('click',()=>{buildPool();show('quiz');renderQuestion();});
+  const hm=document.getElementById('homeBtn');if(hm)hm.addEventListener('click',goHome);
+}
+function retryWrong(){
+  const uniq=dedupWrong(state.wrong);
+  state.pool = state.mode==='C' ? uniq.map(w=>w.era) : uniq.map(w=>byId(w.id));
+  state.idx=0;state.total=state.pool.length;state.correct=0;state.wrong=[];
+  show('quiz');renderQuestion();
+}
+</script>
+</body>
+</html>

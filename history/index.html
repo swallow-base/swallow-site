@@ -3,181 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>中国文化史 演習 ─ つばめ学習舎</title>
-<meta name="description" content="つばめ学習舎の大学受験向け 中国文化史 演習ツール。教材に準拠した一問一答や時代分類で、春秋戦国から清までの文化史を練習できます。">
-
-<!-- 検索エンジンに載せたくない内部用ツールのため除外。公開して検索に出したい場合は次の1行を削除してください -->
+<title>世界史 文化史 演習 ─ つばめ学習舎</title>
+<meta name="description" content="つばめ学習舎の大学受験向け 世界史 文化史 演習ツール。中国文化史、ギリシア・ローマ文化史から選んで練習できます。">
 <meta name="robots" content="noindex, nofollow">
-
-<!-- 正規URL（/history フォルダに index.html として置いた場合） -->
 <link rel="canonical" href="https://swallow-base.com/history/">
 <meta name="theme-color" content="#20262e">
-
-<!-- SNSなどで共有したときの表示（OGP） -->
-<meta property="og:title" content="中国文化史 演習 ─ つばめ学習舎">
-<meta property="og:description" content="教材準拠の中国文化史 演習ツール。一問一答・時代分類などで練習できます。">
+<meta property="og:title" content="世界史 文化史 演習 ─ つばめ学習舎">
+<meta property="og:description" content="教材準拠の文化史 演習ツール。地域を選んで練習できます。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://swallow-base.com/history/">
 <meta property="og:site_name" content="つばめ学習舎">
 <meta property="og:locale" content="ja_JP">
-<!-- サムネイル画像を用意したら、次の形で追加できます（絶対URL推奨）
-<meta property="og:image" content="https://swallow-base.com/history/ogp.png"> -->
-
-<!-- favicon（朱印「演」。外部ファイル不要のインラインSVG） -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%239e3d2e'/><text x='16' y='24' font-family='serif' font-size='19' fill='white' text-anchor='middle'>演</text></svg>">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#20262e;
-  --ink-soft:#48515c;
-  --paper:#f0ece1;
-  --paper-card:#faf7ef;
-  --line:#d8d0bf;
-  --seal:#9e3d2e;
-  --seal-soft:#b8553f;
-  --gold:#a9863f;
-  /* 時代色 */
-  --e-shunju:#5f8290;
-  --e-kan:#a8553f;
-  --e-nanboku:#6c7e58;
-  --e-tou:#b9923f;
-  --e-sou:#7d96a0;
-  --e-min:#3f5a7a;
-  --e-shin:#6e4c6b;
+  --paper:#faf7ef; --ink:#20262e; --ink-soft:#6b6657; --line:#d8d0bf;
+  --seal:#9e3d2e; --gold:#a9863f;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
+*{margin:0;padding:0;box-sizing:border-box}
 body{
-  font-family:"Noto Sans JP",sans-serif;
-  background:var(--paper);
-  color:var(--ink);
-  line-height:1.75;
-  min-height:100vh;
-  background-image:radial-gradient(circle at 20% 10%,rgba(255,255,255,.4),transparent 40%);
+  font-family:"Noto Sans JP",sans-serif;background:var(--paper);color:var(--ink);
+  line-height:1.85;-webkit-font-smoothing:antialiased;padding:0 18px;
 }
-.wrap{max-width:760px;margin:0 auto;padding:24px 18px 80px}
-.serif{font-family:"Noto Serif JP",serif}
-
-/* ヘッダ */
+.wrap{max-width:680px;margin:0 auto;padding:34px 0 60px}
 header.top{display:flex;align-items:baseline;gap:14px;padding:8px 2px 20px;border-bottom:2px solid var(--ink);margin-bottom:26px}
 header.top .mark{
-  font-family:"Noto Serif JP",serif;font-weight:700;font-size:13px;color:#fff;
-  background:var(--seal);padding:7px 9px;border-radius:3px;letter-spacing:.12em;line-height:1.3;
-  writing-mode:vertical-rl;text-orientation:upright;
+  font-family:"Noto Serif JP",serif;font-weight:700;font-size:15px;color:#fff;
+  background:var(--seal);padding:7px 9px;border-radius:3px;letter-spacing:.12em;line-height:1.3;align-self:flex-start;
 }
 header.top h1{font-family:"Noto Serif JP",serif;font-weight:700;font-size:21px;letter-spacing:.04em}
 header.top .sub{font-size:12px;color:var(--ink-soft);margin-top:3px;letter-spacing:.08em}
-
-/* 開始画面 */
-.lead{font-size:13.5px;color:var(--ink-soft);margin-bottom:22px;max-width:60ch}
-.section-label{font-family:"Noto Serif JP",serif;font-size:12px;letter-spacing:.22em;color:var(--gold);margin:26px 0 12px;font-weight:600}
-
-.modes{display:grid;gap:12px}
-.mode-card{
-  text-align:left;background:var(--paper-card);border:1px solid var(--line);border-radius:7px;
-  padding:16px 18px;cursor:pointer;transition:.15s;display:flex;gap:15px;align-items:flex-start;width:100%;
-  font-family:inherit;color:inherit;
+.lead{font-size:14px;color:var(--ink-soft);margin-bottom:26px}
+.section-label{font-family:"Noto Serif JP",serif;font-size:12px;letter-spacing:.22em;color:var(--gold);margin:0 0 14px;font-weight:600}
+.cards{display:flex;flex-direction:column;gap:16px}
+.culture-card{
+  display:flex;align-items:stretch;gap:16px;text-decoration:none;color:inherit;
+  background:#fff;border:1px solid var(--line);border-radius:9px;padding:20px 22px;transition:.14s;
 }
-.mode-card:hover{border-color:var(--ink);transform:translateY(-1px)}
-.mode-card:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
-.mode-card .code{font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px;color:var(--seal);min-width:30px;padding-top:1px}
-.mode-card .body .t{font-weight:700;font-size:15px;margin-bottom:3px}
-.mode-card .body .d{font-size:12.5px;color:var(--ink-soft);line-height:1.6}
-
-/* 時代フィルタ */
-.eras{display:flex;flex-wrap:wrap;gap:8px}
-.era-chip{
-  font-family:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper-card);
-  padding:7px 14px;border-radius:20px;cursor:pointer;color:var(--ink-soft);transition:.12s;font-weight:500;
+.culture-card:hover{border-color:var(--seal);box-shadow:0 4px 18px rgba(32,38,46,.07);transform:translateY(-1px)}
+.cc-code{
+  color:#fff;border-radius:6px;min-width:60px;display:flex;align-items:center;justify-content:center;padding:10px;
 }
-.era-chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.era-chip:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
-.hint{font-size:11.5px;color:var(--ink-soft);margin-top:9px}
-
-/* クイズ画面 */
-.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:8px}
-.btn-back{font-family:inherit;font-size:12.5px;background:none;border:none;color:var(--ink-soft);cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
-.btn-back:hover{color:var(--ink)}
-.progress{font-size:12px;color:var(--ink-soft);font-family:"Noto Serif JP",serif;letter-spacing:.05em}
-.score-tag{font-size:12px;color:var(--seal);font-weight:700}
-
-.card{background:var(--paper-card);border:1px solid var(--line);border-radius:9px;padding:22px 20px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
-
-.era-badge{display:inline-block;font-size:11px;font-weight:700;color:#fff;padding:3px 10px;border-radius:3px;letter-spacing:.08em;margin-bottom:14px}
-
-.prompt-label{font-size:11px;letter-spacing:.18em;color:var(--gold);font-weight:600;font-family:"Noto Serif JP",serif;margin-bottom:8px}
-.prompt-desc{font-size:15.5px;line-height:1.85;margin-bottom:4px}
-.prompt-term{font-family:"Noto Serif JP",serif;font-size:30px;font-weight:700;letter-spacing:.04em;line-height:1.3}
-.prompt-term .rb{font-size:13px;color:var(--ink-soft);font-weight:400;display:block;letter-spacing:.1em;margin-bottom:2px}
-.prompt-sub{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
-
-/* 選択肢 */
-.opts{display:grid;gap:9px;margin-top:18px}
-.opt{
-  font-family:inherit;text-align:left;background:#fff;border:1px solid var(--line);border-radius:6px;
-  padding:12px 15px;cursor:pointer;font-size:14.5px;color:var(--ink);transition:.12s;width:100%;display:flex;gap:10px;align-items:center;
-}
-.opt .mk{font-family:"Noto Serif JP",serif;color:var(--ink-soft);font-size:13px;min-width:18px}
-.opt:hover:not(:disabled){border-color:var(--ink)}
-.opt:focus-visible{outline:2px solid var(--seal);outline-offset:1px}
-.opt:disabled{cursor:default}
-.opt.correct{background:#eef3ea;border-color:var(--e-nanboku);color:#33421f}
-.opt.wrong{background:#f6e9e6;border-color:var(--seal);color:#6e2a1e}
-.opt.dim{opacity:.5}
-.opt.dk{color:var(--ink-soft)}
-.opt.dk .mk{color:var(--seal);font-weight:700}
-
-/* モードB：複数設問ブロック */
-.qblock{border-top:1px dashed var(--line);padding-top:16px;margin-top:16px}
-.qblock:first-of-type{border-top:none;padding-top:4px;margin-top:8px}
-.q-ask{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:10px}
-.q-ask .q-no{color:var(--seal);font-family:"Noto Serif JP",serif;margin-right:6px}
-
-/* 解説 */
-.explain{margin-top:18px;background:#fbf6ea;border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:13px 15px;font-size:13px;line-height:1.8;color:var(--ink-soft)}
-.explain b{color:var(--ink)}
-.explain .ttl{font-family:"Noto Serif JP",serif;font-weight:700;color:var(--gold);font-size:11px;letter-spacing:.14em;display:block;margin-bottom:5px}
-
-/* 正誤の明示 */
-.verdict{display:flex;align-items:center;gap:9px;font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px;padding:11px 18px;border-radius:7px;margin-top:18px;letter-spacing:.1em}
-.verdict .ic{font-size:20px;line-height:1}
-.verdict.ok{background:#e7efe0;color:#3a5a22;border:1.5px solid var(--e-nanboku)}
-.verdict.ng{background:#f4e3df;color:#8a3322;border:1.5px solid var(--seal)}
-
-/* アクションボタン */
-.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
-.btn{font-family:inherit;font-size:14px;font-weight:700;border-radius:6px;padding:11px 22px;cursor:pointer;border:1px solid var(--ink);transition:.12s}
-.btn-primary{background:var(--ink);color:#fff}
-.btn-primary:hover{background:#000}
-.btn-ghost{background:transparent;color:var(--ink)}
-.btn-ghost:hover{background:rgba(0,0,0,.04)}
-.btn:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
-.btn:disabled{opacity:.4;cursor:default}
-
-/* 完了画面 */
-.done{text-align:center;padding:30px 10px}
-.done .big{font-family:"Noto Serif JP",serif;font-size:34px;font-weight:700;margin:10px 0}
-.done .lbl{font-size:12px;letter-spacing:.18em;color:var(--gold);font-family:"Noto Serif JP",serif}
-.done p{font-size:13.5px;color:var(--ink-soft);margin:14px 0 24px}
-.wrong-list{text-align:left;background:#fbf6ea;border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:18px auto;max-width:520px}
-.wrong-list .wl-ttl{font-family:"Noto Serif JP",serif;font-weight:700;font-size:13px;color:var(--seal);margin-bottom:10px}
-.wrong-list ul{list-style:none}
-.wrong-list li{font-size:14px;padding:7px 2px;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:12px;align-items:baseline}
-.wrong-list li:last-child{border-bottom:none}
-.wrong-list li .rd{font-size:12px;color:var(--ink-soft);white-space:nowrap}
-
-footer{margin-top:40px;font-size:11px;color:var(--ink-soft);text-align:center;line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
-
-.hidden{display:none!important}
-
+.cc-code svg{width:40px;height:40px;display:block}
+.cc-code.cn{background:linear-gradient(160deg,#a8432f,#8a3322)}
+.cc-code.gr{background:linear-gradient(160deg,#3a6488,#2c4f6e)}
+.cc-body{flex:1}
+.cc-title{font-family:"Noto Serif JP",serif;font-weight:700;font-size:17px;letter-spacing:.03em}
+.cc-range{font-size:12px;color:var(--gold);letter-spacing:.08em;margin:3px 0 8px;font-weight:600}
+.cc-desc{font-size:13px;color:var(--ink-soft);line-height:1.7}
+.cc-go{align-self:flex-end;font-size:13px;font-weight:700;color:var(--seal);white-space:nowrap}
+footer{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-soft);line-height:1.7}
 @media (max-width:480px){
-  .prompt-term{font-size:25px}
-  .wrap{padding:18px 14px 70px}
+  .culture-card{flex-wrap:wrap}
+  .cc-code{width:100%;min-height:48px}
+  .cc-go{align-self:flex-start;margin-top:4px}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
@@ -185,731 +68,58 @@ footer{margin-top:40px;font-size:11px;color:var(--ink-soft);text-align:center;li
   <header class="top">
     <div class="mark">演習</div>
     <div>
-      <h1>中国文化史</h1>
+      <h1>世界史　文化史 演習</h1>
       <div class="sub">つばめ学習舎 ── 教材準拠の出題</div>
     </div>
   </header>
 
-  <!-- 開始画面 -->
-  <div id="start">
-    <p class="lead">出題はすべて、配布した教材資料に記載のある事項に限定しています。誤りの選択肢も同じ範囲の語から作られています。出題形式を選んで演習を始めてください。</p>
+  <p class="lead">学びたい地域を選んでください。いずれの演習も、配布した教材資料に記載のある事項に限定して出題します。</p>
 
-    <div class="section-label">出題形式</div>
-    <div class="modes" id="modeList"></div>
-
-    <div class="actions" style="margin-top:24px">
-      <button class="btn btn-primary" id="startBtn">演習を始める</button>
-    </div>
-  </div>
-
-  <!-- クイズ画面 -->
-  <div id="quiz" class="hidden">
-    <div class="quiz-top">
-      <button class="btn-back" id="backBtn">← 形式の選択に戻る</button>
-      <div>
-        <span class="progress" id="progress"></span>
-        <span class="score-tag" id="scoreTag"></span>
+  <div class="section-label">演習を選ぶ</div>
+  <div class="cards">
+    <a class="culture-card" href="china/">
+      <div class="cc-code cn"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+        <rect x="23" y="5.5" width="2" height="3.5"/>
+        <path d="M16 13 Q24 9.2 32 13 L30.4 14.7 Q24 12.7 17.6 14.7 Z"/>
+        <rect x="20.5" y="15.2" width="7" height="4.4"/>
+        <path d="M13.3 20 Q24 15.6 34.7 20 L33 21.7 Q24 19.3 15 21.7 Z"/>
+        <rect x="18" y="22.2" width="12" height="5.4"/>
+        <path d="M10.8 27.8 Q24 22.8 37.2 27.8 L35.4 29.5 Q24 26.6 12.6 29.5 Z"/>
+        <rect x="15.5" y="30" width="17" height="7"/>
+        <rect x="22.3" y="31.8" width="3.4" height="5.2" fill="#9a3b29"/>
+        <rect x="12.8" y="37.4" width="22.4" height="2.5"/>
+      </svg></div>
+      <div class="cc-body">
+        <div class="cc-title">中国文化史</div>
+        <div class="cc-range">春秋戦国 ～ 清</div>
+        <div class="cc-desc">諸子百家・儒学・仏教・文学・書画・陶磁・三大発明など、各時代の文化を時代ごとに整理して演習します。</div>
       </div>
-    </div>
-    <div id="quizBody"></div>
-  </div>
-
-  <!-- 完了画面 -->
-  <div id="done" class="hidden">
-    <div class="done">
-      <div class="lbl">演習終了</div>
-      <div class="big" id="doneScore"></div>
-      <p id="doneMsg"></p>
-      <div id="wrongArea"></div>
-    </div>
+      <div class="cc-go">演習する →</div>
+    </a>
+    <a class="culture-card" href="greco-roman/">
+      <div class="cc-code gr"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 7 L41.5 18 L6.5 18 Z"/>
+        <rect x="8" y="19.4" width="32" height="2.7"/>
+        <rect x="10.5" y="23" width="3.3" height="13"/>
+        <rect x="17.3" y="23" width="3.3" height="13"/>
+        <rect x="24.1" y="23" width="3.3" height="13"/>
+        <rect x="30.9" y="23" width="3.3" height="13"/>
+        <rect x="7" y="36.8" width="34" height="2.7"/>
+        <rect x="5.5" y="39.8" width="37" height="2.2"/>
+      </svg></div>
+      <div class="cc-body">
+        <div class="cc-title">ギリシア・ローマ文化史</div>
+        <div class="cc-range">ギリシア ／ ヘレニズム ／ ローマ</div>
+        <div class="cc-desc">文学・哲学・自然科学・彫刻美術・歴史・法学など、ギリシアからローマまでの文化を区分ごとに演習します。</div>
+      </div>
+      <div class="cc-go">演習する →</div>
+    </a>
   </div>
 
   <footer>
-    出題内容は教材資料の範囲に準拠／別名・補足は解説欄に記載<br>
-    つばめ学習舎・授業用演習ツール
+    出題内容は、授業で配布した教材資料の範囲に準拠しています。<br>
+    つばめ学習舎
   </footer>
 </div>
-
-<script>
-/* ===================================================================
-   データ：各語は資料1〜4と照合済み。
-   era … 時代（景徳鎮のみ複数）。person/work … リスト内で相互に問える相手のid。
-   note … 解説に出す補足（別名・リスト外の作者・複数時代の注記など）。
-   =================================================================== */
-const DATA = [
-/* ---- 春秋・戦国 ---- */
-{id:"kaishiso",term:"華夷思想",read:"かいしそう",era:["春秋戦国"],type:"概念",
- desc:"自らを文化の中心とみなし、生活習慣の異なる周辺の民を「夷狄」として低く見る考え方。"},
-{id:"shoshi",term:"諸子百家",read:"しょしひゃっか",era:["春秋戦国"],type:"概念",
- desc:"春秋・戦国時代に現れた、思想や技能を生かして実力を示そうとした多様な思想家・学派の総称。"},
-{id:"juka",term:"儒家",read:"じゅか",era:["春秋戦国"],type:"概念",
- desc:"孔子を祖とする学派。徳による統治を理想とし、礼の実践を通じて親愛を社会秩序へ広げることを説いた。"},
-{id:"koushi",term:"孔子",read:"こうし",era:["春秋戦国"],type:"人物",work:"rongo",
- desc:"春秋時代の思想家で、儒家の祖。仁と礼による道徳を説いた。"},
-{id:"rongo",term:"論語",read:"ろんご",era:["春秋戦国"],type:"書物",
- desc:"孔子とその弟子の言行をまとめた書物。",
- note:"孔子個人の著作ではなく、のちに弟子たちが編纂したもの。"},
-{id:"moushi",term:"孟子",read:"もうし",era:["春秋戦国"],type:"人物",
- desc:"戦国時代の儒家。性善説を唱え、王朝交替を認める易姓革命の論理を説いた。"},
-{id:"seizen",term:"性善説",read:"せいぜんせつ",era:["春秋戦国"],type:"概念",
- desc:"人の本性は善であるとする孟子の主張。"},
-{id:"junshi",term:"荀子",read:"じゅんし",era:["春秋戦国"],type:"人物",
- desc:"戦国時代の儒家。性悪説を唱え、礼による規律の維持を強調した。"},
-{id:"seiaku",term:"性悪説",read:"せいあくせつ",era:["春秋戦国"],type:"概念",
- desc:"人の本性は悪であるとし、礼による矯正を説く荀子の主張。"},
-{id:"ekisei",term:"易姓革命",read:"えきせいかくめい",era:["春秋戦国"],type:"概念",
- desc:"天命が改まれば王朝が交替するという考え方。孟子が説いた。"},
-{id:"houka",term:"法家",read:"ほうか",era:["春秋戦国"],type:"概念",
- desc:"法と刑罰による統治を説いた学派。商鞅・韓非・李斯らが代表。"},
-{id:"rishi",term:"李斯",read:"りし",era:["春秋戦国"],type:"人物",
- desc:"法家の思想家。のちに秦に仕えた。",
- note:"秦の統一とその政策に関与した。"},
-{id:"shouou",term:"商鞅",read:"しょうおう",era:["春秋戦国"],type:"人物",
- desc:"戦国時代に秦の政治改革（変法）を行った法家の人物。"},
-{id:"kanpishi",term:"韓非子",read:"かんぴし",era:["春秋戦国"],type:"人物",
- desc:"法家の思想を大成した人物。",
- note:"人物としては「韓非」、その思想をまとめた書物が『韓非子』。"},
-{id:"bokka",term:"墨家",read:"ぼっか",era:["春秋戦国"],type:"概念",
- desc:"墨子を祖とする学派。血縁をこえた無差別の愛（兼愛）などを説いた。"},
-{id:"douka",term:"道家",read:"どうか",era:["春秋戦国"],type:"概念",
- desc:"老子・荘子を中心とする学派。無為自然を理想とした。"},
-{id:"roushi",term:"老子",read:"ろうし",era:["春秋戦国"],type:"人物",
- desc:"道家の祖とされる人物。無為自然を理想とした。"},
-{id:"muishizen",term:"無為自然",read:"むいしぜん",era:["春秋戦国"],type:"概念",
- desc:"人為を退け、あるがままの自然に従うべきとする道家の理想。"},
-{id:"soushi",term:"荘子",read:"そうし",era:["春秋戦国"],type:"人物",
- desc:"戦国時代の道家の思想家。"},
-{id:"kourou",term:"黄老",read:"こうろう",era:["春秋戦国"],type:"概念",
- desc:"老子・荘子の道家の教えを指す呼称。",
- note:"政治思想として重んじられたのは前漢の初め。資料では春秋戦国の文化として登場するため、ここでは春秋戦国に分類。"},
-
-/* ---- 漢 ---- */
-{id:"tochujo",term:"董仲舒",read:"とうちゅうじょ",era:["漢"],type:"人物",
- desc:"前漢・武帝期の儒家。儒学の影響力を高め、五経博士の設置など儒学の官学化を進めた。",
- note:"時代区分上は前漢。"},
-{id:"shibasen",term:"司馬遷",read:"しばせん",era:["漢"],type:"人物",work:"shiki",
- desc:"前漢・武帝期の歴史家。宮刑を受けながら歴史書『史記』を完成させた。",
- note:"時代区分上は前漢。"},
-{id:"shiki",term:"史記",read:"しき",era:["漢"],type:"書物",person:"shibasen",
- desc:"司馬遷が著した歴史書。紀伝体で記され、中国の歴史書の基本的なかたちをつくった。"},
-{id:"hanko",term:"班固",read:"はんこ",era:["漢"],type:"人物",
- desc:"後漢の歴史家。",
- note:"歴史書『漢書』を著した（漢書は単語リスト外）。時代区分上は後漢。"},
-{id:"jugaku",term:"儒学",read:"じゅがく",era:["漢"],type:"概念",
- desc:"孔子に始まる学問・思想。漢代に官学化され、国家の学問としての地位を確立した。"},
-{id:"kunko",term:"訓詁学",read:"くんこがく",era:["漢"],type:"概念",
- desc:"経典の字句の解釈を行う学問。後漢に発達し、鄭玄らが大成した。",
- note:"時代区分上は後漢。"},
-{id:"kidentai",term:"紀伝体",read:"きでんたい",era:["漢"],type:"概念",
- desc:"本紀（皇帝の記録）と列伝（人物の伝記）を組み合わせて歴史を叙述する形式。『史記』が最初。"},
-{id:"chouken",term:"張騫",read:"ちょうけん",era:["漢"],type:"人物",
- desc:"前漢・武帝期に大月氏へ派遣され、西域の事情を中国に伝えた人物。",
- note:"時代区分上は前漢。"},
-{id:"hanchou",term:"班超",read:"はんちょう",era:["漢"],type:"人物",
- desc:"後漢の人物。西域に派遣され、西域都護となった。",
- note:"時代区分上は後漢。"},
-{id:"sairin",term:"蔡倫",read:"さいりん",era:["漢"],type:"人物",
- desc:"後漢の人物。製紙法を改良した。",
- note:"時代区分上は後漢。"},
-
-/* ---- 南北朝（魏晋南北朝） ---- */
-{id:"monzen",term:"文選",read:"もんぜん",era:["南北朝"],type:"書物",
- desc:"南朝の梁で編まれた、古今の名文・詩文を集めた詞華集（アンソロジー）。",
- note:"編者は昭明太子（資料では細字での登場）。"},
-{id:"touenmei",term:"陶淵明",read:"とうえんめい",era:["南北朝"],type:"人物",
- desc:"東晋〜宋の詩人。田園詩で知られる。",
- note:"別名は陶潜（とうせん）。同一人物。"},
-{id:"kogaishi",term:"顧愷之",read:"こがいし",era:["南北朝"],type:"人物",work:"joshi",
- desc:"東晋の画家。『女史箴図』の作者とされる。"},
-{id:"joshi",term:"女史箴図",read:"じょしのしんず",era:["南北朝"],type:"書物",person:"kogaishi",
- desc:"宮廷の女官が守るべき教えを説いた文章に、絵を付したもの。"},
-{id:"ougishi",term:"王羲之",read:"おうぎし",era:["南北朝"],type:"人物",work:"rantei",
- desc:"東晋の書家で「書聖」と称される。行書・草書を得意とし、後世の書道に大きな影響を残した。"},
-{id:"rantei",term:"蘭亭序",read:"らんていじょ",era:["南北朝"],type:"書物",person:"ougishi",
- desc:"王羲之の代表作とされる書。"},
-{id:"hokken",term:"法顕",read:"ほっけん",era:["南北朝"],type:"人物",work:"bukkokki",
- desc:"東晋の僧。仏典を求めてインドへ赴き、旅行記『仏国記』を著した。"},
-{id:"bukkokki",term:"仏国記",read:"ぶっこくき",era:["南北朝"],type:"書物",person:"hokken",
- desc:"法顕がインド旅行の記録をまとめた書物。"},
-{id:"sekkutsu",term:"石窟寺院",read:"せっくつじいん",era:["南北朝"],type:"文物",
- desc:"岩壁を掘ってつくられた仏教寺院。南北朝期に華北で多く造営された（敦煌・雲崗・竜門など）。"},
-{id:"buttocho",term:"仏図澄",read:"ぶっとちょう",era:["南北朝"],type:"人物",
- desc:"西域出身の僧。華北で仏教の布教に努めた。"},
-{id:"kumaraju",term:"鳩摩羅什",read:"くまらじゅう",era:["南北朝"],type:"人物",
- desc:"西域出身の僧。仏典の漢訳に活躍した。"},
-{id:"koukenshi",term:"寇謙之",read:"こうけんし",era:["南北朝"],type:"人物",
- desc:"北魏の道士。道教教団（新天師道）を設立し、仏教に対抗した。"},
-{id:"seidan",term:"清談",read:"せいだん",era:["南北朝"],type:"概念",
- desc:"世俗を超越した自由な議論。魏晋期に流行した（竹林の七賢など）。"},
-
-/* ---- 唐 ---- */
-{id:"kuyodatsu",term:"孔穎達",read:"くようだつ",era:["唐"],type:"人物",
- desc:"唐の学者。勅命で『五経正義』を編纂し、経典解釈を統一した。",
- note:"『五経正義』は単語リスト外。"},
-{id:"rihaku",term:"李白",read:"りはく",era:["唐"],type:"人物",
- desc:"盛唐の詩人。「詩仙」と称される。",
- note:"時代区分上は盛唐。"},
-{id:"toho",term:"杜甫",read:"とほ",era:["唐"],type:"人物",
- desc:"盛唐の詩人。「詩聖」と称される。",
- note:"時代区分上は盛唐。"},
-{id:"hakukyoi",term:"白居易",read:"はくきょい",era:["唐"],type:"人物",
- desc:"中唐の詩人。平易な詩風をめざした。",
- note:"代表作に『長恨歌』（資料では細字での登場）。時代区分上は中唐。"},
-{id:"kanyu",term:"韓愈",read:"かんゆ",era:["唐"],type:"人物",
- desc:"中唐の文人。柳宗元とともに古文復興を唱えた。",
- note:"時代区分上は中唐。"},
-{id:"ryusogen",term:"柳宗元",read:"りゅうそうげん",era:["唐"],type:"人物",
- desc:"中唐の文人。韓愈とともに古文復興を唱えた。",
- note:"時代区分上は中唐。"},
-{id:"godogen",term:"呉道玄",read:"ごどうげん",era:["唐"],type:"人物",
- desc:"唐の画家。「画聖」と称される。"},
-{id:"genjo",term:"玄奘",read:"げんじょう",era:["唐"],type:"人物",
- desc:"唐の僧。陸路でインドへ赴いて仏典をもち帰り、漢訳に努めた。",
- note:"旅行記『大唐西域記』を著した（単語リスト外）。"},
-{id:"gijo",term:"義浄",read:"ぎじょう",era:["唐"],type:"人物",
- desc:"唐の僧。海路でインドを訪れ、仏典をもち帰った。",
- note:"『南海寄帰内法伝』を著した（単語リスト外）。"},
-
-/* ---- 宋 ---- */
-{id:"shutoni",term:"周敦頤",read:"しゅうとんい",era:["宋"],type:"人物",work:"taikyoku",
- desc:"北宋の儒学者。宇宙論と儒学の教えを結びつけ、宋学の祖と仰がれた。"},
-{id:"shuki",term:"朱熹",read:"しゅき",era:["宋"],type:"人物",
- desc:"南宋の儒学者。宋学を大成した（朱子学）。のちに朝鮮や日本にも影響を与えた。",
- note:"朱子とも呼ばれる。"},
-{id:"oyoshu",term:"欧陽脩",read:"おうようしゅう",era:["宋"],type:"人物",
- desc:"北宋の文人・歴史家。",
- note:"『新唐書』『新五代史』を撰した（単語リスト外）。"},
-{id:"soshoku",term:"蘇軾",read:"そしょく",era:["宋"],type:"人物",
- desc:"北宋の文人。詩文・書画に優れた。",
- note:"『赤壁賦』『墨竹図』などで知られる（単語リスト外）。"},
-{id:"hakuji",term:"白磁",read:"はくじ",era:["宋"],type:"文物",
- desc:"白色の下地の簡素な磁器。宋代を代表する陶磁器。"},
-{id:"seiji",term:"青磁",read:"せいじ",era:["宋"],type:"文物",
- desc:"青みのある釉をかけた磁器。宋代を代表する陶磁器。"},
-{id:"bunjinga",term:"文人画",read:"ぶんじんが",era:["宋"],type:"文物",
- desc:"士大夫が描いた、精神性・内面性を表す絵画（南宗画）。"},
-{id:"intaiga",term:"院体画",read:"いんたいが",era:["宋"],type:"文物",
- desc:"宮廷画家による写実的な絵画（北宗画）。",
- note:"徽宗が代表的な担い手。"},
-{id:"sougaku",term:"宋学",read:"そうがく",era:["宋"],type:"概念",
- desc:"経典を哲学的に読み込み、宇宙万物の理に至ろうとする宋代の儒学。"},
-{id:"sandai",term:"三大発明",read:"さんだいはつめい",era:["宋"],type:"概念",
- desc:"宋代に実用化・普及が進んだ火薬・羅針盤・木版印刷（活版印刷）を指す。"},
-{id:"keitokuchin",term:"景徳鎮",read:"けいとくちん",era:["宋","明"],type:"文物",
- desc:"江西省にある陶磁器の産地。",
- note:"宋代に分業生産で発展し、明代も主要な産地として栄えた。時代問題では宋・明いずれも正解。"},
-{id:"shijitsugan",term:"資治通鑑",read:"しじつがん",era:["宋"],type:"書物",
- desc:"君臣関係を重視する立場で記された編年体の歴史書。",
- note:"北宋の司馬光が編纂した（司馬光は単語リスト外）。"},
-{id:"shisho",term:"四書",read:"ししょ",era:["宋"],type:"概念",
- desc:"宋学で特に重んじられた四つの経典。『論語』『大学』『中庸』『孟子』を指す。"},
-{id:"mokuhan",term:"木版印刷",read:"もくはんいんさつ",era:["宋"],type:"文物",
- desc:"板木に文字を彫って刷る印刷技術。唐代に始まり、宋代に広まった。"},
-{id:"rashinban",term:"羅針盤",read:"らしんばん",era:["宋"],type:"文物",
- desc:"方位を示す器具。宋代に実用化され、のちヨーロッパに伝わった。"},
-{id:"kayaku",term:"火薬",read:"かやく",era:["宋"],type:"文物",
- desc:"宋代に実用化され、のちヨーロッパに伝わった。"},
-{id:"taikyoku",term:"太極図説",read:"たいきょくずせつ",era:["宋"],type:"書物",person:"shutoni",
- desc:"宇宙論と儒学の教えを結びつけた書。宋学の基本概念となった。"},
-
-/* ---- 明 ---- */
-{id:"touji",term:"陶磁器",read:"とうじき",era:["明"],type:"文物",
- desc:"明代に生産が拡大した焼き物。景徳鎮などで作られ、ヨーロッパなどへ輸出された。"},
-{id:"sangokushi",term:"三国志演義",read:"さんごくしえんぎ",era:["明"],type:"書物",
- desc:"明代に普及した長編の口語小説。",
- note:"作者は羅貫中とされる（単語リスト外）。"},
-{id:"saiyuki",term:"西遊記",read:"さいゆうき",era:["明"],type:"書物",
- desc:"明代に普及した長編の口語小説。玄奘のインド旅行を題材とする。",
- note:"呉承恩の作とされる（単語リスト外）。"},
-{id:"suikoden",term:"水滸伝",read:"すいこでん",era:["明"],type:"書物",
- desc:"明代に普及した長編の口語小説。",
- note:"施耐庵らの作とされる（単語リスト外）。"},
-{id:"shosetsu",term:"小説",read:"しょうせつ",era:["明"],type:"概念",
- desc:"明代に三国志演義・西遊記・水滸伝などの口語小説が普及した。",
- note:"宋代の都市文化にも物語（小説）が登場するが、ここでは明に分類。"},
-{id:"oyomei",term:"王陽明",read:"おうようめい",era:["明"],type:"人物",
- desc:"明代の儒学者。人は本来その心のうちに道徳をもつと説いた（陽明学）。",
- note:"人物名は王守仁、陽明は号。"},
-{id:"yomeigaku",term:"陽明学",read:"ようめいがく",era:["明"],type:"概念",
- desc:"王陽明がおこした儒学の一派。庶民のあいだにも広い支持を得た。"},
-{id:"kagakusho",term:"科学技術書",read:"かがくぎじゅつしょ",era:["明"],type:"概念",
- desc:"明末に関心が高まり、『本草綱目』『農政全書』『天工開物』などが著された。"},
-{id:"tokisho",term:"董其昌",read:"とうきしょう",era:["明"],type:"人物",
- desc:"明代の画家。文人画を受け継ぐ画風で知られる。"},
-{id:"honzo",term:"本草綱目",read:"ほんぞうこうもく",era:["明"],type:"書物",
- desc:"明代に著された薬物学の書物。",
- note:"李時珍の著（単語リスト外）。"},
-{id:"konyo",term:"坤輿万国全図",read:"こんよばんこくぜんず",era:["明"],type:"書物",person:"matteo",
- desc:"中国に新しい地理知識を広めた世界地図。",
- note:"マテオ=リッチが作製した。"},
-{id:"matteo",term:"マテオ=リッチ",read:"まてお=りっち",era:["明"],type:"人物",work:"konyo",
- desc:"明代に中国で布教したイエズス会の宣教師。"},
-{id:"zabieru",term:"ザビエル",read:"ざびえる",era:["明"],type:"人物",
- desc:"イエズス会の宣教師。中国布教をめざしたが実現しなかった。"},
-{id:"jokokei",term:"徐光啓",read:"じょこうけい",era:["明"],type:"人物",
- desc:"明代の学者。リッチに学び、西洋学術の導入に努めた。",
- note:"『農政全書』を編纂した（単語リスト外）。"},
-
-/* ---- 清 ---- */
-{id:"kokijiten",term:"康熙字典",read:"こうきじてん",era:["清"],type:"書物",
- desc:"清代に編纂された漢字字典。",
- note:"皇帝の命による大規模な編纂事業。"},
-{id:"koenbu",term:"顧炎武",read:"こえんぶ",era:["清"],type:"人物",
- desc:"清初の学者。事実にもとづく実証的な研究を主張し、考証学の先駆となった。"},
-{id:"benpatsu",term:"辮髪",read:"べんぱつ",era:["清"],type:"文物",
- desc:"清が漢人男性に強制した、満洲人の髪型。"},
-{id:"shikozensho",term:"四庫全書",read:"しこぜんしょ",era:["清"],type:"書物",
- desc:"清代の大規模な編纂事業によってまとめられた叢書。"},
-{id:"enmeien",term:"円明園",read:"えんめいえん",era:["清"],type:"文物",
- desc:"北京郊外に建設された離宮。バロック様式の西洋建築を含む広大な庭園。",
- note:"第2次アヘン戦争の際に英仏軍によって破壊された。"},
-{id:"koromu",term:"紅楼夢",read:"こうろうむ",era:["清"],type:"書物",
- desc:"清代中期の長編小説。上流階級の生活を細やかに描く。",
- note:"曹雪芹の作（単語リスト外）。"},
-{id:"koshogaku",term:"考証学",read:"こうしょうがく",era:["清"],type:"概念",
- desc:"経典の校訂や言語学的研究を精密に行う学問。清代中期に発達した。"}
-];
-
-const ERA_ORDER=["春秋戦国","漢","南北朝","唐","宋","明","清"];
-const ERA_COLOR={"春秋戦国":"var(--e-shunju)","漢":"var(--e-kan)","南北朝":"var(--e-nanboku)","唐":"var(--e-tou)","宋":"var(--e-sou)","明":"var(--e-min)","清":"var(--e-shin)"};
-const byId=id=>DATA.find(d=>d.id===id);
-const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-const sample=(arr,n)=>shuffle(arr).slice(0,n);
-
-const MODES=[
-  {id:"A",code:"A",t:"説明から語を当てる",d:"文章で示された説明に当てはまる語句を、選択肢から選びます。"},
-  {id:"B",code:"B",t:"語の属性を答える",d:"語が一つ示され、その時代・作者・作品などをまとめて答えます。時代は必ず問われます。"},
-  {id:"Bp",code:"B人",t:"人物の属性を答える",d:"人物名のみが出題され、その時代や関わった作品などを答えます。"},
-  {id:"C",code:"C",t:"時代で分類する",d:"「この時代の文化はどれか」を、複数の語から選びます。"}
-];
-
-// 各語の「系統」。誤答は同じ系統から選び、説明文の細部で見分けさせる（人物はtypeで判定するため不要）
-const GROUP_MAP={
-  hakuji:'陶磁',seiji:'陶磁',touji:'陶磁',keitokuchin:'陶磁',
-  bunjinga:'絵画',intaiga:'絵画',joshi:'絵画',
-  mokuhan:'技術',rashinban:'技術',kayaku:'技術',sandai:'技術',
-  enmeien:'建築',sekkutsu:'仏教美術',benpatsu:'風習',
-  rongo:'経典',shisho:'経典',
-  shiki:'歴史書',shijitsugan:'歴史書',
-  sangokushi:'小説',saiyuki:'小説',suikoden:'小説',koromu:'小説',shosetsu:'小説',
-  kokijiten:'編纂物',shikozensho:'編纂物',
-  monzen:'文学作品',rantei:'書',bukkokki:'旅行記',taikyoku:'思想書',honzo:'科学書',kagakusho:'科学書',konyo:'地図',
-  kaishiso:'思想',muishizen:'思想',ekisei:'思想',kourou:'思想',seidan:'思想',
-  shoshi:'学派',juka:'学派',douka:'学派',houka:'学派',bokka:'学派',
-  seizen:'学説',seiaku:'学説',
-  jugaku:'儒学',kunko:'儒学',sougaku:'儒学',yomeigaku:'儒学',koshogaku:'儒学',
-  kidentai:'史叙述'
-};
-
-// モードA用：系統別の誤答候補（教材リスト外の一般的な世界史用語。正解にはならない）
-const DISTRACTORS={
-  '陶磁':[['青花','せいか'],['五彩','ごさい'],['磁州窯','じしゅうよう'],['唐三彩','とうさんさい'],['鈞窯','きんよう'],['定窯','ていよう'],['汝窯','じょよう']],
-  '絵画':[['山水画','さんすいが'],['花鳥画','かちょうが'],['水墨画','すいぼくが'],['北宗画','ほくしゅうが'],['風俗画','ふうぞくが']],
-  '技術':[['活版印刷','かっぱんいんさつ'],['火器','かき'],['銅活字','どうかつじ'],['印刷術','いんさつじゅつ']],
-  '建築':[['離宮','りきゅう'],['楼閣','ろうかく'],['庭園','ていえん'],['仏塔','ぶっとう']],
-  '仏教美術':[['磨崖仏','まがいぶつ'],['石仏','せきぶつ'],['仏塔','ぶっとう'],['塼仏','せんぶつ']],
-  '風習':[['纏足','てんそく'],['宦官','かんがん'],['満洲服','まんしゅうふく'],['頂戴花翎','ちょうだいかれい']],
-  '経典':[['詩経','しきょう'],['書経','しょきょう'],['礼記','らいき'],['易経','えききょう'],['春秋','しゅんじゅう'],['孝経','こうきょう']],
-  '歴史書':[['漢書','かんじょ'],['後漢書','ごかんじょ'],['三国志','さんごくし'],['史通','しつう'],['通典','つてん']],
-  '小説':[['金瓶梅','きんぺいばい'],['儒林外史','じゅりんがいし'],['聊斎志異','りょうさいしい'],['封神演義','ほうしんえんぎ']],
-  '編纂物':[['永楽大典','えいらくたいてん'],['古今図書集成','ここんとしょしゅうせい'],['冊府元亀','さくふげんき'],['太平御覧','たいへいぎょらん']],
-  '文学作品':[['楚辞','そじ'],['文心雕龍','ぶんしんちょうりょう'],['玉台新詠','ぎょくだいしんえい'],['文賦','ぶんぷ']],
-  '書':[['九成宮醴泉銘','きゅうせいきゅうれいせんめい'],['集字聖教序','しゅうじしょうぎょうじょ'],['千字文','せんじもん'],['顔氏家廟碑','がんしかびょうひ']],
-  '旅行記':[['大唐西域記','だいとうさいいきき'],['南海寄帰内法伝','なんかいききないほうでん'],['入唐求法巡礼行記','につとうぐほうじゅんれいこうき'],['西域記','さいいきき']],
-  '思想書':[['近思録','きんしろく'],['西銘','せいめい'],['通書','つうしょ'],['正蒙','せいもう']],
-  '科学書':[['農政全書','のうせいぜんしょ'],['天工開物','てんこうかいぶつ'],['斉民要術','せいみんようじゅつ'],['夢渓筆談','むけいひつだん']],
-  '地図':[['禹貢地域図','うこうちいきず'],['華夷図','かいず'],['広輿図','こうよず'],['輿地図','よちず']],
-  '思想':[['兼愛','けんあい'],['大同','だいどう'],['讖緯思想','しんいしそう'],['五行説','ごぎょうせつ'],['陰陽説','いんようせつ']],
-  '学派':[['陰陽家','いんようか'],['縦横家','じゅうおうか'],['農家','のうか'],['兵家','へいか'],['名家','めいか'],['雑家','ざっか']],
-  '学説':[['性三品説','せいさんぴんせつ'],['気質の性','きしつのせい'],['本然の性','ほんねんのせい'],['告子の説','こくしのせつ']],
-  '儒学':[['玄学','げんがく'],['公羊学','くようがく'],['古文学','こぶんがく'],['今文学','きんぶんがく'],['讖緯学','しんいがく']],
-  '史叙述':[['編年体','へんねんたい'],['紀事本末体','きじほんまつたい'],['断代史','だんだいし'],['通史','つうし']]
-};
-
-// 1モードあたりの出題数（ここを変えれば全体に反映されます）
-const QCOUNT={A:20, B:20, Bp:20, C:20};
-
-// 状態
-let state={mode:null,pool:[],idx:0,total:0,correct:0,answeredCurrent:false,wrong:[]};
-
-// ---- 開始画面の構築 ----
-const modeList=document.getElementById('modeList');
-MODES.forEach(m=>{
-  const b=document.createElement('button');
-  b.className='mode-card';b.dataset.mode=m.id;
-  b.innerHTML=`<span class="code">${m.code}</span><span class="body"><span class="t">${m.t}</span><span class="d">${m.d}</span></span>`;
-  b.addEventListener('click',()=>{selectMode(m.id);});
-  modeList.appendChild(b);
-});
-function selectMode(id){
-  state.mode=id;
-  [...modeList.children].forEach(c=>c.style.borderColor=(c.dataset.mode===id)?'var(--ink)':'var(--line)');
-  [...modeList.children].forEach(c=>c.style.background=(c.dataset.mode===id)?'#fff':'var(--paper-card)');
-}
-
-document.getElementById('startBtn').addEventListener('click',start);
-document.getElementById('backBtn').addEventListener('click',goHome);
-
-function start(){
-  if(!state.mode){alert('出題形式を選んでください。');return;}
-  buildPool();
-  if(state.pool.length===0){alert('出題できる語がありません。');return;}
-  show('quiz');renderQuestion();
-}
-
-function inEras(){return true;}
-
-function buildPool(){
-  let items=DATA.slice();
-  if(state.mode==='Bp')items=items.filter(d=>d.type==='人物');
-  if(state.mode==='C'){
-    // 全時代を最低1回入れ、残りはランダムに補って指定問数ぶん出題（同じ時代が複数回出る）
-    let seq=ERA_ORDER.slice();
-    while(seq.length<QCOUNT.C)seq.push(ERA_ORDER[Math.floor(Math.random()*ERA_ORDER.length)]);
-    state.pool=shuffle(seq).slice(0,QCOUNT.C);
-  }else{
-    const cap=QCOUNT[state.mode]||12;
-    state.pool=shuffle(items).slice(0,Math.min(items.length,cap));
-  }
-  state.idx=0;state.total=state.pool.length;state.correct=0;state.wrong=[];
-}
-
-function show(which){
-  ['start','quiz','done'].forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==which));
-  window.scrollTo({top:0,behavior:'instant'});
-}
-function goHome(){show('start');}
-
-function updateTop(){
-  document.getElementById('progress').textContent=`第 ${state.idx+1} 問 / 全 ${state.total} 問`;
-  document.getElementById('scoreTag').textContent=state.idx>0?`　正答 ${state.correct}`:'';
-}
-
-function explainHTML(d){
-  let parts=[];
-  parts.push(`時代：<b>${d.era.join('・')}</b>`);
-  if(d.work){const w=byId(d.work);if(w)parts.push(`作品：<b>${w.term}</b>`);}
-  if(d.person){const p=byId(d.person);if(p)parts.push(`作者：<b>${p.term}</b>`);}
-  let s=`<div class="explain"><span class="ttl">解説</span>${d.desc}`;
-  if(d.note)s+=`<br><span style="color:var(--ink-soft)">※ ${d.note}</span>`;
-  s+=`<br><br>${parts.join('　／　')}</div>`;
-  return s;
-}
-
-// ====== 出題ルーティング ======
-function renderQuestion(){
-  updateTop();state.answeredCurrent=false;
-  const m=state.mode;
-  if(m==='A')renderModeA();
-  else if(m==='C')renderModeC();
-  else renderModeB(); // B / Bp 共通
-}
-
-/* ---- モードA：説明 → 語を選ぶ ---- */
-function renderModeA(){
-  const d=state.pool[state.idx];
-  let distract;
-  if(d.type==='人物'){
-    // 人物はリスト内の人物のみ。同時代を優先
-    const st=DATA.filter(x=>x.id!==d.id && x.type==='人物');
-    const se=shuffle(st.filter(x=>x.era.some(e=>d.era.includes(e))));
-    const oe=shuffle(st.filter(x=>!x.era.some(e=>d.era.includes(e))));
-    distract=se.concat(oe).slice(0,3);
-  }else{
-    // 人物以外は「同じ系統」から誤答を作る（絵には絵、磁器には磁器の名前を並べる）
-    const g=GROUP_MAP[d.id];
-    const inList=DATA.filter(x=>x.id!==d.id && GROUP_MAP[x.id]===g);
-    const general=(DISTRACTORS[g]||[]).map(t=>({term:t[0],read:t[1],id:'g_'+t[0]}));
-    let cand=shuffle([...inList,...general]);
-    if(cand.length<3){ // 同系統が足りない稀なケースのみ同種で補う
-      cand=cand.concat(shuffle(DATA.filter(x=>x.id!==d.id&&x.type===d.type&&!cand.includes(x))));
-    }
-    distract=cand.slice(0,3);
-  }
-  let opts=shuffle([d,...distract]);
-  opts=[...opts,{term:'わからない',read:'',id:'__dk__',dk:true}];
-  const body=document.getElementById('quizBody');
-  body.innerHTML=`<div class="card">
-    <div class="prompt-label">この説明にあてはまる語は？</div>
-    <div class="prompt-desc">${d.desc}</div>
-    <div class="opts" id="opts"></div>
-    <div id="afterA"></div>
-  </div>`;
-  const oc=document.getElementById('opts');
-  const marks=['一','二','三','四','五'];
-  opts.forEach((o,i)=>{
-    const b=document.createElement('button');
-    b.className='opt'+(o.dk?' dk':'');
-    const rd=o.read?`<span style="color:var(--ink-soft);font-size:12px">（${o.read}）</span>`:'';
-    b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.term}${rd}</span>`;
-    b.addEventListener('click',()=>{
-      if(state.answeredCurrent)return;
-      state.answeredCurrent=true;
-      const ok=o.id===d.id;
-      if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
-      [...oc.children].forEach((c,ci)=>{
-        c.disabled=true;
-        if(opts[ci].id===d.id)c.classList.add('correct');
-        else if(ci===i && !opts[ci].dk)c.classList.add('wrong');
-        else c.classList.add('dim');
-      });
-      document.getElementById('afterA').innerHTML=verdict(ok)+explainHTML(d)+nextBtnHTML();
-      bindNext();
-    });
-    oc.appendChild(b);
-  });
-}
-
-/* ---- モードB / B人物：語 → 属性をまとめて答える ---- */
-function renderModeB(){
-  const d=state.pool[state.idx];
-  const pool=DATA;
-  const questions=[buildEraQuestion(d)];
-  if(d.work){const w=byId(d.work);if(w)questions.push(buildPickQuestion('この語に関わる作品は？',w,pool,x=>x.type==='書物'));}
-  if(d.person){const p=byId(d.person);if(p)questions.push(buildPickQuestion('この作品の作者は？',p,pool,x=>x.type==='人物'));}
-  if(questions.length===1)renderModeB_single(d,questions[0]);
-  else renderModeB_multi(d,questions);
-}
-
-// 時代のみ：選んだ瞬間に判定する単問形式
-function renderModeB_single(d,q){
-  const body=document.getElementById('quizBody');
-  body.innerHTML=`<div class="card">
-    <div class="prompt-label">この語が登場する時代は？</div>
-    <div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>
-    <div class="opts" id="opts" style="margin-top:18px"></div>
-    <div id="afterB"></div>
-  </div>`;
-  const oc=document.getElementById('opts');
-  const marks=['一','二','三','四','五'];
-  q.options.forEach((o,i)=>{
-    const b=document.createElement('button');
-    b.className='opt'+(o.dk?' dk':'');b.dataset.val=o.val;
-    b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.label}</span>`;
-    b.addEventListener('click',()=>{
-      if(state.answeredCurrent)return;state.answeredCurrent=true;
-      const ok=q.validEras.includes(o.val);
-      if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
-      [...oc.children].forEach(c=>{
-        c.disabled=true;
-        const v=c.dataset.val;
-        if(q.validEras.includes(v))c.classList.add('correct');
-        else if(v===o.val && v!=='__dk__')c.classList.add('wrong');
-        else c.classList.add('dim');
-      });
-      document.getElementById('afterB').innerHTML=verdict(ok)+explainHTML(d)+nextBtnHTML();
-      bindNext();
-    });
-    oc.appendChild(b);
-  });
-}
-
-// 作者・作品も問える語：複数設問をまとめて採点
-function renderModeB_multi(d,questions){
-  const body=document.getElementById('quizBody');
-  body.innerHTML=`<div class="card">
-    <div class="prompt-label">次の語について答えてください</div>
-    <div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>
-    <div id="qblocks"></div>
-    <div class="actions"><button class="btn btn-primary" id="gradeBtn">まとめて採点する</button></div>
-    <div id="afterB"></div>
-  </div>`;
-
-  const qb=document.getElementById('qblocks');
-  questions.forEach((q,qi)=>{
-    const blk=document.createElement('div');blk.className='qblock';
-    blk.innerHTML=`<div class="q-ask"><span class="q-no">問${qi+1}</span>${q.ask}</div><div class="opts" id="q${qi}"></div>`;
-    qb.appendChild(blk);
-    const oc=blk.querySelector('.opts');
-    const marks=['一','二','三','四','五'];
-    q.options.forEach((o,i)=>{
-      const b=document.createElement('button');
-      b.className='opt'+(o.dk?' dk':'');b.dataset.val=o.val;
-      b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.label}</span>`;
-      b.addEventListener('click',()=>{
-        if(q.locked)return;
-        [...oc.children].forEach(c=>c.style.borderColor='var(--line)');
-        b.style.borderColor='var(--ink)';q.picked=o.val;
-      });
-      oc.appendChild(b);
-    });
-    q.el=oc;
-  });
-
-  document.getElementById('gradeBtn').addEventListener('click',()=>{
-    if(state.answeredCurrent)return;
-    if(questions.some(q=>q.picked==null)){
-      if(!confirm('未回答の設問があります。このまま採点しますか？'))return;
-    }
-    state.answeredCurrent=true;
-    let allOK=true;
-    questions.forEach(q=>{
-      q.locked=true;
-      const okThis=q.isEra?(q.validEras.includes(q.picked)):(q.picked===q.answer);
-      [...q.el.children].forEach(c=>{
-        c.disabled=true;
-        const v=c.dataset.val;
-        const isAns=q.isEra?q.validEras.includes(v):(v===q.answer);
-        if(isAns)c.classList.add('correct');
-        else if(v===q.picked && v!=='__dk__')c.classList.add('wrong');
-        else c.classList.add('dim');
-      });
-      if(!okThis)allOK=false;
-    });
-    if(allOK)state.correct++; else state.wrong.push({type:'item',id:d.id});
-    document.getElementById('gradeBtn').disabled=true;
-    document.getElementById('afterB').innerHTML=
-      verdict(allOK)
-      +`<p style="font-size:12px;color:var(--ink-soft);margin:8px 0 0">${allOK?'すべての設問に正解しました。':'設問に誤りがあります（全問正解で1点）。'}</p>`
-      +explainHTML(d)+nextBtnHTML();
-    bindNext();
-  });
-}
-
-function buildEraQuestion(d){
-  // 正解の時代（複数なら最初を代表）。誤答は他時代から。
-  const correctEra=d.era[0];
-  const others=ERA_ORDER.filter(e=>!d.era.includes(e));
-  const opts=shuffle([correctEra,...sample(others,3)]).map(e=>({val:e,label:e}));
-  opts.push({val:'__dk__',label:'わからない',dk:true});
-  return {ask:'この語が登場する時代は？',options:opts,answer:correctEra,picked:null,locked:false,
-    isEra:true,validEras:d.era};
-}
-function buildPickQuestion(ask,target,pool,filterFn){
-  let distract=pool.filter(x=>x.id!==target.id&&filterFn(x));
-  const opts=shuffle([target,...sample(distract,3)]).map(x=>({val:x.id,label:`${x.term}（${x.read}）`}));
-  opts.push({val:'__dk__',label:'わからない',dk:true});
-  return {ask,options:opts,answer:target.id,picked:null,locked:false};
-}
-// 時代問題の採点を複数時代対応に：grade時にanswer一致でなくても validEras に含めば正解
-// （buildEraQuestion の answer は代表値だが、locked描画後の判定で吸収）
-function eraPickedOK(q){return q.validEras?q.validEras.includes(q.picked):q.picked===q.answer;}
-
-/* ---- モードC：時代で分類（複数選択） ---- */
-function renderModeC(){
-  const era=state.pool[state.idx];
-  const correctAll=DATA.filter(d=>d.era.includes(era));
-  const wrongAll=DATA.filter(d=>!d.era.includes(era));
-  // 5択。正解は1〜3個（その時代の語数の範囲で）
-  const nCorrect=Math.max(1,Math.min(3,correctAll.length,1+Math.floor(Math.random()*3)));
-  const chosenCorrect=sample(correctAll,nCorrect);
-  const chosenWrong=sample(wrongAll,5-nCorrect);
-  const items=shuffle([...chosenCorrect,...chosenWrong]);
-  const picked=new Set();
-
-  const body=document.getElementById('quizBody');
-  body.innerHTML=`<div class="card">
-    <div class="prompt-label">次のうち、<b style="color:var(--ink)">${era}</b>の文化にあてはまるものを<b style="color:var(--ink)">すべて</b>選んでください</div>
-    <div class="prompt-sub">あてはまる語は1つとは限りません。</div>
-    <div class="opts" id="optsC"></div>
-    <div class="actions"><button class="btn btn-primary" id="gradeC">採点する</button><button class="btn btn-ghost" id="dkC">わからない</button></div>
-    <div id="afterC"></div>
-  </div>`;
-  const oc=document.getElementById('optsC');
-  items.forEach(it=>{
-    const b=document.createElement('button');
-    b.className='opt';b.dataset.id=it.id;
-    b.innerHTML=`<span class="mk">□</span><span>${it.term}<span style="color:var(--ink-soft);font-size:12px">（${it.read}）</span></span>`;
-    b.addEventListener('click',()=>{
-      if(state.answeredCurrent)return;
-      const on=picked.has(it.id);
-      if(on){picked.delete(it.id);b.querySelector('.mk').textContent='□';b.style.borderColor='var(--line)';}
-      else{picked.add(it.id);b.querySelector('.mk').textContent='■';b.style.borderColor='var(--ink)';}
-    });
-    oc.appendChild(b);
-  });
-  function settleC(forceWrong){
-    if(state.answeredCurrent)return;state.answeredCurrent=true;
-    let ok=!forceWrong;
-    [...oc.children].forEach(c=>{
-      c.disabled=true;
-      const isCorrect=items.find(x=>x.id===c.dataset.id).era.includes(era);
-      const chosen=!forceWrong && picked.has(c.dataset.id);
-      if(isCorrect&&chosen)c.classList.add('correct');
-      else if(isCorrect&&!chosen){c.classList.add('correct');c.style.opacity='.7';if(!forceWrong)ok=false;}
-      else if(!isCorrect&&chosen){c.classList.add('wrong');ok=false;}
-      else c.classList.add('dim');
-    });
-    if(ok)state.correct++; else state.wrong.push({type:'era',era});
-    document.getElementById('gradeC').disabled=true;
-    document.getElementById('dkC').disabled=true;
-    const list=chosenCorrect.map(x=>x.term).join('、');
-    const tail=ok?'すべて正しく選べています。':(forceWrong?'「わからない」を選びました。':'取りこぼし・誤選択があります。');
-    document.getElementById('afterC').innerHTML=
-      verdict(ok)
-      +`<div class="explain"><span class="ttl">解説</span>${era}にあてはまるのは <b>${list}</b> です。${tail}<br><br>
-      <span style="color:var(--ink-soft);font-size:12px">※ 緑＝${era}の語、薄い緑＝選び落とした正解、赤＝誤って選んだ語。</span></div>`
-      +nextBtnHTML();
-    bindNext();
-  }
-  document.getElementById('gradeC').addEventListener('click',()=>settleC(false));
-  document.getElementById('dkC').addEventListener('click',()=>settleC(true));
-}
-
-// ---- 共通：正誤の明示 ----
-function verdict(ok){
-  return `<div class="verdict ${ok?'ok':'ng'}"><span class="ic">${ok?'○':'×'}</span><span>${ok?'正解':'不正解'}</span></div>`;
-}
-
-// ---- 共通：次へ ----
-function nextBtnHTML(){
-  const last=state.idx>=state.total-1;
-  return `<div class="actions"><button class="btn btn-primary" id="nextBtn">${last?'結果を見る':'次の問題へ →'}</button></div>`;
-}
-function bindNext(){
-  const nb=document.getElementById('nextBtn');
-  if(nb)nb.addEventListener('click',()=>{
-    state.idx++;
-    if(state.idx>=state.total)finish();
-    else renderQuestion();
-  });
-}
-
-function dedupWrong(arr){
-  const seen=new Set(),out=[];
-  arr.forEach(w=>{const k=w.type+':'+(w.id||w.era);if(!seen.has(k)){seen.add(k);out.push(w);}});
-  return out;
-}
-function finish(){
-  show('done');
-  document.getElementById('doneScore').textContent=`${state.correct} / ${state.total}`;
-  const r=state.total?state.correct/state.total:0;
-  let msg;
-  if(r===1)msg='全問正解です。';
-  else if(r>=0.7)msg='よく取れています。間違えた語を確認しておきましょう。';
-  else if(r>=0.4)msg='半ばまで来ています。間違えた箇所を中心に復習しましょう。';
-  else msg='まずは語を時代ごとに整理し直すとよいでしょう。';
-  document.getElementById('doneMsg').textContent=msg;
-
-  const uniq=dedupWrong(state.wrong);
-  const area=document.getElementById('wrongArea');
-  if(uniq.length===0){
-    area.innerHTML=`<div class="actions" style="justify-content:center">
-      <button class="btn btn-primary" id="againBtn">同じ形式でもう一度</button>
-      <button class="btn btn-ghost" id="homeBtn">形式を選び直す</button></div>`;
-  }else{
-    const rows=uniq.map(w=>{
-      if(w.type==='era')return `<li><span>${w.era}の文化（時代の分類）</span><span class="rd">モードC</span></li>`;
-      const d=byId(w.id);
-      return `<li><span>${d.term}</span><span class="rd">${d.read}</span></li>`;
-    }).join('');
-    area.innerHTML=`<div class="wrong-list">
-      <div class="wl-ttl">間違えた問題（${uniq.length}件）</div>
-      <ul>${rows}</ul></div>
-      <div class="actions" style="justify-content:center">
-        <button class="btn btn-primary" id="retryBtn">間違えた問題をもう一度（${uniq.length}問）</button>
-        <button class="btn btn-ghost" id="homeBtn">セッションを終了する</button></div>`;
-    document.getElementById('retryBtn').addEventListener('click',retryWrong);
-  }
-  const ag=document.getElementById('againBtn');if(ag)ag.addEventListener('click',()=>{buildPool();show('quiz');renderQuestion();});
-  const hm=document.getElementById('homeBtn');if(hm)hm.addEventListener('click',goHome);
-}
-function retryWrong(){
-  const uniq=dedupWrong(state.wrong);
-  state.pool = state.mode==='C' ? uniq.map(w=>w.era) : uniq.map(w=>byId(w.id));
-  state.idx=0;state.total=state.pool.length;state.correct=0;state.wrong=[];
-  show('quiz');renderQuestion();
-}
-</script>
 </body>
 </html>
