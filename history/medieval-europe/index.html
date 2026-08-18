@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中世ヨーロッパ文化史 演習 ─ つばめ学習舎</title>
+<meta name="description" content="つばめ学習舎の大学受験向け 中世ヨーロッパ文化史 演習ツール。教材に準拠した出題で、修道院・スコラ学・大学・教会建築・中世文学を練習できます。">
+
+<!-- 検索エンジンに載せたくない内部用ツールのため除外。公開して検索に出したい場合は次の1行を削除してください -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- 正規URL（/history/medieval-europe フォルダに index.html として置いた場合） -->
+<link rel="canonical" href="https://swallow-base.com/history/medieval-europe/">
+<meta name="theme-color" content="#20262e">
+
+<!-- SNSなどで共有したときの表示（OGP） -->
+<meta property="og:title" content="中世ヨーロッパ文化史 演習 ─ つばめ学習舎">
+<meta property="og:description" content="教材準拠の中世ヨーロッパ文化史 演習ツール。修道院・スコラ学・大学・教会建築・文学を練習できます。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://swallow-base.com/history/medieval-europe/">
+<meta property="og:site_name" content="つばめ学習舎">
+<meta property="og:locale" content="ja_JP">
+
+<!-- favicon（朱印「演」。外部ファイル不要のインラインSVG） -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%239e3d2e'/><text x='16' y='24' font-family='serif' font-size='19' fill='white' text-anchor='middle'>演</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#20262e;
+  --ink-soft:#48515c;
+  --paper:#f0ece1;
+  --paper-card:#faf7ef;
+  --line:#d8d0bf;
+  --seal:#9e3d2e;
+  --seal-soft:#b8553f;
+  --gold:#a9863f;
+  --green:#6c7e58;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+  min-height:100vh;
+  background-image:radial-gradient(circle at 20% 10%,rgba(255,255,255,.4),transparent 40%);
+}
+.wrap{max-width:760px;margin:0 auto;padding:24px 18px 80px}
+.serif{font-family:"Noto Serif JP",serif}
+
+/* ヘッダ */
+header.top{display:flex;align-items:baseline;gap:14px;padding:8px 2px 20px;border-bottom:2px solid var(--ink);margin-bottom:26px}
+header.top .mark{
+  font-family:"Noto Serif JP",serif;font-weight:700;font-size:13px;color:#fff;
+  background:var(--seal);padding:7px 9px;border-radius:3px;letter-spacing:.12em;line-height:1.3;
+  writing-mode:vertical-rl;text-orientation:upright;
+}
+header.top h1{font-family:"Noto Serif JP",serif;font-weight:700;font-size:21px;letter-spacing:.04em}
+header.top .sub{font-size:12px;color:var(--ink-soft);margin-top:3px;letter-spacing:.08em}
+header.top .home-link{margin-left:auto;align-self:center;font-size:12px;color:var(--seal);text-decoration:none;border:1px solid var(--line);padding:6px 12px;border-radius:6px;white-space:nowrap;font-weight:600;letter-spacing:.04em;transition:.12s}
+header.top .home-link:hover{background:#faf0ec;border-color:var(--seal)}
+
+/* 開始画面 */
+.lead{font-size:13.5px;color:var(--ink-soft);margin-bottom:22px;max-width:60ch}
+.section-label{font-family:"Noto Serif JP",serif;font-size:12px;letter-spacing:.22em;color:var(--gold);margin:26px 0 12px;font-weight:600}
+
+.modes{display:grid;gap:12px}
+.mode-card{
+  text-align:left;background:var(--paper-card);border:1px solid var(--line);border-radius:7px;
+  padding:16px 18px;cursor:pointer;transition:.15s;display:flex;gap:15px;align-items:flex-start;width:100%;
+  font-family:inherit;color:inherit;
+}
+.mode-card:hover{border-color:var(--ink);transform:translateY(-1px)}
+.mode-card:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.mode-card .code{font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px;color:var(--seal);min-width:30px;padding-top:1px}
+.mode-card .body .t{font-weight:700;font-size:15px;margin-bottom:3px}
+.mode-card .body .d{font-size:12.5px;color:var(--ink-soft);line-height:1.6}
+
+/* クイズ画面 */
+.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.btn-back{font-family:inherit;font-size:12.5px;background:none;border:none;color:var(--ink-soft);cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+.btn-back:hover{color:var(--ink)}
+.progress{font-size:12px;color:var(--ink-soft);font-family:"Noto Serif JP",serif;letter-spacing:.05em}
+.score-tag{font-size:12px;color:var(--seal);font-weight:700}
+
+.card{background:var(--paper-card);border:1px solid var(--line);border-radius:9px;padding:22px 20px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+
+.prompt-label{font-size:11px;letter-spacing:.18em;color:var(--gold);font-weight:600;font-family:"Noto Serif JP",serif;margin-bottom:8px}
+.prompt-desc{font-size:15.5px;line-height:1.85;margin-bottom:4px}
+.prompt-term{font-family:"Noto Serif JP",serif;font-size:30px;font-weight:700;letter-spacing:.04em;line-height:1.3}
+.prompt-term .rb{font-size:13px;color:var(--ink-soft);font-weight:400;display:block;letter-spacing:.1em;margin-bottom:2px}
+.prompt-sub{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
+
+/* 選択肢 */
+.opts{display:grid;gap:9px;margin-top:18px}
+.opt{
+  font-family:inherit;text-align:left;background:#fff;border:1px solid var(--line);border-radius:6px;
+  padding:12px 15px;cursor:pointer;font-size:14.5px;color:var(--ink);transition:.12s;width:100%;display:flex;gap:10px;align-items:center;
+}
+.opt .mk{font-family:"Noto Serif JP",serif;color:var(--ink-soft);font-size:13px;min-width:18px}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt:focus-visible{outline:2px solid var(--seal);outline-offset:1px}
+.opt:disabled{cursor:default}
+.opt.correct{background:#eef3ea;border-color:var(--green);color:#33421f}
+.opt.wrong{background:#f6e9e6;border-color:var(--seal);color:#6e2a1e}
+.opt.dim{opacity:.5}
+.opt.dk{color:var(--ink-soft)}
+.opt.dk .mk{color:var(--seal);font-weight:700}
+.opt.selected{border-color:var(--seal);background:#faf0ec;box-shadow:inset 0 0 0 2px rgba(158,61,46,.22)}
+.opt .badge{margin-left:auto;font-size:11px;font-weight:700;padding:2px 9px;border-radius:11px;white-space:nowrap;letter-spacing:.03em}
+.opt .badge.your{background:#e7ddca;color:#6b573a}
+.opt .badge.ans{background:#3f7d52;color:#fff}
+.opt .badge+.badge{margin-left:6px}
+
+/* モードB：複数設問ブロック */
+.qblock{border-top:1px dashed var(--line);padding-top:16px;margin-top:16px}
+.qblock:first-of-type{border-top:none;padding-top:4px;margin-top:8px}
+.q-ask{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:10px}
+.q-ask .q-no{color:var(--seal);font-family:"Noto Serif JP",serif;margin-right:6px}
+
+/* 解説 */
+.explain{margin-top:18px;background:#fbf6ea;border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:13px 15px;font-size:13px;line-height:1.8;color:var(--ink-soft)}
+.explain b{color:var(--ink)}
+.explain .ttl{font-family:"Noto Serif JP",serif;font-weight:700;color:var(--gold);font-size:11px;letter-spacing:.14em;display:block;margin-bottom:5px}
+
+/* 正誤の明示 */
+.verdict{display:flex;align-items:center;gap:9px;font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px;padding:11px 18px;border-radius:7px;margin-top:18px;letter-spacing:.1em}
+.verdict .ic{font-size:20px;line-height:1}
+.verdict.ok{background:#e7efe0;color:#3a5a22;border:1.5px solid var(--green)}
+.verdict.ng{background:#f4e3df;color:#8a3322;border:1.5px solid var(--seal)}
+
+/* アクションボタン */
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{font-family:inherit;font-size:14px;font-weight:700;border-radius:6px;padding:11px 22px;cursor:pointer;border:1px solid var(--ink);transition:.12s}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:#000}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:rgba(0,0,0,.04)}
+.btn:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.btn:disabled{opacity:.4;cursor:default}
+
+/* 完了画面 */
+.done{text-align:center;padding:30px 10px}
+.done .big{font-family:"Noto Serif JP",serif;font-size:34px;font-weight:700;margin:10px 0}
+.done .lbl{font-size:12px;letter-spacing:.18em;color:var(--gold);font-family:"Noto Serif JP",serif}
+.done p{font-size:13.5px;color:var(--ink-soft);margin:14px 0 24px}
+.wrong-list{text-align:left;background:#fbf6ea;border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:18px auto;max-width:520px}
+.wrong-list .wl-ttl{font-family:"Noto Serif JP",serif;font-weight:700;font-size:13px;color:var(--seal);margin-bottom:10px}
+.wrong-list ul{list-style:none}
+.wrong-list li{font-size:14px;padding:7px 2px;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.wrong-list li:last-child{border-bottom:none}
+.wrong-list li .rd{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+
+footer{margin-top:40px;font-size:11px;color:var(--ink-soft);text-align:center;line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
+
+.hidden{display:none!important}
+
+@media (max-width:480px){
+  .prompt-term{font-size:25px}
+  .wrap{padding:18px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="mark">演習</div>
+    <div>
+      <h1>中世ヨーロッパ文化史</h1>
+      <div class="sub">つばめ学習舎 ── 教材準拠の出題</div>
+    </div>
+    <a class="home-link" href="../">⌂ 世界史トップ</a>
+  </header>
+
+  <!-- 開始画面 -->
+  <div id="start">
+    <p class="lead">出題はすべて、配布した教材資料に記載のある事項に限定しています。誤りの選択肢も教材の範囲から作られています（見慣れない語は誤答です）。出題形式を選んで演習を始めてください。</p>
+
+    <div class="section-label">出題形式</div>
+    <div class="modes" id="modeList"></div>
+
+    <div class="actions" style="margin-top:24px">
+      <button class="btn btn-primary" id="startBtn">演習を始める</button>
+    </div>
+  </div>
+
+  <!-- クイズ画面 -->
+  <div id="quiz" class="hidden">
+    <div class="quiz-top">
+      <button class="btn-back" id="backBtn">← 形式の選択に戻る</button>
+      <div>
+        <span class="progress" id="progress"></span>
+        <span class="score-tag" id="scoreTag"></span>
+      </div>
+    </div>
+    <div id="quizBody"></div>
+  </div>
+
+  <!-- 完了画面 -->
+  <div id="done" class="hidden">
+    <div class="done">
+      <div class="lbl">演習終了</div>
+      <div class="big" id="doneScore"></div>
+      <p id="doneMsg"></p>
+      <div id="wrongArea"></div>
+    </div>
+  </div>
+
+  <footer>
+    出題内容は教材資料の範囲に準拠／別名・補足は解説欄に記載<br>
+    つばめ学習舎・授業用演習ツール
+  </footer>
+</div>
+
+<script>
+/* ===================================================================
+   データ：各語は資料（図説 p.102-105／教科書 p.134-136）と照合済み。
+   cat … 分野。faculty/country … 大学の中心学部と国。
+   style/country … 大聖堂の様式と国。stance … 普遍論争等での立場。
+   work/person … リスト内で相互に問える相手のid。theme … 文学作品の題材。
+   note … 解説に出す補足。
+   =================================================================== */
+const DATA = [
+
+/* ---- 教会と修道院 ---- */
+{id:"shudoin",term:"修道院",read:"しゅうどういん",cat:"修道院",type:"概念",
+ desc:"世俗を離れた修行の場。中世西ヨーロッパで大きな文化的役割を果たした。"},
+{id:"undou",term:"修道院運動",read:"しゅうどういんうんどう",cat:"修道院",type:"概念",
+ desc:"6世紀にベネディクトゥスがイタリアのモンテ=カシノに修道会を開いたことに始まる、修道生活の刷新と拡大の動き。",
+ note:"起点となったのはベネディクト修道会。「祈り、働け」のモットーは、生産労働を奴隷の仕事とみる古典古代以来の労働観を大きくかえた。"},
+{id:"citeaux",term:"シトー修道会",read:"しとーしゅうどうかい",cat:"修道院",type:"概念",
+ desc:"12〜13世紀の大開墾時代に、森林を切りひらく開墾の先頭に立った修道会。"},
+{id:"daikaikon",term:"大開墾時代",read:"だいかいこんじだい",cat:"修道院",type:"概念",
+ desc:"12〜13世紀、森林を切りひらいて耕地を広げた時代。シトー修道会をはじめとする修道院がその先頭に立った。"},
+
+/* ---- 学問・思想 ---- */
+{id:"shingaku",term:"神学",read:"しんがく",cat:"学問・思想",type:"概念",
+ desc:"中世西ヨーロッパで最高の学問とされたもの。哲学や自然科学はその下に置かれた。"},
+{id:"latin",term:"ラテン語",read:"らてんご",cat:"学問・思想",type:"概念",
+ desc:"当時の学者・知識人が用いた、学問の国際的共通語。"},
+{id:"schola",term:"スコラ学",read:"すこらがく",cat:"学問・思想",type:"概念",
+ desc:"教会の権威の理論的確立のため、信仰を論理的に体系化しようとした中世西ヨーロッパ特有の学問。アリストテレス哲学の影響を受けて壮大な体系となった。"},
+{id:"fuhen",term:"普遍論争",read:"ふへんろんそう",cat:"学問・思想",type:"概念",
+ desc:"「普遍」が現実に実体として存在するか、思考のなかに存在するにすぎないかをめぐる、スコラ学の中心的議論。",
+ note:"実在論と唯名論が対立した。"},
+{id:"jitsuzai",term:"実在論",read:"じつざいろん",cat:"学問・思想",type:"概念",pair:"yuimei",
+ desc:"普遍論争において、普遍は現実に実体として存在すると主張した立場。",
+ note:"アンセルムスが代表。13世紀のトマス=アクィナスもこの立場。"},
+{id:"yuimei",term:"唯名論",read:"ゆいめいろん",cat:"学問・思想",type:"概念",pair:"jitsuzai",
+ desc:"普遍論争において、普遍は名称にすぎず、実在するのは個物だけであるとした立場。",
+ note:"アベラールやウィリアム=オブ=オッカムが代表。"},
+{id:"anselmus",term:"アンセルムス",read:"あんせるむす",cat:"学問・思想",type:"人物",stance:"実在論",
+ desc:"11世紀後半から12世紀初めに活躍し、普遍論争で実在論の議論を代表した人物。"},
+{id:"abelard",term:"アベラール",read:"あべらーる",cat:"学問・思想",type:"人物",stance:"唯名論",
+ desc:"12世紀前半に活躍し、普遍論争で唯名論の立場に立った人物。"},
+{id:"thomas",term:"トマス=アクィナス",read:"とます=あくぃなす",cat:"学問・思想",type:"人物",stance:"実在論",work:"shingakutaizen",
+ desc:"13世紀にスコラ学を大成し、その学問は教皇権の理論的支柱となった。",
+ note:"南イタリアの貴族出身でドミニコ派に属し、パリ・ローマ・ナポリなどの大学で教授をつとめた。普遍論争では実在論の立場。"},
+{id:"occam",term:"ウィリアム=オブ=オッカム",read:"うぃりあむ=おぶ=おっかむ",cat:"学問・思想",type:"人物",stance:"唯名論",
+ desc:"14世紀に唯名論の立場に立ち、近代合理思想の基礎を築いた人物。"},
+{id:"rbacon",term:"ロジャー=ベーコン",read:"ろじゃー=べーこん",cat:"学問・思想",type:"人物",stance:"自然科学",
+ desc:"実験と数学を科学の手法として重視し、のちの近代科学を準備した13世紀の人物。",
+ note:"イングランド出身のフランチェスコ会士。"},
+{id:"shingakutaizen",term:"『神学大全』",read:"しんがくたいぜん",cat:"学問・思想",type:"書物",person:"thomas",
+ desc:"トマス=アクィナスが著した、スコラ学の集大成となる書物。",
+ note:"トマスは『哲学大全』も著しているため、誤答には用いていない。"},
+{id:"runesansu",term:"12世紀ルネサンス",read:"じゅうにせいきるねさんす",cat:"学問・思想",type:"概念",
+ desc:"ビザンツ帝国やイスラーム圏からもたらされたギリシアの古典が、ギリシア語やアラビア語から本格的にラテン語に翻訳され、学問や文芸が大きく発展した動き。",
+ note:"翻訳活動の中心はイベリア半島のトレドやシチリア島のパレルモ。"},
+{id:"shichika",term:"自由七科",read:"じゆうしちか",cat:"学問・思想",type:"概念",
+ desc:"大学で教育された基礎的な教養科目。三学（文法・修辞・論理）と四科（算術・幾何・天文・音楽）からなる。"},
+
+/* ---- 大学 ---- */
+{id:"bologna",term:"ボローニャ大学",read:"ぼろーにゃだいがく",cat:"大学",type:"大学",faculty:"法学",country:"イタリア",
+ desc:"イタリアにある、最古の大学といわれる大学。11世紀にローマ法・教会法の法学校から発展し、法学で有名。",
+ note:"学生が自治団体としての学生組合を形成したことに始まり、ローマ法学の復興に貢献した。"},
+{id:"paris",term:"パリ大学",read:"ぱりだいがく",cat:"大学",type:"大学",faculty:"神学",country:"フランス",
+ desc:"フランスにある、神学で有名な大学。12世紀に司教座付属学校の教師・学生の自治団体から発展した。",
+ note:"在籍した人物にトマス=アクィナス。"},
+{id:"salerno",term:"サレルノ大学",read:"されるのだいがく",cat:"大学",type:"大学",faculty:"医学",country:"イタリア",
+ desc:"イタリアにある、医学を中心とする大学。古くから存在していた医学校から発展し、イスラーム医学を導入した。"},
+{id:"oxford",term:"オクスフォード大学",read:"おくすふぉーどだいがく",cat:"大学",type:"大学",faculty:"神学",country:"イギリス",
+ desc:"イギリスにある、神学を中心とする大学。12世紀、パリ大学を模範として創設された。",
+ note:"資料集ではパリ大学からの学生により形成・発展と記載。在籍した人物にロジャー=ベーコン、ウィリアム=オブ=オッカム、ウィクリフ。"},
+{id:"cambridge",term:"ケンブリッジ大学",read:"けんぶりっじだいがく",cat:"大学",type:"大学",faculty:"神学",country:"イギリス",
+ desc:"イギリスにある大学。13世紀にオクスフォード大学から分かれてでき、独自の学寮（コレッジ）制をもとに発展した。",
+ note:"教科書の一覧表では神学。資料集では17世紀以降、自然科学研究の中心となったと記載（ニュートン・ダーウィンが在籍）。"},
+
+/* ---- 建築 ---- */
+{id:"romanesque",term:"ロマネスク様式",read:"ろまねすくようしき",cat:"建築",type:"様式",pair:"gothic",
+ desc:"11世紀に生み出された教会建築様式。厚い石壁と列柱、小さい窓をもつ重厚なつくりが特徴。",
+ note:"南欧中心に発達。代表例にピサ大聖堂・シュパイアー大聖堂・クリュニー修道院。"},
+{id:"gothic",term:"ゴシック様式",read:"ごしっくようしき",cat:"建築",type:"様式",pair:"romanesque",
+ desc:"12世紀に現れた教会建築様式。頭部のとがった尖頭アーチと高くそびえる塔を特徴とし、広い窓はステンドグラスで飾られた。",
+ note:"北フランスにおこり、西欧・北欧中心に普及。繁栄する商人の経済力を背景に各都市に建設された。"},
+{id:"pisa",term:"ピサ大聖堂",read:"ぴさだいせいどう",cat:"建築",type:"建築物",style:"ロマネスク様式",country:"イタリア",
+ desc:"イタリアにあるロマネスク様式の大聖堂。11〜12世紀に建てられ、アーケードと列柱による外観が特徴。",
+ note:"アーケードと列柱によるその様式は「ピサ式ロマネスク」と呼ばれる。"},
+{id:"speyer",term:"シュパイアー大聖堂",read:"しゅぱいあーだいせいどう",cat:"建築",type:"建築物",style:"ロマネスク様式",country:"ドイツ",
+ desc:"ドイツ中南部にあるロマネスク様式の大聖堂。12世紀半ばに完成した、この様式の代表例。"},
+{id:"notredame",term:"ノートルダム大聖堂",read:"のーとるだむだいせいどう",cat:"建築",type:"建築物",style:"ゴシック様式",country:"フランス",
+ desc:"フランスのパリにあるゴシック様式の大聖堂。バラ窓のステンドグラスで知られる。"},
+{id:"chartres",term:"シャルトル大聖堂",read:"しゃるとるだいせいどう",cat:"建築",type:"建築物",style:"ゴシック様式",country:"フランス",
+ desc:"フランス、パリの南西にあるゴシック様式の大聖堂。とくに美しく保存のよいステンドグラスをもち、その青は「シャルトルブルー」と呼ばれる。"},
+{id:"reims",term:"ランス大聖堂",read:"らんすだいせいどう",cat:"建築",type:"建築物",style:"ゴシック様式",country:"フランス",
+ desc:"フランス北東部にあるゴシック様式の大聖堂。歴代フランス王の戴冠式がおこなわれた。"},
+{id:"koln",term:"ケルン大聖堂",read:"けるんだいせいどう",cat:"建築",type:"建築物",style:"ゴシック様式",country:"ドイツ",
+ desc:"ドイツにあるゴシック様式の大聖堂。尖頭アーチと高い塔をもつこの様式の代表例の一つ。"},
+{id:"glass",term:"ステンドグラス",read:"すてんどぐらす",cat:"建築",type:"文物",
+ desc:"壁を薄くする技術の進歩で広くなった窓にはめられた、色彩豊かな彩色ガラス絵。",
+ note:"ゴシック様式の教会堂の特色。ノートルダム大聖堂のバラ窓、シャルトル大聖堂のものが有名。"},
+
+/* ---- 文学 ---- */
+{id:"kishido",term:"騎士道物語",read:"きしどうものがたり",cat:"文学",type:"概念",
+ desc:"ラテン語ではなく口語（俗語）で表現された中世文学の代表。騎士の武勲や恋愛をテーマとした。",
+ note:"騎士道＝武勇と主君への忠誠、神への信仰、女性・弱者の保護などを重視する騎士の道徳。"},
+{id:"roland",term:"『ローランの歌』",read:"ろーらんのうた",cat:"文学",type:"書物",theme:"カール大帝時代の騎士の武勲が題材",
+ desc:"カール大帝時代の騎士の武勲を題材とした騎士道物語。"},
+{id:"nibelungen",term:"『ニーベルンゲンの歌』",read:"にーべるんげんのうた",cat:"文学",type:"書物",theme:"ゲルマンの英雄叙事詩",
+ desc:"ゲルマンの英雄叙事詩として知られる中世文学。",
+ note:"資料集では、中世ドイツの英雄叙事詩で13世紀初めに成立と記載。"},
+{id:"arthur",term:"『アーサー王物語』",read:"あーさーおうものがたり",cat:"文学",type:"書物",theme:"イギリスのケルト人の伝説から発展",
+ desc:"イギリスのケルト人の伝説から発展した騎士道物語。",
+ note:"挿絵で活躍が描かれる騎士にランスロット。"},
+{id:"ginyuu",term:"吟遊詩人",read:"ぎんゆうしじん",cat:"文学",type:"概念",
+ desc:"おもに宮廷において、騎士の恋愛を叙情詩にうたった人々。その最盛期は12世紀であった。",
+ note:"フランスでトゥルバドゥール、ドイツでミンネジンガーと呼ばれた。"}
+];
+
+const CAT_ORDER=["修道院","学問・思想","大学","建築","文学"];
+const byId=id=>DATA.find(d=>d.id===id);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const sample=(arr,n)=>shuffle(arr).slice(0,n);
+
+const MODES=[
+  {id:"A",code:"A",t:"説明から語を当てる",d:"文章で示された説明に当てはまる語句を、選択肢から選びます。"},
+  {id:"B",code:"B",t:"語の属性を答える",d:"大学・大聖堂・人物・作品が示され、その中心学部と国、様式、立場、作者などをまとめて答えます。"},
+  {id:"C",code:"C",t:"分類する",d:"「◯◯様式の建築」「◯◯学を中心学部とする大学」「◯◯にある大学」などを、並んだ語からすべて選びます。"}
+];
+
+// 各語の「系統」。誤答は同じ系統から選び、説明文の細部で見分けさせる（人物はtypeで判定するため不要）
+const GROUP_MAP={
+  shudoin:'修道院',undou:'修道院',citeaux:'修道院',
+  daikaikon:'出来事',
+  shingaku:'学問概念',schola:'学問概念',fuhen:'学問概念',jitsuzai:'学問概念',yuimei:'学問概念',runesansu:'学問概念',shichika:'学問概念',
+  latin:'言語',
+  shingakutaizen:'神学書',
+  bologna:'大学',paris:'大学',salerno:'大学',oxford:'大学',cambridge:'大学',
+  romanesque:'様式',gothic:'様式',
+  pisa:'大聖堂',speyer:'大聖堂',notredame:'大聖堂',chartres:'大聖堂',reims:'大聖堂',koln:'大聖堂',
+  glass:'建築要素',
+  roland:'文学作品',nibelungen:'文学作品',arthur:'文学作品',
+  kishido:'文学概念',ginyuu:'文学概念'
+};
+
+// モードA用：系統別の誤答候補（教材に登場するがリスト外の語が中心。正解にはならない）
+const DISTRACTORS={
+  '修道院':[['ベネディクト修道会','べねでぃくとしゅうどうかい'],['クリュニー修道院','くりゅにーしゅうどういん'],['フランチェスコ修道会','ふらんちぇすこしゅうどうかい'],['ドミニコ修道会','どみにこしゅうどうかい'],['托鉢修道会','たくはつしゅうどうかい']],
+  '出来事':[['叙任権闘争','じょにんけんとうそう'],['カノッサの屈辱','かのっさのくつじょく'],['教会大分裂（大シスマ）','きょうかいだいぶんれつ'],['東西教会分裂','とうざいきょうかいぶんれつ']],
+  '学問概念':[['教父哲学','きょうふてつがく'],['カロリング=ルネサンス','かろりんぐ=るねさんす'],['三学','さんがく'],['四科','しか']],
+  '言語':[['ギリシア語','ぎりしあご'],['アラビア語','あらびあご'],['口語（俗語）','こうご']],
+  '神学書':[['『神の国』','かみのくに'],['『告白録』','こくはくろく'],['『命題集』','めいだいしゅう']],
+  '大学':[['パドヴァ大学','ぱどゔぁだいがく'],['ナポリ大学','なぽりだいがく'],['カレル大学（プラハ大学）','かれるだいがく']],
+  '様式':[['バシリカ様式','ばしりかようしき'],['ビザンツ様式','びざんつようしき']],
+  '大聖堂':[['ハギア=ソフィア聖堂','はぎあ=そふぃあせいどう'],['聖マルコ大聖堂','せいまるこだいせいどう'],['聖マリア=マジョーレ聖堂','せいまりあ=まじょーれせいどう'],['クリュニー修道院','くりゅにーしゅうどういん']],
+  '建築要素':[['フライング=バットレス（飛梁）','ふらいんぐ=ばっとれす'],['尖頭アーチ','せんとうあーち'],['バラ窓','ばらまど'],['タンパン','たんぱん']],
+  '文学作品':[['『神曲』','しんきょく'],['『デカメロン』','でかめろん'],['『カンタベリ物語』','かんたべりものがたり'],['『ベーオウルフ』','べーおうるふ']],
+  '文学概念':[['英雄叙事詩','えいゆうじょじし'],['聖人伝','せいじんでん'],['年代記','ねんだいき']]
+};
+
+// モードA・人物問題の誤答補充用：教材に登場するリスト外の人物（正解にはならない）
+const PERSON_DISTRACTORS=[['アウグスティヌス','あうぐすてぃぬす'],['アルクイン','あるくいん'],['ダンテ','だんて'],['ウィクリフ','うぃくりふ'],['ベネディクトゥス','べねでぃくとぅす']];
+
+// 1モードあたりの出題数（ここを変えれば全体に反映されます）
+const QCOUNT={A:20, B:20, C:20};
+
+// モードBの対象（属性を問える語）
+const hasB=d=>d.type==='大学'||d.type==='建築物'||d.type==='人物'||!!d.person||!!d.theme;
+
+// モードCの分類課題
+const FACULTY_NOTE='教科書の一覧表ではオクスフォード・ケンブリッジとも神学。ケンブリッジは資料集では17世紀以降、自然科学研究の中心と記載。';
+const CTASKS=[
+  {kind:'style',v:'ロマネスク様式',domain:'cath',label:'<b>ロマネスク様式</b>の建築',test:d=>d.style==='ロマネスク様式'},
+  {kind:'style',v:'ゴシック様式',domain:'cath',label:'<b>ゴシック様式</b>の建築',test:d=>d.style==='ゴシック様式'},
+  {kind:'fac',v:'法学',domain:'univ',label:'<b>法学</b>を中心学部とする大学',test:d=>d.faculty==='法学'},
+  {kind:'fac',v:'神学',domain:'univ',label:'<b>神学</b>を中心学部とする大学',test:d=>d.faculty==='神学',note:FACULTY_NOTE},
+  {kind:'fac',v:'医学',domain:'univ',label:'<b>医学</b>を中心学部とする大学',test:d=>d.faculty==='医学'},
+  {kind:'uc',v:'イタリア',domain:'univ',label:'<b>イタリア</b>にある大学',test:d=>d.country==='イタリア'},
+  {kind:'uc',v:'フランス',domain:'univ',label:'<b>フランス</b>にある大学',test:d=>d.country==='フランス'},
+  {kind:'uc',v:'イギリス',domain:'univ',label:'<b>イギリス</b>にある大学',test:d=>d.country==='イギリス'},
+  {kind:'bc',v:'イタリア',domain:'cath',label:'<b>イタリア</b>にある大聖堂',test:d=>d.country==='イタリア'},
+  {kind:'bc',v:'フランス',domain:'cath',label:'<b>フランス</b>にある大聖堂',test:d=>d.country==='フランス'},
+  {kind:'bc',v:'ドイツ',domain:'cath',label:'<b>ドイツ</b>にある大聖堂',test:d=>d.country==='ドイツ'},
+  {kind:'st',v:'実在論',domain:'phil',label:'普遍論争で<b>実在論</b>の立場に立つ人物',test:d=>d.stance==='実在論',note:'ロジャー=ベーコンは実験と数学を重視した自然科学の人物で、どちらの立場としても出題しない。'},
+  {kind:'st',v:'唯名論',domain:'phil',label:'普遍論争で<b>唯名論</b>の立場に立つ人物',test:d=>d.stance==='唯名論',note:'ロジャー=ベーコンは実験と数学を重視した自然科学の人物で、どちらの立場としても出題しない。'}
+];
+const DOMAIN_ITEMS={
+  univ:()=>DATA.filter(d=>d.type==='大学'),
+  cath:()=>DATA.filter(d=>d.type==='建築物'),
+  phil:()=>DATA.filter(d=>d.type==='人物')
+};
+
+// 状態
+let state={mode:null,pool:[],idx:0,total:0,correct:0,answeredCurrent:false,wrong:[]};
+
+// ---- 開始画面の構築 ----
+const modeList=document.getElementById('modeList');
+MODES.forEach(m=>{
+  const b=document.createElement('button');
+  b.className='mode-card';b.dataset.mode=m.id;
+  b.innerHTML=`<span class="code">${m.code}</span><span class="body"><span class="t">${m.t}</span><span class="d">${m.d}</span></span>`;
+  b.addEventListener('click',()=>{selectMode(m.id);});
+  modeList.appendChild(b);
+});
+function selectMode(id){
+  state.mode=id;
+  [...modeList.children].forEach(c=>c.style.borderColor=(c.dataset.mode===id)?'var(--ink)':'var(--line)');
+  [...modeList.children].forEach(c=>c.style.background=(c.dataset.mode===id)?'#fff':'var(--paper-card)');
+}
+
+document.getElementById('startBtn').addEventListener('click',start);
+document.getElementById('backBtn').addEventListener('click',goHome);
+
+function start(){
+  if(!state.mode){alert('出題形式を選んでください。');return;}
+  buildPool();
+  if(state.pool.length===0){alert('出題できる語がありません。');return;}
+  show('quiz');renderQuestion();
+}
+
+function buildPool(){
+  if(state.mode==='C'){
+    // 全課題を最低1回入れ、残りはランダムに補って指定問数ぶん出題
+    let seq=CTASKS.map((_,i)=>i);
+    while(seq.length<QCOUNT.C)seq.push(Math.floor(Math.random()*CTASKS.length));
+    state.pool=shuffle(seq).slice(0,QCOUNT.C);
+  }else{
+    let items=DATA.slice();
+    if(state.mode==='B')items=items.filter(hasB);
+    const cap=QCOUNT[state.mode]||12;
+    state.pool=shuffle(items).slice(0,Math.min(items.length,cap));
+  }
+  state.idx=0;state.total=state.pool.length;state.correct=0;state.wrong=[];
+}
+
+function show(which){
+  ['start','quiz','done'].forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==which));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function goHome(){show('start');}
+function addBadge(el,text,cls){el.insertAdjacentHTML('beforeend',`<span class="badge ${cls}">${text}</span>`);}
+
+function updateTop(){
+  document.getElementById('progress').textContent=`第 ${state.idx+1} 問 / 全 ${state.total} 問`;
+  document.getElementById('scoreTag').textContent=state.idx>0?`　正答 ${state.correct}`:'';
+}
+
+function stanceLabel(s){return s==='自然科学'?'自然科学の重視':s;}
+
+function explainHTML(d){
+  let parts=[];
+  parts.push(`分野：<b>${d.cat}</b>`);
+  if(d.faculty)parts.push(`中心学部：<b>${d.faculty}</b>`);
+  if(d.style)parts.push(`様式：<b>${d.style}</b>`);
+  if(d.country)parts.push(`国：<b>${d.country}</b>`);
+  if(d.stance)parts.push(`立場：<b>${stanceLabel(d.stance)}</b>`);
+  if(d.theme)parts.push(`題材・性格：<b>${d.theme}</b>`);
+  if(d.work){const w=byId(d.work);if(w)parts.push(`著作：<b>${w.term}</b>`);}
+  if(d.person){const p=byId(d.person);if(p)parts.push(`作者：<b>${p.term}</b>`);}
+  let s=`<div class="explain"><span class="ttl">解説</span>${d.desc}`;
+  if(d.note)s+=`<br><span style="color:var(--ink-soft)">※ ${d.note}</span>`;
+  s+=`<br><br>${parts.join('　／　')}</div>`;
+  return s;
+}
+
+// ====== 出題ルーティング ======
+function renderQuestion(){
+  updateTop();state.answeredCurrent=false;
+  const m=state.mode;
+  if(m==='A')renderModeA();
+  else if(m==='C')renderModeC();
+  else renderModeB();
+}
+
+/* ---- モードA：説明 → 語を選ぶ ---- */
+function renderModeA(){
+  const d=state.pool[state.idx];
+  let distract;
+  if(d.type==='人物'){
+    // 人物はリスト内の人物＋教材内リスト外の人物で構成
+    const inList=DATA.filter(x=>x.id!==d.id && x.type==='人物');
+    const general=PERSON_DISTRACTORS.map(t=>({term:t[0],read:t[1],id:'g_'+t[0]}));
+    distract=shuffle([...inList,...general]).slice(0,3);
+  }else{
+    // 人物以外は「同じ系統」から誤答を作る（大聖堂には大聖堂、様式には様式の名前を並べる）
+    // 大聖堂は同じ様式、大学は同じ国の語を優先し、説明文の様式・国だけでは絞れないようにする
+    const g=GROUP_MAP[d.id];
+    const inList=DATA.filter(x=>x.id!==d.id && GROUP_MAP[x.id]===g);
+    const general=(DISTRACTORS[g]||[]).map(t=>({term:t[0],read:t[1],id:'g_'+t[0]}));
+    let cand;
+    if(d.type==='建築物'){
+      const same=shuffle(inList.filter(x=>x.style===d.style));
+      const rest=shuffle([...inList.filter(x=>x.style!==d.style),...general]);
+      cand=[...same,...rest];
+    }else if(d.type==='大学'){
+      const same=shuffle(inList.filter(x=>x.country===d.country));
+      const rest=shuffle([...inList.filter(x=>x.country!==d.country),...general]);
+      cand=[...same,...rest];
+    }else{
+      cand=shuffle([...inList,...general]);
+    }
+    if(cand.length<3){ // 同系統が足りない稀なケースのみ同種で補う
+      cand=cand.concat(shuffle(DATA.filter(x=>x.id!==d.id&&x.type===d.type&&!cand.includes(x))));
+    }
+    distract=cand.slice(0,3);
+  }
+  // 対立概念（実在論⇔唯名論、ロマネスク⇔ゴシック）は、対の語を誤答に必ず含める
+  if(d.pair){
+    const pw=byId(d.pair);
+    if(pw && !distract.some(x=>x.id===pw.id)){
+      distract=[pw,...distract.filter(x=>x.id!==pw.id)].slice(0,3);
+    }
+  }
+  let opts=shuffle([d,...distract]);
+  opts=[...opts,{term:'わからない',read:'',id:'__dk__',dk:true}];
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">この説明にあてはまる語は？</div>
+    <div class="prompt-desc">${d.desc}</div>
+    <div class="opts" id="opts"></div>
+    <div class="actions"><button class="btn btn-primary" id="answerA" disabled>解答する</button></div>
+    <div id="afterA"></div>
+  </div>`;
+  const oc=document.getElementById('opts');
+  const marks=['一','二','三','四','五'];
+  let selIdx=-1;
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.dk?' dk':'');
+    const rd=o.read?`<span style="color:var(--ink-soft);font-size:12px">（${o.read}）</span>`:'';
+    b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.term}${rd}</span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      selIdx=i;
+      [...oc.children].forEach(c=>c.classList.remove('selected'));
+      b.classList.add('selected');
+      document.getElementById('answerA').disabled=false;
+    });
+    oc.appendChild(b);
+  });
+  document.getElementById('answerA').addEventListener('click',()=>{
+    if(state.answeredCurrent||selIdx<0)return;
+    state.answeredCurrent=true;
+    const o=opts[selIdx];
+    const ok=o.id===d.id;
+    if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    [...oc.children].forEach((c,ci)=>{
+      c.disabled=true;c.classList.remove('selected');
+      const oo=opts[ci];
+      const isCorrect=oo.id===d.id;
+      const isPicked=(ci===selIdx);
+      if(isCorrect)c.classList.add('correct');
+      else if(isPicked && !oo.dk)c.classList.add('wrong');
+      else c.classList.add('dim');
+      if(isPicked && !oo.dk)addBadge(c,'あなたの解答','your');
+      if(isCorrect)addBadge(c,'正しい選択肢','ans');
+    });
+    document.getElementById('answerA').disabled=true;
+    document.getElementById('afterA').innerHTML=verdict(ok)+explainHTML(d)+nextBtnHTML();
+    bindNext();
+  });
+}
+
+/* ---- モードB：語 → 属性をまとめて答える ---- */
+const FACULTIES=['神学','法学','医学','哲学','自然科学'];
+const U_COUNTRIES=['イタリア','フランス','イギリス','ドイツ'];
+const B_COUNTRIES=['イタリア','フランス','ドイツ','イギリス'];
+const STYLES=['ロマネスク様式','ゴシック様式','ビザンツ様式','バシリカ様式'];
+const STANCES=['実在論','唯名論','自然科学の重視','教父哲学'];
+const THEMES=['カール大帝時代の騎士の武勲が題材','ゲルマンの英雄叙事詩','イギリスのケルト人の伝説から発展','宮廷における騎士の恋愛をうたう叙情詩'];
+
+function fixedChoiceQ(ask,answer,pool,nOpt){
+  // answer を含む nOpt 個の選択肢を pool から作る
+  const others=pool.filter(x=>x!==answer);
+  const opts=shuffle([answer,...sample(others,Math.min(nOpt-1,others.length))]).map(v=>({val:v,label:v}));
+  opts.push({val:'__dk__',label:'わからない',dk:true});
+  return {ask,options:opts,answer,picked:null,locked:false};
+}
+function pickItemQ(ask,target,filterFn,generals){
+  // リスト内の語（＋必要なら教材内の一般語）から誤答を作る
+  let cand=DATA.filter(x=>x.id!==target.id&&filterFn(x)).map(x=>({id:x.id,term:x.term,read:x.read}));
+  if(generals)cand=cand.concat(generals.map(t=>({id:'g_'+t[0],term:t[0],read:t[1]})));
+  const opts=shuffle([{id:target.id,term:target.term,read:target.read},...sample(cand,3)])
+    .map(x=>({val:x.id,label:`${x.term}${x.read?`（${x.read}）`:''}`}));
+  opts.push({val:'__dk__',label:'わからない',dk:true});
+  return {ask,options:opts,answer:target.id,picked:null,locked:false};
+}
+
+function buildQuestionsFor(d){
+  const qs=[];
+  if(d.type==='大学'){
+    qs.push(fixedChoiceQ('この大学の中心学部は？',d.faculty,FACULTIES,4));
+    qs.push(fixedChoiceQ('この大学がある国は？',d.country,U_COUNTRIES,4));
+  }else if(d.type==='建築物'){
+    qs.push(fixedChoiceQ('この建築の様式は？',d.style,STYLES,4));
+    qs.push(fixedChoiceQ('この建築がある国は？',d.country,B_COUNTRIES,4));
+  }else if(d.type==='人物'){
+    qs.push(fixedChoiceQ('この人物の立場・分野は？',stanceLabel(d.stance),STANCES,4));
+    if(d.work){const w=byId(d.work);if(w)qs.push(pickItemQ('この人物の著作は？',w,()=>false,DISTRACTORS['神学書']));}
+  }else if(d.person){
+    const p=byId(d.person);
+    if(p)qs.push(pickItemQ('この書物の著者は？',p,x=>x.type==='人物'));
+  }else if(d.theme){
+    qs.push(fixedChoiceQ('この作品の題材・性格は？',d.theme,THEMES,4));
+  }
+  return qs;
+}
+
+function renderModeB(){
+  const d=state.pool[state.idx];
+  const questions=buildQuestionsFor(d);
+  if(questions.length===1)renderModeB_single(d,questions[0]);
+  else renderModeB_multi(d,questions);
+}
+
+// 設問が1つの語：選んで即採点する単問形式
+function renderModeB_single(d,q){
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">${q.ask}</div>
+    <div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>
+    <div class="opts" id="opts" style="margin-top:18px"></div>
+    <div class="actions"><button class="btn btn-primary" id="answerB" disabled>解答する</button></div>
+    <div id="afterB"></div>
+  </div>`;
+  const oc=document.getElementById('opts');
+  const marks=['一','二','三','四','五'];
+  let selVal=null;
+  q.options.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.dk?' dk':'');b.dataset.val=o.val;
+    b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.label}</span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      selVal=o.val;
+      [...oc.children].forEach(c=>c.classList.remove('selected'));
+      b.classList.add('selected');
+      document.getElementById('answerB').disabled=false;
+    });
+    oc.appendChild(b);
+  });
+  document.getElementById('answerB').addEventListener('click',()=>{
+    if(state.answeredCurrent||selVal==null)return;
+    state.answeredCurrent=true;
+    const ok=(selVal===q.answer);
+    if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    [...oc.children].forEach(c=>{
+      c.disabled=true;c.classList.remove('selected');
+      const v=c.dataset.val;
+      const isAns=(v===q.answer);
+      const isPicked=(v===selVal);
+      if(isAns)c.classList.add('correct');
+      else if(isPicked && v!=='__dk__')c.classList.add('wrong');
+      else c.classList.add('dim');
+      if(isPicked && v!=='__dk__')addBadge(c,'あなたの解答','your');
+      if(isAns)addBadge(c,'正しい選択肢','ans');
+    });
+    document.getElementById('answerB').disabled=true;
+    document.getElementById('afterB').innerHTML=verdict(ok)+explainHTML(d)+nextBtnHTML();
+    bindNext();
+  });
+}
+
+// 設問が複数の語：まとめて採点
+function renderModeB_multi(d,questions){
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">次の語について答えてください</div>
+    <div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>
+    <div id="qblocks"></div>
+    <div class="actions"><button class="btn btn-primary" id="gradeBtn">まとめて採点する</button></div>
+    <div id="afterB"></div>
+  </div>`;
+
+  const qb=document.getElementById('qblocks');
+  questions.forEach((q,qi)=>{
+    const blk=document.createElement('div');blk.className='qblock';
+    blk.innerHTML=`<div class="q-ask"><span class="q-no">問${qi+1}</span>${q.ask}</div><div class="opts" id="q${qi}"></div>`;
+    qb.appendChild(blk);
+    const oc=blk.querySelector('.opts');
+    const marks=['一','二','三','四','五'];
+    q.options.forEach((o,i)=>{
+      const b=document.createElement('button');
+      b.className='opt'+(o.dk?' dk':'');b.dataset.val=o.val;
+      b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.label}</span>`;
+      b.addEventListener('click',()=>{
+        if(q.locked)return;
+        [...oc.children].forEach(c=>c.classList.remove('selected'));
+        b.classList.add('selected');q.picked=o.val;
+      });
+      oc.appendChild(b);
+    });
+    q.el=oc;
+  });
+
+  document.getElementById('gradeBtn').addEventListener('click',()=>{
+    if(state.answeredCurrent)return;
+    if(questions.some(q=>q.picked==null)){
+      if(!confirm('未回答の設問があります。このまま採点しますか？'))return;
+    }
+    state.answeredCurrent=true;
+    let allOK=true;
+    questions.forEach(q=>{
+      q.locked=true;
+      const okThis=(q.picked===q.answer);
+      [...q.el.children].forEach(c=>{
+        c.disabled=true;c.classList.remove('selected');
+        const v=c.dataset.val;
+        const isAns=(v===q.answer);
+        const isPicked=(v===q.picked);
+        if(isAns)c.classList.add('correct');
+        else if(isPicked && v!=='__dk__')c.classList.add('wrong');
+        else c.classList.add('dim');
+        if(isPicked && v!=='__dk__')addBadge(c,'あなたの解答','your');
+        if(isAns)addBadge(c,'正しい選択肢','ans');
+      });
+      if(!okThis)allOK=false;
+    });
+    if(allOK)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    document.getElementById('gradeBtn').disabled=true;
+    document.getElementById('afterB').innerHTML=
+      verdict(allOK)
+      +`<p style="font-size:12px;color:var(--ink-soft);margin:8px 0 0">${allOK?'すべての設問に正解しました。':'設問に誤りがあります（全問正解で1点）。'}</p>`
+      +explainHTML(d)+nextBtnHTML();
+    bindNext();
+  });
+}
+
+/* ---- モードC：分類（複数選択） ---- */
+function renderModeC(){
+  const task=CTASKS[state.pool[state.idx]];
+  const items=shuffle(DOMAIN_ITEMS[task.domain]());
+  const correctItems=items.filter(task.test);
+  const picked=new Set();
+
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">次のうち、${task.label}にあてはまるものを<b style="color:var(--ink)">すべて</b>選んでください</div>
+    <div class="prompt-sub">あてはまる語は1つとは限りません。</div>
+    <div class="opts" id="optsC"></div>
+    <div class="actions"><button class="btn btn-primary" id="gradeC">採点する</button><button class="btn btn-ghost" id="dkC">わからない</button></div>
+    <div id="afterC"></div>
+  </div>`;
+  const oc=document.getElementById('optsC');
+  items.forEach(it=>{
+    const b=document.createElement('button');
+    b.className='opt';b.dataset.id=it.id;
+    b.innerHTML=`<span class="mk">□</span><span>${it.term}<span style="color:var(--ink-soft);font-size:12px">（${it.read}）</span></span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      const on=picked.has(it.id);
+      if(on){picked.delete(it.id);b.querySelector('.mk').textContent='□';b.classList.remove('selected');}
+      else{picked.add(it.id);b.querySelector('.mk').textContent='■';b.classList.add('selected');}
+    });
+    oc.appendChild(b);
+  });
+  function settleC(forceWrong){
+    if(state.answeredCurrent)return;state.answeredCurrent=true;
+    let ok=!forceWrong;
+    [...oc.children].forEach(c=>{
+      c.disabled=true;c.classList.remove('selected');
+      const it=items.find(x=>x.id===c.dataset.id);
+      const isCorrect=task.test(it);
+      const chosen=!forceWrong && picked.has(c.dataset.id);
+      if(isCorrect&&chosen){c.classList.add('correct');addBadge(c,'あなたの解答','your');addBadge(c,'正しい選択肢','ans');}
+      else if(isCorrect&&!chosen){c.classList.add('correct');c.style.opacity='.7';if(!forceWrong)ok=false;addBadge(c,'正しい選択肢','ans');}
+      else if(!isCorrect&&chosen){c.classList.add('wrong');ok=false;addBadge(c,'あなたの解答','your');}
+      else c.classList.add('dim');
+    });
+    if(ok)state.correct++; else state.wrong.push({type:'ctask',key:state.pool[state.idx]});
+    document.getElementById('gradeC').disabled=true;
+    document.getElementById('dkC').disabled=true;
+    const list=correctItems.map(x=>x.term).join('、');
+    const tail=ok?'すべて正しく選べています。':(forceWrong?'「わからない」を選びました。':'取りこぼし・誤選択があります。');
+    const noteLine=task.note?`<br><span style="color:var(--ink-soft)">※ ${task.note}</span>`:'';
+    document.getElementById('afterC').innerHTML=
+      verdict(ok)
+      +`<div class="explain"><span class="ttl">解説</span>あてはまるのは <b>${list}</b> です。${tail}${noteLine}<br><br>
+      <span style="color:var(--ink-soft);font-size:12px">※ 緑＝あてはまる語、薄い緑＝選び落とした正解、赤＝誤って選んだ語。</span></div>`
+      +nextBtnHTML();
+    bindNext();
+  }
+  document.getElementById('gradeC').addEventListener('click',()=>settleC(false));
+  document.getElementById('dkC').addEventListener('click',()=>settleC(true));
+}
+
+// ---- 共通：正誤の明示 ----
+function verdict(ok){
+  return `<div class="verdict ${ok?'ok':'ng'}"><span class="ic">${ok?'○':'×'}</span><span>${ok?'正解':'不正解'}</span></div>`;
+}
+
+// ---- 共通：次へ ----
+function nextBtnHTML(){
+  const last=state.idx>=state.total-1;
+  return `<div class="actions"><button class="btn btn-primary" id="nextBtn">${last?'結果を見る':'次の問題へ →'}</button></div>`;
+}
+function bindNext(){
+  const nb=document.getElementById('nextBtn');
+  if(nb)nb.addEventListener('click',()=>{
+    state.idx++;
+    if(state.idx>=state.total)finish();
+    else renderQuestion();
+  });
+}
+
+function dedupWrong(arr){
+  const seen=new Set(),out=[];
+  arr.forEach(w=>{const k=w.type+':'+(w.id!=null?w.id:w.key);if(!seen.has(k)){seen.add(k);out.push(w);}});
+  return out;
+}
+function ctaskPlainLabel(t){return t.label.replace(/<[^>]+>/g,'');}
+function finish(){
+  show('done');
+  document.getElementById('doneScore').textContent=`${state.correct} / ${state.total}`;
+  const r=state.total?state.correct/state.total:0;
+  let msg;
+  if(r===1)msg='全問正解です。';
+  else if(r>=0.7)msg='よく取れています。間違えた語を確認しておきましょう。';
+  else if(r>=0.4)msg='半ばまで来ています。間違えた箇所を中心に復習しましょう。';
+  else msg='まずは語を分野ごとに整理し直すとよいでしょう。';
+  document.getElementById('doneMsg').textContent=msg;
+
+  const uniq=dedupWrong(state.wrong);
+  const area=document.getElementById('wrongArea');
+  if(uniq.length===0){
+    area.innerHTML=`<div class="actions" style="justify-content:center">
+      <button class="btn btn-primary" id="againBtn">同じ形式でもう一度</button>
+      <button class="btn btn-ghost" id="homeBtn">形式を選び直す</button></div>`;
+  }else{
+    const rows=uniq.map(w=>{
+      if(w.type==='ctask')return `<li><span>${ctaskPlainLabel(CTASKS[w.key])}（分類）</span><span class="rd">モードC</span></li>`;
+      const d=byId(w.id);
+      return `<li><span>${d.term}</span><span class="rd">${d.read}</span></li>`;
+    }).join('');
+    area.innerHTML=`<div class="wrong-list">
+      <div class="wl-ttl">間違えた問題（${uniq.length}件）</div>
+      <ul>${rows}</ul></div>
+      <div class="actions" style="justify-content:center">
+        <button class="btn btn-primary" id="retryBtn">間違えた問題をもう一度（${uniq.length}問）</button>
+        <button class="btn btn-ghost" id="homeBtn">セッションを終了する</button></div>`;
+    document.getElementById('retryBtn').addEventListener('click',retryWrong);
+  }
+  const ag=document.getElementById('againBtn');if(ag)ag.addEventListener('click',()=>{buildPool();show('quiz');renderQuestion();});
+  const hm=document.getElementById('homeBtn');if(hm)hm.addEventListener('click',goHome);
+}
+function retryWrong(){
+  const uniq=dedupWrong(state.wrong);
+  state.pool = state.mode==='C' ? uniq.map(w=>w.key) : uniq.map(w=>byId(w.id));
+  state.idx=0;state.total=state.pool.length;state.correct=0;state.wrong=[];
+  show('quiz');renderQuestion();
+}
+</script>
+</body>
+</html>
