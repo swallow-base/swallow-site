@@ -52,12 +52,36 @@ header.top .sub{font-size:12px;color:var(--ink-soft);margin-top:3px;letter-spaci
 .cc-code.gr{background:linear-gradient(160deg,#3a6488,#2c4f6e)}
 .cc-code.is{background:linear-gradient(160deg,#1a8a72,#127057)}
 .cc-code.me{background:linear-gradient(160deg,#5d5a8c,#46436e)}
+.cc-code.mx{background:linear-gradient(160deg,#a9863f,#846628)}
 .cc-body{flex:1}
 .cc-title{font-family:"Noto Serif JP",serif;font-weight:700;font-size:17px;letter-spacing:.03em}
 .cc-range{font-size:12px;color:var(--gold);letter-spacing:.08em;margin:3px 0 8px;font-weight:600}
 .cc-desc{font-size:13px;color:var(--ink-soft);line-height:1.7}
 .cc-go{align-self:flex-end;font-size:13px;font-weight:700;color:var(--seal);white-space:nowrap}
 footer{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-soft);line-height:1.7}
+/* 苦手語句リスト */
+#weakSection{margin-top:36px}
+.weak-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.weak-filters{display:flex;gap:6px}
+.wf-btn{font-family:inherit;font-size:12px;font-weight:600;padding:5px 12px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.wf-btn.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.weak-list{background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 16px}
+.weak-list ul{list-style:none}
+.weak-list li{display:flex;align-items:baseline;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.weak-list li:last-child{border-bottom:none}
+.wl-term{font-weight:700}
+.wl-read{font-size:11.5px;color:var(--ink-soft)}
+.wl-tag{font-size:11px;color:var(--gold);font-weight:600;letter-spacing:.03em}
+.wl-cnt{margin-left:auto;font-size:12.5px;white-space:nowrap}
+.wl-cnt .ng{color:var(--seal);font-weight:700}
+.wl-cnt .ok{color:#3a6a2a;font-weight:700;margin-left:8px}
+.wl-badge{font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:10px;white-space:nowrap}
+.wl-badge.done{background:#e7efe0;color:#3a5a22}
+.wl-badge.yet{background:#f6e9e6;color:#8a3322}
+.weak-empty{font-size:12.5px;color:var(--ink-soft);padding:8px 2px}
+.weak-actions{margin-top:10px;text-align:right}
+.wf-reset{font-family:inherit;font-size:11.5px;background:none;border:none;color:var(--ink-soft);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.wf-reset:hover{color:var(--seal)}
 @media (max-width:480px){
   .culture-card{flex-wrap:wrap}
   .cc-code{width:100%;min-height:48px}
@@ -153,12 +177,214 @@ footer{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);font-si
       </div>
       <div class="cc-go">演習する →</div>
     </a>
+    <a class="culture-card" href="mixed/">
+      <div class="cc-code mx"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="16.5" fill="none" stroke="#fff" stroke-width="2.6"/>
+        <ellipse cx="24" cy="24" rx="7.5" ry="16.5" fill="none" stroke="#fff" stroke-width="2.2"/>
+        <line x1="7.5" y1="24" x2="40.5" y2="24" stroke="#fff" stroke-width="2.2"/>
+        <path d="M10 15.5 Q24 20.5 38 15.5" fill="none" stroke="#fff" stroke-width="2"/>
+        <path d="M10 32.5 Q24 27.5 38 32.5" fill="none" stroke="#fff" stroke-width="2"/>
+      </svg></div>
+      <div class="cc-body">
+        <div class="cc-title">文化史 総合演習</div>
+        <div class="cc-range">中国 ／ ギリシア・ローマ ／ イスラーム ／ 中世ヨーロッパ</div>
+        <div class="cc-desc">4地域の全語句をシャッフルして横断的に出題します。語句の文化圏・時代・区分・キーワードを混同せずに答える練習です。</div>
+      </div>
+      <div class="cc-go">演習する →</div>
+    </a>
   </div>
+
+  <section id="weakSection" class="hiddenW">
+    <div class="weak-head">
+      <div class="section-label" style="margin:0">苦手語句リスト</div>
+      <div class="weak-filters">
+        <button class="wf-btn active" data-f="all">すべて</button>
+        <button class="wf-btn" data-f="yet">未克服</button>
+        <button class="wf-btn" data-f="done">克服済み</button>
+      </div>
+    </div>
+    <div class="weak-list"><ul id="weakUl"></ul><div class="weak-empty" id="weakEmpty" style="display:none"></div></div>
+    <div class="weak-actions">
+      <button class="wf-reset" id="bkExport">記録コードを表示（バックアップ）</button>　
+      <button class="wf-reset" id="bkImport">コードから復元</button>　
+      <button class="wf-reset" id="weakReset">記録をすべて消去する</button>
+    </div>
+    <div class="weak-actions" style="text-align:left;margin-top:4px">
+      <button class="wf-reset" id="svSave" style="color:var(--seal);font-weight:700">暗証コードでサーバーに保存</button>　
+      <button class="wf-reset" id="svLoad" style="color:var(--seal);font-weight:700">暗証コードでサーバーから復元</button>
+    </div>
+    <div id="svArea" style="display:none;margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px">
+      <div style="font-size:12.5px;font-weight:700;margin-bottom:6px" id="svTitle"></div>
+      <input id="svPass" type="text" autocomplete="off" placeholder="例：tanaka0402"
+        style="width:100%;max-width:280px;font-family:inherit;font-size:14px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;background:#fff;color:var(--ink)">
+      <button class="wf-reset" id="svRun" style="margin-left:10px;color:var(--seal);font-weight:700">実行</button>
+      <div id="svHint" style="font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.7">
+        暗証コードは<b>6文字以上</b>で、<b>他の人と被らない自分だけの文字列</b>にしてください（例：名前＋誕生日で「tanaka0402」など）。数字だけより、文字を混ぜたものが安全です。<b>コードは必ず自分で控えておいてください</b>。同じコードで保存し直すと上書きされ、最後に使ってから2ヶ月間サーバーに保管されます。
+      </div>
+      <div id="svMsg" style="font-size:12px;margin-top:6px"></div>
+    </div>
+    <div id="bkArea" style="display:none;margin-top:10px">
+      <textarea id="bkText" style="width:100%;height:88px;font-family:monospace;font-size:11px;border:1px solid var(--line);border-radius:6px;padding:8px;background:#fff;color:var(--ink)"></textarea>
+      <div style="margin-top:6px;display:flex;gap:14px;align-items:center">
+        <button class="wf-reset" id="bkCopy">コードをコピー</button>
+        <button class="wf-reset" id="bkRun" style="display:none;color:var(--seal);font-weight:700">復元を実行</button>
+        <span id="bkHint" style="font-size:11px;color:var(--ink-soft)"></span>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--ink-soft);margin-top:8px;line-height:1.7">※ 記録はこの端末のブラウザ内にのみ保存されます。別の端末とは共有されず、ブラウザの閲覧データを削除すると消えます。「克服済み」は、その語に直近2回以上連続で正答したことを示します。長期間サイトを開かないと記録が消える場合があるため（特にiPhoneのSafari）、ときどき「暗証コードでサーバーに保存」を押しておくと、消えたときや機種変更のときに同じコードで復元できます。「記録コードを表示」による手元へのバックアップも利用できます。</p>
+  </section>
 
   <footer>
     出題内容は、授業で配布した教材資料の範囲に準拠しています。<br>
     つばめ学習舎
   </footer>
 </div>
+<script>
+(function(){
+  const WEAK_KEY='tsubame_weak_v1';
+  const sec=document.getElementById('weakSection');
+  const ul=document.getElementById('weakUl');
+  const empty=document.getElementById('weakEmpty');
+  let filter='all';
+  function load(){
+    try{return JSON.parse(localStorage.getItem(WEAK_KEY)||'{}');}catch(e){return {};}
+  }
+  // 克服済み＝その語に直近2回以上連続で正答（旧データはst未記録のため、直近正答を1回分として扱う）
+  const isDone=e=>((e.st!=null)?e.st:(e.last==='ok'?1:0))>=2;
+  const fmt=v=>String(Math.round(v*10)/10);
+  function render(){
+    const db=load();
+    const rows=Object.values(db).filter(e=>e.w>0);
+    sec.style.display='';
+    if(rows.length===0){
+      ul.innerHTML='';
+      empty.style.display='';
+      empty.textContent='まだ記録はありません。各演習で間違えた語が、自動的にここに並びます。';
+      return;
+    }
+    rows.sort((a,b)=>(b.w-a.w)||(b.ts-a.ts));
+    const shown=rows.filter(e=>{
+      if(filter==='yet')return !isDone(e);
+      if(filter==='done')return isDone(e);
+      return true;
+    });
+    ul.innerHTML=shown.map(e=>{
+      const done=isDone(e);
+      return `<li>
+        <span class="wl-term">${e.t}</span>
+        ${e.r?`<span class="wl-read">（${e.r}）</span>`:''}
+        <span class="wl-tag">${e.g||''}</span>
+        <span class="wl-cnt"><span class="ng">×${fmt(e.w)}</span><span class="ok">○${fmt(e.c)}</span></span>
+        <span class="wl-badge ${done?'done':'yet'}">${done?'克服済み':'未克服'}</span>
+      </li>`;
+    }).join('');
+    empty.style.display=shown.length?'none':'';
+    empty.textContent=filter==='yet'?'未克服の語はありません。':(filter==='done'?'克服済みの語はまだありません（直近2回連続で正答すると克服済みになります）。':'');
+  }
+  document.querySelectorAll('.wf-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      filter=b.dataset.f;
+      document.querySelectorAll('.wf-btn').forEach(x=>x.classList.toggle('active',x===b));
+      render();
+    });
+  });
+  document.getElementById('weakReset').addEventListener('click',()=>{
+    if(!confirm('苦手語句の記録をすべて消去します。よろしいですか？'))return;
+    try{localStorage.removeItem(WEAK_KEY);}catch(e){}
+    render();
+  });
+
+  /* ---- 記録コード（バックアップ・復元）----
+     記録全体を1つの文字列に変換して表示・復元する。サーバーには何も送らない。 */
+  const bkArea=document.getElementById('bkArea');
+  const bkText=document.getElementById('bkText');
+  function encode(obj){return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));}
+  function decode(str){return JSON.parse(decodeURIComponent(escape(atob(str.trim()))));}
+  document.getElementById('bkExport').addEventListener('click',()=>{
+    const db=load();
+    if(Object.keys(db).length===0){alert('記録がありません。');return;}
+    bkArea.style.display='';
+    bkText.value=encode(db);
+    bkText.select();
+    document.getElementById('bkHint').textContent='このコードをコピーして、LINEのKeepやメモアプリなどに保存してください。';
+  });
+  document.getElementById('bkImport').addEventListener('click',()=>{
+    bkArea.style.display='';
+    bkText.value='';
+    bkText.placeholder='保存しておいた記録コードをここに貼り付けて、「復元を実行」を押してください。';
+    document.getElementById('bkRun').style.display='';
+    document.getElementById('bkHint').textContent='';
+    bkText.focus();
+  });
+  document.getElementById('bkRun').addEventListener('click',()=>{
+    let db;
+    try{db=decode(bkText.value);}catch(e){alert('コードを読み取れませんでした。コピーの欠けがないかご確認ください。');return;}
+    if(!db||typeof db!=='object'){alert('コードの形式が正しくありません。');return;}
+    if(!confirm('現在の記録をこのコードの内容で置き換えます。よろしいですか？'))return;
+    try{localStorage.setItem(WEAK_KEY,JSON.stringify(db));}catch(e){alert('保存できませんでした。');return;}
+    document.getElementById('bkRun').style.display='none';
+    bkArea.style.display='none';
+    render();
+    alert('復元しました。');
+  });
+  document.getElementById('bkCopy').addEventListener('click',()=>{
+    bkText.select();
+    try{navigator.clipboard.writeText(bkText.value).then(()=>{document.getElementById('bkHint').textContent='コピーしました。';});}
+    catch(e){document.execCommand('copy');document.getElementById('bkHint').textContent='コピーしました。';}
+  });
+
+  /* ---- サーバー保存・復元（暗証コード方式）----
+     /history/weak-api.php に記録コードを送る。コードのハッシュのみで管理され、
+     最後の利用から2ヶ月で自動削除される。 */
+  const API='https://api.swallow-base.com/weak-api.php';
+  let svMode='';
+  const svArea=document.getElementById('svArea');
+  const svMsg=document.getElementById('svMsg');
+  function svOpen(mode){
+    svMode=mode;
+    svArea.style.display='';
+    document.getElementById('svTitle').textContent=
+      mode==='save'?'サーバーに保存：暗証コードを決めて入力してください'
+                   :'サーバーから復元：保存したときの暗証コードを入力してください';
+    svMsg.textContent='';
+    document.getElementById('svPass').focus();
+  }
+  document.getElementById('svSave').addEventListener('click',()=>{
+    if(Object.keys(load()).length===0){alert('まだ記録がないため、保存できるデータがありません。');return;}
+    svOpen('save');
+  });
+  document.getElementById('svLoad').addEventListener('click',()=>svOpen('load'));
+  document.getElementById('svRun').addEventListener('click',async()=>{
+    const pass=document.getElementById('svPass').value.trim();
+    if(pass.length<6){svMsg.style.color='var(--seal)';svMsg.textContent='暗証コードは6文字以上にしてください。';return;}
+    svMsg.style.color='var(--ink-soft)';svMsg.textContent='通信中…';
+    const body=svMode==='save'
+      ? {action:'save',pass,data:encode(load())}
+      : {action:'load',pass};
+    let res;
+    try{
+      const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      res=await r.json();
+    }catch(e){
+      svMsg.style.color='var(--seal)';
+      svMsg.textContent='サーバーに接続できませんでした。この機能が未設置の可能性があります（手元の「記録コードを表示」でのバックアップは利用できます）。';
+      return;
+    }
+    if(!res.ok){svMsg.style.color='var(--seal)';svMsg.textContent=res.msg||'処理に失敗しました。';return;}
+    if(svMode==='save'){
+      svMsg.style.color='#3a6a2a';svMsg.textContent=(res.msg||'保存しました。')+' 暗証コードを忘れないよう控えておいてください。';
+    }else{
+      let db;
+      try{db=decode(res.data);}catch(e){svMsg.style.color='var(--seal)';svMsg.textContent='受信データを読み取れませんでした。';return;}
+      if(!confirm('この端末の現在の記録を、サーバーの記録で置き換えます。よろしいですか？')){svMsg.textContent='';return;}
+      try{localStorage.setItem(WEAK_KEY,JSON.stringify(db));}catch(e){svMsg.style.color='var(--seal)';svMsg.textContent='この端末に保存できませんでした。';return;}
+      render();
+      svMsg.style.color='#3a6a2a';svMsg.textContent='復元しました。';
+    }
+  });
+
+  render();
+})();
+</script>
 </body>
 </html>

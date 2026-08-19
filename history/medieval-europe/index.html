@@ -406,6 +406,34 @@ const DOMAIN_ITEMS={
 };
 
 // 状態
+
+/* ---- 苦手語句の記録（localStorage・この端末のブラウザ内のみ）----
+   誤答した語だけを記録し、その後の正答回数もあわせて数える。
+   トップページの「苦手語句リスト」がこのデータを読み取って表示する。 */
+const WEAK_KEY='tsubame_weak_v1';
+function weakRecord(term,read,tag,ok,wt){
+  wt=(wt==null)?1:wt;   // 分類問題は0.5など、出題形式に応じた重み
+  try{
+    const db=JSON.parse(localStorage.getItem(WEAK_KEY)||'{}');
+    let e=db[term];
+    if(ok){
+      if(!e)return;                       // 誤答歴のない語の正答は記録しない
+      e.c=Math.round((e.c+wt)*10)/10;
+      e.st=(e.st||0)+1;                   // 連続正解数（克服判定用）
+      e.last='ok';e.ts=Date.now();
+    }else{
+      e=e||{t:term,r:read||'',g:'',w:0,c:0,st:0,last:'',ts:0};
+      e.w=Math.round((e.w+wt)*10)/10;
+      e.st=0;                             // 誤答で連続正解はリセット
+      e.last='ng';e.ts=Date.now();
+      if(tag){const gs=new Set(String(e.g).split('・').filter(Boolean));String(tag).split('・').forEach(x=>gs.add(x));e.g=[...gs].join('・');}
+      if(!e.r&&read)e.r=read;
+    }
+    db[term]=e;
+    localStorage.setItem(WEAK_KEY,JSON.stringify(db));
+  }catch(err){/* プライベートブラウズ等、保存できない環境では何もしない */}
+}
+
 let state={mode:null,pool:[],idx:0,total:0,correct:0,answeredCurrent:false,wrong:[]};
 
 // ---- 開始画面の構築 ----
@@ -559,6 +587,7 @@ function renderModeA(){
     const o=opts[selIdx];
     const ok=o.id===d.id;
     if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    weakRecord(d.term,d.read,'中世ヨーロッパ',ok);
     [...oc.children].forEach((c,ci)=>{
       c.disabled=true;c.classList.remove('selected');
       const oo=opts[ci];
@@ -659,6 +688,7 @@ function renderModeB_single(d,q){
     state.answeredCurrent=true;
     const ok=(selVal===q.answer);
     if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    weakRecord(d.term,d.read,'中世ヨーロッパ',ok);
     [...oc.children].forEach(c=>{
       c.disabled=true;c.classList.remove('selected');
       const v=c.dataset.val;
@@ -732,6 +762,7 @@ function renderModeB_multi(d,questions){
       if(!okThis)allOK=false;
     });
     if(allOK)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    weakRecord(d.term,d.read,'中世ヨーロッパ',allOK);
     document.getElementById('gradeBtn').disabled=true;
     document.getElementById('afterB').innerHTML=
       verdict(allOK)
@@ -776,6 +807,7 @@ function renderModeC(){
       c.disabled=true;c.classList.remove('selected');
       const it=items.find(x=>x.id===c.dataset.id);
       const isCorrect=task.test(it);
+      {const _t='中世ヨーロッパ';const _ch=!forceWrong&&picked.has(c.dataset.id);if(isCorrect&&_ch)weakRecord(it.term,it.read,_t,true,0.5);else if(isCorrect&&!_ch)weakRecord(it.term,it.read,_t,false,0.5);else if(!isCorrect&&_ch)weakRecord(it.term,it.read,_t,false,0.5);}
       const chosen=!forceWrong && picked.has(c.dataset.id);
       if(isCorrect&&chosen){c.classList.add('correct');addBadge(c,'あなたの解答','your');addBadge(c,'正しい選択肢','ans');}
       else if(isCorrect&&!chosen){c.classList.add('correct');c.style.opacity='.7';if(!forceWrong)ok=false;addBadge(c,'正しい選択肢','ans');}

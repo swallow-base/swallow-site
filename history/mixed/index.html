@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>世界史 文化史 総合演習 ─ つばめ学習舎</title>
+<meta name="description" content="つばめ学習舎の大学受験向け 世界史 文化史 総合演習。中国・ギリシア＝ローマ・イスラーム・中世ヨーロッパの全範囲から横断的に出題します。">
+
+<!-- 検索エンジンに載せたくない内部用ツールのため除外。公開して検索に出したい場合は次の1行を削除してください -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- 正規URL（/history/mixed フォルダに index.html として置いた場合） -->
+<link rel="canonical" href="https://swallow-base.com/history/mixed/">
+<meta name="theme-color" content="#20262e">
+
+<meta property="og:title" content="世界史 文化史 総合演習 ─ つばめ学習舎">
+<meta property="og:description" content="教材準拠の文化史 総合演習。4地域の全範囲から横断的に出題します。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://swallow-base.com/history/mixed/">
+<meta property="og:site_name" content="つばめ学習舎">
+<meta property="og:locale" content="ja_JP">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%239e3d2e'/><text x='16' y='24' font-family='serif' font-size='19' fill='white' text-anchor='middle'>演</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#20262e;
+  --ink-soft:#48515c;
+  --paper:#f0ece1;
+  --paper-card:#faf7ef;
+  --line:#d8d0bf;
+  --seal:#9e3d2e;
+  --seal-soft:#b8553f;
+  --gold:#a9863f;
+  --green:#6c7e58;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+  min-height:100vh;
+  background-image:radial-gradient(circle at 20% 10%,rgba(255,255,255,.4),transparent 40%);
+}
+.wrap{max-width:760px;margin:0 auto;padding:24px 18px 80px}
+.serif{font-family:"Noto Serif JP",serif}
+
+header.top{display:flex;align-items:baseline;gap:14px;padding:8px 2px 20px;border-bottom:2px solid var(--ink);margin-bottom:26px}
+header.top .mark{
+  font-family:"Noto Serif JP",serif;font-weight:700;font-size:13px;color:#fff;
+  background:var(--seal);padding:7px 9px;border-radius:3px;letter-spacing:.12em;line-height:1.3;
+  writing-mode:vertical-rl;text-orientation:upright;
+}
+header.top h1{font-family:"Noto Serif JP",serif;font-weight:700;font-size:21px;letter-spacing:.04em}
+header.top .sub{font-size:12px;color:var(--ink-soft);margin-top:3px;letter-spacing:.08em}
+header.top .home-link{margin-left:auto;align-self:center;font-size:12px;color:var(--seal);text-decoration:none;border:1px solid var(--line);padding:6px 12px;border-radius:6px;white-space:nowrap;font-weight:600;letter-spacing:.04em;transition:.12s}
+header.top .home-link:hover{background:#faf0ec;border-color:var(--seal)}
+
+.lead{font-size:13.5px;color:var(--ink-soft);margin-bottom:22px;max-width:60ch}
+.section-label{font-family:"Noto Serif JP",serif;font-size:12px;letter-spacing:.22em;color:var(--gold);margin:26px 0 12px;font-weight:600}
+
+.modes{display:grid;gap:12px}
+.mode-card{
+  text-align:left;background:var(--paper-card);border:1px solid var(--line);border-radius:7px;
+  padding:16px 18px;cursor:pointer;transition:.15s;display:flex;gap:15px;align-items:flex-start;width:100%;
+  font-family:inherit;color:inherit;
+}
+.mode-card:hover{border-color:var(--ink);transform:translateY(-1px)}
+.mode-card:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.mode-card .code{font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px;color:var(--seal);min-width:30px;padding-top:1px}
+.mode-card .body .t{font-weight:700;font-size:15px;margin-bottom:3px}
+.mode-card .body .d{font-size:12.5px;color:var(--ink-soft);line-height:1.6}
+
+.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.btn-back{font-family:inherit;font-size:12.5px;background:none;border:none;color:var(--ink-soft);cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+.btn-back:hover{color:var(--ink)}
+.progress{font-size:12px;color:var(--ink-soft);font-family:"Noto Serif JP",serif;letter-spacing:.05em}
+.score-tag{font-size:12px;color:var(--seal);font-weight:700}
+
+.card{background:var(--paper-card);border:1px solid var(--line);border-radius:9px;padding:22px 20px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+
+.prompt-label{font-size:11px;letter-spacing:.18em;color:var(--gold);font-weight:600;font-family:"Noto Serif JP",serif;margin-bottom:8px}
+.prompt-desc{font-size:15.5px;line-height:1.85;margin-bottom:4px}
+.prompt-term{font-family:"Noto Serif JP",serif;font-size:30px;font-weight:700;letter-spacing:.04em;line-height:1.3}
+.prompt-term .rb{font-size:13px;color:var(--ink-soft);font-weight:400;display:block;letter-spacing:.1em;margin-bottom:2px}
+.prompt-sub{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
+
+.opts{display:grid;gap:9px;margin-top:18px}
+.opt{
+  font-family:inherit;text-align:left;background:#fff;border:1px solid var(--line);border-radius:6px;
+  padding:12px 15px;cursor:pointer;font-size:14.5px;color:var(--ink);transition:.12s;width:100%;display:flex;gap:10px;align-items:center;
+}
+.opt .mk{font-family:"Noto Serif JP",serif;color:var(--ink-soft);font-size:13px;min-width:18px}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt:focus-visible{outline:2px solid var(--seal);outline-offset:1px}
+.opt:disabled{cursor:default}
+.opt.correct{background:#eef3ea;border-color:var(--green);color:#33421f}
+.opt.wrong{background:#f6e9e6;border-color:var(--seal);color:#6e2a1e}
+.opt.dim{opacity:.5}
+.opt.dk{color:var(--ink-soft)}
+.opt.dk .mk{color:var(--seal);font-weight:700}
+.opt.selected{border-color:var(--seal);background:#faf0ec;box-shadow:inset 0 0 0 2px rgba(158,61,46,.22)}
+.opt .badge{margin-left:auto;font-size:11px;font-weight:700;padding:2px 9px;border-radius:11px;white-space:nowrap;letter-spacing:.03em}
+.opt .badge.your{background:#e7ddca;color:#6b573a}
+.opt .badge.ans{background:#3f7d52;color:#fff}
+.opt .badge+.badge{margin-left:6px}
+
+.qblock{border-top:1px dashed var(--line);padding-top:16px;margin-top:16px}
+.qblock:first-of-type{border-top:none;padding-top:4px;margin-top:8px}
+.q-ask{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:10px}
+.q-ask .q-no{color:var(--seal);font-family:"Noto Serif JP",serif;margin-right:6px}
+
+.explain{margin-top:18px;background:#fbf6ea;border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:13px 15px;font-size:13px;line-height:1.8;color:var(--ink-soft)}
+.explain b{color:var(--ink)}
+.explain .ttl{font-family:"Noto Serif JP",serif;font-weight:700;color:var(--gold);font-size:11px;letter-spacing:.14em;display:block;margin-bottom:5px}
+
+.verdict{display:flex;align-items:center;gap:9px;font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px;padding:11px 18px;border-radius:7px;margin-top:18px;letter-spacing:.1em}
+.verdict .ic{font-size:20px;line-height:1}
+.verdict.ok{background:#e7efe0;color:#3a5a22;border:1.5px solid var(--green)}
+.verdict.ng{background:#f4e3df;color:#8a3322;border:1.5px solid var(--seal)}
+
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{font-family:inherit;font-size:14px;font-weight:700;border-radius:6px;padding:11px 22px;cursor:pointer;border:1px solid var(--ink);transition:.12s}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:#000}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:rgba(0,0,0,.04)}
+.btn:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.btn:disabled{opacity:.4;cursor:default}
+
+.done{text-align:center;padding:30px 10px}
+.done .big{font-family:"Noto Serif JP",serif;font-size:34px;font-weight:700;margin:10px 0}
+.done .lbl{font-size:12px;letter-spacing:.18em;color:var(--gold);font-family:"Noto Serif JP",serif}
+.done p{font-size:13.5px;color:var(--ink-soft);margin:14px 0 24px}
+.wrong-list{text-align:left;background:#fbf6ea;border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:18px auto;max-width:520px}
+.wrong-list .wl-ttl{font-family:"Noto Serif JP",serif;font-weight:700;font-size:13px;color:var(--seal);margin-bottom:10px}
+.wrong-list ul{list-style:none}
+.wrong-list li{font-size:14px;padding:7px 2px;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.wrong-list li:last-child{border-bottom:none}
+.wrong-list li .rd{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+
+footer{margin-top:40px;font-size:11px;color:var(--ink-soft);text-align:center;line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
+
+.hidden{display:none!important}
+
+@media (max-width:480px){
+  .prompt-term{font-size:25px}
+  .wrap{padding:18px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="mark">演習</div>
+    <div>
+      <h1>文化史 総合演習</h1>
+      <div class="sub">つばめ学習舎 ── 4地域 横断出題</div>
+    </div>
+    <a class="home-link" href="../">⌂ 世界史トップ</a>
+  </header>
+
+  <!-- 開始画面 -->
+  <div id="start">
+    <p class="lead">中国・ギリシア＝ローマ・イスラーム・中世ヨーロッパの4つの演習の語句を、まとめてシャッフルして出題します。出題も誤答も教材資料の範囲に限定しています（見慣れない語は誤答です）。文化圏をまたいだ混同を防ぐ練習です。</p>
+
+    <div class="section-label">出題形式</div>
+    <div class="modes" id="modeList"></div>
+
+    <div class="actions" style="margin-top:24px">
+      <button class="btn btn-primary" id="startBtn">演習を始める</button>
+    </div>
+  </div>
+
+  <!-- クイズ画面 -->
+  <div id="quiz" class="hidden">
+    <div class="quiz-top">
+      <button class="btn-back" id="backBtn">← 形式の選択に戻る</button>
+      <div>
+        <span class="progress" id="progress"></span>
+        <span class="score-tag" id="scoreTag"></span>
+      </div>
+    </div>
+    <div id="quizBody"></div>
+  </div>
+
+  <!-- 完了画面 -->
+  <div id="done" class="hidden">
+    <div class="done">
+      <div class="lbl">演習終了</div>
+      <div class="big" id="doneScore"></div>
+      <p id="doneMsg"></p>
+      <div id="wrongArea"></div>
+    </div>
+  </div>
+
+  <footer>
+    出題内容は4地域の教材資料の範囲に準拠／別名・補足は解説欄に記載<br>
+    つばめ学習舎・授業用演習ツール
+  </footer>
+</div>
+
+<script>
+/* ===================================================================
+   データ：中国・ギリシア＝ローマ・イスラーム・中世ヨーロッパの
+   各演習アプリのデータを統合したもの（ビルドスクリプトで自動生成）。
+   mem … 所属（文化圏 r と区分 s の組。複数所属あり）。
+   group … モードA誤答の系統キー。cross … 地域横断の系統キー。
+   =================================================================== */
+const DATA=[{"id":"cn_kaishiso","term":"華夷思想","read":"かいしそう","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:思想","desc":"自らを文化の中心とみなし、生活習慣の異なる周辺の民を「夷狄」として低く見る考え方。"},{"id":"cn_shoshi","term":"諸子百家","read":"しょしひゃっか","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:学派","desc":"春秋・戦国時代に現れた、思想や技能を生かして実力を示そうとした多様な思想家・学派の総称。"},{"id":"cn_juka","term":"儒家","read":"じゅか","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:学派","desc":"孔子を祖とする学派。徳による統治を理想とし、礼の実践を通じて親愛を社会秩序へ広げることを説いた。"},{"id":"cn_koushi","term":"孔子","read":"こうし","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"人物","group":"cn:人物","desc":"春秋時代の思想家で、儒家の祖。仁と礼による道徳を説いた。","work":"cn_rongo"},{"id":"cn_rongo","term":"論語","read":"ろんご","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"書物","group":"cn:経典","desc":"孔子とその弟子の言行をまとめた書物。","note":"孔子個人の著作ではなく、のちに弟子たちが編纂したもの。"},{"id":"cn_moushi","term":"孟子","read":"もうし","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"人物","group":"cn:人物","desc":"戦国時代の儒家。性善説を唱え、王朝交替を認める易姓革命の論理を説いた。"},{"id":"cn_seizen","term":"性善説","read":"せいぜんせつ","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:学説","desc":"人の本性は善であるとする孟子の主張。"},{"id":"cn_junshi","term":"荀子","read":"じゅんし","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"人物","group":"cn:人物","desc":"戦国時代の儒家。性悪説を唱え、礼による規律の維持を強調した。"},{"id":"cn_seiaku","term":"性悪説","read":"せいあくせつ","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:学説","desc":"人の本性は悪であるとし、礼による矯正を説く荀子の主張。"},{"id":"cn_ekisei","term":"易姓革命","read":"えきせいかくめい","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:思想","desc":"天命が改まれば王朝が交替するという考え方。孟子が説いた。"},{"id":"cn_houka","term":"法家","read":"ほうか","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:学派","desc":"法と刑罰による統治を説いた学派。商鞅・韓非・李斯らが代表。"},{"id":"cn_rishi","term":"李斯","read":"りし","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"人物","group":"cn:人物","desc":"法家の思想家。のちに秦に仕えた。","note":"秦の統一とその政策に関与した。"},{"id":"cn_shouou","term":"商鞅","read":"しょうおう","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"人物","group":"cn:人物","desc":"戦国時代に秦の政治改革（変法）を行った法家の人物。"},{"id":"cn_kanpishi","term":"韓非子","read":"かんぴし","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"人物","group":"cn:人物","desc":"法家の思想を大成した人物。","note":"人物としては「韓非」、その思想をまとめた書物が『韓非子』。"},{"id":"cn_bokka","term":"墨家","read":"ぼっか","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:学派","desc":"墨子を祖とする学派。血縁をこえた無差別の愛（兼愛）などを説いた。"},{"id":"cn_douka","term":"道家","read":"どうか","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:学派","desc":"老子・荘子を中心とする学派。無為自然を理想とした。"},{"id":"cn_roushi","term":"老子","read":"ろうし","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"人物","group":"cn:人物","desc":"道家の祖とされる人物。無為自然を理想とした。"},{"id":"cn_muishizen","term":"無為自然","read":"むいしぜん","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:思想","desc":"人為を退け、あるがままの自然に従うべきとする道家の理想。"},{"id":"cn_soushi","term":"荘子","read":"そうし","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"人物","group":"cn:人物","desc":"戦国時代の道家の思想家。"},{"id":"cn_kourou","term":"黄老","read":"こうろう","region":"中国","mem":[{"r":"中国","s":"春秋戦国"}],"type":"概念","group":"cn:思想","desc":"老子・荘子の道家の教えを指す呼称。","note":"政治思想として重んじられたのは前漢の初め。資料では春秋戦国の文化として登場するため、ここでは春秋戦国に分類。"},{"id":"cn_tochujo","term":"董仲舒","read":"とうちゅうじょ","region":"中国","mem":[{"r":"中国","s":"漢"}],"type":"人物","group":"cn:人物","desc":"前漢・武帝期の儒家。儒学の影響力を高め、五経博士の設置など儒学の官学化を進めた。","note":"時代区分上は前漢。"},{"id":"cn_shibasen","term":"司馬遷","read":"しばせん","region":"中国","mem":[{"r":"中国","s":"漢"}],"type":"人物","group":"cn:人物","desc":"前漢・武帝期の歴史家。宮刑を受けながら歴史書『史記』を完成させた。","note":"時代区分上は前漢。","work":"cn_shiki"},{"id":"cn_shiki","term":"史記","read":"しき","region":"中国","mem":[{"r":"中国","s":"漢"}],"type":"書物","group":"cn:歴史書","desc":"司馬遷が著した歴史書。紀伝体で記され、中国の歴史書の基本的なかたちをつくった。","person":"cn_shibasen","cross":"歴史書"},{"id":"cn_hanko","term":"班固","read":"はんこ","region":"中国","mem":[{"r":"中国","s":"漢"}],"type":"人物","group":"cn:人物","desc":"後漢の歴史家。","note":"歴史書『漢書』を著した（漢書は単語リスト外）。時代区分上は後漢。"},{"id":"cn_jugaku","term":"儒学","read":"じゅがく","region":"中国","mem":[{"r":"中国","s":"漢"}],"type":"概念","group":"cn:儒学","desc":"孔子に始まる学問・思想。漢代に官学化され、国家の学問としての地位を確立した。"},{"id":"cn_kunko","term":"訓詁学","read":"くんこがく","region":"中国","mem":[{"r":"中国","s":"漢"}],"type":"概念","group":"cn:儒学","desc":"経典の字句の解釈を行う学問。後漢に発達し、鄭玄らが大成した。","note":"時代区分上は後漢。"},{"id":"cn_kidentai","term":"紀伝体","read":"きでんたい","region":"中国","mem":[{"r":"中国","s":"漢"}],"type":"概念","group":"cn:史叙述","desc":"本紀（皇帝の記録）と列伝（人物の伝記）を組み合わせて歴史を叙述する形式。『史記』が最初。"},{"id":"cn_chouken","term":"張騫","read":"ちょうけん","region":"中国","mem":[{"r":"中国","s":"漢"}],"type":"人物","group":"cn:人物","desc":"前漢・武帝期に大月氏へ派遣され、西域の事情を中国に伝えた人物。","note":"時代区分上は前漢。"},{"id":"cn_hanchou","term":"班超","read":"はんちょう","region":"中国","mem":[{"r":"中国","s":"漢"}],"type":"人物","group":"cn:人物","desc":"後漢の人物。西域に派遣され、西域都護となった。","note":"時代区分上は後漢。"},{"id":"cn_sairin","term":"蔡倫","read":"さいりん","region":"中国","mem":[{"r":"中国","s":"漢"}],"type":"人物","group":"cn:人物","desc":"後漢の人物。製紙法を改良した。","note":"時代区分上は後漢。"},{"id":"cn_monzen","term":"文選","read":"もんぜん","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"書物","group":"cn:文学作品","desc":"南朝の梁で編まれた、古今の名文・詩文を集めた詞華集（アンソロジー）。","note":"編者は昭明太子（資料では細字での登場）。","cross":"物語・文学作品"},{"id":"cn_touenmei","term":"陶淵明","read":"とうえんめい","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"人物","group":"cn:人物","desc":"東晋〜宋の詩人。田園詩で知られる。","note":"別名は陶潜（とうせん）。同一人物。"},{"id":"cn_kogaishi","term":"顧愷之","read":"こがいし","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"人物","group":"cn:人物","desc":"東晋の画家。『女史箴図』の作者とされる。","work":"cn_joshi"},{"id":"cn_joshi","term":"女史箴図","read":"じょしのしんず","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"書物","group":"cn:絵画","desc":"宮廷の女官が守るべき教えを説いた文章に、絵を付したもの。","person":"cn_kogaishi"},{"id":"cn_ougishi","term":"王羲之","read":"おうぎし","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"人物","group":"cn:人物","desc":"東晋の書家で「書聖」と称される。行書・草書を得意とし、後世の書道に大きな影響を残した。","work":"cn_rantei"},{"id":"cn_rantei","term":"蘭亭序","read":"らんていじょ","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"書物","group":"cn:書","desc":"王羲之の代表作とされる書。","person":"cn_ougishi"},{"id":"cn_hokken","term":"法顕","read":"ほっけん","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"人物","group":"cn:人物","desc":"東晋の僧。仏典を求めてインドへ赴き、旅行記『仏国記』を著した。","work":"cn_bukkokki"},{"id":"cn_bukkokki","term":"仏国記","read":"ぶっこくき","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"書物","group":"cn:旅行記","desc":"法顕がインド旅行の記録をまとめた書物。","person":"cn_hokken"},{"id":"cn_sekkutsu","term":"石窟寺院","read":"せっくつじいん","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"文物","group":"cn:仏教美術","desc":"岩壁を掘ってつくられた仏教寺院。南北朝期に華北で多く造営された（敦煌・雲崗・竜門など）。","cross":"建築"},{"id":"cn_buttocho","term":"仏図澄","read":"ぶっとちょう","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"人物","group":"cn:人物","desc":"西域出身の僧。華北で仏教の布教に努めた。"},{"id":"cn_kumaraju","term":"鳩摩羅什","read":"くまらじゅう","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"人物","group":"cn:人物","desc":"西域出身の僧。仏典の漢訳に活躍した。"},{"id":"cn_koukenshi","term":"寇謙之","read":"こうけんし","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"人物","group":"cn:人物","desc":"北魏の道士。道教教団（新天師道）を設立し、仏教に対抗した。"},{"id":"cn_seidan","term":"清談","read":"せいだん","region":"中国","mem":[{"r":"中国","s":"南北朝"}],"type":"概念","group":"cn:思想","desc":"世俗を超越した自由な議論。魏晋期に流行した（竹林の七賢など）。"},{"id":"cn_kuyodatsu","term":"孔穎達","read":"くようだつ","region":"中国","mem":[{"r":"中国","s":"唐"}],"type":"人物","group":"cn:人物","desc":"唐の学者。勅命で『五経正義』を編纂し、経典解釈を統一した。","note":"『五経正義』は単語リスト外。"},{"id":"cn_rihaku","term":"李白","read":"りはく","region":"中国","mem":[{"r":"中国","s":"唐"}],"type":"人物","group":"cn:人物","desc":"盛唐の詩人。「詩仙」と称される。","note":"時代区分上は盛唐。"},{"id":"cn_toho","term":"杜甫","read":"とほ","region":"中国","mem":[{"r":"中国","s":"唐"}],"type":"人物","group":"cn:人物","desc":"盛唐の詩人。「詩聖」と称される。","note":"時代区分上は盛唐。"},{"id":"cn_hakukyoi","term":"白居易","read":"はくきょい","region":"中国","mem":[{"r":"中国","s":"唐"}],"type":"人物","group":"cn:人物","desc":"中唐の詩人。平易な詩風をめざした。","note":"代表作に『長恨歌』（資料では細字での登場）。時代区分上は中唐。"},{"id":"cn_kanyu","term":"韓愈","read":"かんゆ","region":"中国","mem":[{"r":"中国","s":"唐"}],"type":"人物","group":"cn:人物","desc":"中唐の文人。柳宗元とともに古文復興を唱えた。","note":"時代区分上は中唐。"},{"id":"cn_ryusogen","term":"柳宗元","read":"りゅうそうげん","region":"中国","mem":[{"r":"中国","s":"唐"}],"type":"人物","group":"cn:人物","desc":"中唐の文人。韓愈とともに古文復興を唱えた。","note":"時代区分上は中唐。"},{"id":"cn_godogen","term":"呉道玄","read":"ごどうげん","region":"中国","mem":[{"r":"中国","s":"唐"}],"type":"人物","group":"cn:人物","desc":"唐の画家。「画聖」と称される。"},{"id":"cn_genjo","term":"玄奘","read":"げんじょう","region":"中国","mem":[{"r":"中国","s":"唐"}],"type":"人物","group":"cn:人物","desc":"唐の僧。陸路でインドへ赴いて仏典をもち帰り、漢訳に努めた。","note":"旅行記『大唐西域記』を著した（単語リスト外）。"},{"id":"cn_gijo","term":"義浄","read":"ぎじょう","region":"中国","mem":[{"r":"中国","s":"唐"}],"type":"人物","group":"cn:人物","desc":"唐の僧。海路でインドを訪れ、仏典をもち帰った。","note":"『南海寄帰内法伝』を著した（単語リスト外）。"},{"id":"cn_shutoni","term":"周敦頤","read":"しゅうとんい","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"人物","group":"cn:人物","desc":"北宋の儒学者。宇宙論と儒学の教えを結びつけ、宋学の祖と仰がれた。","work":"cn_taikyoku"},{"id":"cn_shuki","term":"朱熹","read":"しゅき","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"人物","group":"cn:人物","desc":"南宋の儒学者。宋学を大成した（朱子学）。のちに朝鮮や日本にも影響を与えた。","note":"朱子とも呼ばれる。"},{"id":"cn_oyoshu","term":"欧陽脩","read":"おうようしゅう","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"人物","group":"cn:人物","desc":"北宋の文人・歴史家。","note":"『新唐書』『新五代史』を撰した（単語リスト外）。"},{"id":"cn_soshoku","term":"蘇軾","read":"そしょく","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"人物","group":"cn:人物","desc":"北宋の文人。詩文・書画に優れた。","note":"『赤壁賦』『墨竹図』などで知られる（単語リスト外）。"},{"id":"cn_hakuji","term":"白磁","read":"はくじ","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"文物","group":"cn:陶磁","desc":"白色の下地の簡素な磁器。宋代を代表する陶磁器。"},{"id":"cn_seiji","term":"青磁","read":"せいじ","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"文物","group":"cn:陶磁","desc":"青みのある釉をかけた磁器。宋代を代表する陶磁器。"},{"id":"cn_bunjinga","term":"文人画","read":"ぶんじんが","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"文物","group":"cn:絵画","desc":"士大夫が描いた、精神性・内面性を表す絵画（南宗画）。"},{"id":"cn_intaiga","term":"院体画","read":"いんたいが","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"文物","group":"cn:絵画","desc":"宮廷画家による写実的な絵画（北宗画）。","note":"徽宗が代表的な担い手。"},{"id":"cn_sougaku","term":"宋学","read":"そうがく","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"概念","group":"cn:儒学","desc":"経典を哲学的に読み込み、宇宙万物の理に至ろうとする宋代の儒学。"},{"id":"cn_sandai","term":"三大発明","read":"さんだいはつめい","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"概念","group":"cn:技術","desc":"宋代に実用化・普及が進んだ火薬・羅針盤・木版印刷（活版印刷）を指す。","cross":"技術"},{"id":"cn_keitokuchin","term":"景徳鎮","read":"けいとくちん","region":"中国","mem":[{"r":"中国","s":"宋"},{"r":"中国","s":"明"}],"type":"文物","group":"cn:陶磁","desc":"江西省にある陶磁器の産地。","note":"宋代に分業生産で発展し、明代も主要な産地として栄えた。時代問題では宋・明いずれも正解。"},{"id":"cn_shijitsugan","term":"資治通鑑","read":"しじつがん","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"書物","group":"cn:歴史書","desc":"君臣関係を重視する立場で記された編年体の歴史書。","note":"北宋の司馬光が編纂した（司馬光は単語リスト外）。","cross":"歴史書"},{"id":"cn_shisho","term":"四書","read":"ししょ","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"概念","group":"cn:経典","desc":"宋学で特に重んじられた四つの経典。『論語』『大学』『中庸』『孟子』を指す。"},{"id":"cn_mokuhan","term":"木版印刷","read":"もくはんいんさつ","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"文物","group":"cn:技術","desc":"板木に文字を彫って刷る印刷技術。唐代に始まり、宋代に広まった。","cross":"技術"},{"id":"cn_rashinban","term":"羅針盤","read":"らしんばん","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"文物","group":"cn:技術","desc":"方位を示す器具。宋代に実用化され、のちヨーロッパに伝わった。","cross":"技術"},{"id":"cn_kayaku","term":"火薬","read":"かやく","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"文物","group":"cn:技術","desc":"宋代に実用化され、のちヨーロッパに伝わった。","cross":"技術"},{"id":"cn_taikyoku","term":"太極図説","read":"たいきょくずせつ","region":"中国","mem":[{"r":"中国","s":"宋"}],"type":"書物","group":"cn:思想書","desc":"宇宙論と儒学の教えを結びつけた書。宋学の基本概念となった。","person":"cn_shutoni"},{"id":"cn_touji","term":"陶磁器","read":"とうじき","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"文物","group":"cn:陶磁","desc":"明代に生産が拡大した焼き物。景徳鎮などで作られ、ヨーロッパなどへ輸出された。"},{"id":"cn_sangokushi","term":"三国志演義","read":"さんごくしえんぎ","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"書物","group":"cn:小説","desc":"明代に普及した長編の口語小説。","note":"作者は羅貫中とされる（単語リスト外）。","cross":"物語・文学作品"},{"id":"cn_saiyuki","term":"西遊記","read":"さいゆうき","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"書物","group":"cn:小説","desc":"明代に普及した長編の口語小説。玄奘のインド旅行を題材とする。","note":"呉承恩の作とされる（単語リスト外）。","cross":"物語・文学作品"},{"id":"cn_suikoden","term":"水滸伝","read":"すいこでん","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"書物","group":"cn:小説","desc":"明代に普及した長編の口語小説。","note":"施耐庵らの作とされる（単語リスト外）。","cross":"物語・文学作品"},{"id":"cn_shosetsu","term":"小説","read":"しょうせつ","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"概念","group":"cn:小説","desc":"明代に三国志演義・西遊記・水滸伝などの口語小説が普及した。","note":"宋代の都市文化にも物語（小説）が登場するが、ここでは明に分類。"},{"id":"cn_oyomei","term":"王陽明","read":"おうようめい","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"人物","group":"cn:人物","desc":"明代の儒学者。人は本来その心のうちに道徳をもつと説いた（陽明学）。","note":"人物名は王守仁、陽明は号。"},{"id":"cn_yomeigaku","term":"陽明学","read":"ようめいがく","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"概念","group":"cn:儒学","desc":"王陽明がおこした儒学の一派。庶民のあいだにも広い支持を得た。"},{"id":"cn_kagakusho","term":"科学技術書","read":"かがくぎじゅつしょ","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"概念","group":"cn:科学書","desc":"明末に関心が高まり、『本草綱目』『農政全書』『天工開物』などが著された。"},{"id":"cn_tokisho","term":"董其昌","read":"とうきしょう","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"人物","group":"cn:人物","desc":"明代の画家。文人画を受け継ぐ画風で知られる。"},{"id":"cn_honzo","term":"本草綱目","read":"ほんぞうこうもく","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"書物","group":"cn:科学書","desc":"明代に著された薬物学の書物。","note":"李時珍の著（単語リスト外）。"},{"id":"cn_konyo","term":"坤輿万国全図","read":"こんよばんこくぜんず","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"書物","group":"cn:地図","desc":"中国に新しい地理知識を広めた世界地図。","note":"マテオ=リッチが作製した。","person":"cn_matteo"},{"id":"cn_matteo","term":"マテオ=リッチ","read":"まてお=りっち","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"人物","group":"cn:人物","desc":"明代に中国で布教したイエズス会の宣教師。","work":"cn_konyo"},{"id":"cn_zabieru","term":"ザビエル","read":"ざびえる","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"人物","group":"cn:人物","desc":"イエズス会の宣教師。中国布教をめざしたが実現しなかった。"},{"id":"cn_jokokei","term":"徐光啓","read":"じょこうけい","region":"中国","mem":[{"r":"中国","s":"明"}],"type":"人物","group":"cn:人物","desc":"明代の学者。リッチに学び、西洋学術の導入に努めた。","note":"『農政全書』を編纂した（単語リスト外）。"},{"id":"cn_kokijiten","term":"康熙字典","read":"こうきじてん","region":"中国","mem":[{"r":"中国","s":"清"}],"type":"書物","group":"cn:編纂物","desc":"清代に編纂された漢字字典。","note":"皇帝の命による大規模な編纂事業。"},{"id":"cn_koenbu","term":"顧炎武","read":"こえんぶ","region":"中国","mem":[{"r":"中国","s":"清"}],"type":"人物","group":"cn:人物","desc":"清初の学者。事実にもとづく実証的な研究を主張し、考証学の先駆となった。"},{"id":"cn_benpatsu","term":"辮髪","read":"べんぱつ","region":"中国","mem":[{"r":"中国","s":"清"}],"type":"文物","group":"cn:風習","desc":"清が漢人男性に強制した、満洲人の髪型。"},{"id":"cn_shikozensho","term":"四庫全書","read":"しこぜんしょ","region":"中国","mem":[{"r":"中国","s":"清"}],"type":"書物","group":"cn:編纂物","desc":"清代の大規模な編纂事業によってまとめられた叢書。"},{"id":"cn_enmeien","term":"円明園","read":"えんめいえん","region":"中国","mem":[{"r":"中国","s":"清"}],"type":"文物","group":"cn:建築","desc":"北京郊外に建設された離宮。バロック様式の西洋建築を含む広大な庭園。","note":"第2次アヘン戦争の際に英仏軍によって破壊された。","cross":"建築"},{"id":"cn_koromu","term":"紅楼夢","read":"こうろうむ","region":"中国","mem":[{"r":"中国","s":"清"}],"type":"書物","group":"cn:小説","desc":"清代中期の長編小説。上流階級の生活を細やかに描く。","note":"曹雪芹の作（単語リスト外）。","cross":"物語・文学作品"},{"id":"cn_koshogaku","term":"考証学","read":"こうしょうがく","region":"中国","mem":[{"r":"中国","s":"清"}],"type":"概念","group":"cn:儒学","desc":"経典の校訂や言語学的研究を精密に行う学問。清代中期に発達した。"},{"id":"gr_homeros","term":"ホメロス","read":"ほめろす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:文学","desc":"叙事詩『イリアス』『オデュッセイア』を残した。トロイア戦争を題材とする。"},{"id":"gr_hesiodos","term":"ヘシオドス","read":"へしおどす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:文学","desc":"『神統記』（神々の系譜）、『労働と日々』（市民への教訓）を残した。"},{"id":"gr_sappho","term":"サッフォー","read":"さっふぉー","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:文学","desc":"レスボス島の女性詩人。情熱的な叙情詩を残した。"},{"id":"gr_aischylos","term":"アイスキュロス","read":"あいすきゅろす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:文学","desc":"悲劇『アガメムノン』。雄大で格調高い作品で知られる。"},{"id":"gr_sophokles","term":"ソフォクレス","read":"そふぉくれす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:文学","desc":"悲劇『オイディプス王』。高貴な人間像を描いた。"},{"id":"gr_euripides","term":"エウリピデス","read":"えうりぴです","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:文学","desc":"悲劇『メデイア』。人間の心理を深く描写した。"},{"id":"gr_aristophanes","term":"アリストファネス","read":"ありすとふぁねす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:文学","desc":"喜劇『女の平和』『女の議会』。社会世相やソフィストを風刺した。"},{"id":"gr_sophist","term":"ソフィスト","read":"そふぃすと","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"概念","group":"gr:哲学・思想","desc":"弁論術を教えた職業教師。相手をいかに説得するかを教えた。","note":"代表的な人物がプロタゴラス。"},{"id":"gr_protagoras","term":"プロタゴラス","read":"ぷろたごらす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:哲学・思想","desc":"ソフィスト。「万物の尺度は人間」と説き、真理の主観性を主張した。"},{"id":"gr_sokrates","term":"ソクラテス","read":"そくらてす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:哲学・思想","desc":"「汝自身を知れ」。問答を通じて真理の客観性を説いた西洋哲学の祖。"},{"id":"gr_platon","term":"プラトン","read":"ぷらとん","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:哲学・思想","desc":"イデア論を説き、哲人による理想政治を主張。『国家』、アカデメイアを開設した。"},{"id":"gr_thales","term":"タレス","read":"たれす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:自然科学","desc":"万物の根源を水と考えた、イオニア自然哲学の祖。"},{"id":"gr_pythagoras","term":"ピタゴラス","read":"ぴたごらす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:自然科学","desc":"万物の根源を数とし、「ピタゴラスの定理」で知られる。"},{"id":"gr_herakleitos","term":"ヘラクレイトス","read":"へらくれいとす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:自然科学","desc":"万物の根源を火とし、「万物は流転する」と説いた。"},{"id":"gr_demokritos","term":"デモクリトス","read":"でもくりとす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:自然科学","desc":"万物の根源を原子（アトム）とする原子論・唯物論の祖。"},{"id":"gr_hippokrates","term":"ヒッポクラテス","read":"ひっぽくらてす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:自然科学","desc":"臨床を重視した「西洋医学の父」。"},{"id":"gr_pheidias","term":"フェイディアス","read":"ふぇいでぃあす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:彫刻美術","desc":"パルテノン神殿のアテナ女神像を制作し、神殿彫刻を監督した。"},{"id":"gr_praxiteles","term":"プラクシテレス","read":"ぷらくしてれす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:彫刻美術","desc":"「ヘルメス神像」。若い神を好んで彫像化した。"},{"id":"gr_herodotos","term":"ヘロドトス","read":"へろどとす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:歴史","desc":"『歴史』。ペルシア戦争を物語的に記述した。"},{"id":"gr_thukydides","term":"トゥキディデス","read":"とぅきでぃです","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"人物","group":"gr:歴史","desc":"『歴史（戦史）』。ペロポネソス戦争を客観的に記述した。"},{"id":"gr_parthenon","term":"パルテノン神殿","read":"ぱるてのんしんでん","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"}],"type":"概念","group":"gr:建築","desc":"アテネのアクロポリスに立つドーリア式神殿の傑作。アテネ民主政の最盛期を象徴する。","cross":"建築"},{"id":"gr_epikuros","term":"エピクロス","read":"えぴくろす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"人物","group":"gr:哲学・思想","desc":"精神的快楽（心の平安）を人生の目的とする、エピクロス派の祖。"},{"id":"gr_zenon","term":"ゼノン","read":"ぜのん","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"人物","group":"gr:哲学・思想","desc":"禁欲を重んじて理性的境地を求める、ストア派の祖。"},{"id":"gr_epikuros_ha","term":"エピクロス派","read":"えぴくろすは","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"概念","group":"gr:哲学・思想","desc":"精神的快楽（アタラクシア）を人生の目的とする学派。","person":"gr_epikuros"},{"id":"gr_stoa_ha","term":"ストア派","read":"すとあは","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"概念","group":"gr:哲学・思想","desc":"禁欲による理性的境地（アパティア）を説く学派。世界市民主義に発展した。","person":"gr_zenon"},{"id":"gr_kosmopolitanism","term":"世界市民主義","read":"せかいしみんしゅぎ","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"概念","group":"gr:哲学・思想","desc":"ポリスの枠をこえ、普遍的な人間性を求める考え方（コスモポリタニズム）。"},{"id":"gr_eratosthenes","term":"エラトステネス","read":"えらとすてねす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"人物","group":"gr:自然科学","desc":"子午線（地球の円周）を測定した。"},{"id":"gr_aristarchos","term":"アリスタルコス","read":"ありすたるこす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"人物","group":"gr:自然科学","desc":"地球の自転と公転（太陽中心説）を説いた。"},{"id":"gr_eukleides","term":"エウクレイデス","read":"えうくれいです","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"人物","group":"gr:自然科学","desc":"平面幾何学を集大成した。「ユークリッド幾何学」の創始者。"},{"id":"gr_archimedes","term":"アルキメデス","read":"あるきめです","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"人物","group":"gr:自然科学","desc":"浮力・てこの原理など、数学・物理学の原理を発見した。"},{"id":"gr_museion","term":"ムセイオン","read":"むせいおん","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"概念","group":"gr:自然科学","desc":"アレクサンドリアの王立研究所。自然科学・人文科学の研究の中心となった。","cross":"学問機関"},{"id":"gr_milo_venus","term":"「ミロのヴィーナス」","read":"みろのゔぃーなす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"作品","group":"gr:彫刻美術","desc":"ミロス島出土の女神アフロディテ像。女性美を表すヘレニズム彫刻の代表作。","note":"作者不詳。"},{"id":"gr_laokoon","term":"「ラオコーン」","read":"らおこーん","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"作品","group":"gr:彫刻美術","desc":"トロイアの神官ラオコーンの場面を表したヘレニズム彫刻の傑作。","note":"作者不詳。"},{"id":"gr_hellenism_culture","term":"ヘレニズム文化","read":"へれにずむぶんか","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ヘレニズム"}],"type":"概念","group":"gr:その他","desc":"ギリシア文化とオリエント文化が融合した文化。世界市民主義・個人主義を特徴とする。","cross":"文化総称"},{"id":"gr_vergilius","term":"ウェルギリウス","read":"うぇるぎりうす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:文学","desc":"ローマ建国の叙事詩『アエネイス』を残した。"},{"id":"gr_horatius","term":"ホラティウス","read":"ほらてぃうす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:文学","desc":"『叙情詩集』を残した。"},{"id":"gr_ovidius","term":"オウィディウス","read":"おうぃでぃうす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:文学","desc":"『転身譜』『恋の技法』を残した。"},{"id":"gr_polybios","term":"ポリビオス","read":"ぽりびおす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:歴史","desc":"『歴史』。政体循環史観で知られる。"},{"id":"gr_livius","term":"リウィウス","read":"りうぃうす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:歴史","desc":"『ローマ建国史』を著した。"},{"id":"gr_caesar","term":"カエサル","read":"かえさる","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:歴史","desc":"『ガリア戦記』（ラテン散文の名文）。ユリウス暦を制定した。"},{"id":"gr_tacitus","term":"タキトゥス","read":"たきとぅす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:歴史","desc":"『年代記』『ゲルマニア』を著した。"},{"id":"gr_plutarchos","term":"プルタルコス","read":"ぷるたるこす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:歴史","desc":"ギリシア・ローマの英雄を対比した『対比列伝』（『英雄伝』）を著した。","note":"ギリシア系の人物だが、教材ではローマ文化一覧に記載。"},{"id":"gr_strabon","term":"ストラボン","read":"すとらぼん","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:歴史","desc":"『地理誌』。当時知られていた全世界の地誌を記述した。","note":"ギリシア系の人物だが、教材ではローマ文化一覧に記載。"},{"id":"gr_cicero","term":"キケロ","read":"きけろ","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:哲学・思想","desc":"共和政末期の弁論家・哲学者。『国家論』。その文章はラテン語散文の見本とされた。"},{"id":"gr_seneca","term":"セネカ","read":"せねか","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:哲学・思想","desc":"ストア派哲学者。『幸福論』。ネロ帝の師。"},{"id":"gr_epiktetos","term":"エピクテトス","read":"えぴくてとす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:哲学・思想","desc":"ストア派の哲学者。"},{"id":"gr_marcus_aurelius","term":"マルクス＝アウレリウス＝アントニヌス","read":"まるくす＝あうれりうす＝あんとにぬす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:哲学・思想","desc":"ストア派哲学者として知られる皇帝。『自省録』を残した。"},{"id":"gr_plinius","term":"プリニウス","read":"ぷりにうす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:自然科学","desc":"百科全書的な知識の集大成『博物誌』を著した。"},{"id":"gr_ptolemaios","term":"プトレマイオス","read":"ぷとれまいおす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:自然科学","desc":"天動説を説いた。『天文学大全』。","note":"ギリシア系の人物だが、教材ではローマ文化一覧に記載。"},{"id":"gr_julius_calendar","term":"ユリウス暦","read":"ゆりうすれき","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"概念","group":"gr:自然科学","desc":"カエサルが制定した太陽暦。のちのグレゴリウス暦（西暦）のもととなった。","person":"gr_caesar"},{"id":"gr_tribonianus","term":"トリボニアヌス","read":"とりぼにあぬす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"人物","group":"gr:法学","desc":"ユスティニアヌス帝の命で『ローマ法大全』を編纂した。","work":"gr_roma_law_taizen"},{"id":"gr_roma_law","term":"ローマ法","read":"ろーまほう","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"概念","group":"gr:法学","desc":"十二表法を起源とし、のちに万民法へと発展したローマの法。近代に受け継がれた。","cross":"法"},{"id":"gr_roma_law_taizen","term":"ローマ法大全","read":"ろーまほうたいぜん","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"概念","group":"gr:法学","desc":"ユスティニアヌス帝がトリボニアヌスらに編纂させた、ローマ法の集大成。","person":"gr_tribonianus","cross":"法"},{"id":"gr_banminho","term":"万民法","read":"ばんみんほう","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"概念","group":"gr:法学","desc":"帝国に住むすべての人民に適用される法。市民法から発展した。","cross":"法"},{"id":"gr_colosseum","term":"コロッセウム","read":"ころっせうむ","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"}],"type":"概念","group":"gr:建築","desc":"ローマの円形闘技場。剣闘士の戦いなどの見世物が行われた。","cross":"建築"},{"id":"is_quran","term":"コーラン(クルアーン)","read":"こーらん","region":"イスラーム","mem":[{"r":"イスラーム","s":"宗教・法"}],"type":"概念","group":"is:宗教","desc":"イスラーム教の聖典。神がムハンマドに下した啓示をまとめたもの。"},{"id":"is_hadith","term":"ハディース","read":"はでぃーす","region":"イスラーム","mem":[{"r":"イスラーム","s":"宗教・法"}],"type":"概念","group":"is:宗教","desc":"ムハンマドの言行についての伝承。イスラーム法の基礎の一つ。"},{"id":"is_sharia","term":"イスラーム法(シャリーア)","read":"いすらーむほう","region":"イスラーム","mem":[{"r":"イスラーム","s":"宗教・法"}],"type":"概念","group":"is:宗教","desc":"コーランやハディースを基礎に整えられた法体系。信仰・生活の全体を規定する。","cross":"法"},{"id":"is_ulama","term":"ウラマー","read":"うらまー","region":"イスラーム","mem":[{"r":"イスラーム","s":"宗教・法"}],"type":"概念","group":"is:宗教","desc":"イスラーム法学者。司法や政治の場で活躍した。"},{"id":"is_rokushingogyo","term":"六信五行","read":"ろくしんごぎょう","region":"イスラーム","mem":[{"r":"イスラーム","s":"宗教・法"}],"type":"概念","group":"is:宗教","desc":"ムスリムの信仰(六信)と行為(五行)。信仰告白・礼拝・喜捨・断食・メッカ巡礼などからなる。"},{"id":"is_shingaku","term":"イスラーム神学","read":"いすらーむしんがく","region":"イスラーム","mem":[{"r":"イスラーム","s":"宗教・法"}],"type":"概念","group":"is:宗教","desc":"ギリシア哲学の影響を受けて形成された、イスラームの神学。"},{"id":"is_arabic_script","term":"アラビア文字","read":"あらびあもじ","region":"イスラーム","mem":[{"r":"イスラーム","s":"言語・文字"}],"type":"概念","group":"is:言語","desc":"イスラーム世界で広く用いられた文字。","cross":"言語・文字"},{"id":"is_arabic_lang","term":"アラビア語","read":"あらびあご","region":"イスラーム","mem":[{"r":"イスラーム","s":"言語・文字"}],"type":"概念","group":"is:言語","desc":"コーランの言語であり、学問や行政の共通語となった。","cross":"言語・文字"},{"id":"is_chie","term":"知恵の館(バイト=アルヒクマ)","read":"ちえのやかた","region":"イスラーム","mem":[{"r":"イスラーム","s":"学問"}],"type":"概念","group":"is:施設","desc":"バグダードに設けられた翻訳・研究機関。ギリシア語文献などがアラビア語に翻訳された。","cross":"学問機関"},{"id":"is_khwarizmi","term":"フワーリズミー","read":"ふわーりずみー","region":"イスラーム","mem":[{"r":"イスラーム","s":"学問"}],"type":"人物","group":"is:人物","desc":"数学者。『代数学』を著した。"},{"id":"is_ibn_sina","term":"イブン=シーナー","read":"いぶんしーなー","region":"イスラーム","mem":[{"r":"イスラーム","s":"学問"}],"type":"人物","group":"is:人物","desc":"中央アジア出身の医学者。『医学典範』を著した。","work":"is_igaku_tenpan"},{"id":"is_igaku_tenpan","term":"『医学典範』","read":"いがくてんぱん","region":"イスラーム","mem":[{"r":"イスラーム","s":"学問"}],"type":"作品","group":"is:著作","desc":"イブン=シーナーが著した医学書。長く権威をもった。","person":"is_ibn_sina"},{"id":"is_tabari","term":"タバリー","read":"たばりー","region":"イスラーム","mem":[{"r":"イスラーム","s":"学問"}],"type":"人物","group":"is:人物","desc":"歴史家。年代記『預言者たちと諸王の歴史』を編纂した。","work":"is_yogensha"},{"id":"is_yogensha","term":"『預言者たちと諸王の歴史』","read":"よげんしゃたちとしょおうのれきし","region":"イスラーム","mem":[{"r":"イスラーム","s":"学問"}],"type":"作品","group":"is:著作","desc":"タバリーが編纂した年代記。","person":"is_tabari","cross":"歴史書"},{"id":"is_senya","term":"千夜一夜物語(アラビアン=ナイト)","read":"せんやいちやものがたり","region":"イスラーム","mem":[{"r":"イスラーム","s":"文芸・美術"}],"type":"作品","group":"is:著作","desc":"インド・イラン・アラビア・ギリシアなどの説話を集成した物語。","cross":"物語・文学作品"},{"id":"is_arabesque","term":"アラベスク","read":"あらべすく","region":"イスラーム","mem":[{"r":"イスラーム","s":"文芸・美術"}],"type":"概念","group":"is:美術","desc":"植物や文字を文様化した精緻な装飾文様。偶像を禁じたことから発達した。"},{"id":"is_seishi","term":"製紙法","read":"せいしほう","region":"イスラーム","mem":[{"r":"イスラーム","s":"その他"},{"r":"中国","s":"漢"}],"type":"概念","group":"is:技術","desc":"中国から伝わった紙の製法。アッバース朝期の文化を支えた。","note":"製紙法そのものは後漢の蔡倫が改良した中国の技術。文化圏の問題では中国・イスラームのいずれも正解とする。","cross":"技術"},{"id":"is_islam_culture","term":"イスラーム文化","read":"いすらーむぶんか","region":"イスラーム","mem":[{"r":"イスラーム","s":"その他"}],"type":"概念","group":"is:総称","desc":"西アジアと周辺地域の文化、イスラーム教、アラビア語が融合して生まれた文化。","cross":"文化総称"},{"id":"me_shudoin","term":"修道院","read":"しゅうどういん","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"修道院"}],"type":"概念","group":"me:修道院","desc":"世俗を離れた修行の場。中世西ヨーロッパで大きな文化的役割を果たした。"},{"id":"me_undou","term":"修道院運動","read":"しゅうどういんうんどう","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"修道院"}],"type":"概念","group":"me:修道院","desc":"6世紀にベネディクトゥスがイタリアのモンテ=カシノに修道会を開いたことに始まる、修道生活の刷新と拡大の動き。","note":"起点となったのはベネディクト修道会。「祈り、働け」のモットーは、生産労働を奴隷の仕事とみる古典古代以来の労働観を大きくかえた。"},{"id":"me_citeaux","term":"シトー修道会","read":"しとーしゅうどうかい","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"修道院"}],"type":"概念","group":"me:修道院","desc":"12〜13世紀の大開墾時代に、森林を切りひらく開墾の先頭に立った修道会。"},{"id":"me_daikaikon","term":"大開墾時代","read":"だいかいこんじだい","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"修道院"}],"type":"概念","group":"me:出来事","desc":"12〜13世紀、森林を切りひらいて耕地を広げた時代。シトー修道会をはじめとする修道院がその先頭に立った。"},{"id":"me_shingaku","term":"神学","read":"しんがく","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"概念","group":"me:学問概念","desc":"中世西ヨーロッパで最高の学問とされたもの。哲学や自然科学はその下に置かれた。"},{"id":"me_schola","term":"スコラ学","read":"すこらがく","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"概念","group":"me:学問概念","desc":"教会の権威の理論的確立のため、信仰を論理的に体系化しようとした中世西ヨーロッパ特有の学問。アリストテレス哲学の影響を受けて壮大な体系となった。"},{"id":"me_fuhen","term":"普遍論争","read":"ふへんろんそう","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"概念","group":"me:学問概念","desc":"「普遍」が現実に実体として存在するか、思考のなかに存在するにすぎないかをめぐる、スコラ学の中心的議論。","note":"実在論と唯名論が対立した。"},{"id":"me_jitsuzai","term":"実在論","read":"じつざいろん","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"概念","group":"me:学問概念","desc":"普遍論争において、普遍は現実に実体として存在すると主張した立場。","note":"アンセルムスが代表。13世紀のトマス=アクィナスもこの立場。","pair":"me_yuimei"},{"id":"me_yuimei","term":"唯名論","read":"ゆいめいろん","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"概念","group":"me:学問概念","desc":"普遍論争において、普遍は名称にすぎず、実在するのは個物だけであるとした立場。","note":"アベラールやウィリアム=オブ=オッカムが代表。","pair":"me_jitsuzai"},{"id":"me_anselmus","term":"アンセルムス","read":"あんせるむす","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"人物","group":"me:人物","desc":"11世紀後半から12世紀初めに活躍し、普遍論争で実在論の議論を代表した人物。","stance":"実在論"},{"id":"me_abelard","term":"アベラール","read":"あべらーる","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"人物","group":"me:人物","desc":"12世紀前半に活躍し、普遍論争で唯名論の立場に立った人物。","stance":"唯名論"},{"id":"me_thomas","term":"トマス=アクィナス","read":"とます=あくぃなす","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"人物","group":"me:人物","desc":"13世紀にスコラ学を大成し、その学問は教皇権の理論的支柱となった。","note":"南イタリアの貴族出身でドミニコ派に属し、パリ・ローマ・ナポリなどの大学で教授をつとめた。普遍論争では実在論の立場。","stance":"実在論","work":"me_shingakutaizen"},{"id":"me_occam","term":"ウィリアム=オブ=オッカム","read":"うぃりあむ=おぶ=おっかむ","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"人物","group":"me:人物","desc":"14世紀に唯名論の立場に立ち、近代合理思想の基礎を築いた人物。","stance":"唯名論"},{"id":"me_rbacon","term":"ロジャー=ベーコン","read":"ろじゃー=べーこん","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"人物","group":"me:人物","desc":"実験と数学を科学の手法として重視し、のちの近代科学を準備した13世紀の人物。","note":"イングランド出身のフランチェスコ会士。","stance":"自然科学"},{"id":"me_shingakutaizen","term":"『神学大全』","read":"しんがくたいぜん","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"書物","group":"me:神学書","desc":"トマス=アクィナスが著した、スコラ学の集大成となる書物。","note":"トマスは『哲学大全』も著しているため、誤答には用いていない。","person":"me_thomas"},{"id":"me_runesansu","term":"12世紀ルネサンス","read":"じゅうにせいきるねさんす","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"概念","group":"me:学問概念","desc":"ビザンツ帝国やイスラーム圏からもたらされたギリシアの古典が、ギリシア語やアラビア語から本格的にラテン語に翻訳され、学問や文芸が大きく発展した動き。","note":"翻訳活動の中心はイベリア半島のトレドやシチリア島のパレルモ。"},{"id":"me_shichika","term":"自由七科","read":"じゆうしちか","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"概念","group":"me:学問概念","desc":"大学で教育された基礎的な教養科目。三学（文法・修辞・論理）と四科（算術・幾何・天文・音楽）からなる。"},{"id":"me_bologna","term":"ボローニャ大学","read":"ぼろーにゃだいがく","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"大学"}],"type":"大学","group":"me:大学","desc":"イタリアにある、最古の大学といわれる大学。11世紀にローマ法・教会法の法学校から発展し、法学で有名。","note":"学生が自治団体としての学生組合を形成したことに始まり、ローマ法学の復興に貢献した。","faculty":"法学","country":"イタリア","cross":"学問機関"},{"id":"me_paris","term":"パリ大学","read":"ぱりだいがく","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"大学"}],"type":"大学","group":"me:大学","desc":"フランスにある、神学で有名な大学。12世紀に司教座付属学校の教師・学生の自治団体から発展した。","note":"在籍した人物にトマス=アクィナス。","faculty":"神学","country":"フランス","cross":"学問機関"},{"id":"me_salerno","term":"サレルノ大学","read":"されるのだいがく","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"大学"}],"type":"大学","group":"me:大学","desc":"イタリアにある、医学を中心とする大学。古くから存在していた医学校から発展し、イスラーム医学を導入した。","faculty":"医学","country":"イタリア","cross":"学問機関"},{"id":"me_oxford","term":"オクスフォード大学","read":"おくすふぉーどだいがく","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"大学"}],"type":"大学","group":"me:大学","desc":"イギリスにある、神学を中心とする大学。12世紀、パリ大学を模範として創設された。","note":"資料集ではパリ大学からの学生により形成・発展と記載。在籍した人物にロジャー=ベーコン、ウィリアム=オブ=オッカム、ウィクリフ。","faculty":"神学","country":"イギリス","cross":"学問機関"},{"id":"me_cambridge","term":"ケンブリッジ大学","read":"けんぶりっじだいがく","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"大学"}],"type":"大学","group":"me:大学","desc":"イギリスにある大学。13世紀にオクスフォード大学から分かれてでき、独自の学寮（コレッジ）制をもとに発展した。","note":"教科書の一覧表では神学。資料集では17世紀以降、自然科学研究の中心となったと記載（ニュートン・ダーウィンが在籍）。","faculty":"神学","country":"イギリス","cross":"学問機関"},{"id":"me_romanesque","term":"ロマネスク様式","read":"ろまねすくようしき","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"建築"}],"type":"様式","group":"me:様式","desc":"11世紀に生み出された教会建築様式。厚い石壁と列柱、小さい窓をもつ重厚なつくりが特徴。","note":"南欧中心に発達。代表例にピサ大聖堂・シュパイアー大聖堂・クリュニー修道院。","pair":"me_gothic"},{"id":"me_gothic","term":"ゴシック様式","read":"ごしっくようしき","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"建築"}],"type":"様式","group":"me:様式","desc":"12世紀に現れた教会建築様式。頭部のとがった尖頭アーチと高くそびえる塔を特徴とし、広い窓はステンドグラスで飾られた。","note":"北フランスにおこり、西欧・北欧中心に普及。繁栄する商人の経済力を背景に各都市に建設された。","pair":"me_romanesque"},{"id":"me_pisa","term":"ピサ大聖堂","read":"ぴさだいせいどう","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"建築"}],"type":"建築物","group":"me:大聖堂","desc":"イタリアにあるロマネスク様式の大聖堂。11〜12世紀に建てられ、アーケードと列柱による外観が特徴。","note":"アーケードと列柱によるその様式は「ピサ式ロマネスク」と呼ばれる。","country":"イタリア","style":"ロマネスク様式"},{"id":"me_speyer","term":"シュパイアー大聖堂","read":"しゅぱいあーだいせいどう","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"建築"}],"type":"建築物","group":"me:大聖堂","desc":"ドイツ中南部にあるロマネスク様式の大聖堂。12世紀半ばに完成した、この様式の代表例。","country":"ドイツ","style":"ロマネスク様式"},{"id":"me_notredame","term":"ノートルダム大聖堂","read":"のーとるだむだいせいどう","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"建築"}],"type":"建築物","group":"me:大聖堂","desc":"フランスのパリにあるゴシック様式の大聖堂。バラ窓のステンドグラスで知られる。","country":"フランス","style":"ゴシック様式"},{"id":"me_chartres","term":"シャルトル大聖堂","read":"しゃるとるだいせいどう","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"建築"}],"type":"建築物","group":"me:大聖堂","desc":"フランス、パリの南西にあるゴシック様式の大聖堂。とくに美しく保存のよいステンドグラスをもち、その青は「シャルトルブルー」と呼ばれる。","country":"フランス","style":"ゴシック様式"},{"id":"me_reims","term":"ランス大聖堂","read":"らんすだいせいどう","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"建築"}],"type":"建築物","group":"me:大聖堂","desc":"フランス北東部にあるゴシック様式の大聖堂。歴代フランス王の戴冠式がおこなわれた。","country":"フランス","style":"ゴシック様式"},{"id":"me_koln","term":"ケルン大聖堂","read":"けるんだいせいどう","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"建築"}],"type":"建築物","group":"me:大聖堂","desc":"ドイツにあるゴシック様式の大聖堂。尖頭アーチと高い塔をもつこの様式の代表例の一つ。","country":"ドイツ","style":"ゴシック様式"},{"id":"me_glass","term":"ステンドグラス","read":"すてんどぐらす","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"建築"}],"type":"文物","group":"me:建築要素","desc":"壁を薄くする技術の進歩で広くなった窓にはめられた、色彩豊かな彩色ガラス絵。","note":"ゴシック様式の教会堂の特色。ノートルダム大聖堂のバラ窓、シャルトル大聖堂のものが有名。"},{"id":"me_kishido","term":"騎士道物語","read":"きしどうものがたり","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"文学"}],"type":"概念","group":"me:文学概念","desc":"ラテン語ではなく口語（俗語）で表現された中世文学の代表。騎士の武勲や恋愛をテーマとした。","note":"騎士道＝武勇と主君への忠誠、神への信仰、女性・弱者の保護などを重視する騎士の道徳。"},{"id":"me_roland","term":"『ローランの歌』","read":"ろーらんのうた","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"文学"}],"type":"書物","group":"me:文学作品","desc":"カール大帝時代の騎士の武勲を題材とした騎士道物語。","theme":"カール大帝時代の騎士の武勲が題材","cross":"物語・文学作品"},{"id":"me_nibelungen","term":"『ニーベルンゲンの歌』","read":"にーべるんげんのうた","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"文学"}],"type":"書物","group":"me:文学作品","desc":"ゲルマンの英雄叙事詩として知られる中世文学。","note":"資料集では、中世ドイツの英雄叙事詩で13世紀初めに成立と記載。","theme":"ゲルマンの英雄叙事詩","cross":"物語・文学作品"},{"id":"me_arthur","term":"『アーサー王物語』","read":"あーさーおうものがたり","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"文学"}],"type":"書物","group":"me:文学作品","desc":"イギリスのケルト人の伝説から発展した騎士道物語。","note":"挿絵で活躍が描かれる騎士にランスロット。","theme":"イギリスのケルト人の伝説から発展","cross":"物語・文学作品"},{"id":"me_ginyuu","term":"吟遊詩人","read":"ぎんゆうしじん","region":"中世ヨーロッパ","mem":[{"r":"中世ヨーロッパ","s":"文学"}],"type":"概念","group":"me:文学概念","desc":"おもに宮廷において、騎士の恋愛を叙情詩にうたった人々。その最盛期は12世紀であった。","note":"フランスでトゥルバドゥール、ドイツでミンネジンガーと呼ばれた。"},{"id":"x_aristoteles","term":"アリストテレス","read":"ありすとてれす","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ギリシア"},{"r":"イスラーム","s":"学問"}],"type":"人物","group":"gr:哲学・思想","desc":"諸学問を体系化した「万学の祖」。『政治学』。アレクサンドロスの師。","note":"イスラーム世界では著作がアラビア語に翻訳され、「第一の師」と呼ばれて尊敬された（イスラーム文化史の教材にも登場）。"},{"id":"x_latin","term":"ラテン語","read":"らてんご","region":"ギリシア・ローマ","mem":[{"r":"ギリシア・ローマ","s":"ローマ"},{"r":"中世ヨーロッパ","s":"学問・思想"}],"type":"概念","group":"gr:言語","desc":"ローマ人の言語。中世西ヨーロッパでも、学者・知識人が用いる学問の国際的共通語であり続けた。","note":"ギリシア・ローマ文化史（ローマの言語）と中世ヨーロッパ文化史（学問の共通語）の両方の教材に登場する。元の説明：「ローマ人の言語。近代に至るまで教会や学術の国際的な公用語であった。」","cross":"言語・文字"}];
+const GENERALS={"cn:陶磁":[["青花","せいか"],["五彩","ごさい"],["磁州窯","じしゅうよう"],["唐三彩","とうさんさい"],["鈞窯","きんよう"],["定窯","ていよう"],["汝窯","じょよう"]],"cn:絵画":[["山水画","さんすいが"],["花鳥画","かちょうが"],["水墨画","すいぼくが"],["北宗画","ほくしゅうが"],["風俗画","ふうぞくが"]],"cn:技術":[["活版印刷","かっぱんいんさつ"],["火器","かき"],["銅活字","どうかつじ"],["印刷術","いんさつじゅつ"]],"cn:建築":[["離宮","りきゅう"],["楼閣","ろうかく"],["庭園","ていえん"],["仏塔","ぶっとう"]],"cn:仏教美術":[["磨崖仏","まがいぶつ"],["石仏","せきぶつ"],["仏塔","ぶっとう"],["塼仏","せんぶつ"]],"cn:風習":[["纏足","てんそく"],["宦官","かんがん"],["満洲服","まんしゅうふく"],["頂戴花翎","ちょうだいかれい"]],"cn:経典":[["詩経","しきょう"],["書経","しょきょう"],["礼記","らいき"],["易経","えききょう"],["春秋","しゅんじゅう"],["孝経","こうきょう"]],"cn:歴史書":[["漢書","かんじょ"],["後漢書","ごかんじょ"],["三国志","さんごくし"],["史通","しつう"],["通典","つてん"]],"cn:小説":[["金瓶梅","きんぺいばい"],["儒林外史","じゅりんがいし"],["聊斎志異","りょうさいしい"],["封神演義","ほうしんえんぎ"]],"cn:編纂物":[["永楽大典","えいらくたいてん"],["古今図書集成","ここんとしょしゅうせい"],["冊府元亀","さくふげんき"],["太平御覧","たいへいぎょらん"]],"cn:文学作品":[["楚辞","そじ"],["文心雕龍","ぶんしんちょうりょう"],["玉台新詠","ぎょくだいしんえい"],["文賦","ぶんぷ"]],"cn:書":[["九成宮醴泉銘","きゅうせいきゅうれいせんめい"],["集字聖教序","しゅうじしょうぎょうじょ"],["千字文","せんじもん"],["顔氏家廟碑","がんしかびょうひ"]],"cn:旅行記":[["大唐西域記","だいとうさいいきき"],["南海寄帰内法伝","なんかいききないほうでん"],["入唐求法巡礼行記","につとうぐほうじゅんれいこうき"],["西域記","さいいきき"]],"cn:思想書":[["近思録","きんしろく"],["西銘","せいめい"],["通書","つうしょ"],["正蒙","せいもう"]],"cn:科学書":[["農政全書","のうせいぜんしょ"],["天工開物","てんこうかいぶつ"],["斉民要術","せいみんようじゅつ"],["夢渓筆談","むけいひつだん"]],"cn:地図":[["禹貢地域図","うこうちいきず"],["華夷図","かいず"],["広輿図","こうよず"],["輿地図","よちず"]],"cn:思想":[["兼愛","けんあい"],["大同","だいどう"],["讖緯思想","しんいしそう"],["五行説","ごぎょうせつ"],["陰陽説","いんようせつ"]],"cn:学派":[["陰陽家","いんようか"],["縦横家","じゅうおうか"],["農家","のうか"],["兵家","へいか"],["名家","めいか"],["雑家","ざっか"]],"cn:学説":[["性三品説","せいさんぴんせつ"],["気質の性","きしつのせい"],["本然の性","ほんねんのせい"],["告子の説","こくしのせつ"]],"cn:儒学":[["玄学","げんがく"],["公羊学","くようがく"],["古文学","こぶんがく"],["今文学","きんぶんがく"],["讖緯学","しんいがく"]],"cn:史叙述":[["編年体","へんねんたい"],["紀事本末体","きじほんまつたい"],["断代史","だんだいし"],["通史","つうし"]],"gr:文学":[["アナクレオン","あなくれおん"],["ピンダロス","ぴんだろす"],["メナンドロス","めなんどろす"],["テオクリトス","ておくりとす"],["ユウェナリス","ゆうぇなりす"]],"gr:哲学・思想":[["アナクサゴラス","あなくさごらす"],["エンペドクレス","えんぺどくれす"],["パルメニデス","ぱるめにです"],["ディオゲネス","でぃおげねす"],["プロティノス","ぷろてぃのす"]],"gr:自然科学":[["アナクシマンドロス","あなくしまんどろす"],["ヒッパルコス","ひっぱるこす"],["アポロニオス","あぽろにおす"],["ガレノス","がれのす"],["ヘロフィロス","へろふぃろす"]],"gr:彫刻美術":[["ミュロン","みゅろん"],["ポリュクレイトス","ぽりゅくれいとす"],["リュシッポス","りゅしっぽす"],["スコパス","すこぱす"]],"gr:歴史":[["クセノフォン","くせのふぉん"],["アッリアノス","あっりあのす"],["スエトニウス","すえとにうす"],["ディオドロス","でぃおどろす"]],"gr:建築":[["パンテオン","ぱんておん"],["凱旋門","がいせんもん"],["ガール水道橋","がーるすいどうきょう"],["アッピア街道","あっぴあかいどう"],["アゴラ","あごら"]],"gr:法学":[["十二表法","じゅうにひょうほう"],["市民法","しみんほう"],["ホルテンシウス法","ほるてんしうすほう"],["リキニウス法","りきにうすほう"],["自然法","しぜんほう"]],"gr:言語":[["ギリシア語","ぎりしあご"],["コイネー","こいねー"],["フェニキア文字","ふぇにきあもじ"],["アラム語","あらむご"]],"gr:その他":[["ギリシア文化","ぎりしあぶんか"],["ローマ文化","ろーまぶんか"],["ポリス","ぽりす"],["オリエント文化","おりえんとぶんか"]],"is:人物":[["イブン=ルシュド","いぶんるしゅど"],["イブン=ハルドゥーン","いぶんはるどぅーん"],["ビールーニー","びーるーにー"],["イブン=バットゥータ","いぶんばっとぅーた"],["ウマル=ハイヤーム","うまるはいやーむ"],["フィルドゥシー","ふぃるどぅしー"],["ガザーリー","がざーりー"],["ラシード=アッディーン","らしーどあっでぃーん"]],"is:著作":[["『世界史序説』","せかいしじょせつ"],["『集史』","しゅうし"],["『シャー=ナーメ』","しゃーなーめ"],["『ルバイヤート』","るばいやーと"],["『大旅行記』","だいりょこうき"],["『薔薇園』","ばらえん"]],"is:宗教":[["スンナ派","すんなは"],["シーア派","しーあは"],["カリフ","かりふ"],["ジハード","じはーど"],["スーフィズム","すーふぃずむ"],["メッカ巡礼","めっかじゅんれい"]],"is:言語":[["ペルシア語","ぺるしあご"],["トルコ語","とるこご"],["クーフィー体","くーふぃーたい"],["サンスクリット語","さんすくりっとご"]],"is:施設":[["モスク","もすく"],["マドラサ","まどらさ"],["ミナレット","みなれっと"],["隊商宿","たいしょうやど"]],"is:美術":[["細密画","さいみつが"],["ミニアチュール","みにあちゅーる"],["幾何学文様","きかがくもんよう"],["唐草文様","からくさもんよう"]],"is:技術":[["アラビア数字","あらびあすうじ"]],"is:総称":[["イラン=イスラーム文化","いらんいすらーむぶんか"],["トルコ=イスラーム文化","とるこいすらーむぶんか"],["インド=イスラーム文化","いんどいすらーむぶんか"]],"me:修道院":[["ベネディクト修道会","べねでぃくとしゅうどうかい"],["クリュニー修道院","くりゅにーしゅうどういん"],["フランチェスコ修道会","ふらんちぇすこしゅうどうかい"],["ドミニコ修道会","どみにこしゅうどうかい"],["托鉢修道会","たくはつしゅうどうかい"]],"me:出来事":[["叙任権闘争","じょにんけんとうそう"],["カノッサの屈辱","かのっさのくつじょく"],["教会大分裂（大シスマ）","きょうかいだいぶんれつ"],["東西教会分裂","とうざいきょうかいぶんれつ"]],"me:学問概念":[["教父哲学","きょうふてつがく"],["カロリング=ルネサンス","かろりんぐ=るねさんす"],["三学","さんがく"],["四科","しか"]],"me:言語":[["ギリシア語","ぎりしあご"],["口語（俗語）","こうご"]],"me:神学書":[["『神の国』","かみのくに"],["『告白録』","こくはくろく"],["『命題集』","めいだいしゅう"]],"me:大学":[["パドヴァ大学","ぱどゔぁだいがく"],["ナポリ大学","なぽりだいがく"],["カレル大学（プラハ大学）","かれるだいがく"]],"me:様式":[["バシリカ様式","ばしりかようしき"],["ビザンツ様式","びざんつようしき"]],"me:大聖堂":[["ハギア=ソフィア聖堂","はぎあ=そふぃあせいどう"],["聖マルコ大聖堂","せいまるこだいせいどう"],["聖マリア=マジョーレ聖堂","せいまりあ=まじょーれせいどう"],["クリュニー修道院","くりゅにーしゅうどういん"]],"me:建築要素":[["フライング=バットレス（飛梁）","ふらいんぐ=ばっとれす"],["尖頭アーチ","せんとうあーち"],["バラ窓","ばらまど"],["タンパン","たんぱん"]],"me:文学作品":[["『神曲』","しんきょく"],["『デカメロン』","でかめろん"],["『カンタベリ物語』","かんたべりものがたり"],["『ベーオウルフ』","べーおうるふ"]],"me:文学概念":[["英雄叙事詩","えいゆうじょじし"],["聖人伝","せいじんでん"],["年代記","ねんだいき"]]};
+const PERSON_GENERALS={"gr:文学":[["アナクレオン","あなくれおん"],["ピンダロス","ぴんだろす"],["メナンドロス","めなんどろす"],["テオクリトス","ておくりとす"],["ユウェナリス","ゆうぇなりす"]],"gr:哲学・思想":[["アナクサゴラス","あなくさごらす"],["エンペドクレス","えんぺどくれす"],["パルメニデス","ぱるめにです"],["ディオゲネス","でぃおげねす"],["プロティノス","ぷろてぃのす"]],"gr:自然科学":[["アナクシマンドロス","あなくしまんどろす"],["ヒッパルコス","ひっぱるこす"],["アポロニオス","あぽろにおす"],["ガレノス","がれのす"],["ヘロフィロス","へろふぃろす"]],"gr:彫刻美術":[["ミュロン","みゅろん"],["ポリュクレイトス","ぽりゅくれいとす"],["リュシッポス","りゅしっぽす"],["スコパス","すこぱす"]],"gr:歴史":[["クセノフォン","くせのふぉん"],["アッリアノス","あっりあのす"],["スエトニウス","すえとにうす"],["ディオドロス","でぃおどろす"]],"gr:建築":[["パンテオン","ぱんておん"],["凱旋門","がいせんもん"],["ガール水道橋","がーるすいどうきょう"],["アッピア街道","あっぴあかいどう"],["アゴラ","あごら"]],"gr:法学":[["十二表法","じゅうにひょうほう"],["市民法","しみんほう"],["ホルテンシウス法","ほるてんしうすほう"],["リキニウス法","りきにうすほう"],["自然法","しぜんほう"]],"gr:言語":[["ギリシア語","ぎりしあご"],["コイネー","こいねー"],["フェニキア文字","ふぇにきあもじ"],["アラム語","あらむご"]],"gr:その他":[["ギリシア文化","ぎりしあぶんか"],["ローマ文化","ろーまぶんか"],["ポリス","ぽりす"],["オリエント文化","おりえんとぶんか"]],"pg:is":[["イブン=ルシュド","いぶんるしゅど"],["イブン=ハルドゥーン","いぶんはるどぅーん"],["ビールーニー","びーるーにー"],["イブン=バットゥータ","いぶんばっとぅーた"],["ウマル=ハイヤーム","うまるはいやーむ"],["フィルドゥシー","ふぃるどぅしー"],["ガザーリー","がざーりー"],["ラシード=アッディーン","らしーどあっでぃーん"]],"pg:me":[["アウグスティヌス","あうぐすてぃぬす"],["アルクイン","あるくいん"],["ダンテ","だんて"],["ウィクリフ","うぃくりふ"],["ベネディクトゥス","べねでぃくとぅす"]]};
+
+const REGIONS=['中国','ギリシア・ローマ','イスラーム','中世ヨーロッパ'];
+const CN_ERAS=['春秋戦国','漢','南北朝','唐','宋','明','清'];
+const GR_ERAS=['ギリシア','ヘレニズム','ローマ'];
+const IS_FIELDS=['宗教・法','言語・文字','学問','文芸・美術'];
+const ME_CATS=['修道院','学問・思想','大学','建築','文学'];
+const SUB_LABEL={'中国':'時代','ギリシア・ローマ':'区分','イスラーム':'分野','中世ヨーロッパ':'分野'};
+
+const byId=id=>DATA.find(d=>d.id===id);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const sample=(arr,n)=>shuffle(arr).slice(0,n);
+const regionsOf=d=>[...new Set(d.mem.map(m=>m.r))];
+const inRegion=(d,r)=>d.mem.some(m=>m.r===r);
+const subsIn=(d,r)=>d.mem.filter(m=>m.r===r).map(m=>m.s);
+
+const MODES=[
+  {id:"A",code:"A",t:"説明から語を当てる",d:"全地域の語をシャッフルして出題。誤答には他地域の同系統の語も混ざります。"},
+  {id:"B",code:"B",t:"語の属性を答える",d:"まず「どの文化圏の語か」を答え、続けてその地域固有の属性（時代・区分・分野・学部・様式・立場など）を答えます。"},
+  {id:"C",code:"C",t:"分類する",d:"「中国・宋の文化にあてはまる語」「ギリシアの文化」「中世ヨーロッパ・大学の語」などを、地域の混ざった選択肢からすべて選びます。"}
+];
+
+// ---- モードC 分類課題 ----
+const CTASKS=[];
+REGIONS.forEach(r=>CTASKS.push({r,s:null,label:`<b>${r}</b>の文化史で学ぶ語`}));
+CN_ERAS.forEach(e=>CTASKS.push({r:'中国',s:e,label:`中国・<b>${e}</b>の文化にあてはまる語`}));
+GR_ERAS.forEach(e=>CTASKS.push({r:'ギリシア・ローマ',s:e,label:`ギリシア・ローマ文化史のうち、<b>${e}</b>の区分にあてはまる語`}));
+IS_FIELDS.forEach(e=>CTASKS.push({r:'イスラーム',s:e,label:`イスラーム文化史・<b>${e}</b>の分野にあてはまる語`}));
+ME_CATS.forEach(e=>CTASKS.push({r:'中世ヨーロッパ',s:e,label:`中世ヨーロッパ文化史・<b>${e}</b>の分野にあてはまる語`}));
+const taskTest=(t,d)=>d.mem.some(m=>m.r===t.r&&(t.s==null||m.s===t.s));
+
+// 1モードあたりの出題数（ここを変えれば全体に反映されます）
+const QCOUNT={A:20, B:20, C:20};
+
+// モードB対象：総称語（イスラーム文化・ヘレニズム文化）は文化圏問題が自明になるため除外
+const B_EXCLUDE=new Set(['gr_hellenism_culture','is_islam_culture']);
+
+// 状態
+
+/* ---- 苦手語句の記録（localStorage・この端末のブラウザ内のみ）----
+   誤答した語だけを記録し、その後の正答回数もあわせて数える。
+   トップページの「苦手語句リスト」がこのデータを読み取って表示する。 */
+const WEAK_KEY='tsubame_weak_v1';
+function weakRecord(term,read,tag,ok,wt){
+  wt=(wt==null)?1:wt;   // 分類問題は0.5など、出題形式に応じた重み
+  try{
+    const db=JSON.parse(localStorage.getItem(WEAK_KEY)||'{}');
+    let e=db[term];
+    if(ok){
+      if(!e)return;                       // 誤答歴のない語の正答は記録しない
+      e.c=Math.round((e.c+wt)*10)/10;
+      e.st=(e.st||0)+1;                   // 連続正解数（克服判定用）
+      e.last='ok';e.ts=Date.now();
+    }else{
+      e=e||{t:term,r:read||'',g:'',w:0,c:0,st:0,last:'',ts:0};
+      e.w=Math.round((e.w+wt)*10)/10;
+      e.st=0;                             // 誤答で連続正解はリセット
+      e.last='ng';e.ts=Date.now();
+      if(tag){const gs=new Set(String(e.g).split('・').filter(Boolean));String(tag).split('・').forEach(x=>gs.add(x));e.g=[...gs].join('・');}
+      if(!e.r&&read)e.r=read;
+    }
+    db[term]=e;
+    localStorage.setItem(WEAK_KEY,JSON.stringify(db));
+  }catch(err){/* プライベートブラウズ等、保存できない環境では何もしない */}
+}
+
+let state={mode:null,pool:[],idx:0,total:0,correct:0,answeredCurrent:false,wrong:[]};
+
+// ---- 開始画面の構築 ----
+const modeList=document.getElementById('modeList');
+MODES.forEach(m=>{
+  const b=document.createElement('button');
+  b.className='mode-card';b.dataset.mode=m.id;
+  b.innerHTML=`<span class="code">${m.code}</span><span class="body"><span class="t">${m.t}</span><span class="d">${m.d}</span></span>`;
+  b.addEventListener('click',()=>{selectMode(m.id);});
+  modeList.appendChild(b);
+});
+function selectMode(id){
+  state.mode=id;
+  [...modeList.children].forEach(c=>c.style.borderColor=(c.dataset.mode===id)?'var(--ink)':'var(--line)');
+  [...modeList.children].forEach(c=>c.style.background=(c.dataset.mode===id)?'#fff':'var(--paper-card)');
+}
+
+document.getElementById('startBtn').addEventListener('click',start);
+document.getElementById('backBtn').addEventListener('click',goHome);
+
+function start(){
+  if(!state.mode){alert('出題形式を選んでください。');return;}
+  buildPool();
+  if(state.pool.length===0){alert('出題できる語がありません。');return;}
+  show('quiz');renderQuestion();
+}
+
+function buildPool(){
+  if(state.mode==='C'){
+    state.pool=sample(CTASKS.map((_,i)=>i),QCOUNT.C);
+  }else{
+    let items=DATA.slice();
+    if(state.mode==='B')items=items.filter(d=>!B_EXCLUDE.has(d.id));
+    state.pool=shuffle(items).slice(0,Math.min(items.length,QCOUNT[state.mode]||20));
+  }
+  state.idx=0;state.total=state.pool.length;state.correct=0;state.wrong=[];
+}
+
+function show(which){
+  ['start','quiz','done'].forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==which));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function goHome(){show('start');}
+function addBadge(el,text,cls){el.insertAdjacentHTML('beforeend',`<span class="badge ${cls}">${text}</span>`);}
+
+function updateTop(){
+  document.getElementById('progress').textContent=`第 ${state.idx+1} 問 / 全 ${state.total} 問`;
+  document.getElementById('scoreTag').textContent=state.idx>0?`　正答 ${state.correct}`:'';
+}
+
+function stanceLabel(s){return s==='自然科学'?'自然科学の重視':s;}
+
+function explainHTML(d){
+  let parts=[];
+  const rs=regionsOf(d);
+  parts.push(`文化圏：<b>${rs.join('・')}</b>`);
+  rs.forEach(r=>{
+    const ss=subsIn(d,r).filter(s=>s&&s!=='その他');
+    if(ss.length)parts.push(`${rs.length>1?r+'での':''}${SUB_LABEL[r]}：<b>${ss.join('・')}</b>`);
+  });
+  if(d.faculty)parts.push(`中心学部：<b>${d.faculty}</b>`);
+  if(d.style)parts.push(`様式：<b>${d.style}</b>`);
+  if(d.country)parts.push(`国：<b>${d.country}</b>`);
+  if(d.stance)parts.push(`立場：<b>${stanceLabel(d.stance)}</b>`);
+  if(d.theme)parts.push(`題材・性格：<b>${d.theme}</b>`);
+  if(d.work){const w=byId(d.work);if(w)parts.push(`作品：<b>${w.term}</b>`);}
+  if(d.person){const p=byId(d.person);if(p)parts.push(`${(d.type==='書物'||d.type==='作品')?'作者':'関係人物'}：<b>${p.term}</b>`);}
+  let s=`<div class="explain"><span class="ttl">解説</span>${d.desc}`;
+  if(d.note)s+=`<br><span style="color:var(--ink-soft)">※ ${d.note}</span>`;
+  s+=`<br><br>${parts.join('　／　')}</div>`;
+  return s;
+}
+
+// ====== 出題ルーティング ======
+function renderQuestion(){
+  updateTop();state.answeredCurrent=false;
+  const m=state.mode;
+  if(m==='A')renderModeA();
+  else if(m==='C')renderModeC();
+  else renderModeB();
+}
+
+/* ---- モードA：説明 → 語を選ぶ ---- */
+function distractorsFor(d){
+  // 説明文が出題語と同一の語は誤答にしない（モードAで正解が一意でなくなるため）
+  const uniqPush=(arr,x)=>{if(x&&x.id!==d.id&&x.desc!==d.desc&&!arr.some(y=>y.term===x.term))arr.push(x);};
+  let ordered=[];
+  if(d.type==='人物'){
+    if(d.region==='中国'){
+      // 中国の人物は中国内のみ（漢字名と片仮名名は混ざらない）
+      const cn=DATA.filter(x=>x.type==='人物'&&x.region==='中国'&&x.id!==d.id);
+      const same=shuffle(cn.filter(x=>x.mem.some(m=>d.mem.some(n=>n.s===m.s))));
+      const other=shuffle(cn.filter(x=>!same.includes(x)));
+      [...same,...other].forEach(x=>uniqPush(ordered,x));
+    }else{
+      const own=DATA.filter(x=>x.type==='人物'&&x.region===d.region&&x.id!==d.id);
+      const sameSub=shuffle(own.filter(x=>x.group===d.group));
+      const cross=shuffle(DATA.filter(x=>x.type==='人物'&&x.region!==d.region&&x.region!=='中国'&&x.id!==d.id));
+      // 同地域2 ＋ 他地域1 を基本形にする
+      sameSub.slice(0,2).forEach(x=>uniqPush(ordered,x));
+      cross.slice(0,1).forEach(x=>uniqPush(ordered,x));
+      shuffle(own).forEach(x=>uniqPush(ordered,x));
+      (PERSON_GENERALS[d.group]||PERSON_GENERALS['pg:'+({'ギリシア・ローマ':'gr','イスラーム':'is','中世ヨーロッパ':'me'}[d.region])]||[]).forEach(t=>uniqPush(ordered,{term:t[0],read:t[1],id:'g_'+t[0]}));
+      cross.slice(1).forEach(x=>uniqPush(ordered,x));
+    }
+  }else{
+    const sameLocal=shuffle(DATA.filter(x=>x.id!==d.id&&x.group&&x.group===d.group));
+    const crossMates=d.cross?shuffle(DATA.filter(x=>x.id!==d.id&&x.cross===d.cross&&x.group!==d.group)):[];
+    const generals=(GENERALS[d.group]||[]).map(t=>({term:t[0],read:t[1],id:'g_'+t[0]}));
+    // 他地域の同系統1 ＋ 同地域の同系統2 を基本形にする
+    crossMates.slice(0,1).forEach(x=>uniqPush(ordered,x));
+    sameLocal.slice(0,2).forEach(x=>uniqPush(ordered,x));
+    shuffle(generals).forEach(x=>uniqPush(ordered,x));
+    sameLocal.slice(2).forEach(x=>uniqPush(ordered,x));
+    crossMates.slice(1).forEach(x=>uniqPush(ordered,x));
+    if(ordered.length<3){
+      shuffle(DATA.filter(x=>x.id!==d.id&&x.type===d.type&&x.region===d.region)).forEach(x=>uniqPush(ordered,x));
+    }
+  }
+  let distract=ordered.slice(0,3);
+  // 対立概念（実在論⇔唯名論、ロマネスク⇔ゴシック）は、対の語を誤答に必ず含める
+  if(d.pair){
+    const pw=byId(d.pair);
+    if(pw&&!distract.some(x=>x.id===pw.id))distract=[pw,...distract.filter(x=>x.id!==pw.id)].slice(0,3);
+  }
+  return shuffle(distract);
+}
+
+function renderModeA(){
+  const d=state.pool[state.idx];
+  const distract=distractorsFor(d);
+  let opts=shuffle([d,...distract]);
+  opts=[...opts,{term:'わからない',read:'',id:'__dk__',dk:true}];
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">この説明にあてはまる語は？</div>
+    <div class="prompt-desc">${d.desc}</div>
+    <div class="opts" id="opts"></div>
+    <div class="actions"><button class="btn btn-primary" id="answerA" disabled>解答する</button></div>
+    <div id="afterA"></div>
+  </div>`;
+  const oc=document.getElementById('opts');
+  const marks=['一','二','三','四','五'];
+  let selIdx=-1;
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.dk?' dk':'');
+    const rd=o.read?`<span style="color:var(--ink-soft);font-size:12px">（${o.read}）</span>`:'';
+    b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.term}${rd}</span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      selIdx=i;
+      [...oc.children].forEach(c=>c.classList.remove('selected'));
+      b.classList.add('selected');
+      document.getElementById('answerA').disabled=false;
+    });
+    oc.appendChild(b);
+  });
+  document.getElementById('answerA').addEventListener('click',()=>{
+    if(state.answeredCurrent||selIdx<0)return;
+    state.answeredCurrent=true;
+    const o=opts[selIdx];
+    const ok=o.id===d.id;
+    if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    weakRecord(d.term,d.read,regionsOf(d).join('・'),ok);
+    [...oc.children].forEach((c,ci)=>{
+      c.disabled=true;c.classList.remove('selected');
+      const oo=opts[ci];
+      const isCorrect=oo.id===d.id;
+      const isPicked=(ci===selIdx);
+      if(isCorrect)c.classList.add('correct');
+      else if(isPicked && !oo.dk)c.classList.add('wrong');
+      else c.classList.add('dim');
+      if(isPicked && !oo.dk)addBadge(c,'あなたの解答','your');
+      if(isCorrect)addBadge(c,'正しい選択肢','ans');
+    });
+    document.getElementById('answerA').disabled=true;
+    document.getElementById('afterA').innerHTML=verdict(ok)+explainHTML(d)+nextBtnHTML();
+    bindNext();
+  });
+}
+
+/* ---- モードB：語 → 文化圏＋属性をまとめて答える ---- */
+const FACULTIES=['神学','法学','医学','哲学','自然科学'];
+const U_COUNTRIES=['イタリア','フランス','イギリス','ドイツ'];
+const B_COUNTRIES=['イタリア','フランス','ドイツ','イギリス'];
+const STYLES=['ロマネスク様式','ゴシック様式','ビザンツ様式','バシリカ様式'];
+const STANCES=['実在論','唯名論','自然科学の重視','教父哲学'];
+const THEMES=['カール大帝時代の騎士の武勲が題材','ゲルマンの英雄叙事詩','イギリスのケルト人の伝説から発展','宮廷における騎士の恋愛をうたう叙情詩'];
+
+// 選択肢 val の配列＋validSet（複数正解対応）で設問を作る
+function makeQ(ask,optionVals,validSet){
+  const opts=optionVals.map(v=>({val:v,label:v}));
+  opts.push({val:'__dk__',label:'わからない',dk:true});
+  return {ask,options:opts,validSet,picked:null,locked:false};
+}
+function fixedChoiceQ(ask,answer,pool,nOpt){
+  const others=pool.filter(x=>x!==answer);
+  return makeQ(ask,shuffle([answer,...sample(others,Math.min(nOpt-1,others.length))]),[answer]);
+}
+function pickItemQ(ask,target,filterFn,generals){
+  let cand=DATA.filter(x=>x.id!==target.id&&filterFn(x)).map(x=>({id:x.id,term:x.term,read:x.read}));
+  if(generals)cand=cand.concat(generals.map(t=>({id:'g_'+t[0],term:t[0],read:t[1]})));
+  const opts=shuffle([{id:target.id,term:target.term,read:target.read},...sample(cand,3)])
+    .map(x=>({val:x.id,label:`${x.term}${x.read?`（${x.read}）`:''}`}));
+  opts.push({val:'__dk__',label:'わからない',dk:true});
+  return {ask,options:opts,validSet:[target.id],picked:null,locked:false};
+}
+
+function buildQuestionsFor(d){
+  const qs=[];
+  // 問1：文化圏（複数所属の語はいずれも正解）
+  qs.push(makeQ('この語はどの文化圏の文化史で学ぶ語か？',REGIONS.slice(),regionsOf(d)));
+  // 問2以降：主所属の地域に応じた属性
+  const r=d.region;
+  if(r==='中国'){
+    const subs=subsIn(d,'中国');
+    const others=CN_ERAS.filter(e=>!subs.includes(e));
+    qs.push(makeQ('中国のどの時代の文化か？',shuffle([...subs,...sample(others,Math.max(1,4-subs.length))]),subs));
+  }else if(r==='ギリシア・ローマ'){
+    const subs=subsIn(d,'ギリシア・ローマ');
+    qs.push(makeQ('ギリシア・ローマ文化史での区分は？',shuffle(GR_ERAS.slice()),subs));
+  }else if(r==='イスラーム'){
+    const subs=subsIn(d,'イスラーム').filter(s=>s!=='その他');
+    if(subs.length)qs.push(makeQ('イスラーム文化史での分野は？',shuffle(IS_FIELDS.slice()),subs));
+  }else if(r==='中世ヨーロッパ'){
+    if(d.type==='大学'){
+      qs.push(fixedChoiceQ('この大学の中心学部は？',d.faculty,FACULTIES,4));
+      qs.push(fixedChoiceQ('この大学がある国は？',d.country,U_COUNTRIES,4));
+    }else if(d.type==='建築物'){
+      qs.push(fixedChoiceQ('この建築の様式は？',d.style,STYLES,4));
+      qs.push(fixedChoiceQ('この建築がある国は？',d.country,B_COUNTRIES,4));
+    }else if(d.type==='人物'&&d.stance){
+      qs.push(fixedChoiceQ('この人物の立場・分野は？',stanceLabel(d.stance),STANCES,4));
+      if(d.work){const w=byId(d.work);if(w)qs.push(pickItemQ('この人物の著作は？',w,()=>false,GENERALS['me:神学書']));}
+    }else if(d.person&&d.region==='中世ヨーロッパ'){
+      const p=byId(d.person);
+      if(p)qs.push(pickItemQ('この書物の著者は？',p,x=>x.type==='人物'&&x.region==='中世ヨーロッパ'));
+    }else if(d.theme){
+      qs.push(fixedChoiceQ('この作品の題材・性格は？',d.theme,THEMES,4));
+    }
+  }
+  // 中国・ギリシア＝ローマ・イスラームの作者⇔作品リンク
+  if(r!=='中世ヨーロッパ'){
+    if(d.work){const w=byId(d.work);if(w)qs.push(pickItemQ('この人物に関わる作品は？',w,x=>(x.type==='書物'||x.type==='作品')&&x.region===d.region));}
+    if(d.person){
+      const p=byId(d.person);
+      // 書物・作品は「作者」、学派・暦・法典などの概念は「関係の深い人物」と問う
+      const ask=(d.type==='書物'||d.type==='作品')?'この作品の作者は？':'この語と関係の深い人物は？';
+      if(p)qs.push(pickItemQ(ask,p,x=>x.type==='人物'&&x.region===d.region));
+    }
+  }
+  // 最終問：語の説明として正しいものを選ぶ（説明文からのリーク防止のため必ず最後）
+  const dd=descDistractors(d);
+  if(dd.length===3){
+    const opts=shuffle([{val:d.id,label:d.desc},...dd.map(x=>({val:x.id,label:x.desc}))]);
+    opts.push({val:'__dk__',label:'わからない',dk:true});
+    qs.push({ask:'この語の説明として正しいものは？',options:opts,validSet:[d.id],picked:null,locked:false});
+  }
+  return qs;
+}
+
+// 説明文どうしを並べる設問の誤答：モードAと同じ系統選定を使い、
+// 説明文を持たない一般誤答（g_）は除いてリスト内の語で補充する
+function descDistractors(d){
+  let picked=distractorsFor(d).filter(x=>!String(x.id).startsWith('g_')&&x.desc);
+  // 誤答どうしでも説明文が同一なら1つに絞る
+  {const seen=new Set([d.desc]);picked=picked.filter(x=>{if(seen.has(x.desc))return false;seen.add(x.desc);return true;});}
+  const usedId=new Set([d.id,...picked.map(x=>x.id)]);
+  const usedDesc=new Set([d.desc,...picked.map(x=>x.desc)]);
+  const sub=d.mem[0]&&d.mem[0].s;
+  const fill=[
+    ...DATA.filter(x=>x.group===d.group),
+    ...(d.cross?DATA.filter(x=>x.cross===d.cross):[]),
+    ...DATA.filter(x=>x.type===d.type&&x.region===d.region),
+    ...DATA.filter(x=>x.region===d.region&&x.mem.some(m=>m.s===sub)),
+    ...DATA.filter(x=>x.region===d.region),
+    ...DATA.filter(x=>x.type===d.type)
+  ];
+  for(const f of fill.length?shuffle(fill):[]){
+    if(picked.length>=3)break;
+    if(!usedId.has(f.id)&&!usedDesc.has(f.desc)){picked.push(f);usedId.add(f.id);usedDesc.add(f.desc);}
+  }
+  return picked.slice(0,3);
+}
+
+function renderModeB(){
+  const d=state.pool[state.idx];
+  const questions=buildQuestionsFor(d);
+  if(questions.length===1)renderModeB_single(d,questions[0]);
+  else renderModeB_multi(d,questions);
+}
+
+function renderModeB_single(d,q){
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">${q.ask}</div>
+    <div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>
+    <div class="opts" id="opts" style="margin-top:18px"></div>
+    <div class="actions"><button class="btn btn-primary" id="answerB" disabled>解答する</button></div>
+    <div id="afterB"></div>
+  </div>`;
+  const oc=document.getElementById('opts');
+  const marks=['一','二','三','四','五'];
+  let selVal=null;
+  q.options.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.dk?' dk':'');b.dataset.val=o.val;
+    b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.label}</span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      selVal=o.val;
+      [...oc.children].forEach(c=>c.classList.remove('selected'));
+      b.classList.add('selected');
+      document.getElementById('answerB').disabled=false;
+    });
+    oc.appendChild(b);
+  });
+  document.getElementById('answerB').addEventListener('click',()=>{
+    if(state.answeredCurrent||selVal==null)return;
+    state.answeredCurrent=true;
+    const ok=q.validSet.includes(selVal);
+    if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    weakRecord(d.term,d.read,regionsOf(d).join('・'),ok);
+    [...oc.children].forEach(c=>{
+      c.disabled=true;c.classList.remove('selected');
+      const v=c.dataset.val;
+      const isAns=q.validSet.includes(v);
+      const isPicked=(v===selVal);
+      if(isAns)c.classList.add('correct');
+      else if(isPicked && v!=='__dk__')c.classList.add('wrong');
+      else c.classList.add('dim');
+      if(isPicked && v!=='__dk__')addBadge(c,'あなたの解答','your');
+      if(isAns)addBadge(c,'正しい選択肢','ans');
+    });
+    document.getElementById('answerB').disabled=true;
+    document.getElementById('afterB').innerHTML=verdict(ok)+explainHTML(d)+nextBtnHTML();
+    bindNext();
+  });
+}
+
+// 設問を1つずつ表示する逐次方式。決定した設問はその場で採点・正誤表示し、
+// 正しい前提の上で次の設問に進む（後の設問文が前の設問の答えを含んでも矛盾しない）。
+function renderModeB_multi(d,questions){
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">次の語について答えてください（設問は1つずつ・決定するとその場で採点されます）</div>
+    <div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>
+    <div id="qblocks"></div>
+    <div id="afterB"></div>
+  </div>`;
+
+  const qb=document.getElementById('qblocks');
+  let allOK=true;
+
+  // 決定した設問をその場で採点し、正誤を返す
+  function gradeOne(q){
+    const okThis=q.validSet.includes(q.picked);
+    [...q.el.children].forEach(c=>{
+      c.disabled=true;c.classList.remove('selected');
+      const v=c.dataset.val;
+      const isAns=q.validSet.includes(v);
+      const isPicked=(v===q.picked);
+      if(isAns)c.classList.add('correct');
+      else if(isPicked && v!=='__dk__')c.classList.add('wrong');
+      else c.classList.add('dim');
+      if(isPicked && v!=='__dk__')addBadge(c,'あなたの解答','your');
+      if(isAns)addBadge(c,'正しい選択肢','ans');
+    });
+    // 設問見出しの右に小さく○×を出す
+    q.askEl.insertAdjacentHTML('beforeend',
+      okThis?'<span style="color:#3a5a22;margin-left:8px">○</span>'
+            :'<span style="color:#8a3322;margin-left:8px">×</span>');
+    return okThis;
+  }
+
+  function finishItem(){
+    state.answeredCurrent=true;
+    if(allOK)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    weakRecord(d.term,d.read,regionsOf(d).join('・'),allOK);
+    document.getElementById('afterB').innerHTML=
+      verdict(allOK)
+      +`<p style="font-size:12px;color:var(--ink-soft);margin:8px 0 0">${allOK?'すべての設問に正解しました。':'設問に誤りがあります（全問正解で1点）。'}</p>`
+      +explainHTML(d)+nextBtnHTML();
+    bindNext();
+  }
+
+  function showQuestion(qi){
+    const q=questions[qi];
+    const last=(qi===questions.length-1);
+    const blk=document.createElement('div');blk.className='qblock';
+    blk.innerHTML=`<div class="q-ask"><span class="q-no">問${qi+1}</span>${q.ask}</div><div class="opts"></div>
+      <div class="actions" style="margin-top:12px"><button class="btn btn-primary" disabled>${last?'決定する':'決定して次の設問へ'}</button></div>`;
+    qb.appendChild(blk);
+    const oc=blk.querySelector('.opts');
+    const decideBtn=blk.querySelector('button');
+    q.askEl=blk.querySelector('.q-ask');
+    const marks=['一','二','三','四','五'];
+    q.options.forEach((o,i)=>{
+      const b=document.createElement('button');
+      b.className='opt'+(o.dk?' dk':'');b.dataset.val=o.val;
+      b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.label}</span>`;
+      b.addEventListener('click',()=>{
+        if(q.locked)return;
+        [...oc.children].forEach(c=>c.classList.remove('selected'));
+        b.classList.add('selected');q.picked=o.val;
+        decideBtn.disabled=false;
+      });
+      oc.appendChild(b);
+    });
+    q.el=oc;
+    decideBtn.addEventListener('click',()=>{
+      if(q.locked||q.picked==null)return;
+      q.locked=true;
+      decideBtn.parentElement.remove();   // 決定ボタンを消す
+      if(!gradeOne(q))allOK=false;        // その場で採点
+      if(last)finishItem();
+      else showQuestion(qi+1);
+    });
+    blk.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  showQuestion(0);
+}
+
+/* ---- モードC：分類（複数選択・5択） ---- */
+function renderModeC(){
+  const task=CTASKS[state.pool[state.idx]];
+  const correctAll=DATA.filter(d=>taskTest(task,d));
+  const sameRegionOther=DATA.filter(d=>!taskTest(task,d)&&inRegion(d,task.r));
+  const otherRegion=DATA.filter(d=>!inRegion(d,task.r));
+  const nCorrect=Math.max(1,Math.min(3,correctAll.length,1+Math.floor(Math.random()*3)));
+  const chosenCorrect=sample(correctAll,nCorrect);
+  // 誤答：同地域の別区分と他地域を必ず混ぜる
+  let wrongs=[];
+  const nWrong=5-nCorrect;
+  if(task.s!=null&&sameRegionOther.length)wrongs.push(sample(sameRegionOther,1)[0]);
+  if(wrongs.length<nWrong&&otherRegion.length)wrongs.push(sample(otherRegion,1)[0]);
+  const restPool=shuffle([...sameRegionOther,...otherRegion]).filter(x=>!wrongs.includes(x));
+  while(wrongs.length<nWrong&&restPool.length)wrongs.push(restPool.pop());
+  const items=shuffle([...chosenCorrect,...wrongs]);
+  const picked=new Set();
+
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">次のうち、${task.label}にあてはまるものを<b style="color:var(--ink)">すべて</b>選んでください</div>
+    <div class="prompt-sub">あてはまる語は1つとは限りません。</div>
+    <div class="opts" id="optsC"></div>
+    <div class="actions"><button class="btn btn-primary" id="gradeC">採点する</button><button class="btn btn-ghost" id="dkC">わからない</button></div>
+    <div id="afterC"></div>
+  </div>`;
+  const oc=document.getElementById('optsC');
+  items.forEach(it=>{
+    const b=document.createElement('button');
+    b.className='opt';b.dataset.id=it.id;
+    b.innerHTML=`<span class="mk">□</span><span>${it.term}<span style="color:var(--ink-soft);font-size:12px">（${it.read}）</span></span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      const on=picked.has(it.id);
+      if(on){picked.delete(it.id);b.querySelector('.mk').textContent='□';b.classList.remove('selected');}
+      else{picked.add(it.id);b.querySelector('.mk').textContent='■';b.classList.add('selected');}
+    });
+    oc.appendChild(b);
+  });
+  function settleC(forceWrong){
+    if(state.answeredCurrent)return;state.answeredCurrent=true;
+    let ok=!forceWrong;
+    [...oc.children].forEach(c=>{
+      c.disabled=true;c.classList.remove('selected');
+      const it=items.find(x=>x.id===c.dataset.id);
+      const isCorrect=taskTest(task,it);
+      {const _t=regionsOf(it).join('・');const _ch=!forceWrong&&picked.has(c.dataset.id);if(isCorrect&&_ch)weakRecord(it.term,it.read,_t,true,0.5);else if(isCorrect&&!_ch)weakRecord(it.term,it.read,_t,false,0.5);else if(!isCorrect&&_ch)weakRecord(it.term,it.read,_t,false,0.5);}
+      const chosen=!forceWrong && picked.has(c.dataset.id);
+      if(isCorrect&&chosen){c.classList.add('correct');addBadge(c,'あなたの解答','your');addBadge(c,'正しい選択肢','ans');}
+      else if(isCorrect&&!chosen){c.classList.add('correct');c.style.opacity='.7';if(!forceWrong)ok=false;addBadge(c,'正しい選択肢','ans');}
+      else if(!isCorrect&&chosen){c.classList.add('wrong');ok=false;addBadge(c,'あなたの解答','your');}
+      else c.classList.add('dim');
+    });
+    if(ok)state.correct++; else state.wrong.push({type:'ctask',key:state.pool[state.idx]});
+    document.getElementById('gradeC').disabled=true;
+    document.getElementById('dkC').disabled=true;
+    const list=chosenCorrect.map(x=>x.term).join('、');
+    // 誤答側の各語の所属も解説に出す（横断混同の確認用）
+    const wrongInfo=wrongs.map(w=>{
+      const rs=regionsOf(w).join('・');
+      return `${w.term}＝${rs}`;
+    }).join('、');
+    const tail=ok?'すべて正しく選べています。':(forceWrong?'「わからない」を選びました。':'取りこぼし・誤選択があります。');
+    document.getElementById('afterC').innerHTML=
+      verdict(ok)
+      +`<div class="explain"><span class="ttl">解説</span>あてはまるのは <b>${list}</b> です。${tail}<br>
+      <span style="color:var(--ink-soft)">それ以外の語の所属：${wrongInfo}</span><br><br>
+      <span style="color:var(--ink-soft);font-size:12px">※ 緑＝あてはまる語、薄い緑＝選び落とした正解、赤＝誤って選んだ語。</span></div>`
+      +nextBtnHTML();
+    bindNext();
+  }
+  document.getElementById('gradeC').addEventListener('click',()=>settleC(false));
+  document.getElementById('dkC').addEventListener('click',()=>settleC(true));
+}
+
+// ---- 共通：正誤の明示 ----
+function verdict(ok){
+  return `<div class="verdict ${ok?'ok':'ng'}"><span class="ic">${ok?'○':'×'}</span><span>${ok?'正解':'不正解'}</span></div>`;
+}
+
+// ---- 共通：次へ ----
+function nextBtnHTML(){
+  const last=state.idx>=state.total-1;
+  return `<div class="actions"><button class="btn btn-primary" id="nextBtn">${last?'結果を見る':'次の問題へ →'}</button></div>`;
+}
+function bindNext(){
+  const nb=document.getElementById('nextBtn');
+  if(nb)nb.addEventListener('click',()=>{
+    state.idx++;
+    if(state.idx>=state.total)finish();
+    else renderQuestion();
+  });
+}
+
+function dedupWrong(arr){
+  const seen=new Set(),out=[];
+  arr.forEach(w=>{const k=w.type+':'+(w.id!=null?w.id:w.key);if(!seen.has(k)){seen.add(k);out.push(w);}});
+  return out;
+}
+function ctaskPlainLabel(t){return t.label.replace(/<[^>]+>/g,'');}
+function finish(){
+  show('done');
+  document.getElementById('doneScore').textContent=`${state.correct} / ${state.total}`;
+  const r=state.total?state.correct/state.total:0;
+  let msg;
+  if(r===1)msg='全問正解です。';
+  else if(r>=0.7)msg='よく取れています。間違えた語を確認しておきましょう。';
+  else if(r>=0.4)msg='半ばまで来ています。間違えた箇所を中心に復習しましょう。';
+  else msg='まずは語がどの文化圏のものかを整理し直すとよいでしょう。';
+  document.getElementById('doneMsg').textContent=msg;
+
+  const uniq=dedupWrong(state.wrong);
+  const area=document.getElementById('wrongArea');
+  if(uniq.length===0){
+    area.innerHTML=`<div class="actions" style="justify-content:center">
+      <button class="btn btn-primary" id="againBtn">同じ形式でもう一度</button>
+      <button class="btn btn-ghost" id="homeBtn">形式を選び直す</button></div>`;
+  }else{
+    const rows=uniq.map(w=>{
+      if(w.type==='ctask')return `<li><span>${ctaskPlainLabel(CTASKS[w.key])}（分類）</span><span class="rd">モードC</span></li>`;
+      const d=byId(w.id);
+      return `<li><span>${d.term}</span><span class="rd">${regionsOf(d).join('・')}</span></li>`;
+    }).join('');
+    area.innerHTML=`<div class="wrong-list">
+      <div class="wl-ttl">間違えた問題（${uniq.length}件）</div>
+      <ul>${rows}</ul></div>
+      <div class="actions" style="justify-content:center">
+        <button class="btn btn-primary" id="retryBtn">間違えた問題をもう一度（${uniq.length}問）</button>
+        <button class="btn btn-ghost" id="homeBtn">セッションを終了する</button></div>`;
+    document.getElementById('retryBtn').addEventListener('click',retryWrong);
+  }
+  const ag=document.getElementById('againBtn');if(ag)ag.addEventListener('click',()=>{buildPool();show('quiz');renderQuestion();});
+  const hm=document.getElementById('homeBtn');if(hm)hm.addEventListener('click',goHome);
+}
+function retryWrong(){
+  const uniq=dedupWrong(state.wrong);
+  state.pool = state.mode==='C' ? uniq.map(w=>w.key) : uniq.map(w=>byId(w.id));
+  state.idx=0;state.total=state.pool.length;state.correct=0;state.wrong=[];
+  show('quiz');renderQuestion();
+}
+</script>
+</body>
+</html>
