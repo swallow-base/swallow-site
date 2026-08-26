@@ -416,14 +416,20 @@ const MODES=[
    -------------------------------------------------------------------
    画像は同じフォルダ内の img/ に置いてください（例：renaissance/img/mona-lisa.jpg）。
    file … 保存するファイル名。ここと実際のファイル名を一致させること。
-   credit … 画面下に表示する出典・ライセンス表記。
+   credit … 画面下に表示する出典・ライセンス表記。HTMLを書けるので、
+            CCライセンスの場合はライセンス本文へのリンクを必ず含めること。
             ここが空欄の語は出題されません（表記漏れの防止のため）。
+            記入例は st-peters.jpg の行を参照。ccBySa() を使うと定型で書けます。
    絵画は原作者の没後100年以上が経過し、正面から複写した写真にも新たな著作権は
    生じないという扱いが一般的なため、あらかじめ記入してあります。
    彫刻・建築は撮影者の著作権が残るため、入手した画像に応じてご記入ください。
    =================================================================== */
 const IMG_BASE='img/';
 const PD='パブリックドメイン（作者の没後100年以上が経過した平面作品の複製）';
+// CC BY-SA 表記の雛形。ccBySa('撮影者名','4.0','コモンズ上のファイル名') のように使う
+const ccBySa=(author,ver,file)=>
+  `写真：${author}／<a href="https://creativecommons.org/licenses/by-sa/${ver}/" target="_blank" rel="noopener" style="color:inherit">CC BY-SA ${ver}</a>`
+  +`（Wikimedia Commons: ${file}／表示サイズを縮小）`;
 const IMAGES=[
   // ---- 絵画（記入済み） ----
   {id:'im_monalisa',   pid:'davinci',      t:'「モナ=リザ」',              file:'mona-lisa.jpg',         credit:PD},
@@ -435,12 +441,38 @@ const IMAGES=[
   {id:'im_children',   pid:'bruegel',      t:'「子どもの遊び」',          file:'childrens-games.jpg',   credit:PD},
   {id:'im_judgment',   pid:'michelangelo', t:'「最後の審判」',            file:'last-judgment.jpg',     credit:PD},
   // ---- 彫刻・建築（creditの記入が必要。空欄のあいだは出題されません） ----
-  {id:'im_david',      pid:'michelangelo', t:'「ダヴィデ像」',            file:'david.jpg',             credit:''},
-  {id:'im_george',     pid:'donatello',    t:'「聖ジョルジオ像」',        file:'st-george.jpg',         credit:''},
-  {id:'im_dome',       pid:'brunelleschi', t:'サンタ=マリア大聖堂のドーム',file:'duomo-dome.jpg',       credit:''},
-  {id:'im_stpeters',   pid:'bramante',     t:'サン=ピエトロ大聖堂',       file:'st-peters.jpg',         credit:''}
+  {id:'im_david',      pid:'michelangelo', t:'「ダヴィデ像」',            file:'david.jpg',
+   credit:ccBySa('Yair Haklai','4.0',"Michelangelo's David-Galleria dell'Accademia.jpg")},
+  {id:'im_george',     pid:'donatello',    t:'「聖ジョルジオ像」',        file:'st-george.jpg',
+   credit:ccBySa('Francesco Bini','4.0','Donatello, san giorgio, 1416-17, da orsanmichele 02.jpg')},
+  {id:'im_dome',       pid:'brunelleschi', t:'サンタ=マリア大聖堂のドーム',file:'duomo-dome.jpg',
+   credit:ccBySa('Eric Kilby','2.0','Florence Cathedral in Sunset.jpg')},
+  {id:'im_stpeters',   pid:'bramante',     t:'サン=ピエトロ大聖堂',       file:'st-peters.jpg',
+   credit:ccBySa('Didier Moïse','4.0',"St. Peter's Basilica in Vatican City.jpg")}
 ];
 const usableImages=()=>IMAGES.filter(im=>im.credit&&im.credit.trim());
+
+// 拡張子の食い違い（.jpeg / 大文字 / .png など）でも読めるように候補を並べる
+const IMG_EXTS=['.jpg','.jpeg','.JPG','.JPEG','.png','.PNG','.webp'];
+function imgCandidates(file){
+  const base=file.replace(/\.[^.]+$/,'');
+  const list=[file];
+  IMG_EXTS.forEach(e=>{if(!list.includes(base+e))list.push(base+e);});
+  return list.map(f=>IMG_BASE+f);
+}
+// 候補を順に試し、成功したら onOK、すべて失敗したら onNG を呼ぶ
+function loadImage(el,file,onOK,onNG){
+  const cands=imgCandidates(file);
+  let i=0; const t0=performance.now();
+  const next=()=>{ if(i>=cands.length){onNG&&onNG(new URL(cands[0],location.href).href);return;} el.src=cands[i++]; };
+  el.addEventListener('load',()=>onOK&&onOK({
+    src:el.currentSrc||el.src,
+    w:el.naturalWidth,h:el.naturalHeight,
+    ms:Math.round(performance.now()-t0)
+  }),{once:true});
+  el.addEventListener('error',next);
+  next();
+}
 
 // 各語の「系統」。誤答は同じ系統から選び、説明文の細部で見分けさせる（人物はfield等で判定するため不要）
 const GROUP_MAP={
@@ -639,22 +671,53 @@ function renderImageCheck(){
   const box=document.getElementById('imgCheck');
   box.classList.remove('hidden');
   const rows=IMAGES.map(im=>{
-    const cr=(im.credit&&im.credit.trim())?'':'<b style="color:#a8432f">出典表記が未記入</b>';
-    return `<li id="ic_${im.id}" style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line)">
-      <span>${im.t}<br><span style="color:var(--ink-soft);font-size:11px">${IMG_BASE}${im.file}${cr?'　'+cr:''}</span></span>
-      <span class="st" style="white-space:nowrap;font-size:12px;color:var(--ink-soft)">確認中…</span></li>`;
+    const cr=(im.credit&&im.credit.trim())?'':'　<b style="color:#a8432f">出典表記が未記入</b>';
+    return `<li id="ic_${im.id}" style="padding:6px 0;border-bottom:1px solid var(--line)">
+      <div style="display:flex;justify-content:space-between;gap:10px">
+        <span>${im.t}</span>
+        <span class="st" style="white-space:nowrap;font-size:12px;color:var(--ink-soft)">確認中…</span>
+      </div>
+      <div class="dt" style="color:var(--ink-soft);font-size:11px">${IMG_BASE}${im.file}${cr}</div>
+    </li>`;
   }).join('');
+  const here=new URL(IMG_BASE,location.href).href;
   box.innerHTML=`<div class="wrong-list"><div class="wl-ttl">画像の設置状況</div>
+    <p style="font-size:11px;color:var(--ink-soft);margin:0 0 10px;word-break:break-all">
+      このページの場所：${location.href}<br>
+      画像を探しに行く場所：<b>${here}</b></p>
     <ul style="list-style:none;margin:0;padding:0">${rows}</ul>
-    <p style="font-size:11px;color:var(--ink-soft);margin:10px 0 0">
-    「未設置」の作品は、ファイル名を一致させて img/ フォルダに置いてください。
-    出典表記が未記入の作品は、画像があってもモードEでは出題されません。</p></div>`;
+    <p id="icSummary" style="font-size:12px;margin:12px 0 0"></p>
+    <p style="font-size:11px;color:var(--ink-soft);margin:8px 0 0">
+    幅が2000pxを超える画像は表示が重くなります。コモンズのダウンロード時に
+    幅800〜1200px程度のサイズを選び直すと改善します。</p></div>`;
+
+  let done=0,ng=0,heavy=0,slow=0;
+  const finish=()=>{
+    if(++done<IMAGES.length)return;
+    const el=document.getElementById('icSummary');
+    const msg=[];
+    if(ng)msg.push(`<b style="color:#a8432f">${ng}点が読み込めません。</b>`);
+    if(heavy)msg.push(`<b style="color:#a8432f">${heavy}点が大きすぎます（幅2000px超）。</b>`);
+    if(slow)msg.push(`${slow}点の読み込みに3秒以上かかりました。`);
+    el.innerHTML=msg.length?msg.join(' '):'<b style="color:#2f6f4f">12点すべて正常です。</b>';
+  };
   IMAGES.forEach(im=>{
-    const el=document.querySelector(`#ic_${im.id} .st`);
+    const li=document.getElementById('ic_'+im.id);
+    const st=li.querySelector('.st'), dt=li.querySelector('.dt');
     const probe=new Image();
-    probe.onload=()=>{el.textContent='○ 設置済み';el.style.color='#2f6f4f';};
-    probe.onerror=()=>{el.textContent='× 未設置';el.style.color='#a8432f';};
-    probe.src=IMG_BASE+im.file;
+    loadImage(probe,im.file,
+      r=>{
+        const big=r.w>2000, lag=r.ms>3000;
+        if(big)heavy++; if(lag)slow++;
+        st.textContent=big?'△ 大きすぎます':(lag?'△ 読み込みが遅い':'○ 設置済み');
+        st.style.color=(big||lag)?'#a8432f':'#2f6f4f';
+        const name=r.src.split('/').pop();
+        dt.innerHTML=`${IMG_BASE}${decodeURIComponent(name)}　${r.w}×${r.h}px　${r.ms}ms`
+          +(name!==im.file?'　<b style="color:#a8432f">設定と拡張子が違います</b>':'');
+        finish();
+      },
+      url=>{ng++;st.textContent='× 見つかりません';st.style.color='#a8432f';
+            dt.innerHTML=`<span style="word-break:break-all">探した場所：${url}</span>`;finish();});
   });
 }
 
@@ -1055,8 +1118,11 @@ function renderModeE(){
   body.innerHTML=`<div class="card">
     <div class="prompt-label">次の作品の作者は？</div>
     <div style="margin:10px 0 4px;text-align:center">
-      <img id="qimg" src="${IMG_BASE}${im.file}" alt=""
+      <img id="qimg" alt="" class="hidden"
            style="max-width:100%;max-height:46vh;border:1px solid var(--line);border-radius:4px;background:#fff">
+      <div id="imgWait" style="padding:26px 14px;border:1px dashed var(--line);border-radius:4px;color:var(--ink-soft);font-size:13px">
+        画像を読み込んでいます…
+      </div>
       <div id="imgNG" class="hidden" style="padding:26px 14px;border:1px dashed var(--line);border-radius:4px;color:var(--ink-soft);font-size:13px">
         画像を読み込めません。<br><b>${IMG_BASE}${im.file}</b> が置かれているか確認してください。
       </div>
@@ -1066,7 +1132,9 @@ function renderModeE(){
     <div id="afterE"></div>
   </div>`;
   const qi=document.getElementById('qimg');
-  qi.addEventListener('error',()=>{qi.classList.add('hidden');document.getElementById('imgNG').classList.remove('hidden');});
+  loadImage(qi,im.file,
+    ()=>{document.getElementById('imgWait').classList.add('hidden');qi.classList.remove('hidden');},
+    ()=>{document.getElementById('imgWait').classList.add('hidden');document.getElementById('imgNG').classList.remove('hidden');});
 
   const oc=document.getElementById('optsE');
   const marks=['一','二','三','四','五'];
