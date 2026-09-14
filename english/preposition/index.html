@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>つばめ英語 — 前置詞演習 v2.2</title>
+<title>つばめ英語 — 前置詞演習 v2.5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -449,29 +449,19 @@
   .ex-row .j { flex: 1 1 44%; color: var(--subtle); font-size: 0.92em; }
   .ex-more { font-size: 0.78em; color: var(--subtle); margin-top: 4px; }
 
-  /* モードE: 総点検 */
-  .exam-item { background: var(--paper); border: 1px solid var(--border); border-radius: 4px; padding: 20px 22px; margin-bottom: 14px; }
-  .exam-phrase { font-family: 'Cormorant Garamond', serif; font-size: 1.9em; text-align: center; margin-bottom: 4px; }
-  .exam-phrase u { text-decoration: none; color: var(--accent); font-style: italic; border-bottom: 2px solid var(--accent); }
-  .exam-q { font-size: 0.82em; color: var(--subtle); letter-spacing: 0.06em; margin: 16px 0 8px; }
-  .exam-opts { display: grid; gap: 7px; }
-  .exam-opt {
-    font: inherit; font-size: 0.92em; text-align: left; line-height: 1.55;
-    padding: 10px 14px; border: 1px solid var(--border); border-radius: 4px;
-    background: transparent; color: var(--ink); cursor: pointer;
+  /* モードA: アコーディオン */
+  .inv-head { cursor: pointer; }
+  .inv-toggle {
+    margin-left: auto; font: inherit; font-size: 0.76em; letter-spacing: 0.04em;
+    color: var(--accent); background: none; border: none; cursor: pointer; white-space: nowrap;
   }
-  .exam-opt:hover { border-color: var(--accent); }
-  .exam-opt.selected { border-color: var(--accent); background: var(--highlight); box-shadow: inset 0 0 0 1px var(--accent); }
-  .exam-opt.ok { border-color: #1f5d3f; background: #eaf3ed; }
-  .exam-opt.ng { border-color: var(--accent); background: #faf0f0; text-decoration: line-through; }
-  .exam-opt.ans { border-color: #1f5d3f; }
-  .exam-mark { float: right; font-size: 0.9em; letter-spacing: 0.1em; }
-  .exam-mark.o { color: #1f5d3f; } .exam-mark.x { color: var(--accent); }
-  .exam-ref { font-size: 0.78em; color: var(--subtle); margin-top: 10px; }
-  .exam-score { text-align: center; padding: 22px; background: var(--paper); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 16px; }
-  .exam-score .n { font-family: 'Cormorant Garamond', serif; font-size: 2.6em; color: var(--accent); line-height: 1.1; }
-  .exam-score .lbl { font-size: 0.8em; color: var(--subtle); letter-spacing: 0.06em; }
-  .exam-score .row2 { display: flex; justify-content: center; gap: 40px; margin-top: 6px; }
+  .inv-toggle::before { content: '▸ '; }
+  .inv-word.open .inv-toggle::before { content: '▾ '; }
+  .inv-count { font-size: 0.74em; color: var(--subtle); white-space: nowrap; }
+  .inv-body { display: none; }
+  .inv-word.open .inv-body { display: block; }
+  .inv-word.open .inv-head { margin-bottom: 8px; }
+  .inv-word:not(.open) .inv-head { padding-bottom: 0; border-bottom: none; margin-bottom: 0; }
 
   /* モード選択の補助ボタン */
   .sub-btn {
@@ -998,10 +988,10 @@
       <div class="mode-desc">by と till、above と over、of と from のように、意味の近い語だけを選択肢にして出題します。解説では判断の基準を示します。</div>
       <div class="mode-count" id="countD"></div>
     </button>
-    <button class="mode-btn" onclick="startExam()">
+    <button class="mode-btn" onclick="startQuiz('E')">
       <div class="mode-label">E.</div>
-      <div class="mode-title">語句を総点検する(意味・用法と訳)</div>
-      <div class="mode-desc">『整理して覚える028』の語句について、意味・用法と和訳の二つを続けて答えます。途中で正誤は出さず、10問すべてに答えたあとにまとめて採点します。</div>
+      <div class="mode-title">語句の意味を答える</div>
+      <div class="mode-desc">『整理して覚える028』の語句を見て、その和訳を選びます。解説では意味・用法の分類と参照番号を示します。</div>
       <div class="mode-count" id="countE"></div>
     </button>
     <section id="weakSection" style="display:none">
@@ -1055,6 +1045,8 @@
       <input type="search" id="invQ" placeholder="語・訳・用法で絞り込む">
       <button class="tg" id="invBlind" aria-pressed="false">前置詞を隠す</button>
       <button class="tg" id="invEx" aria-pressed="false">例文を隠す</button>
+      <button class="tg" id="invOpenAll">すべて開く</button>
+      <button class="tg" id="invCloseAll">すべて閉じる</button>
     </div>
     <div id="invList"></div>
   </div>
@@ -1087,15 +1079,6 @@
     </div>
 
     <button class="next-btn" id="nextBtn" onclick="nextQuestion()" style="display:none;">次の問題へ →</button>
-  </div>
-
-  <!-- モードE: 総点検 -->
-  <div id="examScreen" class="quiz-screen">
-    <div class="quiz-header">
-      <button class="back-btn" onclick="backToMode()">← モード選択へ</button>
-      <div class="progress" id="examProgress"></div>
-    </div>
-    <div id="examBody"></div>
   </div>
 
   <!-- レビュー画面 -->
@@ -1136,7 +1119,7 @@
   </div>
 
   <footer>
-    SWALLOW-BASE — Preposition Training v2.2
+    SWALLOW-BASE — Preposition Training v2.5
   </footer>
   <div class="origin-note">※発展10語(around, through, behind ほか)のコアイメージは当塾オリジナルの補足です(資料には未収録)。<br>※意味・用法の分類と参照番号は『整理して覚える028 重要な前置詞の意味』(p.172–173)によります。</div>
 
@@ -1320,62 +1303,62 @@ const SENTENCE_DATA = [
    ============================================ */
 const REVIEW_DATA = [
   // at
-  { ans:'at', sentence:'___ 5:00 this morning', gloss:'今朝5時に', use:'時の一点(＝時刻)', ref:'322', grp:'at', alt:['on','in','by'] },
-  { ans:'at', sentence:'___ the top of the hill', gloss:'丘のてっぺんに', use:'広がりのない場所の一点(＝地点)', ref:'327', grp:'at', alt:['on','in','over'] },
+  { ans:'at', sentence:'___ 5:00 this morning', gloss:'今朝5時に', use:'時の一点(＝時刻)', ref:'322', gAlt:['今朝5時まで(ずっと)','今朝5時までには','今朝5時から'], grp:'at', alt:['on','in','by'] },
+  { ans:'at', sentence:'___ the top of the hill', gloss:'丘のてっぺんに', use:'広がりのない場所の一点(＝地点)', ref:'327', gAlt:['丘のてっぺんへ','丘のてっぺんから','丘のてっぺんを越えて'], grp:'at', alt:['on','in','over'] },
   // on
-  { ans:'on', sentence:'___ November 28th', gloss:'11月28日に', use:'曜日・日付', ref:'323', grp:'on', alt:['at','in','by'] },
-  { ans:'on', sentence:'___ Friday night', gloss:'金曜日の夜に', use:'特定の日の朝・昼・夜など', ref:'326', grp:'on', alt:['at','in','during'] },
-  { ans:'on', sentence:'___ the ceiling', gloss:'天井に', use:'表面に接触している状態', ref:'329', grp:'on', alt:['in','above','over'] },
-  { ans:'on', sentence:'___ the phone', gloss:'電話で', use:'電話・テレビ・ラジオ・ネットなどの利用', ref:'347', grp:'on', alt:['by','with','in'] },
-  { ans:'on', sentence:'a book ___ animals', gloss:'動物に関する本', use:'関連', ref:'356', grp:'on', alt:['in','for','of'] },
+  { ans:'on', sentence:'___ November 28th', gloss:'11月28日に', use:'曜日・日付', ref:'323', gAlt:['11月28日までには','11月28日以降に','11月28日以内に'], grp:'on', alt:['at','in','by'] },
+  { ans:'on', sentence:'___ Friday night', gloss:'金曜日の夜に', use:'特定の日の朝・昼・夜など', ref:'326', gAlt:['金曜日の夜までには','金曜日の夜まで(ずっと)','金曜日の夜から'], grp:'on', alt:['at','in','during'] },
+  { ans:'on', sentence:'___ the ceiling', gloss:'天井に', use:'表面に接触している状態', ref:'329', gAlt:['天井よりも上に','天井の下に','天井から'], grp:'on', alt:['in','above','over'] },
+  { ans:'on', sentence:'___ the phone', gloss:'電話で', use:'電話・テレビ・ラジオ・ネットなどの利用', ref:'347', gAlt:['電話のそばで','電話なしで','電話に向かって'], grp:'on', alt:['by','with','in'] },
+  { ans:'on', sentence:'a book ___ animals', gloss:'動物に関する本', use:'関連', ref:'356', gAlt:['動物のための本','動物が書いた本','動物以外を扱った本'], grp:'on', alt:['in','for','of'] },
   // in
-  { ans:'in', sentence:'___ April 1949', gloss:'1949年4月に', use:'年・月', ref:'324', grp:'in', alt:['at','on','by'] },
-  { ans:'in', sentence:'___ the evening', gloss:'夕方に', use:'幅のある時間', ref:'325', grp:'in', alt:['at','on','for'] },
-  { ans:'in', sentence:'___ the sea', gloss:'海で', use:'広がりのある空間や領域の中に存在する状態', ref:'328', grp:'in', alt:['at','on','over'] },
-  { ans:'in', sentence:'___ a week or two', gloss:'あと1，2週間で', use:'時の経過', ref:'330', grp:'in', alt:['within','for','after'], note:'現時点から「〜たてば」の <code>in</code>。期限内を表す <code>within</code>(〜以内に)と区別する。' },
-  { ans:'in', sentence:'the woman ___ red', gloss:'赤い服を着た女性', use:'着用', ref:'352', grp:'in', alt:['on','with','by'] },
-  { ans:'in', sentence:'___ the opposite direction', gloss:'反対の方向へ', use:'方向・方角', ref:'364', grp:'in', alt:['at','to','for'] },
+  { ans:'in', sentence:'___ April 1949', gloss:'1949年4月に', use:'年・月', ref:'324', gAlt:['1949年4月までには','1949年4月以来','1949年4月以内に'], grp:'in', alt:['at','on','by'] },
+  { ans:'in', sentence:'___ the evening', gloss:'夕方に', use:'幅のある時間', ref:'325', gAlt:['夕方までには','夕方まで(ずっと)','夕方から'], grp:'in', alt:['at','on','for'] },
+  { ans:'in', sentence:'___ the sea', gloss:'海で', use:'広がりのある空間や領域の中に存在する状態', ref:'328', gAlt:['海の上で','海のそばで','海を越えて'], grp:'in', alt:['at','on','over'] },
+  { ans:'in', sentence:'___ a week or two', gloss:'あと1，2週間で', use:'時の経過', ref:'330', gAlt:['1，2週間以内に','1，2週間の間ずっと','1，2週間前に'], grp:'in', alt:['within','for','after'], note:'現時点から「〜たてば」の <code>in</code>。期限内を表す <code>within</code>(〜以内に)と区別する。' },
+  { ans:'in', sentence:'the woman ___ red', gloss:'赤い服を着た女性', use:'着用', ref:'352', gAlt:['赤い物を持った女性','赤い髪の女性','赤い服のそばにいる女性'], grp:'in', alt:['on','with','by'] },
+  { ans:'in', sentence:'___ the opposite direction', gloss:'反対の方向へ', use:'方向・方角', ref:'364', gAlt:['反対の方向から','反対の方向まで','反対の方向を越えて'], grp:'in', alt:['at','to','for'] },
   // for / against
-  { ans:'for', sentence:'___ five years', gloss:'5年間', use:'継続する期間', ref:'332', grp:'for', alt:['during','in','within'], note:'期間の長さを表す <code>for</code>。特定の期間中を表す <code>during</code> と対にして覚える。' },
-  { ans:'for', sentence:"look young ___ one's age", gloss:'年齢のわりには若く見える', use:'基準', ref:'358', grp:'for', alt:['by','to','at'] },
-  { ans:'for', sentence:'Are you ___ the proposal?', gloss:'提案に賛成ですか', use:'賛成・支持', ref:'339', grp:'for', alt:['against','on','with'] },
-  { ans:'against', sentence:'___ the law', gloss:'法律に反している', use:'反対・対立(⇔ for)', ref:'340', grp:'for', alt:['for','over','beyond'] },
+  { ans:'for', sentence:'___ five years', gloss:'5年間', use:'継続する期間', ref:'332', gAlt:['5年以内に','5年後に','5年前から'], grp:'for', alt:['during','in','within'], note:'期間の長さを表す <code>for</code>。特定の期間中を表す <code>during</code> と対にして覚える。' },
+  { ans:'for', sentence:"look young ___ one's age", gloss:'年齢のわりには若く見える', use:'基準', ref:'358', gAlt:['年齢のせいで若く見える','年齢を越えて若く見える','年齢とともに若く見えてくる'], grp:'for', alt:['by','to','at'] },
+  { ans:'for', sentence:'Are you ___ the proposal?', gloss:'提案に賛成ですか', use:'賛成・支持', ref:'339', gAlt:['提案に反対ですか','提案と引き換えですか','提案のためですか'], grp:'for', alt:['against','on','with'] },
+  { ans:'against', sentence:'___ the law', gloss:'法律に反している', use:'反対・対立(⇔ for)', ref:'340', gAlt:['法律に従っている','法律のためになっている','法律に基づいている'], grp:'for', alt:['for','over','beyond'] },
   // by
-  { ans:'by', sentence:'___ two inches', gloss:'2インチだけ', use:'差', ref:'344', grp:'by', alt:['in','at','for'] },
-  { ans:'by', sentence:'___ e-mail', gloss:'メールで', use:'伝達・交通手段', ref:'346', grp:'by', alt:['with','on','in'] },
-  { ans:'by', sentence:'___ the hour', gloss:'時間単位で／時間給で', use:'基準となる単位', ref:'370', grp:'by', alt:['for','in','at'] },
+  { ans:'by', sentence:'___ two inches', gloss:'2インチだけ', use:'差', ref:'344', gAlt:['2インチの長さで','2インチにわたって','2インチ以内で'], grp:'by', alt:['in','at','for'] },
+  { ans:'by', sentence:'___ e-mail', gloss:'メールで', use:'伝達・交通手段', ref:'346', gAlt:['メールのそばで','メールなしで','メールについて'], grp:'by', alt:['with','on','in'] },
+  { ans:'by', sentence:'___ the hour', gloss:'時間単位で／時間給で', use:'基準となる単位', ref:'370', gAlt:['1時間以内に','1時間までには','1時間ずっと'], grp:'by', alt:['for','in','at'] },
   // with
-  { ans:'with', sentence:'___ the knife', gloss:'ナイフで', use:'道具', ref:'345', grp:'with', alt:['by','in','on'] },
-  { ans:'with', sentence:'___ your mouth full', gloss:'口に食べ物をほおばったまま', use:'付帯状況', ref:'348〜350', grp:'with', alt:['in','on','at'] },
-  { ans:'with', sentence:'the pianist ___ long hair', gloss:'長い髪のピアニスト', use:'所有', ref:'351', grp:'with', alt:['in','of','by'] },
-  { ans:'with', sentence:'___ care', gloss:'注意深く', use:'with＋抽象名詞(＝carefully)', ref:'369', grp:'with', alt:['of','in','by'] },
+  { ans:'with', sentence:'___ the knife', gloss:'ナイフで', use:'道具', ref:'345', gAlt:['ナイフなしで','ナイフのそばで','ナイフに向かって'], grp:'with', alt:['by','in','on'] },
+  { ans:'with', sentence:'___ your mouth full', gloss:'口に食べ物をほおばったまま', use:'付帯状況', ref:'348〜350', gAlt:['口に食べ物をほおばるまで','口に食べ物をほおばるために','口に食べ物をほおばらずに'], grp:'with', alt:['in','on','at'] },
+  { ans:'with', sentence:'the pianist ___ long hair', gloss:'長い髪のピアニスト', use:'所有', ref:'351', gAlt:['髪の長くないピアニスト','長い髪の人といるピアニスト','長い髪を使って弾くピアニスト'], grp:'with', alt:['in','of','by'] },
+  { ans:'with', sentence:'___ care', gloss:'注意深く', use:'with＋抽象名詞(＝carefully)', ref:'369', gAlt:['注意せずに','注意するまで','注意するために'], grp:'with', alt:['of','in','by'] },
   // to
-  { ans:'to', sentence:'___ my surprise', gloss:'私が驚いたことには', use:'感情', ref:'366', grp:'to', alt:['for','at','in'] },
-  { ans:'to', sentence:'dance ___ the music', gloss:'音楽に合わせて踊る', use:'伴奏', ref:'367', grp:'to', alt:['with','on','by'] },
+  { ans:'to', sentence:'___ my surprise', gloss:'私が驚いたことには', use:'感情', ref:'366', gAlt:['私の驚きのために','私が驚いたにもかかわらず','私が驚く前に'], grp:'to', alt:['for','at','in'] },
+  { ans:'to', sentence:'dance ___ the music', gloss:'音楽に合わせて踊る', use:'伴奏', ref:'367', gAlt:['音楽のために踊る','音楽なしで踊る','音楽を聞きながら踊る'], grp:'to', alt:['with','on','by'] },
   // 上下の位置関係
-  { ans:'above', sentence:'500 meters ___ sea level', gloss:'海抜500メートル', use:'…よりも上に', ref:'336', grp:'vert', alt:['over','on','below'] },
-  { ans:'below', sentence:'___ sea level', gloss:'海面よりも下に', use:'…よりも下に(⇔ above A)', ref:'しっかり理解017(p.158)', grp:'vert', alt:['under','above','over'] },
-  { ans:'over', sentence:'a bridge ___ the river', gloss:'その川に架かっている橋', use:'(覆うように)…の上に', ref:'しっかり理解017(p.158)', grp:'vert', alt:['above','on','under'], note:'覆うイメージの <code>over</code>。単に「より上」の <code>above</code> と区別する。' },
-  { ans:'under', sentence:'___ a bridge', gloss:'橋の下', use:'(覆うように)…の下に(⇔ over A)', ref:'しっかり理解017(p.158)', grp:'vert', alt:['below','over','above'] },
+  { ans:'above', sentence:'500 meters ___ sea level', gloss:'海抜500メートル', use:'…よりも上に', ref:'336', gAlt:['海面下500メートル','海面まで500メートル','海面から500メートル以内'], grp:'vert', alt:['over','on','below'] },
+  { ans:'below', sentence:'___ sea level', gloss:'海面よりも下に', use:'…よりも下に(⇔ above A)', ref:'しっかり理解017(p.158)', gAlt:['海面よりも上に','海面を覆うように','海面と同じ高さに'], grp:'vert', alt:['under','above','over'] },
+  { ans:'over', sentence:'a bridge ___ the river', gloss:'その川に架かっている橋', use:'(覆うように)…の上に', ref:'しっかり理解017(p.158)', gAlt:['その川の下を通っている橋','その川沿いに続く橋','その川の手前にある橋'], grp:'vert', alt:['above','on','under'], note:'覆うイメージの <code>over</code>。単に「より上」の <code>above</code> と区別する。' },
+  { ans:'under', sentence:'___ a bridge', gloss:'橋の下', use:'(覆うように)…の下に(⇔ over A)', ref:'しっかり理解017(p.158)', gAlt:['橋の上','橋のそば','橋を越えて'], grp:'vert', alt:['below','over','above'] },
   // ペアで覚える
-  { ans:'till[until]', sentence:'___ ten', gloss:'10時まで(ずっと)', use:'動作や状態の継続', ref:'334', grp:'pair', alt:['by','for','within'], note:'継続の <code>till[until]</code>。期限の <code>by</code>(10時までには完了)と対にして覚える。' },
-  { ans:'by', sentence:'___ ten', gloss:'10時までには', use:'動作や状態が完了する期限', ref:'335', grp:'pair', alt:['till[until]','for','during'], note:'期限の <code>by</code>。継続の <code>till[until]</code>(10時までずっと)と対にして覚える。' },
-  { ans:'among', sentence:'___ local residents', gloss:'地元住民の間で', use:'(3つ[3人]以上)の中で', ref:'337', grp:'pair', alt:['between','in','within'] },
-  { ans:'between', sentence:'___ the two incidents', gloss:'2つの事件の間で', use:'(2つ[2人])の間で', ref:'338', grp:'pair', alt:['among','during','over'] },
-  { ans:'like', sentence:'sing ___ a rock star', gloss:'ロックスターのように歌う', use:'…のように', ref:'341', grp:'pair', alt:['as','unlike','with'] },
-  { ans:'unlike', sentence:'She is ___ me.', gloss:'彼女は私とは違っている', use:'…と違って／…らしくない', ref:'342', grp:'pair', alt:['like','against','beyond'] },
-  { ans:'during', sentence:'___ my stay in Paris', gloss:'私のパリ滞在中に', use:'特定の期間', ref:'333', grp:'pair', alt:['for','while','in'], note:'あとに名詞句が続く <code>during</code>。節が続く場合は接続詞の <code>while</code> を使う。' },
+  { ans:'till[until]', sentence:'___ ten', gloss:'10時まで(ずっと)', use:'動作や状態の継続', ref:'334', gAlt:['10時までには','10時から','10時ちょうどに'], grp:'pair', alt:['by','for','within'], note:'継続の <code>till[until]</code>。期限の <code>by</code>(10時までには完了)と対にして覚える。' },
+  { ans:'by', sentence:'___ ten', gloss:'10時までには', use:'動作や状態が完了する期限', ref:'335', gAlt:['10時まで(ずっと)','10時ちょうどに','10時を過ぎて'], grp:'pair', alt:['till[until]','for','during'], note:'期限の <code>by</code>。継続の <code>till[until]</code>(10時までずっと)と対にして覚える。' },
+  { ans:'among', sentence:'___ local residents', gloss:'地元住民の間で', use:'(3つ[3人]以上)の中で', ref:'337', gAlt:['地元住民2人の間で','地元住民に対して','地元住民を除いて'], grp:'pair', alt:['between','in','within'] },
+  { ans:'between', sentence:'___ the two incidents', gloss:'2つの事件の間で', use:'(2つ[2人])の間で', ref:'338', gAlt:['3つ以上の事件の中で','2つの事件の後で','2つの事件にもかかわらず'], grp:'pair', alt:['among','during','over'] },
+  { ans:'like', sentence:'sing ___ a rock star', gloss:'ロックスターのように歌う', use:'…のように', ref:'341', gAlt:['ロックスターとして歌う','ロックスターと違って歌う','ロックスターと一緒に歌う'], grp:'pair', alt:['as','unlike','with'] },
+  { ans:'unlike', sentence:'She is ___ me.', gloss:'彼女は私とは違っている', use:'…と違って／…らしくない', ref:'342', gAlt:['彼女は私に似ている','彼女は私と一緒にいる','彼女は私に反対している'], grp:'pair', alt:['like','against','beyond'] },
+  { ans:'during', sentence:'___ my stay in Paris', gloss:'私のパリ滞在中に', use:'特定の期間', ref:'333', gAlt:['私のパリ滞在の前に','私のパリ滞在の後で','私がパリに滞在するために'], grp:'pair', alt:['for','while','in'], note:'あとに名詞句が続く <code>during</code>。節が続く場合は接続詞の <code>while</code> を使う。' },
   // その他
-  { ans:'as', sentence:"___ a children's book", gloss:'子ども向けの本として', use:'…として', ref:'343', grp:'misc', alt:['like','for','of'] },
-  { ans:'besides', sentence:'___ literature', gloss:'文学に加えて', use:'追加', ref:'354', grp:'misc', alt:['beside','except','without'], note:'追加の <code>besides</code>(…に加えて)。「…のそばに」の <code>beside</code> と綴りが紛らわしい。' },
-  { ans:'beyond', sentence:'___ me', gloss:'私には理解できない', use:'…には理解できない／…の能力を超えている', ref:'361', grp:'misc', alt:['above','over','against'] },
-  { ans:'but', sentence:'eat anything ___ natto', gloss:'納豆以外は食べる', use:'…以外の／…を除いた', ref:'355', grp:'misc', alt:['besides','without','despite'] },
-  { ans:'despite', sentence:'___ his efforts', gloss:'彼の努力にもかかわらず', use:'譲歩', ref:'357', grp:'misc', alt:['although','because of','thanks to'], note:'前置詞の <code>despite</code> のあとは名詞句。節が続く場合は接続詞の <code>although</code> を使う。' },
-  { ans:'of', sentence:'___ use', gloss:'役立つ', use:'of＋抽象名詞(＝useful)', ref:'368', grp:'misc', alt:['with','in','for'] },
-  { ans:'over', sentence:'___ tea and cakes', gloss:'お茶を飲みケーキを食べながら', use:'従事', ref:'353', grp:'misc', alt:['on','during','with'] },
-  { ans:'within', sentence:'___ two months', gloss:'2か月以内に', use:'これから…(の時間)以内に', ref:'331', grp:'misc', alt:['in','for','after'] },
-  { ans:'worth', sentence:'That project is ___ launching.', gloss:'そのプロジェクトは立ち上げる価値がある', use:'A is worth doing.', ref:'359', grp:'misc', alt:['worthy','worth of','worthwhile'], note:'<code>A is worth doing.</code> の形。doing の目的語が主語 A にあたるため、launching のあとに目的語は置かない。' },
-  { ans:'worth', sentence:'It is ___ launching that project.', gloss:'そのプロジェクトは立ち上げる価値がある', use:'It is worth doing A.', ref:'360', grp:'misc', alt:['worthy','worth to','valuable'], note:'<code>It is worth doing A.</code> の形。上の <code>A is worth doing.</code> と書き換えの関係にある。' },
+  { ans:'as', sentence:"___ a children's book", gloss:'子ども向けの本として', use:'…として', ref:'343', gAlt:['子ども向けの本のように','子ども向けの本のために','子ども向けの本以外に'], grp:'misc', alt:['like','for','of'] },
+  { ans:'besides', sentence:'___ literature', gloss:'文学に加えて', use:'追加', ref:'354', gAlt:['文学を除いて','文学のそばに','文学に反して'], grp:'misc', alt:['beside','except','without'], note:'追加の <code>besides</code>(…に加えて)。「…のそばに」の <code>beside</code> と綴りが紛らわしい。' },
+  { ans:'beyond', sentence:'___ me', gloss:'私には理解できない', use:'…には理解できない／…の能力を超えている', ref:'361', gAlt:['私を除いて','私のそばに','私に向かって'], grp:'misc', alt:['above','over','against'] },
+  { ans:'but', sentence:'eat anything ___ natto', gloss:'納豆以外は食べる', use:'…以外の／…を除いた', ref:'355', gAlt:['納豆に加えて何でも食べる','納豆といっしょに何でも食べる','納豆のために何でも食べる'], grp:'misc', alt:['besides','without','despite'] },
+  { ans:'despite', sentence:'___ his efforts', gloss:'彼の努力にもかかわらず', use:'譲歩', ref:'357', gAlt:['彼の努力のおかげで','彼の努力のために','彼の努力の後で'], grp:'misc', alt:['although','because of','thanks to'], note:'前置詞の <code>despite</code> のあとは名詞句。節が続く場合は接続詞の <code>although</code> を使う。' },
+  { ans:'of', sentence:'___ use', gloss:'役立つ', use:'of＋抽象名詞(＝useful)', ref:'368', gAlt:['使用中で','使い方について','使うために'], grp:'misc', alt:['with','in','for'] },
+  { ans:'over', sentence:'___ tea and cakes', gloss:'お茶を飲みケーキを食べながら', use:'従事', ref:'353', gAlt:['お茶とケーキのために','お茶とケーキの上に','お茶とケーキを食べた後で'], grp:'misc', alt:['on','during','with'] },
+  { ans:'within', sentence:'___ two months', gloss:'2か月以内に', use:'これから…(の時間)以内に', ref:'331', gAlt:['2か月後に','2か月間ずっと','2か月より前に'], grp:'misc', alt:['in','for','after'] },
+  { ans:'worth', sentence:'That project is ___ launching.', gloss:'そのプロジェクトは立ち上げる価値がある', use:'A is worth doing.', ref:'359', gAlt:['そのプロジェクトは立ち上げる必要がある','そのプロジェクトは立ち上げる価値がない','そのプロジェクトは立ち上げられつつある'], grp:'misc', alt:['worthy','worth of','worthwhile'], note:'<code>A is worth doing.</code> の形。doing の目的語が主語 A にあたるため、launching のあとに目的語は置かない。' },
+  { ans:'worth', sentence:'It is ___ launching that project.', gloss:'そのプロジェクトは立ち上げる価値がある', use:'It is worth doing A.', ref:'360', gAlt:['そのプロジェクトを立ち上げる必要がある','そのプロジェクトを立ち上げてはいけない','そのプロジェクトは立ち上げられつつある'], grp:'misc', alt:['worthy','worth to','valuable'], note:'<code>It is worth doing A.</code> の形。上の <code>A is worth doing.</code> と書き換えの関係にある。' },
 ];
 
 /* ============================================
@@ -1638,6 +1621,20 @@ function buildPool(mode) {
       options: s.options,
       key: s.key,
       caution: s.caution || null,
+      others: s.others || null,
+    }));
+  }
+  if (mode === 'E') {
+    return REVIEW_DATA.map(s => ({
+      kind: 'gloss',
+      sentence: s.sentence,
+      gloss: s.gloss,
+      gAlt: s.gAlt,
+      use: s.use,
+      ref: s.ref,
+      ans: s.ans,
+      grp: s.grp,
+      note: s.note || null,
     }));
   }
   if (mode === 'B') {
@@ -1696,7 +1693,6 @@ function startRound(questions, roundNum) {
 
   document.getElementById('modeSelect').style.display = 'none';
   document.getElementById('inventoryScreen').classList.remove('active');
-  document.getElementById('examScreen').classList.remove('active');
   document.getElementById('reviewScreen').classList.remove('active');
   document.getElementById('completeScreen').classList.remove('active');
   document.getElementById('quizScreen').classList.add('active');
@@ -1713,7 +1709,6 @@ function startNextRound() {
 }
 
 function backToMode() {
-  document.getElementById('examScreen').classList.remove('active');
   document.getElementById('inventoryScreen').classList.remove('active');
   document.getElementById('quizScreen').classList.remove('active');
   document.getElementById('reviewScreen').classList.remove('active');
@@ -1749,18 +1744,23 @@ function showNextQuestion() {
       currentQuestion.choices = buildUsageChoices(currentQuestion, 4);
     } else if (currentQuestion.kind === 'contrast') {
       currentQuestion.choices = buildContrastChoices(currentQuestion);
+    } else if (currentQuestion.kind === 'gloss') {
+      currentQuestion.choices = buildGlossChoices(currentQuestion, 4)
+        .map(g => ({ value: g, disp: g, isCorrect: g === currentQuestion.gloss }));
     } else {
       currentQuestion.choices = buildPrepChoices(MASTER_BY_ID[currentQuestion.prepId], 4);
     }
   }
 
-  if (currentQuestion.kind === 'usage') {
+  if (currentQuestion.kind === 'usage' || currentQuestion.kind === 'gloss') {
     targetEl.style.display = 'none';
     sentenceEl.style.display = 'block';
     sentenceEl.innerHTML = currentQuestion.sentence.replace(
       '___', `<span class="target-prep">${currentQuestion.ans}</span>`);
     glossEl.style.display = 'none'; // 訳は伏せる(解説で提示)
-    promptEl.textContent = '下線部の前置詞はどの意味・用法か?';
+    promptEl.textContent = currentQuestion.kind === 'gloss'
+      ? 'この語句の意味は?'
+      : '下線部の前置詞はどの意味・用法か?';
   } else if (currentQuestion.kind === 'core') {
     targetEl.style.display = 'block';
     targetEl.textContent = currentQuestion.disp;
@@ -1779,7 +1779,7 @@ function showNextQuestion() {
       : '空所に入る前置詞は?';
   }
 
-  const isUsage = currentQuestion.kind === 'usage';
+  const isUsage = currentQuestion.kind === 'usage' || currentQuestion.kind === 'gloss';
   const isPrepChoice = currentQuestion.kind === 'review'
     || currentQuestion.kind === 'sentence'
     || currentQuestion.kind === 'contrast';
@@ -1841,7 +1841,7 @@ function updateCounts() {
   document.getElementById('countB').textContent = label(PREP_MASTER.length, '問');
   document.getElementById('countC').textContent = label(buildPool('C').length, '問');
   document.getElementById('countD').textContent = label(CONTRAST_DATA.length, '問');
-  document.getElementById('countE').textContent = `収録: ${REVIEW_DATA.length}語句(毎回${EXAM_SIZE}語句・20問を出題)`;
+  document.getElementById('countE').textContent = label(REVIEW_DATA.length, '問');
 }
 
 /* ============================================
@@ -1991,6 +1991,16 @@ function buildFeedback(q) {
     return html;
   }
 
+  if (q.kind === 'gloss') {
+    const filled = q.sentence.replace('___', `<code>${q.ans}</code>`);
+    html += `<div class="feedback-row"><span class="label">意味:</span>${q.gloss}</div>`;
+    html += `<div class="feedback-row"><span class="label">語句:</span>${filled}</div>`;
+    html += `<div class="feedback-row"><span class="label">用法:</span>〈${q.use}〉</div>`;
+    html += `<div class="feedback-row"><span class="label">資料:</span>整理して覚える028 → ${q.ref}</div>`;
+    if (q.note) html += `<div class="note">${q.note}</div>`;
+    return html;
+  }
+
   if (q.kind === 'usage') {
     const filled = q.sentence.replace('___', `<code>${q.ans}</code>`);
     html += `<div class="feedback-row"><span class="label">用法:</span>${q.use}</div>`;
@@ -2044,7 +2054,8 @@ const INV_ORDER = PREP_MASTER.filter(p => p.group === 'A').map(p => p.id)
   .concat(REVIEW_DATA.map(r => r.ans).filter((w, i, a) => a.indexOf(w) === i && !MASTER_BY_ID[w]));
 
 let invBlind = false, invNoEx = false, invQuery = '';
-const invRefs = {}; // 語 → セクション要素
+const invRefs = {};          // 語 → セクション要素
+const invOpen = new Set();   // 開いている語
 
 function renderInvIndex(shown) {
   const idx = document.getElementById('invIndex');
@@ -2062,6 +2073,7 @@ function renderInvIndex(shown) {
 }
 
 function jumpToWord(w) {
+  if (!invOpen.has(w)) { invOpen.add(w); renderInventory(); }
   const el = invRefs[w];
   if (!el) return;
   el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2071,7 +2083,6 @@ function jumpToWord(w) {
 
 function openInventory() {
   document.getElementById('modeSelect').style.display = 'none';
-  document.getElementById('examScreen').classList.remove('active');
   document.getElementById('quizScreen').classList.remove('active');
   document.getElementById('reviewScreen').classList.remove('active');
   document.getElementById('completeScreen').classList.remove('active');
@@ -2118,12 +2129,19 @@ function renderInventory() {
     }
     if (!rows.length) rows.push('<div class="inv-empty">この語の例文は未収録です。</div>');
 
+    const open = invOpen.has(w) || !!t;
     const el = document.createElement('div');
-    el.className = 'inv-word';
+    el.className = 'inv-word' + (open ? ' open' : '');
     el.innerHTML = `<div class="inv-head"><span class="w">${w}</span>`
       + (core ? `<span class="ci">${core.core}</span>` : '')
       + (holes.length ? `<span class="miss">${holes.join('／')}</span>` : '')
-      + `</div>${rows.join('')}`;
+      + `<span class="inv-count">${revs.length + sents.length}例</span>`
+      + `<button class="inv-toggle">${open ? '閉じる' : '詳しく見る'}</button>`
+      + `</div><div class="inv-body">${rows.join('')}</div>`;
+    el.querySelector('.inv-head').onclick = () => {
+      if (invOpen.has(w)) invOpen.delete(w); else invOpen.add(w);
+      renderInventory();
+    };
     invRefs[w] = el;
     list.appendChild(el);
   });
@@ -2146,140 +2164,39 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   bind('invBlind', () => invBlind, v => invBlind = v);
   bind('invEx', () => invNoEx, v => invNoEx = v);
+  document.getElementById('invOpenAll').addEventListener('click', () => {
+    INV_ORDER.forEach(w => invOpen.add(w)); renderInventory();
+  });
+  document.getElementById('invCloseAll').addEventListener('click', () => {
+    invOpen.clear(); renderInventory();
+  });
   initWeakUI();
 });
 
 /* ============================================
-   モードE: 語句の総点検
-   1項目につき「意味・用法」と「和訳」を続けて答え、
-   全問終えてからまとめて採点する。
+   モードE: 語句の和訳を答える
    ============================================ */
-const EXAM_SIZE = 10;
-let exam = null;
-
-// 和訳の選択肢。同じ前置詞 → 同じ資料区分 → その他 の順に誤答を集める。
+// 和訳の選択肢。内容語は変えず前置詞の意味だけを差し替えた誤答(gAlt)を使う。
+// gAlt が無い項目だけ、他の項目の訳から補う。
 function buildGlossChoices(d, n) {
   const opts = [d.gloss];
-  const rest = REVIEW_DATA.filter(x => x.gloss !== d.gloss);
-  const tiers = [
-    shuffle(rest.filter(x => x.ans === d.ans)),
-    shuffle(rest.filter(x => x.ans !== d.ans && x.grp === d.grp)),
-    shuffle(rest.filter(x => x.ans !== d.ans && x.grp !== d.grp)),
-  ];
-  tiers.forEach(tier => tier.forEach(x => {
-    if (opts.length < n && !opts.includes(x.gloss)) opts.push(x.gloss);
-  }));
+  if (d.gAlt && d.gAlt.length) {
+    shuffle(d.gAlt.slice()).forEach(g => {
+      if (opts.length < n && !opts.includes(g)) opts.push(g);
+    });
+  }
+  if (opts.length < n) {
+    const rest = REVIEW_DATA.filter(x => x.gloss !== d.gloss);
+    const tiers = [
+      shuffle(rest.filter(x => x.ans === d.ans)),
+      shuffle(rest.filter(x => x.ans !== d.ans && x.grp === d.grp)),
+      shuffle(rest.filter(x => x.ans !== d.ans && x.grp !== d.grp)),
+    ];
+    tiers.forEach(tier => tier.forEach(x => {
+      if (opts.length < n && !opts.includes(x.gloss)) opts.push(x.gloss);
+    }));
+  }
   return shuffle(opts);
-}
-
-function startExam(subset) {
-  const src = (subset && subset.length) ? subset.slice() : shuffle(REVIEW_DATA.slice()).slice(0, EXAM_SIZE);
-  const items = src.map(d => ({
-    d,
-    useOpts: buildUsageChoices({ ...d, use: d.use }, 4).map(c => c.disp),
-    jaOpts: buildGlossChoices(d, 4),
-    pickUse: null,
-    pickJa: null,
-  }));
-  exam = { items, idx: 0, graded: false };
-  document.getElementById('modeSelect').style.display = 'none';
-  document.getElementById('inventoryScreen').classList.remove('active');
-  document.getElementById('quizScreen').classList.remove('active');
-  document.getElementById('reviewScreen').classList.remove('active');
-  document.getElementById('completeScreen').classList.remove('active');
-  document.getElementById('examScreen').classList.add('active');
-  renderExam();
-}
-
-function renderExam() {
-  const body = document.getElementById('examBody');
-  const prog = document.getElementById('examProgress');
-  const it = exam.items[exam.idx];
-  const d = it.d;
-  const last = exam.idx === exam.items.length - 1;
-  prog.textContent = `${exam.idx + 1} / ${exam.items.length} 問目`;
-
-  const opt = (kind, arr, picked) => arr.map((o, i) =>
-    `<button class="exam-opt${picked === o ? ' selected' : ''}" data-kind="${kind}" data-i="${i}">${o}</button>`).join('');
-
-  body.innerHTML = `
-    <div class="exam-item">
-      <div class="exam-phrase">${d.sentence.replace('___', `<u>${d.ans}</u>`)}</div>
-      <div class="exam-q">① 下線部の前置詞の意味・用法は</div>
-      <div class="exam-opts" data-group="use">${opt('use', it.useOpts, it.pickUse)}</div>
-      <div class="exam-q">② この語句の和訳は</div>
-      <div class="exam-opts" data-group="ja">${opt('ja', it.jaOpts, it.pickJa)}</div>
-    </div>
-    <button class="confirm-btn" id="examNext" ${it.pickUse !== null && it.pickJa !== null ? '' : 'disabled'}>
-      ${last ? '採点する' : '次の語句へ →'}</button>
-    <button class="dontknow-btn" id="examBack" ${exam.idx === 0 ? 'style="visibility:hidden"' : ''}>← 前の語句へ</button>`;
-
-  body.querySelectorAll('.exam-opt').forEach(btn => {
-    btn.onclick = () => {
-      const kind = btn.dataset.kind;
-      const val = kind === 'use' ? it.useOpts[+btn.dataset.i] : it.jaOpts[+btn.dataset.i];
-      if (kind === 'use') it.pickUse = val; else it.pickJa = val;
-      renderExam();
-    };
-  });
-  document.getElementById('examNext').onclick = () => {
-    if (it.pickUse === null || it.pickJa === null) return;
-    if (last) { gradeExam(); } else { exam.idx++; renderExam(); }
-  };
-  const back = document.getElementById('examBack');
-  if (back) back.onclick = () => { if (exam.idx > 0) { exam.idx--; renderExam(); } };
-}
-
-let examMissed = [];
-function retryExam() { if (examMissed.length) startExam(examMissed); }
-
-function gradeExam() {
-  exam.graded = true;
-  exam.items.forEach(it => {
-    const d = it.d;
-    const uOK = it.pickUse === d.use, jOK = it.pickJa === d.gloss;
-    const nW = (uOK ? 0 : 1) + (jOK ? 0 : 1);
-    weakRecord(`prep:ph:${d.sentence}|${d.ans}`, {
-      t: d.sentence.replace('___', `<u>${d.ans}</u>`), r: d.gloss, g: d.ans,
-    }, nW * 0.5, (2 - nW) * 0.5, nW === 0);
-  });
-  const body = document.getElementById('examBody');
-  const okUse = exam.items.filter(i => i.pickUse === i.d.use).length;
-  const okJa = exam.items.filter(i => i.pickJa === i.d.gloss).length;
-  const missed = exam.items.filter(i => i.pickUse !== i.d.use || i.pickJa !== i.d.gloss).map(i => i.d);
-  examMissed = missed;
-  document.getElementById('examProgress').textContent = '採点結果';
-
-  const cards = exam.items.map((it, n) => {
-    const d = it.d;
-    const uOK = it.pickUse === d.use, jOK = it.pickJa === d.gloss;
-    const line = (label, picked, correct, ok) => {
-      let h = `<div class="exam-q">${label}<span class="exam-mark ${ok ? 'o' : 'x'}">${ok ? '○' : '×'}</span></div>`;
-      h += `<div class="exam-opt ${ok ? 'ok' : 'ng'}">${picked}</div>`;
-      if (!ok) h += `<div class="exam-opt ans" style="margin-top:5px">正解：${correct}</div>`;
-      return h;
-    };
-    return `<div class="exam-item">
-      <div class="exam-phrase">${d.sentence.replace('___', `<u>${d.ans}</u>`)}</div>
-      ${line(`${n + 1}① 意味・用法`, it.pickUse, d.use, uOK)}
-      ${line(`${n + 1}② 和訳`, it.pickJa, d.gloss, jOK)}
-      ${d.note ? `<div class="note">${d.note}</div>` : ''}
-      <div class="exam-ref">整理して覚える028 → ${d.ref}</div>
-    </div>`;
-  }).join('');
-
-  body.innerHTML = `
-    <div class="exam-score">
-      <div class="row2">
-        <div><div class="n">${okUse} / ${exam.items.length}</div><div class="lbl">意味・用法</div></div>
-        <div><div class="n">${okJa} / ${exam.items.length}</div><div class="lbl">和訳</div></div>
-      </div>
-    </div>
-    ${cards}
-    ${missed.length ? `<button class="confirm-btn" onclick="retryExam()">間違えた ${missed.length} 語句のみもう一度</button>` : ''}
-    <button class="${missed.length ? 'dontknow-btn' : 'confirm-btn'}" onclick="startExam()">別の10語句で解く</button>
-    <button class="dontknow-btn" onclick="backToMode()">モード選択へ</button>`;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /* ============================================
@@ -2300,7 +2217,6 @@ function weakSave(db) {
 const weakDone = e => ((e.st != null) ? e.st : (e.last === 'ok' ? 1 : 0)) >= 2;
 const weakFmt = v => String(Math.round(v * 10) / 10);
 
-// addW/addC は 1問=1。モードEは1語句2問なので 0.5 ずつ加算する。
 function weakRecord(id, meta, addW, addC, streakOk) {
   const db = weakLoad();
   const e = db[id] || { t: '', r: '', g: '', w: 0, c: 0, st: 0, last: '', ts: 0 };
@@ -2495,7 +2411,12 @@ function showReviewScreen() {
     item.className = 'wrong-item';
 
     let headTarget, userAnsStr, correctAnsStr, targetClass;
-    if (q.kind === 'contrast') {
+    if (q.kind === 'gloss') {
+      headTarget = q.sentence.replace('___', `<i>${q.ans}</i>`);
+      targetClass = 'wrong-item-target sentence';
+      correctAnsStr = q.gloss;
+      userAnsStr = q.userAnswer === -1 ? 'わからない' : q.choices[q.userAnswer].disp;
+    } else if (q.kind === 'contrast') {
       headTarget = q.sentence.replace('___', '____');
       targetClass = 'wrong-item-target sentence';
       correctAnsStr = q.ans;
