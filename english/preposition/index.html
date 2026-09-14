@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>つばめ英語 — 前置詞演習 v1.0</title>
+<title>つばめ英語 — 前置詞演習 v2.2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -287,12 +287,18 @@
 
   .question-gloss {
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: 0.6em;
-    color: var(--subtle);
+    font-size: 1.02em;
+    font-weight: 500;
+    color: var(--ink);
     text-align: center;
-    margin-top: 10px;
-    line-height: 1.6;
+    margin-top: 14px;
+    padding: 8px 14px;
+    background: var(--highlight);
+    border-radius: 3px;
+    line-height: 1.7;
+    display: inline-block;
   }
+  .question-card .question-gloss { display: block; }
 
   .question-prompt {
     text-align: center;
@@ -310,6 +316,8 @@
   }
 
   .choices.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  /* モードE: 意味・用法の選択肢は1列に並べて読ませる */
+  .choices.cols-1 { grid-template-columns: 1fr; }
 
   .choice-btn {
     padding: 16px 12px;
@@ -331,6 +339,186 @@
     font-size: 1.5em;
     font-weight: 600;
   }
+
+  /* till[until] / because of など長い選択肢 */
+  .choice-btn.prep.long { font-size: 1.15em; }
+
+  /* モードE: 意味・用法のラベルは左寄せの本文組み */
+  .choice-btn.usage {
+    text-align: left;
+    font-size: 0.98em;
+    font-weight: 400;
+    line-height: 1.6;
+    padding: 14px 18px;
+  }
+
+  /* モードE: 問われている前置詞 */
+  .question-sentence .target-prep {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    font-style: italic;
+    padding-bottom: 1px;
+  }
+
+  /* 解説内の補助ブロック */
+  .note.also { border-left-color: var(--subtle); background: #f4f3ef; }
+  .note.caution { border-left-color: var(--accent); background: #faf4f4; }
+
+  /* 苦手項目リスト */
+  #weakSection { margin-top: 34px; }
+  .weak-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .weak-title { font-family: 'Noto Sans JP', sans-serif; font-size: 0.82em; font-weight: 700; letter-spacing: 0.12em; color: var(--subtle); }
+  .weak-filters { display: flex; gap: 6px; margin-left: auto; }
+  .wf-btn {
+    font: inherit; font-size: 0.74em; font-weight: 500; padding: 4px 12px;
+    border-radius: 14px; border: 1px solid var(--border);
+    background: var(--paper); color: var(--subtle); cursor: pointer;
+  }
+  .wf-btn.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .weak-list { background: var(--paper); border: 1px solid var(--border); border-radius: 4px; padding: 4px 16px; }
+  .weak-list ul { list-style: none; margin: 0; padding: 0; }
+  .weak-list li {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    padding: 9px 0; border-bottom: 1px dashed var(--border-soft); font-size: 0.88em;
+  }
+  .weak-list li:last-child { border-bottom: none; }
+  .wl-term { font-family: 'Cormorant Garamond', serif; font-size: 1.2em; }
+  .wl-term u { text-decoration: none; color: var(--accent); font-style: italic; border-bottom: 1px solid var(--accent); }
+  .wl-read { font-size: 0.82em; color: var(--subtle); }
+  .wl-tag { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9em; color: #a08940; }
+  .wl-cnt { margin-left: auto; font-size: 0.8em; white-space: nowrap; }
+  .wl-cnt .ng { color: var(--accent); font-weight: 700; }
+  .wl-cnt .ok { color: #3a6a2a; font-weight: 700; margin-left: 8px; }
+  .wl-badge { font-size: 0.7em; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+  .wl-badge.done { background: #e7efe0; color: #3a5a22; }
+  .wl-badge.yet { background: #f6e9e6; color: #8a3322; }
+  .weak-empty { font-size: 0.82em; color: var(--subtle); padding: 10px 2px; }
+  .weak-actions { margin-top: 10px; text-align: right; }
+  .weak-actions.left { text-align: left; margin-top: 4px; }
+  .wf-reset {
+    font: inherit; font-size: 0.76em; background: none; border: none;
+    color: var(--subtle); cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+  }
+  .wf-reset:hover { color: var(--accent); }
+  .wf-reset.strong { color: var(--accent); font-weight: 700; }
+  .weak-box { margin-top: 10px; background: var(--paper); border: 1px solid var(--border); border-radius: 4px; padding: 12px 14px; }
+  .weak-box-title { font-size: 0.8em; font-weight: 700; margin-bottom: 6px; }
+  .weak-box textarea, .weak-box input {
+    width: 100%; font: inherit; font-size: 0.84em; border: 1px solid var(--border);
+    border-radius: 4px; padding: 8px 10px; background: #fff; color: var(--ink); resize: vertical;
+  }
+  .weak-box input { max-width: 280px; width: auto; }
+  .weak-row { margin-top: 8px; }
+  .weak-hint { font-size: 0.76em; color: var(--subtle); margin-top: 6px; line-height: 1.7; }
+  .weak-note { font-size: 0.72em; color: var(--subtle); line-height: 1.9; margin-top: 12px; }
+
+  /* モードA: 語の索引 */
+  .inv-index {
+    display: flex; flex-wrap: wrap; gap: 5px;
+    padding: 12px 14px; margin-bottom: 12px;
+    background: var(--paper); border: 1px solid var(--border); border-radius: 4px;
+  }
+  .inv-index button {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.05em; line-height: 1.3;
+    padding: 3px 10px; border: 1px solid var(--border-soft); border-radius: 3px;
+    background: transparent; color: var(--ink); cursor: pointer;
+  }
+  .inv-index button:hover { border-color: var(--accent); color: var(--accent); background: var(--highlight); }
+  .inv-index button.gap { margin-left: 10px; border-left: 2px solid var(--border); }
+  .inv-word { scroll-margin-top: 14px; }
+  .inv-word.flash { border-color: var(--accent); box-shadow: 0 0 0 3px var(--highlight); }
+
+  /* 解答確定ボタン */
+  .confirm-btn {
+    display: block; width: 100%; margin-top: 18px;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 0.95em; letter-spacing: 0.08em;
+    padding: 14px; border: 1px solid var(--accent); border-radius: 4px;
+    background: var(--accent); color: #fff; cursor: pointer;
+  }
+  .confirm-btn:disabled { background: transparent; color: var(--subtle); border-color: var(--border); cursor: default; }
+  .confirm-btn.hidden { display: none; }
+  .choice-btn.selected { border-color: var(--accent); background: var(--highlight); box-shadow: inset 0 0 0 1px var(--accent); }
+
+  /* 解説内の例文 */
+  .ex-list { margin-top: 10px; padding-top: 8px; border-top: 1px dotted var(--border); }
+  .ex-list .ex-h { font-size: 0.78em; color: var(--subtle); letter-spacing: 0.06em; margin-bottom: 4px; }
+  .ex-row { display: flex; gap: 10px; flex-wrap: wrap; padding: 2px 0; font-size: 0.86em; }
+  .ex-row .e { font-family: 'Cormorant Garamond', serif; font-size: 1.14em; flex: 1 1 44%; }
+  .ex-row .e u { text-decoration: none; color: var(--accent); font-style: italic; border-bottom: 1px solid var(--accent); }
+  .ex-row .j { flex: 1 1 44%; color: var(--subtle); font-size: 0.92em; }
+  .ex-more { font-size: 0.78em; color: var(--subtle); margin-top: 4px; }
+
+  /* モードE: 総点検 */
+  .exam-item { background: var(--paper); border: 1px solid var(--border); border-radius: 4px; padding: 20px 22px; margin-bottom: 14px; }
+  .exam-phrase { font-family: 'Cormorant Garamond', serif; font-size: 1.9em; text-align: center; margin-bottom: 4px; }
+  .exam-phrase u { text-decoration: none; color: var(--accent); font-style: italic; border-bottom: 2px solid var(--accent); }
+  .exam-q { font-size: 0.82em; color: var(--subtle); letter-spacing: 0.06em; margin: 16px 0 8px; }
+  .exam-opts { display: grid; gap: 7px; }
+  .exam-opt {
+    font: inherit; font-size: 0.92em; text-align: left; line-height: 1.55;
+    padding: 10px 14px; border: 1px solid var(--border); border-radius: 4px;
+    background: transparent; color: var(--ink); cursor: pointer;
+  }
+  .exam-opt:hover { border-color: var(--accent); }
+  .exam-opt.selected { border-color: var(--accent); background: var(--highlight); box-shadow: inset 0 0 0 1px var(--accent); }
+  .exam-opt.ok { border-color: #1f5d3f; background: #eaf3ed; }
+  .exam-opt.ng { border-color: var(--accent); background: #faf0f0; text-decoration: line-through; }
+  .exam-opt.ans { border-color: #1f5d3f; }
+  .exam-mark { float: right; font-size: 0.9em; letter-spacing: 0.1em; }
+  .exam-mark.o { color: #1f5d3f; } .exam-mark.x { color: var(--accent); }
+  .exam-ref { font-size: 0.78em; color: var(--subtle); margin-top: 10px; }
+  .exam-score { text-align: center; padding: 22px; background: var(--paper); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 16px; }
+  .exam-score .n { font-family: 'Cormorant Garamond', serif; font-size: 2.6em; color: var(--accent); line-height: 1.1; }
+  .exam-score .lbl { font-size: 0.8em; color: var(--subtle); letter-spacing: 0.06em; }
+  .exam-score .row2 { display: flex; justify-content: center; gap: 40px; margin-top: 6px; }
+
+  /* モード選択の補助ボタン */
+  .sub-btn {
+    display: block; width: 100%; margin-top: -4px;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 0.82em;
+    color: var(--subtle); background: none; border: none;
+    padding: 6px 4px; cursor: pointer; text-align: left;
+    letter-spacing: 0.03em;
+  }
+  .sub-btn:hover { color: var(--accent); }
+
+  /* モードA: インプット一覧 */
+  .inv-controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .inv-controls input[type=search] {
+    flex: 1; min-width: 160px; font: inherit; font-size: 0.9em;
+    padding: 8px 12px; border: 1px solid var(--border);
+    border-radius: 4px; background: var(--paper); color: var(--ink);
+  }
+  .tg {
+    font: inherit; font-size: 0.8em; padding: 6px 14px;
+    border: 1px solid var(--border); border-radius: 999px;
+    background: var(--paper); color: var(--subtle); cursor: pointer;
+  }
+  .tg[aria-pressed="true"] { background: var(--highlight); border-color: var(--accent); color: var(--ink); }
+  .inv-word {
+    background: var(--paper); border: 1px solid var(--border);
+    border-radius: 4px; padding: 14px 18px; margin-bottom: 10px;
+  }
+  .inv-head {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border-soft); margin-bottom: 8px;
+  }
+  .inv-head .w {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.8em; font-weight: 600; color: var(--accent); line-height: 1;
+  }
+  .inv-head .ci { font-size: 0.86em; color: var(--subtle); }
+  .inv-head .miss { font-size: 0.7em; padding: 2px 8px; border-radius: 999px; background: #f3dee0; color: var(--accent); margin-left: auto; }
+  .inv-use { margin: 6px 0 2px; font-size: 0.82em; color: var(--subtle); letter-spacing: 0.04em; }
+  .inv-row { display: flex; gap: 12px; flex-wrap: wrap; padding: 3px 0; font-size: 0.9em; }
+  .inv-row .e { font-family: 'Cormorant Garamond', serif; font-size: 1.16em; flex: 1 1 46%; }
+  .inv-row .e u { text-decoration: none; color: var(--accent); border-bottom: 1.5px solid var(--accent); font-style: italic; }
+  .inv-row .j { flex: 1 1 40%; color: var(--subtle); font-size: 0.86em; }
+  .inv-row .r { font-size: 0.76em; color: var(--subtle); }
+  .inv.blind .inv-row .e u { color: transparent; border-bottom-color: var(--border); background: var(--border-soft); border-radius: 2px; }
+  .inv.noex .inv-row { display: none; }
+  .inv-empty { color: var(--subtle); font-size: 0.85em; padding: 6px 0; }
 
   .choice-btn:hover:not(:disabled) {
     background: var(--highlight);
@@ -767,6 +955,8 @@
     .question-sentence { font-size: 1.35em; }
     .choices { grid-template-columns: 1fr 1fr; }
     .choices.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .choices.cols-1 { grid-template-columns: 1fr; }
+    .choice-btn.usage { font-size: 0.92em; padding: 13px 14px; }
     .stats { gap: 22px; }
     .stat-item .stat-num { font-size: 2.1em; }
   }
@@ -784,24 +974,89 @@
   <div id="modeSelect" class="mode-select">
     <a class="home-link" href="../">← 演習一覧へ</a>
     <h2>モードを選んでください</h2>
-    <button class="mode-btn" onclick="startQuiz('A')">
+    <button class="mode-btn" onclick="openInventory()">
       <div class="mode-label">A.</div>
-      <div class="mode-title">前置詞からコアイメージを答える</div>
-      <div class="mode-desc">表示される前置詞(例: in, at, by)の「コアイメージ(基本イメージ)」を選びます。</div>
+      <div class="mode-title">前置詞を一覧する(インプット)</div>
+      <div class="mode-desc">語ごとにコアイメージ・意味と用法・例文をまとめて読みます。演習ではありません。前置詞を伏せて板書の下敷きにも使えます。</div>
       <div class="mode-count" id="countA"></div>
     </button>
     <button class="mode-btn" onclick="startQuiz('B')">
       <div class="mode-label">B.</div>
-      <div class="mode-title">例文の空所に入る前置詞を答える</div>
-      <div class="mode-desc">前置詞が空所になった例文を見て、当てはまる前置詞を選びます。1回ごとに全108問からランダムに30問を出題します。</div>
+      <div class="mode-title">前置詞からコアイメージを答える</div>
+      <div class="mode-desc">表示される前置詞の「コアイメージ(基本イメージ)」を選びます。資料16語と発展10語をまとめて出題します。</div>
       <div class="mode-count" id="countB"></div>
     </button>
     <button class="mode-btn" onclick="startQuiz('C')">
       <div class="mode-label">C.</div>
-      <div class="mode-title">前置詞からコアイメージを答える(発展)</div>
-      <div class="mode-desc">資料外の前置詞(例: between, through, against)のコアイメージを選びます。誤答にはモードAの語のイメージも混ざります。</div>
+      <div class="mode-title">例文の空所に入る前置詞を答える</div>
+      <div class="mode-desc">前置詞が空所になった例文を見て、当てはまる語を選びます。解説では意味・用法の分類と資料の参照番号を示します。</div>
       <div class="mode-count" id="countC"></div>
     </button>
+    <button class="mode-btn" onclick="startQuiz('D')">
+      <div class="mode-label">D.</div>
+      <div class="mode-title">紛らわしい前置詞を使い分ける</div>
+      <div class="mode-desc">by と till、above と over、of と from のように、意味の近い語だけを選択肢にして出題します。解説では判断の基準を示します。</div>
+      <div class="mode-count" id="countD"></div>
+    </button>
+    <button class="mode-btn" onclick="startExam()">
+      <div class="mode-label">E.</div>
+      <div class="mode-title">語句を総点検する(意味・用法と訳)</div>
+      <div class="mode-desc">『整理して覚える028』の語句について、意味・用法と和訳の二つを続けて答えます。途中で正誤は出さず、10問すべてに答えたあとにまとめて採点します。</div>
+      <div class="mode-count" id="countE"></div>
+    </button>
+    <section id="weakSection" style="display:none">
+      <div class="weak-head">
+        <div class="weak-title">苦手項目リスト</div>
+        <div class="weak-filters">
+          <button class="wf-btn active" data-f="all">すべて</button>
+          <button class="wf-btn" data-f="yet">未克服</button>
+          <button class="wf-btn" data-f="done">克服済み</button>
+        </div>
+      </div>
+      <div class="weak-list"><ul id="weakUl"></ul><div class="weak-empty" id="weakEmpty" style="display:none"></div></div>
+      <div class="weak-actions">
+        <button class="wf-reset" id="bkExport">記録コードを表示(バックアップ)</button>　
+        <button class="wf-reset" id="bkImport">コードから復元</button>　
+        <button class="wf-reset" id="weakReset">記録をすべて消去する</button>
+      </div>
+      <div class="weak-actions left">
+        <button class="wf-reset strong" id="svSave">暗証コードでサーバーに保存</button>　
+        <button class="wf-reset strong" id="svLoad">暗証コードでサーバーから復元</button>
+      </div>
+      <div id="bkArea" class="weak-box" style="display:none">
+        <textarea id="bkText" rows="3"></textarea>
+        <div class="weak-row">
+          <button class="wf-reset" id="bkCopy">コードをコピー</button>　
+          <button class="wf-reset strong" id="bkRun" style="display:none">復元を実行</button>
+        </div>
+        <div class="weak-hint" id="bkHint"></div>
+      </div>
+      <div id="svArea" class="weak-box" style="display:none">
+        <div class="weak-box-title" id="svTitle"></div>
+        <input id="svPass" type="text" autocomplete="off" placeholder="例：tanaka0402">
+        <button class="wf-reset strong" id="svRun">実行</button>
+        <div class="weak-hint" id="svMsg"></div>
+      </div>
+      <div class="weak-note">
+        暗証コードは<b>6文字以上</b>で、<b>他の人と被らない自分だけの文字列</b>にしてください(例：名前＋誕生日で「tanaka0402」など)。コードは必ず自分で控えておいてください。同じコードで保存し直すと上書きされ、最後に使ってから2ヶ月間サーバーに保管されます。<br>
+        ※記録はこの端末のブラウザ内にのみ保存されます。「克服済み」は、その項目に直近2回以上連続で正答したことを示します。世界史の演習とは別の記録として保管されます。
+      </div>
+    </section>
+  </div>
+
+  <!-- モードA: インプット一覧 -->
+  <div id="inventoryScreen" class="quiz-screen">
+    <div class="quiz-header">
+      <button class="back-btn" onclick="backToMode()">← モード選択へ</button>
+      <div class="progress"><span id="invCount"></span></div>
+    </div>
+    <div class="inv-index" id="invIndex"></div>
+    <div class="inv-controls">
+      <input type="search" id="invQ" placeholder="語・訳・用法で絞り込む">
+      <button class="tg" id="invBlind" aria-pressed="false">前置詞を隠す</button>
+      <button class="tg" id="invEx" aria-pressed="false">例文を隠す</button>
+    </div>
+    <div id="invList"></div>
   </div>
 
   <!-- クイズ画面 -->
@@ -823,6 +1078,7 @@
 
     <div class="choices" id="choices"></div>
 
+    <button class="confirm-btn" id="confirmBtn" onclick="confirmAnswer()" disabled>解答を見る</button>
     <button class="dontknow-btn" id="dontknowBtn" onclick="selectDontKnow()">わからない</button>
 
     <div class="feedback" id="feedback">
@@ -831,6 +1087,15 @@
     </div>
 
     <button class="next-btn" id="nextBtn" onclick="nextQuestion()" style="display:none;">次の問題へ →</button>
+  </div>
+
+  <!-- モードE: 総点検 -->
+  <div id="examScreen" class="quiz-screen">
+    <div class="quiz-header">
+      <button class="back-btn" onclick="backToMode()">← モード選択へ</button>
+      <div class="progress" id="examProgress"></div>
+    </div>
+    <div id="examBody"></div>
   </div>
 
   <!-- レビュー画面 -->
@@ -871,9 +1136,9 @@
   </div>
 
   <footer>
-    SWALLOW-BASE — Preposition Training v1.0
+    SWALLOW-BASE — Preposition Training v2.2
   </footer>
-  <div class="origin-note">※モードCの前置詞・コアイメージは当塾オリジナルの補足です(資料には未収録)。</div>
+  <div class="origin-note">※発展10語(around, through, behind ほか)のコアイメージは当塾オリジナルの補足です(資料には未収録)。<br>※意味・用法の分類と参照番号は『整理して覚える028 重要な前置詞の意味』(p.172–173)によります。</div>
 
 </div>
 
@@ -1048,6 +1313,215 @@ const SENTENCE_DATA = [
   { prep:'up', sentence:'go ___ to London', gloss:'ロンドンに行く' },
 ];
 
+/* ============================================
+   モードD: 整理して覚える028「重要な前置詞の意味」(p.172-173)
+   ans: 正解の語 / use: 資料の意味・用法分類 / ref: 資料の参照番号
+   alt: 誤答候補(資料外の語も紛らわしさのために含む)
+   ============================================ */
+const REVIEW_DATA = [
+  // at
+  { ans:'at', sentence:'___ 5:00 this morning', gloss:'今朝5時に', use:'時の一点(＝時刻)', ref:'322', grp:'at', alt:['on','in','by'] },
+  { ans:'at', sentence:'___ the top of the hill', gloss:'丘のてっぺんに', use:'広がりのない場所の一点(＝地点)', ref:'327', grp:'at', alt:['on','in','over'] },
+  // on
+  { ans:'on', sentence:'___ November 28th', gloss:'11月28日に', use:'曜日・日付', ref:'323', grp:'on', alt:['at','in','by'] },
+  { ans:'on', sentence:'___ Friday night', gloss:'金曜日の夜に', use:'特定の日の朝・昼・夜など', ref:'326', grp:'on', alt:['at','in','during'] },
+  { ans:'on', sentence:'___ the ceiling', gloss:'天井に', use:'表面に接触している状態', ref:'329', grp:'on', alt:['in','above','over'] },
+  { ans:'on', sentence:'___ the phone', gloss:'電話で', use:'電話・テレビ・ラジオ・ネットなどの利用', ref:'347', grp:'on', alt:['by','with','in'] },
+  { ans:'on', sentence:'a book ___ animals', gloss:'動物に関する本', use:'関連', ref:'356', grp:'on', alt:['in','for','of'] },
+  // in
+  { ans:'in', sentence:'___ April 1949', gloss:'1949年4月に', use:'年・月', ref:'324', grp:'in', alt:['at','on','by'] },
+  { ans:'in', sentence:'___ the evening', gloss:'夕方に', use:'幅のある時間', ref:'325', grp:'in', alt:['at','on','for'] },
+  { ans:'in', sentence:'___ the sea', gloss:'海で', use:'広がりのある空間や領域の中に存在する状態', ref:'328', grp:'in', alt:['at','on','over'] },
+  { ans:'in', sentence:'___ a week or two', gloss:'あと1，2週間で', use:'時の経過', ref:'330', grp:'in', alt:['within','for','after'], note:'現時点から「〜たてば」の <code>in</code>。期限内を表す <code>within</code>(〜以内に)と区別する。' },
+  { ans:'in', sentence:'the woman ___ red', gloss:'赤い服を着た女性', use:'着用', ref:'352', grp:'in', alt:['on','with','by'] },
+  { ans:'in', sentence:'___ the opposite direction', gloss:'反対の方向へ', use:'方向・方角', ref:'364', grp:'in', alt:['at','to','for'] },
+  // for / against
+  { ans:'for', sentence:'___ five years', gloss:'5年間', use:'継続する期間', ref:'332', grp:'for', alt:['during','in','within'], note:'期間の長さを表す <code>for</code>。特定の期間中を表す <code>during</code> と対にして覚える。' },
+  { ans:'for', sentence:"look young ___ one's age", gloss:'年齢のわりには若く見える', use:'基準', ref:'358', grp:'for', alt:['by','to','at'] },
+  { ans:'for', sentence:'Are you ___ the proposal?', gloss:'提案に賛成ですか', use:'賛成・支持', ref:'339', grp:'for', alt:['against','on','with'] },
+  { ans:'against', sentence:'___ the law', gloss:'法律に反している', use:'反対・対立(⇔ for)', ref:'340', grp:'for', alt:['for','over','beyond'] },
+  // by
+  { ans:'by', sentence:'___ two inches', gloss:'2インチだけ', use:'差', ref:'344', grp:'by', alt:['in','at','for'] },
+  { ans:'by', sentence:'___ e-mail', gloss:'メールで', use:'伝達・交通手段', ref:'346', grp:'by', alt:['with','on','in'] },
+  { ans:'by', sentence:'___ the hour', gloss:'時間単位で／時間給で', use:'基準となる単位', ref:'370', grp:'by', alt:['for','in','at'] },
+  // with
+  { ans:'with', sentence:'___ the knife', gloss:'ナイフで', use:'道具', ref:'345', grp:'with', alt:['by','in','on'] },
+  { ans:'with', sentence:'___ your mouth full', gloss:'口に食べ物をほおばったまま', use:'付帯状況', ref:'348〜350', grp:'with', alt:['in','on','at'] },
+  { ans:'with', sentence:'the pianist ___ long hair', gloss:'長い髪のピアニスト', use:'所有', ref:'351', grp:'with', alt:['in','of','by'] },
+  { ans:'with', sentence:'___ care', gloss:'注意深く', use:'with＋抽象名詞(＝carefully)', ref:'369', grp:'with', alt:['of','in','by'] },
+  // to
+  { ans:'to', sentence:'___ my surprise', gloss:'私が驚いたことには', use:'感情', ref:'366', grp:'to', alt:['for','at','in'] },
+  { ans:'to', sentence:'dance ___ the music', gloss:'音楽に合わせて踊る', use:'伴奏', ref:'367', grp:'to', alt:['with','on','by'] },
+  // 上下の位置関係
+  { ans:'above', sentence:'500 meters ___ sea level', gloss:'海抜500メートル', use:'…よりも上に', ref:'336', grp:'vert', alt:['over','on','below'] },
+  { ans:'below', sentence:'___ sea level', gloss:'海面よりも下に', use:'…よりも下に(⇔ above A)', ref:'しっかり理解017(p.158)', grp:'vert', alt:['under','above','over'] },
+  { ans:'over', sentence:'a bridge ___ the river', gloss:'その川に架かっている橋', use:'(覆うように)…の上に', ref:'しっかり理解017(p.158)', grp:'vert', alt:['above','on','under'], note:'覆うイメージの <code>over</code>。単に「より上」の <code>above</code> と区別する。' },
+  { ans:'under', sentence:'___ a bridge', gloss:'橋の下', use:'(覆うように)…の下に(⇔ over A)', ref:'しっかり理解017(p.158)', grp:'vert', alt:['below','over','above'] },
+  // ペアで覚える
+  { ans:'till[until]', sentence:'___ ten', gloss:'10時まで(ずっと)', use:'動作や状態の継続', ref:'334', grp:'pair', alt:['by','for','within'], note:'継続の <code>till[until]</code>。期限の <code>by</code>(10時までには完了)と対にして覚える。' },
+  { ans:'by', sentence:'___ ten', gloss:'10時までには', use:'動作や状態が完了する期限', ref:'335', grp:'pair', alt:['till[until]','for','during'], note:'期限の <code>by</code>。継続の <code>till[until]</code>(10時までずっと)と対にして覚える。' },
+  { ans:'among', sentence:'___ local residents', gloss:'地元住民の間で', use:'(3つ[3人]以上)の中で', ref:'337', grp:'pair', alt:['between','in','within'] },
+  { ans:'between', sentence:'___ the two incidents', gloss:'2つの事件の間で', use:'(2つ[2人])の間で', ref:'338', grp:'pair', alt:['among','during','over'] },
+  { ans:'like', sentence:'sing ___ a rock star', gloss:'ロックスターのように歌う', use:'…のように', ref:'341', grp:'pair', alt:['as','unlike','with'] },
+  { ans:'unlike', sentence:'She is ___ me.', gloss:'彼女は私とは違っている', use:'…と違って／…らしくない', ref:'342', grp:'pair', alt:['like','against','beyond'] },
+  { ans:'during', sentence:'___ my stay in Paris', gloss:'私のパリ滞在中に', use:'特定の期間', ref:'333', grp:'pair', alt:['for','while','in'], note:'あとに名詞句が続く <code>during</code>。節が続く場合は接続詞の <code>while</code> を使う。' },
+  // その他
+  { ans:'as', sentence:"___ a children's book", gloss:'子ども向けの本として', use:'…として', ref:'343', grp:'misc', alt:['like','for','of'] },
+  { ans:'besides', sentence:'___ literature', gloss:'文学に加えて', use:'追加', ref:'354', grp:'misc', alt:['beside','except','without'], note:'追加の <code>besides</code>(…に加えて)。「…のそばに」の <code>beside</code> と綴りが紛らわしい。' },
+  { ans:'beyond', sentence:'___ me', gloss:'私には理解できない', use:'…には理解できない／…の能力を超えている', ref:'361', grp:'misc', alt:['above','over','against'] },
+  { ans:'but', sentence:'eat anything ___ natto', gloss:'納豆以外は食べる', use:'…以外の／…を除いた', ref:'355', grp:'misc', alt:['besides','without','despite'] },
+  { ans:'despite', sentence:'___ his efforts', gloss:'彼の努力にもかかわらず', use:'譲歩', ref:'357', grp:'misc', alt:['although','because of','thanks to'], note:'前置詞の <code>despite</code> のあとは名詞句。節が続く場合は接続詞の <code>although</code> を使う。' },
+  { ans:'of', sentence:'___ use', gloss:'役立つ', use:'of＋抽象名詞(＝useful)', ref:'368', grp:'misc', alt:['with','in','for'] },
+  { ans:'over', sentence:'___ tea and cakes', gloss:'お茶を飲みケーキを食べながら', use:'従事', ref:'353', grp:'misc', alt:['on','during','with'] },
+  { ans:'within', sentence:'___ two months', gloss:'2か月以内に', use:'これから…(の時間)以内に', ref:'331', grp:'misc', alt:['in','for','after'] },
+  { ans:'worth', sentence:'That project is ___ launching.', gloss:'そのプロジェクトは立ち上げる価値がある', use:'A is worth doing.', ref:'359', grp:'misc', alt:['worthy','worth of','worthwhile'], note:'<code>A is worth doing.</code> の形。doing の目的語が主語 A にあたるため、launching のあとに目的語は置かない。' },
+  { ans:'worth', sentence:'It is ___ launching that project.', gloss:'そのプロジェクトは立ち上げる価値がある', use:'It is worth doing A.', ref:'360', grp:'misc', alt:['worthy','worth to','valuable'], note:'<code>It is worth doing A.</code> の形。上の <code>A is worth doing.</code> と書き換えの関係にある。' },
+];
+
+/* ============================================
+   B例文 と 028 の重複対応表
+   同じ用法を扱っている18組。モードCでは028側を出題から外し、
+   B例文の解説に「資料028では〜」として併記する。
+   key: 028の参照番号|正解語
+   ============================================ */
+const OVERLAP = {
+  '329|on':   'a picture ___ the wall',
+  '347|on':   '___ TV',
+  '356|on':   'a book ___ politics',
+  '330|in':   'He will come here ___ ten days.',
+  '352|in':   'a woman ___ white',
+  '332|for':  'I study English ___ 60 minutes every day.',
+  '339|for':  'I am ___ the plan.',
+  '358|for':  'She looks young ___ her age.',
+  '344|by':   'I missed the train ___ a minute.',
+  '370|by':   'Produce and meat are sold ___ the kilo.',
+  '335|by':   'Come home ___ 7.',
+  '345|with': 'Someone broke the window ___ a hammer.',
+  '348〜350|with': 'He listened to the story ___ his eyes shining.',
+  '351|with': 'a man ___ black hair',
+  '336|above':'fifty meters ___ sea level',
+  '353|over': 'Tom and I had a talk ___ a cup of coffee.',
+  'しっかり理解017(p.158)|over':  'A lot of seagulls are flying ___ the sea.',
+  'しっかり理解017(p.158)|under': 'I was fishing ___ the bridge.',
+};
+// B例文 → 028側の情報(解説での併記用)
+const OVERLAP_BY_SENT = {};
+REVIEW_DATA.forEach(r => {
+  const b = OVERLAP[`${r.ref}|${r.ans}`];
+  if (b) OVERLAP_BY_SENT[b] = r;
+});
+const isOverlapped = r => !!OVERLAP[`${r.ref}|${r.ans}`];
+
+/* ============================================
+   モードD: 紛らわしい前置詞の使い分け
+   例文はすべて既存データ(資料の例文・028の語句)から採る。
+   options: 選択肢に出す語 / key: 判断の基準
+   ============================================ */
+const CONTRAST_DATA = [
+  // --- 時を表す at / on / in ---
+  { sentence:'___ 5:00 this morning', gloss:'今朝5時に', ans:'at', options:['at','on','in'],
+    key:'時刻のように幅のない「点」は <code>at</code>。' },
+  { sentence:'___ November 28th', gloss:'11月28日に', ans:'on', options:['at','on','in'],
+    key:'日付・曜日は <code>on</code>。' },
+  { sentence:'___ April 1949', gloss:'1949年4月に', ans:'in', options:['at','on','in'],
+    key:'年・月のように幅のある時は <code>in</code>。' },
+  { sentence:'___ Friday night', gloss:'金曜日の夜に', ans:'on', options:['at','on','in'],
+    key:'特定の日の朝・昼・夜は <code>on</code>。日を限定しない「夕方に」なら <code>in the evening</code>。' },
+  { sentence:'___ the evening', gloss:'夕方に', ans:'in', options:['at','on','in'],
+    key:'幅のある時間帯は <code>in</code>。特定の日に限定されると <code>on</code> に変わる。' },
+  // --- 場所を表す at / on / in ---
+  { sentence:'arrive ___ the station', gloss:'駅に到着する', ans:'at', options:['at','on','in'],
+    key:'駅など広がりのない地点は <code>at</code>。都市など広い範囲なら <code>in</code>。' },
+  { sentence:'___ the ceiling', gloss:'天井に', ans:'on', options:['at','on','in'],
+    key:'面に接していれば <code>on</code>。上下は問わない。' },
+  { sentence:'___ the sea', gloss:'海で', ans:'in', options:['at','on','in'],
+    key:'広がりのある空間の内側は <code>in</code>。' },
+  // --- by / till[until] ---
+  { sentence:'Come home ___ 7.', gloss:'7時までに帰宅しなさい。', ans:'by', options:['by','till[until]'],
+    key:'動作が完了する期限は <code>by</code>。' },
+  { sentence:'___ ten', gloss:'10時まで(ずっと)', ans:'till[until]', options:['by','till[until]'],
+    key:'状態や動作の継続は <code>till[until]</code>。' },
+  // --- for / during ---
+  { sentence:'___ five years', gloss:'5年間', ans:'for', options:['for','during'],
+    key:'期間の長さ(数詞を伴うことが多い)は <code>for</code>。' },
+  { sentence:'I study English ___ 60 minutes every day.', gloss:'毎日60分英語を勉強する。', ans:'for', options:['for','during'],
+    key:'「どれだけの間」を答えるのが <code>for</code>。' },
+  { sentence:'___ my stay in Paris', gloss:'私のパリ滞在中に', ans:'during', options:['for','during'],
+    key:'「いつ」を特定の期間で示すのが <code>during</code>。' },
+  { sentence:'___ my stay in Paris', gloss:'私のパリ滞在中に', ans:'during', options:['during','while'],
+    key:'あとに名詞句が続くのは前置詞の <code>during</code>。節が続くなら接続詞の <code>while</code>。',
+    others:{ 'while':'接続詞。あとに〈主語＋動詞〉の節が続く。名詞句だけを従えることはできない。' } },
+  // --- in / within ---
+  { sentence:'He will come here ___ ten days.', gloss:'10日たてば彼はここに来ます。', ans:'in', options:['in','within'],
+    key:'現時点から「〜たてば」と経過を表すのが <code>in</code>。' },
+  { sentence:'___ a week or two', gloss:'あと1，2週間で', ans:'in', options:['in','within'],
+    key:'時の経過の <code>in</code>。「以内に」の意味ではない。' },
+  { sentence:'___ two months', gloss:'2か月以内に', ans:'within', options:['in','within'],
+    key:'期限の内側を表すのが <code>within</code>。' },
+  // --- above / over ---
+  { sentence:'fifty meters ___ sea level', gloss:'海抜50メートル', ans:'above', options:['above','over'],
+    key:'接触せず単に「ある所より上」は <code>above</code>。' },
+  { sentence:'There is a waterfall ___ the bridge.', gloss:'橋の上手に滝がある。', ans:'above', options:['above','over'],
+    key:'位置が上であることだけを示す <code>above</code>。' },
+  { sentence:'A lot of seagulls are flying ___ the sea.', gloss:'たくさんのカモメが海の上を飛んでいる。', ans:'over', options:['above','over'],
+    key:'対象を覆うように広がるのが <code>over</code>。' },
+  { sentence:'a bridge ___ the river', gloss:'その川に架かっている橋', ans:'over', options:['above','over'],
+    key:'川を覆ってまたぐので <code>over</code>。' },
+  // --- under / below ---
+  { sentence:'I was fishing ___ the bridge.', gloss:'私は橋の下で釣りをしていた。', ans:'under', options:['under','below'],
+    key:'覆われた「真下」は <code>under</code>。<code>below</code> なら「橋より下流で」の含みになる。' },
+  { sentence:'___ a bridge', gloss:'橋の下', ans:'under', options:['under','below'],
+    key:'橋に覆われた真下なので <code>under</code>。' },
+  { sentence:'___ sea level', gloss:'海面よりも下に', ans:'below', options:['under','below'],
+    key:'単に「基準より低い位置」は <code>below</code>。' },
+  // --- of / from(原料) ---
+  { sentence:'a table ___ wood', gloss:'木製テーブル', ans:'of', options:['of','from'],
+    key:'材料が形を保って残る場合は <code>of</code>。' },
+  { sentence:'Paper is made ___ wood.', gloss:'紙は木からできている。', ans:'from', options:['of','from'],
+    key:'原料が質的に変化して見た目で分からない場合は <code>from</code>。' },
+  // --- of / from(死因) ---
+  { sentence:'die ___ cancer', gloss:'ガンで死ぬ', ans:'of', options:['of','from'],
+    key:'病気が原因の場合は <code>die of</code> が伝統的な用法。',
+    caution:'近年は区別が薄れつつあり、入試では文脈で判断する。' },
+  { sentence:'die ___ starvation', gloss:'餓死する', ans:'from', options:['of','from'],
+    key:'飢餓・けがなど外的要因は <code>die from</code>。',
+    caution:'近年は区別が薄れつつあり、入試では文脈で判断する。' },
+  // --- for / to(方向) ---
+  { sentence:"I'm leaving ___ Tokyo.", gloss:'東京へ出発する。', ans:'for', options:['for','to'],
+    key:'向かう先を示すだけで到達は含意しないのが <code>for</code>。' },
+  { sentence:'The river runs down ___ the sea.', gloss:'その川は海まで流れている。', ans:'to', options:['for','to'],
+    key:'到達点まで示すのが <code>to</code>。' },
+  // --- among / between ---
+  { sentence:'___ local residents', gloss:'地元住民の間で', ans:'among', options:['among','between'],
+    key:'3つ[3人]以上の中では <code>among</code>。' },
+  { sentence:'___ the two incidents', gloss:'2つの事件の間で', ans:'between', options:['among','between'],
+    key:'2つ[2人]の間は <code>between</code>。' },
+  // --- like / unlike ---
+  { sentence:'sing ___ a rock star', gloss:'ロックスターのように歌う', ans:'like', options:['like','unlike'],
+    key:'「…のように」は <code>like</code>。' },
+  { sentence:'She is ___ me.', gloss:'彼女は私とは違っている。', ans:'unlike', options:['like','unlike'],
+    key:'「…と違って」は <code>unlike</code>。' },
+  // --- like / as ---
+  { sentence:'sing ___ a rock star', gloss:'ロックスターのように歌う(実際は違う)', ans:'like', options:['like','as'],
+    key:'比喩として「…のように」は <code>like</code>。' },
+  { sentence:"___ a children's book", gloss:'子ども向けの本として', ans:'as', options:['like','as'],
+    key:'実際にその資格・役割であることを示すのが <code>as</code>。' },
+  // --- beside / besides ---
+  { sentence:'a tennis court ___ the house', gloss:'家のそばにあるテニスコート', ans:'beside', options:['beside','besides'],
+    key:'「…のそばに」は <code>beside</code>。' },
+  { sentence:'___ literature', gloss:'文学に加えて', ans:'besides', options:['beside','besides'],
+    key:'「…に加えて」は <code>besides</code>。綴りの s に注意。' },
+  // --- for / against ---
+  { sentence:'I am ___ the plan.', gloss:'その計画に賛成です。', ans:'for', options:['for','against'],
+    key:'賛成・支持は <code>for</code>。' },
+  { sentence:'___ the law', gloss:'法律に反している', ans:'against', options:['for','against'],
+    key:'反対・対立は <code>against</code>。' },
+  // --- despite / although ---
+  { sentence:'___ his efforts', gloss:'彼の努力にもかかわらず', ans:'despite', options:['despite','although'],
+    key:'あとに名詞句が続くのは前置詞の <code>despite</code>。節が続くなら接続詞の <code>although</code>。',
+    others:{ 'although':'接続詞。あとに〈主語＋動詞〉の節が続く。<code>despite</code> のように名詞句だけを従えることはできない。' } },
+];
+
 /* セッションあたりの最大出題数 */
 const SESSION_SIZE = 30;
 
@@ -1104,32 +1578,98 @@ function buildPrepChoices(correctPrep, numChoices) {
   return shuffle(choices);
 }
 
+// モードD: 前置詞選択肢。誤答は項目ごとに指定した紛らわしい語を使う。
+function buildReviewChoices(q, numChoices) {
+  const choices = [{ value: q.ans, disp: q.ans, isCorrect: true }];
+  const used = new Set([q.ans]);
+  for (const a of shuffle(q.alt)) {
+    if (choices.length >= numChoices) break;
+    if (used.has(a)) continue;
+    used.add(a);
+    choices.push({ value: a, disp: a, isCorrect: false });
+  }
+  return shuffle(choices);
+}
+
+// モードE: 意味・用法の選択肢。
+// (1)同じ前置詞の別用法 → (2)同じ資料区分 → (3)それ以外 の順に誤答を集める。
+function buildUsageChoices(q, numChoices) {
+  const choices = [{ value: q.use, disp: q.use, isCorrect: true }];
+  const used = new Set([q.use]);
+  const rest = REVIEW_DATA.filter(d => d.use !== q.use);
+  const CORE_GRP = ['at','on','in','for','by','with','to'];
+  const outer = rest.filter(d => d.ans !== q.ans && d.grp !== q.grp);
+  const tiers = [
+    shuffle(rest.filter(d => d.ans === q.ans)),
+    shuffle(rest.filter(d => d.ans !== q.ans && d.grp === q.grp)),
+    // at / to のように同区分の候補が乏しい場合の補充。
+    // 基本7語の用法を優先し、worth などの語法ラベルは最後に回す。
+    shuffle(outer.filter(d => CORE_GRP.includes(d.grp))),
+    shuffle(outer.filter(d => !CORE_GRP.includes(d.grp))),
+  ];
+  for (const tier of tiers) {
+    for (const d of tier) {
+      if (choices.length >= numChoices) break;
+      if (used.has(d.use)) continue;
+      used.add(d.use);
+      choices.push({ value: d.use, disp: d.use, isCorrect: false });
+    }
+  }
+  return shuffle(choices);
+}
+
+// モードD: 使い分けの選択肢。指定した紛らわしい語だけを並べる。
+function buildContrastChoices(q) {
+  return shuffle(q.options.map(o => ({ value: o, disp: o, isCorrect: o === q.ans })));
+}
+
 /* ============================================
    問題プール生成
+   B: コアイメージ(26語) / C: 例文の空所補充(137問)
+   D: 使い分け / D2: 意味・用法の識別
    ============================================ */
 function buildPool(mode) {
-  if (mode === 'A' || mode === 'C') {
-    const group = mode === 'A' ? 'A' : 'C';
-    const distractorPool = mode === 'A'
-      ? PREP_MASTER.filter(p => p.group === 'A')
-      : PREP_MASTER.slice(); // モードCは16語+発展10語から誤答を作る
-    return PREP_MASTER.filter(p => p.group === group).map(p => ({
+  if (mode === 'D') {
+    return CONTRAST_DATA.map(s => ({
+      kind: 'contrast',
+      sentence: s.sentence,
+      gloss: s.gloss,
+      ans: s.ans,
+      options: s.options,
+      key: s.key,
+      caution: s.caution || null,
+    }));
+  }
+  if (mode === 'B') {
+    return PREP_MASTER.map(p => ({
       kind: 'core',
       prepId: p.id,
       disp: p.disp,
       answerLabel: p.core,
-      distractorPool: distractorPool,
-    }));
-  } else {
-    return SENTENCE_DATA.map(s => ({
-      kind: 'sentence',
-      prepId: s.prep,
-      sentence: s.sentence,
-      gloss: s.gloss,
-      note: s.note || null,
-      answerDisp: MASTER_BY_ID[s.prep].disp,
+      distractorPool: PREP_MASTER,
     }));
   }
+  // モードC: 資料の例文108問 + 028のうちBと重ならない29項目
+  const fromB = SENTENCE_DATA.map(s => ({
+    kind: 'sentence',
+    prepId: s.prep,
+    sentence: s.sentence,
+    gloss: s.gloss,
+    note: s.note || null,
+    answerDisp: MASTER_BY_ID[s.prep].disp,
+    also: OVERLAP_BY_SENT[s.sentence] || null,
+  }));
+  const fromR = REVIEW_DATA.filter(r => !isOverlapped(r)).map(s => ({
+    kind: 'review',
+    sentence: s.sentence,
+    gloss: s.gloss,
+    use: s.use,
+    ref: s.ref,
+    ans: s.ans,
+    alt: s.alt,
+    note: s.note || null,
+  }));
+  return fromB.concat(fromR);
 }
 
 /* ============================================
@@ -1155,6 +1695,8 @@ function startRound(questions, roundNum) {
   wrongList = [];
 
   document.getElementById('modeSelect').style.display = 'none';
+  document.getElementById('inventoryScreen').classList.remove('active');
+  document.getElementById('examScreen').classList.remove('active');
   document.getElementById('reviewScreen').classList.remove('active');
   document.getElementById('completeScreen').classList.remove('active');
   document.getElementById('quizScreen').classList.add('active');
@@ -1171,11 +1713,14 @@ function startNextRound() {
 }
 
 function backToMode() {
+  document.getElementById('examScreen').classList.remove('active');
+  document.getElementById('inventoryScreen').classList.remove('active');
   document.getElementById('quizScreen').classList.remove('active');
   document.getElementById('reviewScreen').classList.remove('active');
   document.getElementById('completeScreen').classList.remove('active');
   document.getElementById('modeSelect').style.display = 'block';
   updateCounts();
+  renderWeak();
 }
 
 function restartQuiz() { startQuiz(currentMode); }
@@ -1196,15 +1741,27 @@ function showNextQuestion() {
   const choicesEl = document.getElementById('choices');
 
   if (!currentQuestion.choices) {
-    const correctPrep = MASTER_BY_ID[currentQuestion.prepId];
     if (currentQuestion.kind === 'core') {
-      currentQuestion.choices = buildCoreChoices(correctPrep, currentQuestion.distractorPool, 4);
+      currentQuestion.choices = buildCoreChoices(MASTER_BY_ID[currentQuestion.prepId], currentQuestion.distractorPool, 4);
+    } else if (currentQuestion.kind === 'review') {
+      currentQuestion.choices = buildReviewChoices(currentQuestion, 4);
+    } else if (currentQuestion.kind === 'usage') {
+      currentQuestion.choices = buildUsageChoices(currentQuestion, 4);
+    } else if (currentQuestion.kind === 'contrast') {
+      currentQuestion.choices = buildContrastChoices(currentQuestion);
     } else {
-      currentQuestion.choices = buildPrepChoices(correctPrep, 4);
+      currentQuestion.choices = buildPrepChoices(MASTER_BY_ID[currentQuestion.prepId], 4);
     }
   }
 
-  if (currentQuestion.kind === 'core') {
+  if (currentQuestion.kind === 'usage') {
+    targetEl.style.display = 'none';
+    sentenceEl.style.display = 'block';
+    sentenceEl.innerHTML = currentQuestion.sentence.replace(
+      '___', `<span class="target-prep">${currentQuestion.ans}</span>`);
+    glossEl.style.display = 'none'; // 訳は伏せる(解説で提示)
+    promptEl.textContent = '下線部の前置詞はどの意味・用法か?';
+  } else if (currentQuestion.kind === 'core') {
     targetEl.style.display = 'block';
     targetEl.textContent = currentQuestion.disp;
     targetEl.classList.toggle('small', currentQuestion.disp.length > 8);
@@ -1217,16 +1774,27 @@ function showNextQuestion() {
     sentenceEl.innerHTML = currentQuestion.sentence.replace('___', '<span class="blank">?</span>');
     glossEl.style.display = 'block';
     glossEl.textContent = currentQuestion.gloss;
-    promptEl.textContent = '空所に入る前置詞は?';
+    promptEl.textContent = currentQuestion.kind === 'contrast'
+      ? 'この日本語を表すのはどちらか?'
+      : '空所に入る前置詞は?';
   }
 
+  const isUsage = currentQuestion.kind === 'usage';
+  const isPrepChoice = currentQuestion.kind === 'review'
+    || currentQuestion.kind === 'sentence'
+    || currentQuestion.kind === 'contrast';
   choicesEl.innerHTML = '';
-  choicesEl.className = 'choices' + (currentQuestion.choices.length === 3 ? ' cols-3' : '');
+  choicesEl.className = 'choices'
+    + (isUsage ? ' cols-1' : (currentQuestion.choices.length === 3 ? ' cols-3' : ''));
   currentQuestion.choices.forEach((c, idx) => {
     const btn = document.createElement('button');
-    btn.className = 'choice-btn' + (currentQuestion.kind === 'sentence' ? ' prep' : '');
+    const label = currentQuestion.kind === 'core' ? c.value : c.disp;
+    btn.className = 'choice-btn'
+      + (isUsage ? ' usage' : '')
+      + (isPrepChoice ? ' prep' : '')
+      + (isPrepChoice && label.length > 8 ? ' long' : '');
     btn.dataset.idx = idx;
-    btn.textContent = currentQuestion.kind === 'sentence' ? c.disp : c.value;
+    btn.textContent = label;
     btn.onclick = () => selectChoice(idx);
     choicesEl.appendChild(btn);
   });
@@ -1235,6 +1803,11 @@ function showNextQuestion() {
   dontknowBtn.disabled = false;
   dontknowBtn.classList.remove('dimmed');
   dontknowBtn.style.display = 'block';
+  pendingChoice = null;
+  const confirmBtn = document.getElementById('confirmBtn');
+  confirmBtn.style.display = 'block';
+  confirmBtn.disabled = true;
+  confirmBtn.textContent = '選択肢を選んでください';
 
   document.getElementById('feedback').classList.remove('show');
   document.getElementById('nextBtn').style.display = 'none';
@@ -1259,19 +1832,37 @@ function updateProgress() {
 }
 
 function updateCounts() {
-  const aCount = PREP_MASTER.filter(p => p.group === 'A').length;
-  const cCount = PREP_MASTER.filter(p => p.group === 'C').length;
-  document.getElementById('countA').textContent = `収録: ${aCount}問`;
-  document.getElementById('countB').textContent = `収録: ${SENTENCE_DATA.length}問(毎回${SESSION_SIZE}問を出題)`;
-  document.getElementById('countC').textContent = `収録: ${cCount}問`;
+  const label = (n, unit) => n > SESSION_SIZE
+    ? `収録: ${n}${unit}(毎回${SESSION_SIZE}問を出題)`
+    : `収録: ${n}${unit}`;
+  const invWords = INV_ORDER.length;
+  const invItems = SENTENCE_DATA.length + REVIEW_DATA.length;
+  document.getElementById('countA').textContent = `${invWords}語 / ${invItems}項目`;
+  document.getElementById('countB').textContent = label(PREP_MASTER.length, '問');
+  document.getElementById('countC').textContent = label(buildPool('C').length, '問');
+  document.getElementById('countD').textContent = label(CONTRAST_DATA.length, '問');
+  document.getElementById('countE').textContent = `収録: ${REVIEW_DATA.length}語句(毎回${EXAM_SIZE}語句・20問を出題)`;
 }
 
 /* ============================================
-   解答処理
+   解答処理(選択 → 確定 の2段階)
    ============================================ */
+let pendingChoice = null;
+
 function selectChoice(idx) {
   if (answered) return;
-  judgeAnswer(idx);
+  pendingChoice = idx;
+  document.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.classList.toggle('selected', parseInt(btn.dataset.idx, 10) === idx);
+  });
+  const cf = document.getElementById('confirmBtn');
+  cf.disabled = false;
+  cf.textContent = '解答を見る';
+}
+
+function confirmAnswer() {
+  if (answered || pendingChoice === null) return;
+  judgeAnswer(pendingChoice);
 }
 
 function selectDontKnow() {
@@ -1289,8 +1880,12 @@ function judgeAnswer(selectedIdx) {
   currentQuestion.userAnswer = selectedIdx;
   currentQuestion.isCorrect = isCorrect;
 
+  const wm = weakMeta(currentQuestion);
+  weakRecord(wm.id, wm, isCorrect ? 0 : 1, isCorrect ? 1 : 0, isCorrect);
+
   document.querySelectorAll('.choice-btn').forEach(btn => {
     btn.disabled = true;
+    btn.classList.remove('selected');
     const i = parseInt(btn.dataset.idx, 10);
     const c = currentQuestion.choices[i];
     if (c.isCorrect) {
@@ -1305,6 +1900,7 @@ function judgeAnswer(selectedIdx) {
   const dontknowBtn = document.getElementById('dontknowBtn');
   dontknowBtn.disabled = true;
   dontknowBtn.classList.add('dimmed');
+  document.getElementById('confirmBtn').style.display = 'none';
 
   const feedback = document.getElementById('feedback');
   const resultEl = document.getElementById('feedbackResult');
@@ -1330,13 +1926,98 @@ function judgeAnswer(selectedIdx) {
   updateProgress();
 }
 
+// 解説に添える例文リスト。028の項目(用法つき)を先に、資料の例文を後に。
+function exampleBlock(prepId, limit) {
+  const revs = REVIEW_DATA.filter(r => r.ans === prepId);
+  const sents = SENTENCE_DATA.filter(s => s.prep === prepId);
+  const total = revs.length + sents.length;
+  if (!total) return '<div class="ex-list"><div class="ex-h">例文</div><div class="ex-more">この語の例文は資料に収録されていません。</div></div>';
+  const rows = [];
+  revs.forEach(r => {
+    if (rows.length >= limit) return;
+    rows.push(`<div class="ex-row"><span class="e">${r.sentence.replace('___', `<u>${r.ans}</u>`)}</span>`
+      + `<span class="j">${r.gloss}　〈${r.use}〉</span></div>`);
+  });
+  sents.forEach(s => {
+    if (rows.length >= limit) return;
+    rows.push(`<div class="ex-row"><span class="e">${s.sentence.replace('___', `<u>${prepId}</u>`)}</span>`
+      + `<span class="j">${s.gloss}</span></div>`);
+  });
+  const rest = total - rows.length;
+  return `<div class="ex-list"><div class="ex-h">この語の用法と例文（${total}例）</div>${rows.join('')}`
+    + (rest > 0 ? `<div class="ex-more">ほか ${rest} 例はモードAの一覧で確認できます。</div>` : '')
+    + '</div>';
+}
+
+// モードD: 選ばなかった語が正しくはどう使われるか
+function counterpartBlock(q) {
+  const sig = q.options.join('|');
+  const rows = q.options.filter(w => w !== q.ans).map(w => {
+    if (q.others && q.others[w]) {
+      return `<div class="ex-row"><span class="e"><u>${w}</u></span><span class="j">${q.others[w]}</span></div>`;
+    }
+    const c = CONTRAST_DATA.find(x => x.ans === w && x.options.join('|') === sig && x.sentence !== q.sentence);
+    if (c) {
+      return `<div class="ex-row"><span class="e">${c.sentence.replace('___', `<u>${w}</u>`)}</span>`
+        + `<span class="j">${c.gloss}</span></div>`;
+    }
+    const r = REVIEW_DATA.find(x => x.ans === w);
+    if (r) {
+      return `<div class="ex-row"><span class="e">${r.sentence.replace('___', `<u>${w}</u>`)}</span>`
+        + `<span class="j">${r.gloss}　〈${r.use}〉</span></div>`;
+    }
+    const b = SENTENCE_DATA.find(x => x.prep === w);
+    if (b) {
+      return `<div class="ex-row"><span class="e">${b.sentence.replace('___', `<u>${w}</u>`)}</span>`
+        + `<span class="j">${b.gloss}</span></div>`;
+    }
+    return '';
+  }).filter(Boolean);
+  if (!rows.length) return '';
+  return `<div class="ex-list"><div class="ex-h">選ばなかった語の使い方</div>${rows.join('')}</div>`;
+}
+
 function buildFeedback(q) {
   let html = '';
+
+  if (q.kind === 'contrast') {
+    const filled = q.sentence.replace('___', `<code>${q.ans}</code>`);
+    html += `<div class="feedback-row"><span class="label">正解:</span><code>${q.ans}</code></div>`;
+    html += `<div class="feedback-row"><span class="label">語句:</span>${filled}</div>`;
+    html += `<div class="feedback-row"><span class="label">意味:</span>${q.gloss}</div>`;
+    html += `<div class="note"><b>判断の基準</b>　${q.key}</div>`;
+    if (q.caution) html += `<div class="note caution">${q.caution}</div>`;
+    html += counterpartBlock(q);
+    return html;
+  }
+
+  if (q.kind === 'usage') {
+    const filled = q.sentence.replace('___', `<code>${q.ans}</code>`);
+    html += `<div class="feedback-row"><span class="label">用法:</span>${q.use}</div>`;
+    html += `<div class="feedback-row"><span class="label">語句:</span>${filled}</div>`;
+    html += `<div class="feedback-row"><span class="label">意味:</span>${q.gloss}</div>`;
+    html += `<div class="feedback-row"><span class="label">資料:</span>整理して覚える028 → ${q.ref}</div>`;
+    if (q.note) html += `<div class="note">${q.note}</div>`;
+    return html;
+  }
+
+  if (q.kind === 'review') {
+    const filled = q.sentence.replace('___', `<code>${q.ans}</code>`);
+    html += `<div class="feedback-row"><span class="label">正解:</span><code>${q.ans}</code></div>`;
+    html += `<div class="feedback-row"><span class="label">語句:</span>${filled}</div>`;
+    html += `<div class="feedback-row"><span class="label">意味:</span>${q.gloss}</div>`;
+    html += `<div class="feedback-row"><span class="label">用法:</span>${q.use}</div>`;
+    html += `<div class="feedback-row"><span class="label">資料:</span>整理して覚える028 → ${q.ref}</div>`;
+    if (q.note) html += `<div class="note">${q.note}</div>`;
+    return html;
+  }
+
   const prep = MASTER_BY_ID[q.prepId];
 
   if (q.kind === 'core') {
     html += `<div class="feedback-row"><span class="label">前置詞:</span><code>${prep.disp}</code></div>`;
     html += `<div class="feedback-row"><span class="label">コアイメージ:</span>${prep.core}</div>`;
+    html += exampleBlock(prep.id, 8);
     if (prep.group === 'C') {
       html += `<div class="note">この語のコアイメージは当塾オリジナルの補足です(資料には未収録)。</div>`;
     }
@@ -1347,8 +2028,448 @@ function buildFeedback(q) {
     html += `<div class="feedback-row"><span class="label">意味:</span>${q.gloss}</div>`;
     html += `<div class="feedback-row"><span class="label">コアイメージ:</span>${prep.core}</div>`;
     if (q.note) html += `<div class="note">${q.note}</div>`;
+    if (q.also) {
+      const a = q.also.sentence.replace('___', `<code>${q.also.ans}</code>`);
+      html += `<div class="note also">同じ用法が『整理して覚える028』にもあります：${a}(${q.also.gloss})〈${q.also.use}〉→ ${q.also.ref}</div>`;
+    }
   }
   return html;
+}
+
+/* ============================================
+   モードA: インプット一覧
+   ============================================ */
+const INV_ORDER = PREP_MASTER.filter(p => p.group === 'A').map(p => p.id)
+  .concat(PREP_MASTER.filter(p => p.group === 'C').map(p => p.id))
+  .concat(REVIEW_DATA.map(r => r.ans).filter((w, i, a) => a.indexOf(w) === i && !MASTER_BY_ID[w]));
+
+let invBlind = false, invNoEx = false, invQuery = '';
+const invRefs = {}; // 語 → セクション要素
+
+function renderInvIndex(shown) {
+  const idx = document.getElementById('invIndex');
+  idx.innerHTML = '';
+  const nA = PREP_MASTER.filter(p => p.group === 'A').length;
+  const nC = nA + PREP_MASTER.filter(p => p.group === 'C').length;
+  INV_ORDER.forEach((w, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = w;
+    if (i === nA || i === nC) btn.className = 'gap';
+    if (!shown.includes(w)) { btn.disabled = true; btn.style.opacity = '.3'; btn.style.cursor = 'default'; }
+    else btn.onclick = () => jumpToWord(w);
+    idx.appendChild(btn);
+  });
+}
+
+function jumpToWord(w) {
+  const el = invRefs[w];
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  el.classList.add('flash');
+  setTimeout(() => el.classList.remove('flash'), 1200);
+}
+
+function openInventory() {
+  document.getElementById('modeSelect').style.display = 'none';
+  document.getElementById('examScreen').classList.remove('active');
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('reviewScreen').classList.remove('active');
+  document.getElementById('completeScreen').classList.remove('active');
+  document.getElementById('inventoryScreen').classList.add('active');
+  renderInventory();
+}
+
+function renderInventory() {
+  const list = document.getElementById('invList');
+  const t = invQuery.trim().toLowerCase();
+  let shownWords = 0, shownRows = 0;
+  const shownIds = [];
+  list.className = 'inv' + (invBlind ? ' blind' : '') + (invNoEx ? ' noex' : '');
+  list.innerHTML = '';
+
+  INV_ORDER.forEach(w => {
+    const core = MASTER_BY_ID[w];
+    const revs = REVIEW_DATA.filter(r => r.ans === w);
+    const sents = SENTENCE_DATA.filter(s => s.prep === w);
+    const hay = (w + ' ' + (core ? core.core : '') + ' '
+      + revs.map(r => r.gloss + r.use + r.sentence).join(' ')
+      + sents.map(s => s.gloss + s.sentence).join(' ')).toLowerCase();
+    if (t && !hay.includes(t)) return;
+    shownWords++;
+    shownIds.push(w);
+    shownRows += revs.length + sents.length;
+
+    const holes = [];
+    if (!core) holes.push('コアイメージ未収録');
+    if (!revs.length && !sents.length) holes.push('例文未収録');
+
+    const rows = [];
+    if (revs.length) {
+      rows.push('<div class="inv-use">意味と用法(整理して覚える028)</div>');
+      revs.forEach(r => rows.push(
+        `<div class="inv-row"><span class="e">${r.sentence.replace('___', `<u>${r.ans}</u>`)}</span>`
+        + `<span class="j">${r.gloss}　〈${r.use}〉</span><span class="r">→ ${r.ref}</span></div>`));
+    }
+    if (sents.length) {
+      rows.push('<div class="inv-use">例文(資料)</div>');
+      sents.forEach(s => rows.push(
+        `<div class="inv-row"><span class="e">${s.sentence.replace('___', `<u>${w}</u>`)}</span>`
+        + `<span class="j">${s.gloss}</span></div>`));
+    }
+    if (!rows.length) rows.push('<div class="inv-empty">この語の例文は未収録です。</div>');
+
+    const el = document.createElement('div');
+    el.className = 'inv-word';
+    el.innerHTML = `<div class="inv-head"><span class="w">${w}</span>`
+      + (core ? `<span class="ci">${core.core}</span>` : '')
+      + (holes.length ? `<span class="miss">${holes.join('／')}</span>` : '')
+      + `</div>${rows.join('')}`;
+    invRefs[w] = el;
+    list.appendChild(el);
+  });
+
+  renderInvIndex(shownIds);
+  document.getElementById('invCount').textContent = `${shownWords} 語 / ${shownRows} 項目`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const q = document.getElementById('invQ');
+  if (!q) return;
+  q.addEventListener('input', e => { invQuery = e.target.value; renderInventory(); });
+  const bind = (id, get, set) => {
+    const el = document.getElementById(id);
+    el.addEventListener('click', () => {
+      set(!get());
+      el.setAttribute('aria-pressed', String(get()));
+      renderInventory();
+    });
+  };
+  bind('invBlind', () => invBlind, v => invBlind = v);
+  bind('invEx', () => invNoEx, v => invNoEx = v);
+  initWeakUI();
+});
+
+/* ============================================
+   モードE: 語句の総点検
+   1項目につき「意味・用法」と「和訳」を続けて答え、
+   全問終えてからまとめて採点する。
+   ============================================ */
+const EXAM_SIZE = 10;
+let exam = null;
+
+// 和訳の選択肢。同じ前置詞 → 同じ資料区分 → その他 の順に誤答を集める。
+function buildGlossChoices(d, n) {
+  const opts = [d.gloss];
+  const rest = REVIEW_DATA.filter(x => x.gloss !== d.gloss);
+  const tiers = [
+    shuffle(rest.filter(x => x.ans === d.ans)),
+    shuffle(rest.filter(x => x.ans !== d.ans && x.grp === d.grp)),
+    shuffle(rest.filter(x => x.ans !== d.ans && x.grp !== d.grp)),
+  ];
+  tiers.forEach(tier => tier.forEach(x => {
+    if (opts.length < n && !opts.includes(x.gloss)) opts.push(x.gloss);
+  }));
+  return shuffle(opts);
+}
+
+function startExam(subset) {
+  const src = (subset && subset.length) ? subset.slice() : shuffle(REVIEW_DATA.slice()).slice(0, EXAM_SIZE);
+  const items = src.map(d => ({
+    d,
+    useOpts: buildUsageChoices({ ...d, use: d.use }, 4).map(c => c.disp),
+    jaOpts: buildGlossChoices(d, 4),
+    pickUse: null,
+    pickJa: null,
+  }));
+  exam = { items, idx: 0, graded: false };
+  document.getElementById('modeSelect').style.display = 'none';
+  document.getElementById('inventoryScreen').classList.remove('active');
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('reviewScreen').classList.remove('active');
+  document.getElementById('completeScreen').classList.remove('active');
+  document.getElementById('examScreen').classList.add('active');
+  renderExam();
+}
+
+function renderExam() {
+  const body = document.getElementById('examBody');
+  const prog = document.getElementById('examProgress');
+  const it = exam.items[exam.idx];
+  const d = it.d;
+  const last = exam.idx === exam.items.length - 1;
+  prog.textContent = `${exam.idx + 1} / ${exam.items.length} 問目`;
+
+  const opt = (kind, arr, picked) => arr.map((o, i) =>
+    `<button class="exam-opt${picked === o ? ' selected' : ''}" data-kind="${kind}" data-i="${i}">${o}</button>`).join('');
+
+  body.innerHTML = `
+    <div class="exam-item">
+      <div class="exam-phrase">${d.sentence.replace('___', `<u>${d.ans}</u>`)}</div>
+      <div class="exam-q">① 下線部の前置詞の意味・用法は</div>
+      <div class="exam-opts" data-group="use">${opt('use', it.useOpts, it.pickUse)}</div>
+      <div class="exam-q">② この語句の和訳は</div>
+      <div class="exam-opts" data-group="ja">${opt('ja', it.jaOpts, it.pickJa)}</div>
+    </div>
+    <button class="confirm-btn" id="examNext" ${it.pickUse !== null && it.pickJa !== null ? '' : 'disabled'}>
+      ${last ? '採点する' : '次の語句へ →'}</button>
+    <button class="dontknow-btn" id="examBack" ${exam.idx === 0 ? 'style="visibility:hidden"' : ''}>← 前の語句へ</button>`;
+
+  body.querySelectorAll('.exam-opt').forEach(btn => {
+    btn.onclick = () => {
+      const kind = btn.dataset.kind;
+      const val = kind === 'use' ? it.useOpts[+btn.dataset.i] : it.jaOpts[+btn.dataset.i];
+      if (kind === 'use') it.pickUse = val; else it.pickJa = val;
+      renderExam();
+    };
+  });
+  document.getElementById('examNext').onclick = () => {
+    if (it.pickUse === null || it.pickJa === null) return;
+    if (last) { gradeExam(); } else { exam.idx++; renderExam(); }
+  };
+  const back = document.getElementById('examBack');
+  if (back) back.onclick = () => { if (exam.idx > 0) { exam.idx--; renderExam(); } };
+}
+
+let examMissed = [];
+function retryExam() { if (examMissed.length) startExam(examMissed); }
+
+function gradeExam() {
+  exam.graded = true;
+  exam.items.forEach(it => {
+    const d = it.d;
+    const uOK = it.pickUse === d.use, jOK = it.pickJa === d.gloss;
+    const nW = (uOK ? 0 : 1) + (jOK ? 0 : 1);
+    weakRecord(`prep:ph:${d.sentence}|${d.ans}`, {
+      t: d.sentence.replace('___', `<u>${d.ans}</u>`), r: d.gloss, g: d.ans,
+    }, nW * 0.5, (2 - nW) * 0.5, nW === 0);
+  });
+  const body = document.getElementById('examBody');
+  const okUse = exam.items.filter(i => i.pickUse === i.d.use).length;
+  const okJa = exam.items.filter(i => i.pickJa === i.d.gloss).length;
+  const missed = exam.items.filter(i => i.pickUse !== i.d.use || i.pickJa !== i.d.gloss).map(i => i.d);
+  examMissed = missed;
+  document.getElementById('examProgress').textContent = '採点結果';
+
+  const cards = exam.items.map((it, n) => {
+    const d = it.d;
+    const uOK = it.pickUse === d.use, jOK = it.pickJa === d.gloss;
+    const line = (label, picked, correct, ok) => {
+      let h = `<div class="exam-q">${label}<span class="exam-mark ${ok ? 'o' : 'x'}">${ok ? '○' : '×'}</span></div>`;
+      h += `<div class="exam-opt ${ok ? 'ok' : 'ng'}">${picked}</div>`;
+      if (!ok) h += `<div class="exam-opt ans" style="margin-top:5px">正解：${correct}</div>`;
+      return h;
+    };
+    return `<div class="exam-item">
+      <div class="exam-phrase">${d.sentence.replace('___', `<u>${d.ans}</u>`)}</div>
+      ${line(`${n + 1}① 意味・用法`, it.pickUse, d.use, uOK)}
+      ${line(`${n + 1}② 和訳`, it.pickJa, d.gloss, jOK)}
+      ${d.note ? `<div class="note">${d.note}</div>` : ''}
+      <div class="exam-ref">整理して覚える028 → ${d.ref}</div>
+    </div>`;
+  }).join('');
+
+  body.innerHTML = `
+    <div class="exam-score">
+      <div class="row2">
+        <div><div class="n">${okUse} / ${exam.items.length}</div><div class="lbl">意味・用法</div></div>
+        <div><div class="n">${okJa} / ${exam.items.length}</div><div class="lbl">和訳</div></div>
+      </div>
+    </div>
+    ${cards}
+    ${missed.length ? `<button class="confirm-btn" onclick="retryExam()">間違えた ${missed.length} 語句のみもう一度</button>` : ''}
+    <button class="${missed.length ? 'dontknow-btn' : 'confirm-btn'}" onclick="startExam()">別の10語句で解く</button>
+    <button class="dontknow-btn" onclick="backToMode()">モード選択へ</button>`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================
+   苦手項目の記録
+   世界史の演習ツールと同じ形式(t/r/g/w/c/st/last/ts)で保存する。
+   保存キーだけを分け、記録が混ざらないようにしている。
+   ============================================ */
+const WEAK_KEY = 'tsubame_weak_prep_v1';
+const WEAK_API = 'https://api.swallow-base.com/weak-api.php';
+const WEAK_SLOT = '#prep'; // 世界史の記録を上書きしないよう、暗証コードに付ける識別子
+
+function weakLoad() {
+  try { return JSON.parse(localStorage.getItem(WEAK_KEY) || '{}'); } catch (e) { return {}; }
+}
+function weakSave(db) {
+  try { localStorage.setItem(WEAK_KEY, JSON.stringify(db)); return true; } catch (e) { return false; }
+}
+const weakDone = e => ((e.st != null) ? e.st : (e.last === 'ok' ? 1 : 0)) >= 2;
+const weakFmt = v => String(Math.round(v * 10) / 10);
+
+// addW/addC は 1問=1。モードEは1語句2問なので 0.5 ずつ加算する。
+function weakRecord(id, meta, addW, addC, streakOk) {
+  const db = weakLoad();
+  const e = db[id] || { t: '', r: '', g: '', w: 0, c: 0, st: 0, last: '', ts: 0 };
+  e.t = meta.t; e.r = meta.r || ''; e.g = meta.g || '';
+  e.w = (e.w || 0) + addW;
+  e.c = (e.c || 0) + addC;
+  e.st = streakOk ? (e.st || 0) + 1 : 0;
+  e.last = streakOk ? 'ok' : 'ng';
+  e.ts = Date.now();
+  db[id] = e;
+  weakSave(db);
+}
+
+// 問題オブジェクトから記録用の見出しを作る
+function weakMeta(q) {
+  if (q.kind === 'core') {
+    const p = MASTER_BY_ID[q.prepId];
+    return { id: `prep:core:${p.id}`, t: p.disp, r: p.core, g: 'コアイメージ' };
+  }
+  const ans = q.kind === 'sentence' ? MASTER_BY_ID[q.prepId].disp : q.ans;
+  return {
+    id: `prep:ph:${q.sentence}|${ans}`,
+    t: q.sentence.replace('___', `<u>${ans}</u>`),
+    r: q.gloss,
+    g: ans,
+  };
+}
+
+let weakFilter = 'all';
+function renderWeak() {
+  const sec = document.getElementById('weakSection');
+  const ul = document.getElementById('weakUl');
+  const empty = document.getElementById('weakEmpty');
+  if (!sec) return;
+  const rows = Object.values(weakLoad()).filter(e => e.w > 0);
+  sec.style.display = '';
+  if (rows.length === 0) {
+    ul.innerHTML = '';
+    empty.style.display = '';
+    empty.textContent = 'まだ記録はありません。演習で間違えた項目が、自動的にここに並びます。';
+    return;
+  }
+  rows.sort((a, b) => (b.w - a.w) || (b.ts - a.ts));
+  const shown = rows.filter(e => {
+    if (weakFilter === 'yet') return !weakDone(e);
+    if (weakFilter === 'done') return weakDone(e);
+    return true;
+  });
+  ul.innerHTML = shown.map(e => {
+    const done = weakDone(e);
+    return `<li>
+      <span class="wl-term">${e.t}</span>
+      ${e.r ? `<span class="wl-read">（${e.r}）</span>` : ''}
+      <span class="wl-tag">${e.g || ''}</span>
+      <span class="wl-cnt"><span class="ng">×${weakFmt(e.w)}</span><span class="ok">○${weakFmt(e.c)}</span></span>
+      <span class="wl-badge ${done ? 'done' : 'yet'}">${done ? '克服済み' : '未克服'}</span>
+    </li>`;
+  }).join('');
+  empty.style.display = shown.length ? 'none' : '';
+  empty.textContent = weakFilter === 'yet' ? '未克服の項目はありません。'
+    : (weakFilter === 'done' ? '克服済みの項目はまだありません(直近2回連続で正答すると克服済みになります)。' : '');
+}
+
+function weakEncode(o) { return btoa(unescape(encodeURIComponent(JSON.stringify(o)))); }
+function weakDecode(s) { return JSON.parse(decodeURIComponent(escape(atob(s.trim())))); }
+
+function initWeakUI() {
+  if (!document.getElementById('weakSection')) return;
+  document.querySelectorAll('.wf-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      weakFilter = b.dataset.f;
+      document.querySelectorAll('.wf-btn').forEach(x => x.classList.toggle('active', x === b));
+      renderWeak();
+    });
+  });
+  document.getElementById('weakReset').addEventListener('click', () => {
+    if (!confirm('苦手項目の記録をすべて消去します。よろしいですか？')) return;
+    try { localStorage.removeItem(WEAK_KEY); } catch (e) {}
+    renderWeak();
+  });
+
+  const bkArea = document.getElementById('bkArea');
+  const bkText = document.getElementById('bkText');
+  document.getElementById('bkExport').addEventListener('click', () => {
+    const db = weakLoad();
+    if (Object.keys(db).length === 0) { alert('記録がありません。'); return; }
+    bkArea.style.display = '';
+    document.getElementById('bkRun').style.display = 'none';
+    bkText.value = weakEncode(db);
+    bkText.select();
+    document.getElementById('bkHint').textContent = 'このコードをコピーして、メモアプリなどに保存してください。';
+  });
+  document.getElementById('bkImport').addEventListener('click', () => {
+    bkArea.style.display = '';
+    bkText.value = '';
+    bkText.placeholder = '保存しておいた記録コードをここに貼り付けて、「復元を実行」を押してください。';
+    document.getElementById('bkRun').style.display = '';
+    document.getElementById('bkHint').textContent = '';
+    bkText.focus();
+  });
+  document.getElementById('bkRun').addEventListener('click', () => {
+    let db;
+    try { db = weakDecode(bkText.value); } catch (e) { alert('コードを読み取れませんでした。コピーの欠けがないかご確認ください。'); return; }
+    if (!db || typeof db !== 'object') { alert('コードの形式が正しくありません。'); return; }
+    if (!confirm('現在の記録をこのコードの内容で置き換えます。よろしいですか？')) return;
+    if (!weakSave(db)) { alert('保存できませんでした。'); return; }
+    document.getElementById('bkRun').style.display = 'none';
+    bkArea.style.display = 'none';
+    renderWeak();
+    alert('復元しました。');
+  });
+  document.getElementById('bkCopy').addEventListener('click', () => {
+    bkText.select();
+    try {
+      navigator.clipboard.writeText(bkText.value)
+        .then(() => { document.getElementById('bkHint').textContent = 'コピーしました。'; });
+    } catch (e) {
+      document.execCommand('copy');
+      document.getElementById('bkHint').textContent = 'コピーしました。';
+    }
+  });
+
+  let svMode = '';
+  const svArea = document.getElementById('svArea');
+  const svMsg = document.getElementById('svMsg');
+  const svOpen = mode => {
+    svMode = mode;
+    svArea.style.display = '';
+    document.getElementById('svTitle').textContent = mode === 'save'
+      ? 'サーバーに保存：暗証コードを決めて入力してください'
+      : 'サーバーから復元：保存したときの暗証コードを入力してください';
+    svMsg.textContent = '';
+    document.getElementById('svPass').focus();
+  };
+  document.getElementById('svSave').addEventListener('click', () => {
+    if (Object.keys(weakLoad()).length === 0) { alert('まだ記録がないため、保存できるデータがありません。'); return; }
+    svOpen('save');
+  });
+  document.getElementById('svLoad').addEventListener('click', () => svOpen('load'));
+  document.getElementById('svRun').addEventListener('click', async () => {
+    const pass = document.getElementById('svPass').value.trim();
+    if (pass.length < 6) { svMsg.style.color = 'var(--accent)'; svMsg.textContent = '暗証コードは6文字以上にしてください。'; return; }
+    svMsg.style.color = 'var(--subtle)'; svMsg.textContent = '通信中…';
+    const body = svMode === 'save'
+      ? { action: 'save', pass: pass + WEAK_SLOT, data: weakEncode(weakLoad()) }
+      : { action: 'load', pass: pass + WEAK_SLOT };
+    let res;
+    try {
+      const r = await fetch(WEAK_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      res = await r.json();
+    } catch (e) {
+      svMsg.style.color = 'var(--accent)';
+      svMsg.textContent = 'サーバーに接続できませんでした。手元の「記録コードを表示」でのバックアップは利用できます。';
+      return;
+    }
+    if (!res.ok) { svMsg.style.color = 'var(--accent)'; svMsg.textContent = res.msg || '処理に失敗しました。'; return; }
+    if (svMode === 'save') {
+      svMsg.style.color = '#3a6a2a';
+      svMsg.textContent = (res.msg || '保存しました。') + ' 暗証コードを忘れないよう控えておいてください。';
+    } else {
+      let db;
+      try { db = weakDecode(res.data); } catch (e) { svMsg.style.color = 'var(--accent)'; svMsg.textContent = '受信データを読み取れませんでした。'; return; }
+      if (!confirm('この端末の現在の記録を、サーバーの記録で置き換えます。よろしいですか？')) { svMsg.textContent = ''; return; }
+      if (!weakSave(db)) { svMsg.style.color = 'var(--accent)'; svMsg.textContent = 'この端末に保存できませんでした。'; return; }
+      renderWeak();
+      svMsg.style.color = '#3a6a2a'; svMsg.textContent = '復元しました。';
+    }
+  });
+  renderWeak();
 }
 
 function nextQuestion() { showNextQuestion(); }
@@ -1374,7 +2495,22 @@ function showReviewScreen() {
     item.className = 'wrong-item';
 
     let headTarget, userAnsStr, correctAnsStr, targetClass;
-    if (q.kind === 'core') {
+    if (q.kind === 'contrast') {
+      headTarget = q.sentence.replace('___', '____');
+      targetClass = 'wrong-item-target sentence';
+      correctAnsStr = q.ans;
+      userAnsStr = q.userAnswer === -1 ? 'わからない' : q.choices[q.userAnswer].disp;
+    } else if (q.kind === 'usage') {
+      headTarget = q.sentence.replace('___', `<i>${q.ans}</i>`);
+      targetClass = 'wrong-item-target sentence';
+      correctAnsStr = q.use;
+      userAnsStr = q.userAnswer === -1 ? 'わからない' : q.choices[q.userAnswer].disp;
+    } else if (q.kind === 'review') {
+      headTarget = q.sentence.replace('___', '____');
+      targetClass = 'wrong-item-target sentence';
+      correctAnsStr = q.ans;
+      userAnsStr = q.userAnswer === -1 ? 'わからない' : q.choices[q.userAnswer].disp;
+    } else if (q.kind === 'core') {
       headTarget = prep.disp;
       targetClass = 'wrong-item-target';
       correctAnsStr = prep.core;
