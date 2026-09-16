@@ -179,7 +179,7 @@ footer{margin-top:40px;font-size:11px;color:var(--ink-soft);text-align:center;li
 
   <!-- 開始画面 -->
   <div id="start">
-    <p class="lead">出題はすべて、配布した教材資料に記載のある事項に限定しています。誤りの選択肢も教材の範囲から作られています（見慣れない語は誤答です）。出題形式を選んで演習を始めてください。</p>
+    <p class="lead">正解となる語は、配布した教材資料に記載のある事項に限定しています。誤りの選択肢には教材外の語も含まれます（見慣れない語は誤答です）。教材外の補足は解説欄に明記しています。出題形式を選んで演習を始めてください。</p>
 
     <div class="section-label">出題形式</div>
     <div class="modes" id="modeList"></div>
@@ -666,7 +666,8 @@ function explainHTML(d){
     if(d.by&&!rel.some(x=>x.id===d.by))rel.unshift(byId(d.by));
     if(rel.length)parts.push(`関連する人物：<b>${rel.map(x=>x.term).join('、')}</b>`);
   }
-  let s=`<div class="explain"><span class="ttl">解説</span>${d.desc}`;
+  // 携帯でスクロールしても何の語の解説かわかるよう、冒頭に正解の語を再掲する
+  let s=`<div class="explain"><span class="ttl">解説</span><div style="font-weight:700;font-size:15px;margin:2px 0 6px">${d.term}<span style="font-weight:400;font-size:12px;color:var(--ink-soft)">（${d.read}）</span></div>${d.desc}`;
   if(d.note)s+=`<br><span style="color:var(--ink-soft)">※ ${d.note}</span>`;
   if(d.ext)s+=`<br><span style="color:var(--ink-soft)">※ 教材外の補足：${d.ext}</span>`;
   s+=`<br><br>${parts.join('　／　')}</div>`;
@@ -1023,11 +1024,18 @@ function renderModeC(){
     document.getElementById('gradeC').disabled=true;
     document.getElementById('dkC').disabled=true;
     const list=correctItems.map(x=>task.plain?x.term:cLabel(x)).join('、');
+    // 正解の語それぞれの説明（携帯でも選択肢まで戻らずに確認できるように）
+    const correctDescHTML=correctItems.map(x=>{
+      const link=x.type==='人物'?'':(x.person?`　人物：${byId(x.person).term}`:'');
+      return `<div style="margin-top:10px;padding-top:8px;border-top:1px dashed var(--line)">
+        <div style="font-weight:700">${x.term}<span style="font-weight:400;font-size:12px;color:var(--ink-soft)">（${x.read}）　${x.cat}${link}</span></div>
+        <div>${x.desc}${x.ext?`<br><span style="color:var(--ink-soft)">※ 教材外の補足：${x.ext}</span>`:''}</div></div>`;
+    }).join('');
     const tail=ok?'すべて正しく選べています。':(forceWrong?'「わからない」を選びました。':'取りこぼし・誤選択があります。');
     const noteLine=task.note?`<br><span style="color:var(--ink-soft)">※ ${task.note}</span>`:'';
     document.getElementById('afterC').innerHTML=
       verdict(ok)
-      +`<div class="explain"><span class="ttl">解説</span>あてはまるのは <b>${list}</b> です。${tail}${noteLine}<br><br>
+      +`<div class="explain"><span class="ttl">解説</span>あてはまるのは <b>${list}</b> です。${tail}${noteLine}${correctDescHTML}<br>
       <span style="color:var(--ink-soft);font-size:12px">※ 緑＝あてはまる語、薄い緑＝選び落とした正解、赤＝誤って選んだ語。</span></div>`
       +nextBtnHTML();
     bindNext();
