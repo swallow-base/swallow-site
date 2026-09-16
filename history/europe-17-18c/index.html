@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17〜18世紀ヨーロッパ文化史 演習 ─ つばめ学習舎</title>
+<meta name="description" content="つばめ学習舎の大学受験向け 17〜18世紀ヨーロッパ文化史 演習ツール。教材に準拠した出題で、科学革命・哲学・政治思想・経済学・啓蒙思想・芸術を練習できます。">
+
+<!-- 検索エンジンに載せたくない内部用ツールのため除外。公開して検索に出したい場合は次の1行を削除してください -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- 正規URL（/history/europe-17-18c フォルダに index.html として置いた場合） -->
+<link rel="canonical" href="https://swallow-base.com/history/europe-17-18c/">
+<meta name="theme-color" content="#20262e">
+
+<!-- SNSなどで共有したときの表示（OGP） -->
+<meta property="og:title" content="17〜18世紀ヨーロッパ文化史 演習 ─ つばめ学習舎">
+<meta property="og:description" content="教材準拠の17〜18世紀ヨーロッパ文化史 演習ツール。科学革命・哲学・政治思想・経済学・啓蒙思想・芸術を練習できます。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://swallow-base.com/history/europe-17-18c/">
+<meta property="og:site_name" content="つばめ学習舎">
+<meta property="og:locale" content="ja_JP">
+
+<!-- favicon（朱印「演」。外部ファイル不要のインラインSVG） -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%239e3d2e'/><text x='16' y='24' font-family='serif' font-size='19' fill='white' text-anchor='middle'>演</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#20262e;
+  --ink-soft:#48515c;
+  --paper:#f0ece1;
+  --paper-card:#faf7ef;
+  --line:#d8d0bf;
+  --seal:#9e3d2e;
+  --seal-soft:#b8553f;
+  --gold:#a9863f;
+  --green:#6c7e58;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+  min-height:100vh;
+  background-image:radial-gradient(circle at 20% 10%,rgba(255,255,255,.4),transparent 40%);
+}
+.wrap{max-width:760px;margin:0 auto;padding:24px 18px 80px}
+.serif{font-family:"Noto Serif JP",serif}
+
+/* ヘッダ */
+header.top{display:flex;align-items:baseline;gap:14px;padding:8px 2px 20px;border-bottom:2px solid var(--ink);margin-bottom:26px}
+header.top .mark{
+  font-family:"Noto Serif JP",serif;font-weight:700;font-size:13px;color:#fff;
+  background:var(--seal);padding:7px 9px;border-radius:3px;letter-spacing:.12em;line-height:1.3;
+  writing-mode:vertical-rl;text-orientation:upright;
+}
+header.top h1{font-family:"Noto Serif JP",serif;font-weight:700;font-size:21px;letter-spacing:.04em}
+header.top .sub{font-size:12px;color:var(--ink-soft);margin-top:3px;letter-spacing:.08em}
+header.top .home-link{margin-left:auto;align-self:center;font-size:12px;color:var(--seal);text-decoration:none;border:1px solid var(--line);padding:6px 12px;border-radius:6px;white-space:nowrap;font-weight:600;letter-spacing:.04em;transition:.12s}
+header.top .home-link:hover{background:#faf0ec;border-color:var(--seal)}
+
+/* 開始画面 */
+.lead{font-size:13.5px;color:var(--ink-soft);margin-bottom:22px;max-width:60ch}
+.section-label{font-family:"Noto Serif JP",serif;font-size:12px;letter-spacing:.22em;color:var(--gold);margin:26px 0 12px;font-weight:600}
+
+.modes{display:grid;gap:12px}
+.mode-card{
+  text-align:left;background:var(--paper-card);border:1px solid var(--line);border-radius:7px;
+  padding:16px 18px;cursor:pointer;transition:.15s;display:flex;gap:15px;align-items:flex-start;width:100%;
+  font-family:inherit;color:inherit;
+}
+.mode-card:hover{border-color:var(--ink);transform:translateY(-1px)}
+.mode-card:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.mode-card .code{font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px;color:var(--seal);min-width:30px;padding-top:1px}
+.mode-card .body .t{font-weight:700;font-size:15px;margin-bottom:3px}
+.mode-card .body .d{font-size:12.5px;color:var(--ink-soft);line-height:1.6}
+
+/* クイズ画面 */
+.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.btn-back{font-family:inherit;font-size:12.5px;background:none;border:none;color:var(--ink-soft);cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+.btn-back:hover{color:var(--ink)}
+.progress{font-size:12px;color:var(--ink-soft);font-family:"Noto Serif JP",serif;letter-spacing:.05em}
+.score-tag{font-size:12px;color:var(--seal);font-weight:700}
+
+.card{background:var(--paper-card);border:1px solid var(--line);border-radius:9px;padding:22px 20px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+
+.prompt-label{font-size:11px;letter-spacing:.18em;color:var(--gold);font-weight:600;font-family:"Noto Serif JP",serif;margin-bottom:8px}
+.prompt-desc{font-size:15.5px;line-height:1.85;margin-bottom:4px}
+.prompt-term{font-family:"Noto Serif JP",serif;font-size:30px;font-weight:700;letter-spacing:.04em;line-height:1.3}
+.prompt-term .rb{font-size:13px;color:var(--ink-soft);font-weight:400;display:block;letter-spacing:.1em;margin-bottom:2px}
+.prompt-sub{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
+
+/* 選択肢 */
+.opts{display:grid;gap:9px;margin-top:18px}
+.opt{
+  font-family:inherit;text-align:left;background:#fff;border:1px solid var(--line);border-radius:6px;
+  padding:12px 15px;cursor:pointer;font-size:14.5px;color:var(--ink);transition:.12s;width:100%;display:flex;gap:10px;align-items:center;
+}
+.opt .mk{font-family:"Noto Serif JP",serif;color:var(--ink-soft);font-size:13px;min-width:18px}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt:focus-visible{outline:2px solid var(--seal);outline-offset:1px}
+.opt:disabled{cursor:default}
+.opt.correct{background:#eef3ea;border-color:var(--green);color:#33421f}
+.opt.wrong{background:#f6e9e6;border-color:var(--seal);color:#6e2a1e}
+.opt.dim{opacity:.5}
+.opt.dk{color:var(--ink-soft)}
+.opt.dk .mk{color:var(--seal);font-weight:700}
+.opt.selected{border-color:var(--seal);background:#faf0ec;box-shadow:inset 0 0 0 2px rgba(158,61,46,.22)}
+.opt .badge{margin-left:auto;font-size:11px;font-weight:700;padding:2px 9px;border-radius:11px;white-space:nowrap;letter-spacing:.03em}
+.opt .badge.your{background:#e7ddca;color:#6b573a}
+.opt .badge.ans{background:#3f7d52;color:#fff}
+.opt .badge+.badge{margin-left:6px}
+
+/* モードB：複数設問ブロック */
+.qblock{border-top:1px dashed var(--line);padding-top:16px;margin-top:16px}
+.qblock:first-of-type{border-top:none;padding-top:4px;margin-top:8px}
+.q-ask{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:10px}
+.q-ask .q-no{color:var(--seal);font-family:"Noto Serif JP",serif;margin-right:6px}
+
+/* 解説 */
+.explain{margin-top:18px;background:#fbf6ea;border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:13px 15px;font-size:13px;line-height:1.8;color:var(--ink-soft)}
+.explain b{color:var(--ink)}
+.explain .ttl{font-family:"Noto Serif JP",serif;font-weight:700;color:var(--gold);font-size:11px;letter-spacing:.14em;display:block;margin-bottom:5px}
+
+/* 正誤の明示 */
+.verdict{display:flex;align-items:center;gap:9px;font-family:"Noto Serif JP",serif;font-weight:700;font-size:18px;padding:11px 18px;border-radius:7px;margin-top:18px;letter-spacing:.1em}
+.verdict .ic{font-size:20px;line-height:1}
+.verdict.ok{background:#e7efe0;color:#3a5a22;border:1.5px solid var(--green)}
+.verdict.ng{background:#f4e3df;color:#8a3322;border:1.5px solid var(--seal)}
+
+/* アクションボタン */
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{font-family:inherit;font-size:14px;font-weight:700;border-radius:6px;padding:11px 22px;cursor:pointer;border:1px solid var(--ink);transition:.12s}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:#000}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:rgba(0,0,0,.04)}
+.btn:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.btn:disabled{opacity:.4;cursor:default}
+
+/* 完了画面 */
+.done{text-align:center;padding:30px 10px}
+.done .big{font-family:"Noto Serif JP",serif;font-size:34px;font-weight:700;margin:10px 0}
+.done .lbl{font-size:12px;letter-spacing:.18em;color:var(--gold);font-family:"Noto Serif JP",serif}
+.done p{font-size:13.5px;color:var(--ink-soft);margin:14px 0 24px}
+.wrong-list{text-align:left;background:#fbf6ea;border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:18px auto;max-width:520px}
+.wrong-list .wl-ttl{font-family:"Noto Serif JP",serif;font-weight:700;font-size:13px;color:var(--seal);margin-bottom:10px}
+.wrong-list ul{list-style:none}
+.wrong-list li{font-size:14px;padding:7px 2px;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.wrong-list li:last-child{border-bottom:none}
+.wrong-list li .rd{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+
+footer{margin-top:40px;font-size:11px;color:var(--ink-soft);text-align:center;line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
+
+.hidden{display:none!important}
+
+@media (max-width:480px){
+  .prompt-term{font-size:25px}
+  .wrap{padding:18px 14px 70px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="mark">演習</div>
+    <div>
+      <h1>17〜18世紀ヨーロッパ文化史</h1>
+      <div class="sub">つばめ学習舎 ── 教材準拠の出題</div>
+    </div>
+    <a class="home-link" href="../">⌂ 世界史トップ</a>
+  </header>
+
+  <!-- 開始画面 -->
+  <div id="start">
+    <p class="lead">出題はすべて、配布した教材資料に記載のある事項に限定しています。誤りの選択肢も教材の範囲から作られています（見慣れない語は誤答です）。出題形式を選んで演習を始めてください。</p>
+
+    <div class="section-label">出題形式</div>
+    <div class="modes" id="modeList"></div>
+
+    <div class="actions" style="margin-top:24px">
+      <button class="btn btn-primary" id="startBtn">演習を始める</button>
+    </div>
+  </div>
+
+  <!-- クイズ画面 -->
+  <div id="quiz" class="hidden">
+    <div class="quiz-top">
+      <button class="btn-back" id="backBtn">← 形式の選択に戻る</button>
+      <div>
+        <span class="progress" id="progress"></span>
+        <span class="score-tag" id="scoreTag"></span>
+      </div>
+    </div>
+    <div id="quizBody"></div>
+  </div>
+
+  <!-- 完了画面 -->
+  <div id="done" class="hidden">
+    <div class="done">
+      <div class="lbl">演習終了</div>
+      <div class="big" id="doneScore"></div>
+      <p id="doneMsg"></p>
+      <div id="wrongArea"></div>
+    </div>
+  </div>
+
+  <footer>
+    出題内容は教材資料の範囲に準拠／別名・補足は解説欄に記載<br>
+    つばめ学習舎・授業用演習ツール
+  </footer>
+</div>
+
+
+<script>
+/* ===================================================================
+   データ：各語は資料（図説 p.160-163／教科書 p.198-201）と照合済み。
+   cat … 分野。country … 国。col … 教科書p.199の表の欄（自然科学／哲学・社会科学）。
+   askCountry … trueの人物だけ国を設問にする（それ以外は説明文に国を含める）。
+   type:"業績" … 表の実績。person で人物に結びつく。モードAでは出題しない。
+   by … その語に結びつく人物のid。method/stance/theory/phrase/value … 人物に結びつく語のid。
+   note … 解説に出す補足。
+   =================================================================== */
+const DATA = [
+
+/* ---- 自然科学（表の左欄）---- */
+{id:"galilei",term:"ガリレイ",read:"がりれい",cat:"自然科学",type:"人物",col:"自然科学",country:"イタリア",
+ desc:"イタリアの人物。望遠鏡を改良し、観測データを集めて天体の運動法則を解明した。"},
+{id:"kepler",term:"ケプラー",read:"けぷらー",cat:"自然科学",type:"人物",col:"自然科学",country:"ドイツ",
+ desc:"ドイツの人物。惑星運行の法則を業績とする。"},
+{id:"harvey",term:"ハーヴェー",read:"はーゔぇー",cat:"自然科学",type:"人物",col:"自然科学",country:"イギリス",
+ desc:"イギリスの人物。血液循環論を業績とする。"},
+{id:"boyle",term:"ボイル",read:"ぼいる",cat:"自然科学",type:"人物",col:"自然科学",country:"イギリス",
+ desc:"イギリスの人物。気体力学を業績とする。",
+ note:"資料集の王立協会の図では、背景にボイルの実験装置が描かれている。"},
+{id:"newton",term:"ニュートン",read:"にゅーとん",cat:"自然科学",type:"人物",col:"自然科学",country:"イギリス",
+ desc:"イギリスの人物。万有引力の法則を発見し、『プリンキピア』を著した。",
+ note:"資料集では、万有引力の発見などを通じて古典力学を確立し、近代物理学の創始者とされると記載。"},
+{id:"hooke",term:"フック",read:"ふっく",cat:"自然科学",type:"人物",col:"自然科学",country:"イギリス",
+ desc:"イギリスの人物。『ミクログラフィア』を著した。",
+ note:"教科書では、自然現象全般に関心をもち、ニュートンと並ぶイギリスの科学研究の推進者となったと記載し、フックが発明した顕微鏡の図を掲載。"},
+{id:"linne",term:"リンネ",read:"りんね",cat:"自然科学",type:"人物",col:"自然科学",country:"スウェーデン",
+ desc:"スウェーデンの人物。植物分類学を業績とする。"},
+{id:"lavoisier",term:"ラヴォワジェ",read:"らゔぉわじぇ",cat:"自然科学",type:"人物",col:"自然科学",country:"フランス",
+ desc:"フランスの人物。燃焼理論を業績とする。"},
+{id:"jenner",term:"ジェンナー",read:"じぇんなー",cat:"自然科学",type:"人物",col:"自然科学",country:"イギリス",
+ desc:"イギリスの人物。牛痘を接種する種痘法を開発した。",
+ note:"資料集では、天然痘は古来より恐れられた伝染病で、乳搾りの女性がかかりにくいことに注目したと記載。"},
+{id:"laplace",term:"ラプラース",read:"らぷらーす",cat:"自然科学",type:"人物",col:"自然科学",country:"フランス",
+ desc:"フランスの人物。宇宙進化論を業績とする。"},
+
+/* ---- 哲学・思想（表の右欄）---- */
+{id:"bacon",term:"フランシス=ベーコン",read:"ふらんしす=べーこん",cat:"哲学・思想",type:"人物",col:"哲学・社会科学",country:"イギリス",
+ method:"kinou",stance:"keiken",
+ desc:"イギリスの人物。『新オルガヌム』を著し、観察と実験を重視して、個々の事例から普遍的な法則に到達する帰納法をとなえた。",
+ note:"資料集では「イギリス経験主義を確立した」と記載。教科書では経験主義はロックの姿勢として確立されたと記載。"},
+{id:"descartes",term:"デカルト",read:"でかると",cat:"哲学・思想",type:"人物",col:"哲学・社会科学",country:"フランス",askCountry:true,
+ method:"eneki",stance:"gouri",
+ desc:"『方法序説』を著した人物。人間の理性が明晰に正しいと認めるものはすべて真実とみなしてよいとし、普遍的な法則から個々の事例を説明する演繹法をとなえた。",
+ note:"「われ思う、ゆえにわれあり」の言葉で知られ、資料集では近代合理主義哲学の出発点と記載。"},
+{id:"pascal",term:"パスカル",read:"ぱすかる",cat:"哲学・思想",type:"人物",col:"哲学・社会科学",country:"フランス",
+ desc:"フランスの人物。『パンセ（瞑想録）』を著した。"},
+{id:"spinoza",term:"スピノザ",read:"すぴのざ",cat:"哲学・思想",type:"人物",col:"哲学・社会科学",country:"オランダ",
+ desc:"オランダの人物。『エチカ（倫理学）』を著した。"},
+{id:"leibniz",term:"ライプニッツ",read:"らいぷにっつ",cat:"哲学・思想",type:"人物",col:"哲学・社会科学",country:"ドイツ",
+ desc:"ドイツの人物。『単子論』を著した。"},
+{id:"kant",term:"カント",read:"かんと",cat:"哲学・思想",type:"人物",col:"哲学・社会科学",country:"ドイツ",askCountry:true,
+ stance:"kannen",
+ desc:"『純粋理性批判』を著した人物。合理主義と経験主義の2つの立場を統合しようと試みた。",
+ note:"資料集では、規則正しい生活を送り、決まった時間に散歩するので町の人々は時刻を知ったという逸話を紹介。"},
+
+/* ---- 政治思想・法（表の右欄）---- */
+{id:"grotius",term:"グロティウス",read:"ぐろてぃうす",cat:"政治思想・法",type:"人物",col:"哲学・社会科学",country:"オランダ",
+ theory:"kokusaihou",
+ desc:"オランダの人物。『海洋自由論』『戦争と平和の法』を著し、自然法の理論を国家関係の分析に適用して、国際法理論を創始した。"},
+{id:"hobbes",term:"ホッブズ",read:"ほっぶず",cat:"政治思想・法",type:"人物",col:"哲学・社会科学",country:"イギリス",
+ phrase:"bannin",
+ desc:"イギリスの人物。『リヴァイアサン』を著した。人間を利己的動物ととらえ、自然状態を「万人の万人に対する闘い」とした。",
+ note:"教科書では、自然法を探究する試みがホッブズらによって始められたと記載。資料集の社会契約説の表では、国家（絶対的権力）に自然権を譲渡するとし、王権神授説（絶対王政）を正当化したとある。"},
+{id:"locke",term:"ロック",read:"ろっく",cat:"政治思想・法",type:"人物",col:"哲学・社会科学",country:"イギリス",askCountry:true,
+ stance:"keiken",
+ desc:"『統治二論』を著した人物。人間の思考では生後に獲得される知識と経験が決定的な役割を果たすとして、デカルトの考え方に反対した。",
+ note:"資料集の社会契約説の表では、人民が政府に自然権を信託し、政府に対する抵抗権を容認。名誉革命を正当化し、アメリカ独立革命に影響を与えたとある。"},
+
+/* ---- 表の業績（人物⇔業績を相互に問う。モードAでは出題しない）---- */
+{id:"w_telescope",term:"望遠鏡の改良",read:"ぼうえんきょうのかいりょう",cat:"自然科学",type:"業績",person:"galilei",desc:"ガリレイの業績。",
+ ext:"ガリレイは自作の望遠鏡で、月面の凹凸、木星の衛星、金星の満ち欠け、太陽の黒点などを観測し、地動説を支持した。のちに地動説を擁護したことで宗教裁判にかけられた。"},
+{id:"w_planet",term:"惑星運行の法則",read:"わくせいうんこうのほうそく",cat:"自然科学",type:"業績",person:"kepler",desc:"ケプラーの業績。",
+ ext:"ティコ=ブラーエの観測記録をもとに、惑星が太陽を1つの焦点とする楕円軌道を描くことなどを示した3つの法則。地動説を理論面で補強した。"},
+{id:"w_blood",term:"血液循環論",read:"けつえきじゅんかんろん",cat:"自然科学",type:"業績",person:"harvey",desc:"ハーヴェーの業績。",
+ ext:"血液が心臓のポンプのはたらきによって全身を循環することを、実験と観察によって示した（1628年刊『動物の心臓と血液の運動』）。"},
+{id:"w_gas",term:"気体力学",read:"きたいりきがく",cat:"自然科学",type:"業績",person:"boyle",desc:"ボイルの業績。",
+ ext:"温度が一定のとき、気体の体積は圧力に反比例するという「ボイルの法則」で知られる。空気ポンプを用いた実験をおこなった。"},
+{id:"w_gravity",term:"万有引力の法則",read:"ばんゆういんりょくのほうそく",cat:"自然科学",type:"業績",person:"newton",desc:"ニュートンの業績。",
+ ext:"地上で物体が落下する運動と、天体の運動とを、質量をもつ物体どうしが引き合う同じ力で説明した。"},
+{id:"w_principia",term:"『プリンキピア』",read:"ぷりんきぴあ",cat:"自然科学",type:"業績",person:"newton",desc:"ニュートンの著作。",
+ ext:"1687年刊。運動の3法則と万有引力の法則を数学的に体系化し、古典力学を確立した。",
+ note:"資料集では『プリンキピア（自然哲学の数学的原理）』と記載。"},
+{id:"w_micro",term:"『ミクログラフィア』",read:"みくろぐらふぃあ",cat:"自然科学",type:"業績",person:"hooke",desc:"フックの著作。",
+ ext:"1665年刊。自作の顕微鏡による観察記録で、コルクの薄片にみられる小部屋を「細胞（cell）」と名づけた。"},
+{id:"w_plant",term:"植物分類学",read:"しょくぶつぶんるいがく",cat:"自然科学",type:"業績",person:"linne",desc:"リンネの業績。",
+ ext:"生物を属名と種小名の2語で表す二名法を確立し、動植物を体系的に分類した（主著『自然の体系』）。"},
+{id:"w_burn",term:"燃焼理論",read:"ねんしょうりろん",cat:"自然科学",type:"業績",person:"lavoisier",desc:"ラヴォワジェの業績。",
+ ext:"燃焼は物質と酸素が結びつく現象であることを明らかにし、それまでのフロギストン説を否定した。質量保存の法則でも知られる。徴税請負人であったため、フランス革命中に処刑された。"},
+{id:"w_vaccine",term:"種痘法",read:"しゅとうほう",cat:"自然科学",type:"業績",person:"jenner",desc:"ジェンナーの業績。",
+ ext:"1796年、牛痘を人に接種して天然痘を予防する方法を開発した。ワクチン（予防接種）の起源とされる。"},
+{id:"w_cosmos",term:"宇宙進化論",read:"うちゅうしんかろん",cat:"自然科学",type:"業績",person:"laplace",desc:"ラプラースの業績。",
+ ext:"太陽系は、回転するガス状の星雲が収縮してできたとする星雲説。カントも同様の説をとなえたため「カント=ラプラース説」とも呼ばれる。"},
+{id:"w_organum",term:"『新オルガヌム』",read:"しんおるがぬむ",cat:"哲学・思想",type:"業績",person:"bacon",desc:"フランシス=ベーコンの著作。",
+ ext:"1620年刊。題はアリストテレスの論理学書『オルガノン』に対する「新しい道具」の意。人間の偏見（イドラ）を排し、観察と実験にもとづく帰納法を学問の方法として説いた。「知は力なり」の言葉で知られる。"},
+{id:"w_method",term:"『方法序説』",read:"ほうほうじょせつ",cat:"哲学・思想",type:"業績",person:"descartes",desc:"デカルトの著作。",
+ ext:"1637年刊。確実なものに達するまであらゆるものを疑う方法的懐疑を経て「われ思う、ゆえにわれあり」に到達し、そこから明晰な原理にもとづいて推論する方法を説いた。"},
+{id:"w_pensees",term:"『パンセ（瞑想録）』",read:"ぱんせ",cat:"哲学・思想",type:"業績",person:"pascal",desc:"パスカルの著作。",
+ ext:"死後に遺稿をまとめて刊行された。「人間は考える葦である」の言葉で知られ、人間の偉大さと悲惨さを見つめ、キリスト教信仰の意義を説いた。"},
+{id:"w_ethica",term:"『エチカ（倫理学）』",read:"えちか",cat:"哲学・思想",type:"業績",person:"spinoza",desc:"スピノザの著作。",
+ ext:"死後の1677年刊。定義・公理・定理という幾何学の形式で論を進め、神と自然を同一視する汎神論の立場から、人間の幸福のあり方を論じた。"},
+{id:"w_monad",term:"『単子論』",read:"たんしろん",cat:"哲学・思想",type:"業績",person:"leibniz",desc:"ライプニッツの著作。",
+ ext:"1714年執筆。世界は分割できない精神的な実体「単子（モナド）」から成り、それらは神によってあらかじめ調和するよう定められている（予定調和）と説いた。"},
+{id:"w_critique",term:"『純粋理性批判』",read:"じゅんすいりせいひはん",cat:"哲学・思想",type:"業績",person:"kant",desc:"カントの著作。",
+ ext:"1781年刊。人間の理性がどこまで対象を認識できるのか、その範囲と限界を検討した。この立場は批判哲学と呼ばれる。"},
+{id:"w_sea",term:"『海洋自由論』",read:"かいようじゆうろん",cat:"政治思想・法",type:"業績",person:"grotius",desc:"グロティウスの著作。",
+ ext:"1609年刊。海洋はいかなる国家も独占することはできず、すべての国の航行と通商に開かれているべきだと主張した。オランダ東インド会社のアジア進出を背景に、ポルトガルによる海洋の独占に反論したもの。"},
+{id:"w_war",term:"『戦争と平和の法』",read:"せんそうとへいわのほう",cat:"政治思想・法",type:"業績",person:"grotius",desc:"グロティウスの著作。",
+ ext:"1625年刊。三十年戦争の惨禍を背景に、戦争の開始や遂行においても国家が守るべき規範があることを自然法にもとづいて論じた。この著作によりグロティウスは「国際法の祖」と呼ばれる。"},
+{id:"w_leviathan",term:"『リヴァイアサン』",read:"りゔぁいあさん",cat:"政治思想・法",type:"業績",person:"hobbes",desc:"ホッブズの著作。",
+ ext:"1651年刊。題は旧約聖書に登場する怪物の名。自然状態を「万人の万人に対する闘い」ととらえ、人々が契約によって主権者に権利を譲渡することで国家が成立すると説き、絶対的な主権を正当化した。",
+ note:"資料集の扉絵では、国王の体に多くの国民が描かれ、国民全員から自然権の譲渡を受けた絶対主権者（王）を示している。"},
+{id:"w_gov",term:"『統治二論』",read:"とうちにろん",cat:"政治思想・法",type:"業績",person:"locke",desc:"ロックの著作。",
+ ext:"1690年刊。政府は人民の生命・自由・財産という自然権を守るために信託されたものであり、政府がこれを侵害すれば人民は抵抗し政府を改めることができると論じた。名誉革命を理論的に正当化した。"},
+
+/* ---- 科学革命と哲学の概念 ---- */
+{id:"kagakukakumei",term:"科学革命",read:"かがくかくめい",cat:"自然科学",type:"概念",
+ desc:"観察と実験を重ねて自然界の法則を解明し、それを検証によって確認するという自然科学の基本的な手続きが確立され、科学協会やアカデミーも創設された一連の変化。",
+ note:"南北アメリカ大陸の「発見」や錬金術・天文学の発達によって、古代ギリシアの著作の権威が崩れたことが背景。"},
+{id:"kinou",term:"帰納法",read:"きのうほう",cat:"哲学・思想",type:"概念",pair:"eneki",by:"bacon",
+ desc:"観察や実験によって得た個々の事例から共通事項を見出し、普遍的な法則に到達する思考法。",
+ note:"教科書の注では「現象から法則を発見する思考法」。"},
+{id:"eneki",term:"演繹法",read:"えんえきほう",cat:"哲学・思想",type:"概念",pair:"kinou",by:"descartes",
+ desc:"理性を重視し、普遍的な法則から個々の事例を説明する思考法。",
+ note:"教科書の注では「法則から現象を説明する思考法」。"},
+{id:"gouri",term:"合理主義",read:"ごうりしゅぎ",cat:"哲学・思想",type:"概念",pair:"keiken",by:"descartes",
+ desc:"理性を万能視する考え方。近世以降のヨーロッパ思想の柱の1つで、秩序と調和を重んじる姿勢を生んだ。",
+ note:"デカルトの哲学により確立。資料集では「大陸合理主義」とも記載。"},
+{id:"keiken",term:"経験主義",read:"けいけんしゅぎ",cat:"哲学・思想",type:"概念",pair:"gouri",
+ desc:"人間の思考では生後に獲得される知識と経験が決定的な役割を果たし、思考の正確さも絶対的なものではなく確実性の違いにすぎないとする姿勢。",
+ note:"教科書ではロックの姿勢として確立されたと記載し、資料集ではフランシス=ベーコンが「イギリス経験主義を確立した」と記載。"},
+{id:"kannen",term:"ドイツ観念論哲学",read:"どいつかんねんろんてつがく",cat:"哲学・思想",type:"概念",by:"kant",
+ desc:"合理主義と経験主義の2つの立場を統合しようとする試みから道が開かれた哲学。",
+ note:"教科書の表記は「観念論哲学」、資料集のカントの説明では「ドイツ観念論哲学」。"},
+{id:"shinpo",term:"進歩主義",read:"しんぽしゅぎ",cat:"哲学・思想",type:"概念",
+ desc:"17世紀末から18世紀初めの西欧で、古代人と現代人のどちらがすぐれているかの論争に現代人派が勝利したことで優勢となった、人間の歴史はよりよい時代に向かって無限に進歩していくことが可能であるとする考え方。"},
+{id:"keimou",term:"啓蒙思想",read:"けいもうしそう",cat:"哲学・思想",type:"概念",
+ desc:"18世紀に広まった、すべての人間を対象に、現実世界における幸福を増大させるために有用な知識を集積して広めようとする思想。",
+ note:"その思想家たちは国境をこえて議論し、為政者に直接働きかけたり、世論を通じて改革を要求したりした。"},
+{id:"kankyo",term:"宗教的寛容",read:"しゅうきょうてきかんよう",cat:"哲学・思想",type:"概念",by:"voltaire",
+ desc:"国家・君主の信仰とは異なる宗派のキリスト教を容認する姿勢。これが広まり、宗教改革以来のヨーロッパにおける宗教的迫害や対立はしだいに収束に向かった。"},
+
+/* ---- 政治思想・法の概念 ---- */
+{id:"shizenhou",term:"自然法",read:"しぜんほう",cat:"政治思想・法",type:"概念",by:"hobbes",
+ desc:"現実に定められた法である実定法とは別の、理性を備えた人間に普遍的に共通するルールとして想定された法。",
+ note:"その探究はホッブズらによって始められた。"},
+{id:"kokusaihou",term:"国際法",read:"こくさいほう",cat:"政治思想・法",type:"概念",by:"grotius",
+ desc:"グロティウスが、自然法の理論を国家関係の分析に適用することで理論を創始した法。"},
+{id:"bannin",term:"「万人の万人に対する闘い」",read:"ばんにんのばんにんにたいするたたかい",cat:"政治思想・法",type:"言葉",by:"hobbes",
+ desc:"人間を利己的動物ととらえた思想家が、国家成立以前の自然状態を表現した言葉。",
+ note:"資料集では、この状態から国民を保護するため、国民全員から自然権の譲渡を受けた絶対主権者（王）が必要だとする考え方が『リヴァイアサン』の扉絵に表されていると解説。"},
+{id:"voltaire",term:"ヴォルテール",read:"ゔぉるてーる",cat:"政治思想・法",type:"人物",country:"フランス",value:"kankyo",
+ desc:"フランスの啓蒙思想家。その著作によって、国家・君主の信仰とは異なる宗派のキリスト教を容認する姿勢を広めた。",
+ note:"資料集では、イギリス滞在中にロックの思想とともにニュートンの力学に注目したと記載。プロイセンのフリードリヒ2世にまねかれた（教科書p.198）。"},
+{id:"montesquieu",term:"モンテスキュー",read:"もんてすきゅー",cat:"政治思想・法",type:"人物",country:"フランス",
+ desc:"フランスの人物。歴史上の諸国家・文明の考察を通じて、イギリスの立憲君主政を例に権力の分立と王権の制限を主張した。"},
+{id:"horeishin",term:"『法の精神』",read:"ほうのせいしん",cat:"政治思想・法",type:"書物",person:"montesquieu",
+ desc:"モンテスキューが著した書物。歴史上の諸国家・文明を考察し、イギリスの立憲君主政を例に権力の分立と王権の制限を主張した。"},
+{id:"rousseau",term:"ルソー",read:"るそー",cat:"政治思想・法",type:"人物",country:"フランス",
+ desc:"フランスの人物。文明の進展がむしろ人間の自由を制約していると考え、直接民主政のかたちで統治に参加することで自由と平等を回復すべきと論じた。",
+ note:"資料集の社会契約説の表では、人間を自然な善性をもつ未発達な存在ととらえ、フランス革命に影響を与えたとある。"},
+{id:"shakaikeiyaku",term:"『社会契約論』",read:"しゃかいけいやくろん",cat:"政治思想・法",type:"書物",person:"rousseau",
+ desc:"ルソーが著した書物。各人が社会と契約してすべての権利を譲渡したうえで、直接民主政のかたちで統治に参加することによって自由と平等を回復すべきと論じた。"},
+
+/* ---- 経済学 ---- */
+{id:"turgot",term:"テュルゴ",read:"てゅるご",cat:"経済学",type:"人物",country:"フランス",theory:"koten",
+ desc:"フランスの人物。人類社会が農耕中心の自給自足的段階から、分業と交換が世界規模で展開する商業段階へ移行しつつあると考え、古典派経済学を創始した一人。",
+ note:"資料集の経済学の系譜では、重農主義の欄にケネーとともに記載（表記は「テュルゴー」）。"},
+{id:"smith",term:"アダム=スミス",read:"あだむ=すみす",cat:"経済学",type:"人物",country:"イギリス",theory:"koten",
+ desc:"イギリスの人物。重商主義的な特権や規制を撤廃し、経済の不都合は市場の自動調節機能に任せるほうがよいとする自由放任の政策を唱えた。",
+ note:"資料集では、公共の利益を意図せず自分の利益を追求することが結果的に社会の利益を促進するという「見えざる手」の考え方を紹介。"},
+{id:"kokufu",term:"『諸国民の富（国富論）』",read:"しょこくみんのとみ（こくふろん）",cat:"経済学",type:"書物",person:"smith",
+ desc:"アダム=スミスが著した書物。人類社会が、分業と交換が世界規模で展開する商業段階へ移行しつつあると考え、古典派経済学の出発点となった。"},
+{id:"koten",term:"古典派経済学",read:"こてんはけいざいがく",cat:"経済学",type:"概念",
+ desc:"人類社会とくに西欧諸国が、農耕を中心とした自給自足的段階から、分業と交換が世界規模で展開する商業段階へ移行しつつあると考えた経済学。",
+ note:"テュルゴとアダム=スミスが創始。資料集の系譜では自由放任主義とされ、マルサス『人口論』、リカード『経済学および課税の原理』が続く。"},
+
+/* ---- 文学・社会 ---- */
+{id:"diderot",term:"ディドロ・ダランベール",read:"でぃどろ・だらんべーる",cat:"文学・社会",type:"人物",country:"フランス",
+ desc:"フランスの人物。啓蒙思想の最大の成果とされる『百科全書』を編纂した。",
+ note:"資料集では、思想のなかにニュートン力学・原子論・機械論などを取り入れたと記載。"},
+{id:"hyakka",term:"『百科全書』",read:"ひゃっかぜんしょ",cat:"文学・社会",type:"書物",person:"diderot",
+ desc:"ディドロやダランベールらが編纂した書物。啓蒙思想の最大の成果とされる百科事典のうち、18世紀のフランスで刊行されたもの。",
+ note:"この時代には各国で百科事典が刊行され、博物館や植物園も登場した。"},
+{id:"yoron",term:"世論の形成",read:"よろんのけいせい",cat:"文学・社会",type:"概念",
+ desc:"新聞・雑誌などの出版物が、ロンドンやパリのコーヒーハウス・カフェ・クラブ・サロンといった集いの場で読まれ、討論の対象となったことでうながされたもの。",
+ note:"背景は、18世紀後半のヨーロッパで書物に限らず出版業が発達したこと。"},
+{id:"bourgeois",term:"ブルジョワ",read:"ぶるじょわ",cat:"文学・社会",type:"概念",
+ desc:"都市の商業を基盤に富を蓄積し、上流階級の華やかな宮廷文化とは異なる独自の文化を形成しはじめた人々。啓蒙思想の推進役となった知識人も生んだ。",
+ note:"教科書の表記は「ブルジョワ（市民）」。のちに経済力を基盤に、政治の主導権をめぐって国王ら旧来の支配層と争った。"},
+{id:"defoe",term:"デフォー",read:"でふぉー",cat:"文学・社会",type:"人物",country:"イギリス",
+ desc:"イギリスの人物。ヨーロッパ外への空想旅行記が流行するなかで、孤島に漂着した男の物語を書き、ベストセラーとなった。",
+ note:"資料集では、様々な商業に従事した山師的商人でもあり、ジャーナリストとしても活動したと記載。"},
+{id:"robinson",term:"『ロビンソン=クルーソー』",read:"ろびんそん=くるーそー",cat:"文学・社会",type:"書物",person:"defoe",
+ desc:"デフォーが書いた作品。孤島に漂着して労働でいっさいをつくりあげる男の物語で、ヨーロッパ外への空想旅行記の流行のなかでベストセラーとなった。",
+ note:"資料集では、マルクスがこの物語を「資本主義小説」と読んだと紹介。"},
+{id:"swift",term:"スウィフト",read:"すうぃふと",cat:"文学・社会",type:"人物",country:"イギリス",
+ desc:"イギリスの人物。架空の国々の旅行記を通して当時のイギリス社会を風刺した作品を書き、ベストセラーとなった。"},
+{id:"gulliver",term:"『ガリヴァー旅行記』",read:"がりゔぁーりょこうき",cat:"文学・社会",type:"書物",person:"swift",
+ desc:"スウィフトが書いた作品。主人公が小人国などの架空の国々を旅する物語を通して、当時のイギリス社会を風刺した。"},
+
+/* ---- 芸術 ---- */
+{id:"kotenshugi",term:"古典主義",read:"こてんしゅぎ",cat:"芸術",type:"概念",
+ desc:"合理主義が生んだ秩序と調和を重んじる姿勢が、芸術に反映されたもの。",
+ note:"資料集では、17世紀フランスのコルネイユ・ラシーヌ・モリエールの3大劇作家の作品を紹介。"},
+{id:"baroque",term:"バロック様式",read:"ばろっくようしき",cat:"芸術",type:"概念",pair:"rococo",
+ desc:"17世紀を中心にヨーロッパ各国で栄えた芸術様式。名称は「ゆがんだ真珠」という意味のポルトガル語に由来し、激しい動勢や強烈な明暗表現などダイナミックで豪華な表現を特徴とする。",
+ note:"資料集の作品例：ベラスケス「宮廷の侍女たち」、ルーベンス「マリ=ド=メディシスのマルセイユ上陸」、ベルニーニ「聖女テレサの法悦」、レンブラント「夜警」。"},
+{id:"rococo",term:"ロココ様式",read:"ろここようしき",cat:"芸術",type:"概念",pair:"baroque",
+ desc:"18世紀のフランスを中心に栄えた芸術様式。名称は貝殻状の人造石を意味するフランス語に由来し、優美さ・洗練・官能性、軽妙で装飾性が高いことを特徴とする。",
+ note:"資料集の作品例：ワトー「シテール島への船出」、フラゴナール「ぶらんこ」、プロイセン王フリードリヒ2世がポツダムに建てたサンスーシ宮殿。"}
+];
+
+
+const CAT_ORDER=["自然科学","哲学・思想","政治思想・法","経済学","文学・社会","芸術"];
+const REGION_TAG='17〜18世紀ヨーロッパ';
+const byId=id=>DATA.find(d=>d.id===id);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const sample=(arr,n)=>shuffle(arr).slice(0,n);
+const isPerson=d=>d.type==='人物';
+const isBook=d=>d.term.startsWith('『');
+const worksOf=pid=>DATA.filter(x=>x.person===pid);
+
+const MODES=[
+  {id:"A",code:"A",t:"説明から語を当てる",d:"文章で示された説明に当てはまる人物・語句を、選択肢から選びます。"},
+  {id:"B",code:"B",t:"人物と業績・思想を結びつける",d:"人物が示されたら業績・著作や国・思考法・立場などを、業績・著作・概念が示されたらその人物を答えます。"},
+  {id:"C",code:"C",t:"分類する",d:"「経験主義の立場に立つ人物」「社会契約説を唱えた人物」などを、並んだ語からすべて選びます。"}
+];
+
+// 各語の「系統」。誤答は同じ系統（語の種類がそろうもの）から選ぶ
+// 人物は分野・国で判定するため不要。表の業績はモードAで出題しない
+const GROUP_MAP={
+  kagakukakumei:'変化',
+  gouri:'思想',keiken:'思想',kannen:'思想',shinpo:'思想',keimou:'思想',
+  kinou:'思考法',eneki:'思考法',
+  kankyo:'宗教上の姿勢',
+  yoron:'社会の変化',
+  bourgeois:'社会層',
+  shizenhou:'法',kokusaihou:'法',
+  bannin:'言葉',
+  koten:'経済学',
+  horeishin:'書物',shakaikeiyaku:'書物',kokufu:'書物',hyakka:'書物',robinson:'書物',gulliver:'書物',
+  kotenshugi:'様式',baroque:'様式',rococo:'様式'
+};
+const GROUP_FALLBACK={};
+
+// モードA用：系統別の誤答候補（リスト外の語。教材外の語も含むが、正解にはならない）
+const DISTRACTORS={
+  '変化':[['産業革命','さんぎょうかくめい'],['商業革命','しょうぎょうかくめい'],['価格革命','かかくかくめい'],['生活革命','せいかつかくめい'],['農業革命','のうぎょうかくめい']],
+  '思想':[['人文主義','じんぶんしゅぎ'],['スコラ学','すこらがく'],['実証主義','じっしょうしゅぎ'],['功利主義','こうりしゅぎ'],['ロマン主義','ろまんしゅぎ']],
+  '思考法':[['弁証法','べんしょうほう'],['類推法','るいすいほう'],['背理法','はいりほう']],
+  '宗教上の姿勢':[['政教分離','せいきょうぶんり'],['予定説','よていせつ'],['反宗教改革','はんしゅうきょうかいかく'],['国家教会主義','こっかきょうかいしゅぎ']],
+  '社会の変化':[['国民意識の形成','こくみんいしきのけいせい'],['主権国家体制の形成','しゅけんこっかたいせいのけいせい'],['生活革命','せいかつかくめい'],['身分制社会の成立','みぶんせいしゃかいのせいりつ']],
+  '社会層':[['啓蒙専制君主','けいもうせんせいくんしゅ'],['開明的な貴族','かいめいてきなきぞく'],['特権商人','とっけんしょうにん'],['ユンカー','ゆんかー']],
+  '法':[['実定法','じっていほう'],['慣習法','かんしゅうほう'],['ローマ法','ろーまほう'],['万民法','ばんみんほう']],
+  '言葉':[['「われ思う、ゆえにわれあり」','われおもう、ゆえにわれあり'],['「見えざる手」','みえざるて'],['「人間は考える葦である」','にんげんはかんがえるあしである'],['「知は力なり」','ちはちからなり']],
+  '経済学':[['重商主義','じゅうしょうしゅぎ'],['重農主義','じゅうのうしゅぎ'],['マルクス経済学','まるくすけいざいがく'],['近代経済学','きんだいけいざいがく']],
+  '書物':[['『人口論』','じんこうろん'],['『経済表』','けいざいひょう']],
+  '様式':[['ゴシック様式','ごしっくようしき'],['ルネサンス様式','るねさんすようしき'],['ロマン主義','ろまんしゅぎ'],['写実主義','しゃじつしゅぎ']]
+};
+
+// 人物問題の誤答補充用：教材に登場するリスト外の人物（分野別。正解にはならない）
+const PERSON_DISTRACTORS={
+  '経済学':[['ケネー','けねー'],['マルサス','まるさす'],['リカード','りかーど'],['トーマス=マン','とーます=まん'],['コルベール','こるべーる']],
+  '文学・社会':[['コルネイユ','こるねいゆ'],['ラシーヌ','らしーぬ'],['モリエール','もりえーる']]
+};
+
+// 2人一組の誤答（資料集で並べて挙げられている組）
+const PAIR_DISTRACTORS=[['コルネイユ・ラシーヌ','こるねいゆ・らしーぬ'],['マルサス・リカード','まるさす・りかーど']];
+
+// 1モードあたりの出題数（ここを変えれば全体に反映されます）
+const QCOUNT={A:20, B:20, C:15};   // Cは課題数（15）と同じにし、各課題を1回ずつ出題
+
+// モードAの対象（表の業績は人物との対応をモードBで問うため除外）
+const hasA=d=>d.type!=='業績';
+// モードBの対象（人物、人物に結びつく業績・書物・概念）
+const hasB=d=>isPerson(d)||!!d.person||!!d.by;
+
+/* ---- モードCの分類課題 ----
+   items() がその回の選択肢を返す（多い場合は正解・不正解を混ぜて8語程度に絞る） */
+function mixItems(correct,wrong,nC,nTotal){
+  const c=sample(correct,Math.min(nC,correct.length));
+  const w=sample(wrong,Math.max(0,nTotal-c.length));
+  return shuffle([...c,...w]);
+}
+// 人物に結びつく語（著作・業績、思考法・立場など、その人物を by に持つ概念）
+function linksOf(pid){
+  const p=byId(pid);const ids=new Set(worksOf(pid).map(x=>x.id));
+  ['method','stance','theory','phrase','value'].forEach(k=>{if(p[k])ids.add(p[k]);});
+  DATA.filter(x=>x.by===pid).forEach(x=>ids.add(x.id));
+  return [...ids];
+}
+// 「人物に結びつく語」課題：他の思想家に結びつく語を誤答に混ぜる
+const SET_PEOPLE=['bacon','descartes','locke','kant','hobbes','grotius'];
+// 教材上、その人物と無関係とは言い切れない語は誤答に出さない
+const SET_EXCLUDE={kant:['gouri','keiken'],grotius:['shizenhou'],locke:['shizenhou','kinou']};
+function setTask(pid){
+  const p=byId(pid);
+  return {label:`<b>${p.term}</b>に結びつく著作・語`,
+    test:d=>linksOf(pid).includes(d.id),
+    plain:true,
+    items:()=>{
+      const own=linksOf(pid);const ex=new Set([...own,...(SET_EXCLUDE[pid]||[])]);
+      const wrong=[...new Set(SET_PEOPLE.filter(x=>x!==pid).flatMap(linksOf))].filter(id=>!ex.has(id)).map(byId);
+      return mixItems(own.map(byId),wrong,own.length,own.length+4);
+    }};
+}
+const byIds=ids=>ids.map(byId);
+const ASTRO=['w_telescope','w_planet','w_gravity','w_principia','w_cosmos'];
+const BIO=['w_blood','w_plant','w_vaccine'];
+const PHIL_BOOKS=['w_organum','w_method','w_pensees','w_ethica','w_monad','w_critique'];
+const POL_BOOKS=['w_sea','w_war','w_leviathan','w_gov','horeishin','shakaikeiyaku'];
+const OTHER_BOOKS=['kokufu','robinson','gulliver','hyakka'];
+const CTASKS=[
+  {label:'<b>自然科学</b>の分野の業績・著作',test:d=>d.type==='業績'&&d.cat==='自然科学',
+   items:()=>{const all=DATA.filter(d=>d.type==='業績');return mixItems(all.filter(d=>d.cat==='自然科学'),all.filter(d=>d.cat!=='自然科学'),2+Math.floor(Math.random()*3),8);},
+   note:'教科書p.199の表「17〜18世紀の自然科学と哲学・社会科学」の左欄にあたるもの。'},
+  {label:'<b>天文学・物理学</b>に関する業績・著作',test:d=>ASTRO.includes(d.id),
+   items:()=>shuffle([...byIds(ASTRO),...byIds(BIO)])},
+  {label:'<b>生物学・医学</b>に関する業績',test:d=>BIO.includes(d.id),
+   items:()=>shuffle([...byIds(BIO),...byIds(ASTRO)])},
+  {label:'<b>哲学</b>の著作',test:d=>PHIL_BOOKS.includes(d.id),
+   items:()=>mixItems(byIds(PHIL_BOOKS),byIds([...POL_BOOKS,...OTHER_BOOKS]),2+Math.floor(Math.random()*3),8)},
+  {label:'<b>政治・法</b>に関する著作',test:d=>POL_BOOKS.includes(d.id),
+   items:()=>mixItems(byIds(POL_BOOKS),byIds([...PHIL_BOOKS,...OTHER_BOOKS]),2+Math.floor(Math.random()*3),8)},
+  {label:'<b>経験主義</b>の立場に立つ人物',test:d=>d.stance==='keiken',
+   items:()=>shuffle(byIds(['bacon','descartes','locke','kant','spinoza','leibniz'])),
+   note:'教科書では経験主義はロックの姿勢として確立されたと記載し、資料集ではフランシス=ベーコンが「イギリス経験主義を確立した」と記載。'},
+  {label:'<b>社会契約説</b>を唱えた人物',test:d=>['hobbes','locke','rousseau'].includes(d.id),
+   items:()=>shuffle(byIds(['hobbes','locke','rousseau','grotius','montesquieu','voltaire','descartes'])),
+   note:'資料集p.161「社会契約説の比較」で、ホッブズ・ロック・ルソーの人間観・自然状態・国家観が比較されている。'},
+  {label:'<b>古典派経済学</b>を創始した人物',test:d=>d.theory==='koten',
+   items:()=>shuffle(byIds(['turgot','smith','montesquieu','rousseau','voltaire','diderot'])),
+   note:'教科書p.200による。資料集の経済学の系譜ではテュルゴ（テュルゴー）は重農主義の欄に置かれている。'},
+  {label:'ヨーロッパ外への<b>空想旅行記</b>がベストセラーとなった作家',test:d=>['defoe','swift'].includes(d.id),
+   items:()=>shuffle(byIds(['defoe','swift','diderot','montesquieu','rousseau','voltaire']))},
+  ...SET_PEOPLE.map(setTask)
+];
+
+// 解説で、正解の語に結びつく人物・著作を添える
+function cLabel(x){
+  if(isPerson(x)){const ws=worksOf(x.id);return ws.length?`${x.term}（${ws.map(w=>w.term).join('、')}）`:x.term;}
+  if(x.person){const p=byId(x.person);return `${x.term}（${p.term}）`;}
+  return x.term;
+}
+
+// ---- 苦手語句の記録（トップページと共通） ----
+
+/* ---- 苦手語句の記録（localStorage・この端末のブラウザ内のみ）----
+   誤答した語だけを記録し、その後の正答回数もあわせて数える。
+   トップページの「苦手語句リスト」がこのデータを読み取って表示する。 */
+const WEAK_KEY='tsubame_weak_v1';
+function weakRecord(term,read,tag,ok,wt){
+  wt=(wt==null)?1:wt;   // 分類問題は0.5など、出題形式に応じた重み
+  try{
+    const db=JSON.parse(localStorage.getItem(WEAK_KEY)||'{}');
+    let e=db[term];
+    if(ok){
+      if(!e)return;                       // 誤答歴のない語の正答は記録しない
+      e.c=Math.round((e.c+wt)*10)/10;
+      e.st=(e.st||0)+1;                   // 連続正解数（克服判定用）
+      e.last='ok';e.ts=Date.now();
+    }else{
+      e=e||{t:term,r:read||'',g:'',w:0,c:0,st:0,last:'',ts:0};
+      e.w=Math.round((e.w+wt)*10)/10;
+      e.st=0;                             // 誤答で連続正解はリセット
+      e.last='ng';e.ts=Date.now();
+      if(tag){const gs=new Set(String(e.g).split('・').filter(Boolean));String(tag).split('・').forEach(x=>gs.add(x));e.g=[...gs].join('・');}
+      if(!e.r&&read)e.r=read;
+    }
+    db[term]=e;
+    localStorage.setItem(WEAK_KEY,JSON.stringify(db));
+  }catch(err){/* プライベートブラウズ等、保存できない環境では何もしない */}
+}
+
+let state={mode:null,pool:[],idx:0,total:0,correct:0,answeredCurrent:false,wrong:[]};
+
+// ---- 開始画面の構築 ----
+const modeList=document.getElementById('modeList');
+MODES.forEach(m=>{
+  const b=document.createElement('button');
+  b.className='mode-card';b.dataset.mode=m.id;
+  b.innerHTML=`<span class="code">${m.code}</span><span class="body"><span class="t">${m.t}</span><span class="d">${m.d}</span></span>`;
+  b.addEventListener('click',()=>{selectMode(m.id);});
+  modeList.appendChild(b);
+});
+function selectMode(id){
+  state.mode=id;
+  [...modeList.children].forEach(c=>c.style.borderColor=(c.dataset.mode===id)?'var(--ink)':'var(--line)');
+  [...modeList.children].forEach(c=>c.style.background=(c.dataset.mode===id)?'#fff':'var(--paper-card)');
+}
+
+document.getElementById('startBtn').addEventListener('click',start);
+document.getElementById('backBtn').addEventListener('click',goHome);
+
+function start(){
+  if(!state.mode){alert('出題形式を選んでください。');return;}
+  buildPool();
+  if(state.pool.length===0){alert('出題できる語がありません。');return;}
+  show('quiz');renderQuestion();
+}
+
+function buildPool(){
+  if(state.mode==='C'){
+    // 各課題を1回ずつ出題（QCOUNT.Cが課題数より多い場合のみ、ランダムに補う）
+    let seq=CTASKS.map((_,i)=>i);
+    while(seq.length<QCOUNT.C)seq.push(Math.floor(Math.random()*CTASKS.length));
+    state.pool=shuffle(seq).slice(0,QCOUNT.C);
+  }else{
+    let items=DATA.slice();
+    items=items.filter(state.mode==='B'?hasB:hasA);
+    const cap=QCOUNT[state.mode]||12;
+    state.pool=shuffle(items).slice(0,Math.min(items.length,cap));
+  }
+  state.idx=0;state.total=state.pool.length;state.correct=0;state.wrong=[];
+}
+
+function show(which){
+  ['start','quiz','done'].forEach(s=>document.getElementById(s).classList.toggle('hidden',s!==which));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function goHome(){show('start');}
+function addBadge(el,text,cls){el.insertAdjacentHTML('beforeend',`<span class="badge ${cls}">${text}</span>`);}
+
+function updateTop(){
+  document.getElementById('progress').textContent=`第 ${state.idx+1} 問 / 全 ${state.total} 問`;
+  document.getElementById('scoreTag').textContent=state.idx>0?`　正答 ${state.correct}`:'';
+}
+
+
+// 人物に結びつく語の見出し
+const LINK_LABEL={method:'思考法',stance:'思想の立場',theory:'創始したもの',phrase:'言葉',value:'広めた姿勢'};
+
+function explainHTML(d){
+  let parts=[];
+  parts.push(`分野：<b>${d.cat}</b>`);
+  if(isPerson(d)){
+    if(d.country)parts.push(`国：<b>${d.country}</b>`);
+    const ws=worksOf(d.id);
+    if(ws.length)parts.push(`${ws.every(isBook)?'著作':'業績・著作'}：<b>${ws.map(w=>w.term).join('、')}</b>`);
+    Object.keys(LINK_LABEL).forEach(k=>{if(d[k]){const x=byId(d[k]);if(x)parts.push(`${LINK_LABEL[k]}：<b>${x.term}</b>`);}});
+  }else{
+    if(d.person){const p=byId(d.person);if(p)parts.push(`人物：<b>${p.term}</b>（${p.country}）`);}
+    const rel=DATA.filter(x=>isPerson(x)&&Object.keys(LINK_LABEL).some(k=>x[k]===d.id));
+    if(d.by&&!rel.some(x=>x.id===d.by))rel.unshift(byId(d.by));
+    if(rel.length)parts.push(`関連する人物：<b>${rel.map(x=>x.term).join('、')}</b>`);
+  }
+  let s=`<div class="explain"><span class="ttl">解説</span>${d.desc}`;
+  if(d.note)s+=`<br><span style="color:var(--ink-soft)">※ ${d.note}</span>`;
+  if(d.ext)s+=`<br><span style="color:var(--ink-soft)">※ 教材外の補足：${d.ext}</span>`;
+  s+=`<br><br>${parts.join('　／　')}</div>`;
+  return s;
+}
+
+// ====== 出題ルーティング ======
+function renderQuestion(){
+  updateTop();state.answeredCurrent=false;
+  const m=state.mode;
+  if(m==='A')renderModeA();
+  else if(m==='C')renderModeC();
+  else renderModeB();
+}
+
+// 人物の誤答候補：同じ分野（さらに同じ国）を優先し、足りなければ他分野・リスト外の人物で補う
+function personCandidates(d,excludeIds){
+  const ex=new Set([d.id,...(excludeIds||[])]);
+  const inList=DATA.filter(x=>isPerson(x)&&!ex.has(x.id));
+  const general0=(PERSON_DISTRACTORS[d.cat]||[]).map(t=>({term:t[0],read:t[1],id:'g_'+t[0]}));
+  // 2人一組の正解（ディドロ・ダランベール）は、同じ形の組を誤答に混ぜて形で絞れないようにする
+  const pairs=(d.id==='diderot')?sample(PAIR_DISTRACTORS,2).map(t=>({term:t[0],read:t[1],id:'g_'+t[0]})):[];
+  const sameCatCountry=[...pairs,...shuffle(inList.filter(x=>x.cat===d.cat&&x.country===d.country))];
+  const general=general0.filter(g=>!pairs.some(pr=>pr.term.split('・').includes(g.term)));
+  const sameCat=shuffle([...inList.filter(x=>x.cat===d.cat&&x.country!==d.country),...general]);
+  const rest=shuffle(inList.filter(x=>x.cat!==d.cat));
+  return [...sameCatCountry,...sameCat,...rest];
+}
+
+/* ---- モードA：説明 → 語を選ぶ ---- */
+function renderModeA(){
+  const d=state.pool[state.idx];
+  let distract;
+  if(isPerson(d)){
+    distract=personCandidates(d).slice(0,3);
+  }else{
+    const g=GROUP_MAP[d.id];
+    let inList=DATA.filter(x=>x.id!==d.id && GROUP_MAP[x.id]===g);
+    // 書物は表の著作（『』付きの業績）も誤答に使う
+    if(g==='書物')inList=inList.concat(DATA.filter(x=>x.type==='業績'&&isBook(x)));
+    const general=(DISTRACTORS[g]||[]).map(t=>({term:t[0],read:t[1],id:'g_'+t[0]}));
+    let cand=shuffle([...inList,...general]);
+    if(cand.length<3&&GROUP_FALLBACK[g]){
+      const fb=GROUP_FALLBACK[g];
+      cand=cand.concat(shuffle(DATA.filter(x=>x.id!==d.id&&GROUP_MAP[x.id]===fb&&!cand.includes(x))));
+    }
+    if(cand.length<3){
+      cand=cand.concat(shuffle(DATA.filter(x=>x.id!==d.id&&x.type===d.type&&!cand.includes(x))));
+    }
+    distract=cand.slice(0,3);
+  }
+  // 対になる語（帰納法⇔演繹法、合理主義⇔経験主義、バロック⇔ロココ）は誤答に必ず含める
+  if(d.pair){
+    const pw=byId(d.pair);
+    if(pw && !distract.some(x=>x.id===pw.id)){
+      distract=[pw,...distract.filter(x=>x.id!==pw.id)].slice(0,3);
+    }
+  }
+  let opts=shuffle([d,...distract]);
+
+  opts=[...opts,{term:'わからない',read:'',id:'__dk__',dk:true}];
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">この説明にあてはまる語は？</div>
+    <div class="prompt-desc">${d.desc}</div>
+    <div class="opts" id="opts"></div>
+    <div class="actions"><button class="btn btn-primary" id="answerA" disabled>解答する</button></div>
+    <div id="afterA"></div>
+  </div>`;
+  const oc=document.getElementById('opts');
+  const marks=['一','二','三','四','五'];
+  let selIdx=-1;
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.dk?' dk':'');
+    const rd=o.read?`<span style="color:var(--ink-soft);font-size:12px">（${o.read}）</span>`:'';
+    b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.term}${rd}</span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      selIdx=i;
+      [...oc.children].forEach(c=>c.classList.remove('selected'));
+      b.classList.add('selected');
+      document.getElementById('answerA').disabled=false;
+    });
+    oc.appendChild(b);
+  });
+  document.getElementById('answerA').addEventListener('click',()=>{
+    if(state.answeredCurrent||selIdx<0)return;
+    state.answeredCurrent=true;
+    const o=opts[selIdx];
+    const ok=o.id===d.id;
+    if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    weakRecord(d.term,d.read,REGION_TAG,ok);
+    [...oc.children].forEach((c,ci)=>{
+      c.disabled=true;c.classList.remove('selected');
+      const oo=opts[ci];
+      const isCorrect=oo.id===d.id;
+      const isPicked=(ci===selIdx);
+      if(isCorrect)c.classList.add('correct');
+      else if(isPicked && !oo.dk)c.classList.add('wrong');
+      else c.classList.add('dim');
+      if(isPicked && !oo.dk)addBadge(c,'あなたの解答','your');
+      if(isCorrect)addBadge(c,'正しい選択肢','ans');
+    });
+    document.getElementById('answerA').disabled=true;
+    document.getElementById('afterA').innerHTML=verdict(ok)+explainHTML(d)+nextBtnHTML();
+    bindNext();
+  });
+}
+
+/* ---- モードB：語 → 属性をまとめて答える ---- */
+
+/* ---- モードB：語 → 結びつく語をまとめて答える ---- */
+const COUNTRIES=['イギリス','フランス','ドイツ','オランダ','イタリア'];
+const METHODS=['帰納法','演繹法'];
+const STANCES=['合理主義','経験主義','ドイツ観念論哲学','進歩主義'];
+const PHRASES=['「万人の万人に対する闘い」','「われ思う、ゆえにわれあり」','「見えざる手」','「人間は考える葦である」','「知は力なり」'];
+const VALUES=['宗教的寛容','政教分離','予定説','反宗教改革','国家教会主義'];
+// 創始したものの選択肢（テュルゴは資料集で重農主義の欄にあるため、重農主義を選択肢に出さない）
+const THEORY_POOL={
+  grotius:['国際法','実定法','慣習法','ローマ法','万民法'],
+  smith:['古典派経済学','重商主義','重農主義','マルクス経済学'],
+  turgot:['古典派経済学','重商主義','マルクス経済学','近代経済学']
+};
+const THEORY_ASK={grotius:'この人物が理論を創始した法は？',smith:'この人物が創始した経済学は？',turgot:'この人物が創始した経済学は？'};
+
+// 概念 → 人物 の問い方と、誤答から外す人物（教材上、正解と紛らわしくなるため）
+const BY_ASK={
+  kinou:'この思考法をとなえた人物は？',
+  eneki:'この思考法をとなえた人物は？',
+  gouri:'この立場を確立した人物は？',
+  kannen:'この哲学への道を開いた人物は？',
+  kankyo:'著作によってこの姿勢を広めた人物は？',
+  shizenhou:'この法の探究を始めた人物は？',
+  kokusaihou:'この法の理論を創始した人物は？',
+  bannin:'この言葉で自然状態を表現した人物は？'
+};
+const BY_EXCLUDE={
+  gouri:['spinoza','leibniz'],eneki:['spinoza','leibniz'],
+  shizenhou:['grotius','locke','rousseau'],kokusaihou:['hobbes'],
+  bannin:['locke','rousseau']
+};
+
+function fixedChoiceQ(ask,answer,pool,nOpt){
+  const others=pool.filter(x=>x!==answer);
+  const opts=shuffle([answer,...sample(others,Math.min(nOpt-1,others.length))]).map(v=>({val:v,label:v}));
+  opts.push({val:'__dk__',label:'わからない',dk:true});
+  return {ask,options:opts,answer,picked:null,locked:false};
+}
+function itemQ(ask,target,cands){
+  const seen=new Set([target.id]);const pick=[];
+  for(const c of cands){if(pick.length>=3)break;if(seen.has(c.id))continue;seen.add(c.id);pick.push(c);}
+  const opts=shuffle([target,...pick]).map(x=>({val:x.id,label:`${x.term}${x.read?`（${x.read}）`:''}`}));
+  opts.push({val:'__dk__',label:'わからない',dk:true});
+  return {ask,options:opts,answer:target.id,picked:null,locked:false};
+}
+
+function buildQuestionsFor(d){
+  const qs=[];
+  if(isPerson(d)){
+    const ws=worksOf(d.id);
+    if(ws.length){
+      const w=ws[Math.floor(Math.random()*ws.length)];   // 業績が2つある人物はどちらか一方を正解肢に
+      const own=new Set(ws.map(x=>x.id));
+      const pool=DATA.filter(x=>(x.type==='業績'||x.type==='書物')&&!own.has(x.id));
+      const sameKind=shuffle(pool.filter(x=>isBook(x)===isBook(w)&&x.cat===d.cat));
+      const kind=shuffle(pool.filter(x=>isBook(x)===isBook(w)&&x.cat!==d.cat));
+      const rest=shuffle(pool.filter(x=>isBook(x)!==isBook(w)));
+      const ask=d.id==='diderot'?'この人物が編纂した書物は？':(isBook(w)?'この人物の著作は？':'この人物の業績は？');
+      qs.push(itemQ(ask,w,[...sameKind,...kind,...rest]));
+    }
+    if(d.askCountry)qs.push(fixedChoiceQ('この人物の国は？',d.country,COUNTRIES,4));
+    if(d.method)qs.push(fixedChoiceQ('この人物がとなえた思考法は？',byId(d.method).term,METHODS,2));
+    if(d.stance)qs.push(fixedChoiceQ('この人物に結びつく思想の立場は？',byId(d.stance).term,STANCES,4));
+    if(d.theory)qs.push(fixedChoiceQ(THEORY_ASK[d.id],byId(d.theory).term,THEORY_POOL[d.id],4));
+    if(d.phrase)qs.push(fixedChoiceQ('この人物に結びつく言葉は？',byId(d.phrase).term,PHRASES,4));
+    if(d.value)qs.push(fixedChoiceQ('この人物が著作によって広めた姿勢は？',byId(d.value).term,VALUES,4));
+  }else if(d.person){
+    const p=byId(d.person);
+    const ask=d.person==='diderot'?'この書物を編纂した人物は？':(isBook(d)?'この書物の著者は？':'この業績を残した人物は？');
+    if(p)qs.push(itemQ(ask,p,personCandidates(p)));
+  }else if(d.by){
+    const p=byId(d.by);
+    if(p)qs.push(itemQ(BY_ASK[d.id]||'この語に結びつく人物は？',p,personCandidates(p,BY_EXCLUDE[d.id])));
+  }
+  return qs;
+}
+
+function renderModeB(){
+  const d=state.pool[state.idx];
+  const questions=buildQuestionsFor(d);
+  if(questions.length===1)renderModeB_single(d,questions[0]);
+  else renderModeB_multi(d,questions);
+}
+
+// 設問が1つの語：選んで即採点する単問形式
+function renderModeB_single(d,q){
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">${q.ask}</div>
+    <div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>
+    <div class="opts" id="opts" style="margin-top:18px"></div>
+    <div class="actions"><button class="btn btn-primary" id="answerB" disabled>解答する</button></div>
+    <div id="afterB"></div>
+  </div>`;
+  const oc=document.getElementById('opts');
+  const marks=['一','二','三','四','五'];
+  let selVal=null;
+  q.options.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'+(o.dk?' dk':'');b.dataset.val=o.val;
+    b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.label}</span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      selVal=o.val;
+      [...oc.children].forEach(c=>c.classList.remove('selected'));
+      b.classList.add('selected');
+      document.getElementById('answerB').disabled=false;
+    });
+    oc.appendChild(b);
+  });
+  document.getElementById('answerB').addEventListener('click',()=>{
+    if(state.answeredCurrent||selVal==null)return;
+    state.answeredCurrent=true;
+    const ok=(selVal===q.answer);
+    if(ok)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    weakRecord(d.term,d.read,REGION_TAG,ok);
+    [...oc.children].forEach(c=>{
+      c.disabled=true;c.classList.remove('selected');
+      const v=c.dataset.val;
+      const isAns=(v===q.answer);
+      const isPicked=(v===selVal);
+      if(isAns)c.classList.add('correct');
+      else if(isPicked && v!=='__dk__')c.classList.add('wrong');
+      else c.classList.add('dim');
+      if(isPicked && v!=='__dk__')addBadge(c,'あなたの解答','your');
+      if(isAns)addBadge(c,'正しい選択肢','ans');
+    });
+    document.getElementById('answerB').disabled=true;
+    document.getElementById('afterB').innerHTML=verdict(ok)+explainHTML(d)+nextBtnHTML();
+    bindNext();
+  });
+}
+
+// 設問が複数の語：まとめて採点
+function renderModeB_multi(d,questions){
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">次の語について答えてください</div>
+    <div class="prompt-term"><span class="rb">${d.read}</span>${d.term}</div>
+    <div id="qblocks"></div>
+    <div class="actions"><button class="btn btn-primary" id="gradeBtn">まとめて採点する</button></div>
+    <div id="afterB"></div>
+  </div>`;
+
+  const qb=document.getElementById('qblocks');
+  questions.forEach((q,qi)=>{
+    const blk=document.createElement('div');blk.className='qblock';
+    blk.innerHTML=`<div class="q-ask"><span class="q-no">問${qi+1}</span>${q.ask}</div><div class="opts" id="q${qi}"></div>`;
+    qb.appendChild(blk);
+    const oc=blk.querySelector('.opts');
+    const marks=['一','二','三','四','五'];
+    q.options.forEach((o,i)=>{
+      const b=document.createElement('button');
+      b.className='opt'+(o.dk?' dk':'');b.dataset.val=o.val;
+      b.innerHTML=`<span class="mk">${o.dk?'？':marks[i]}</span><span>${o.label}</span>`;
+      b.addEventListener('click',()=>{
+        if(q.locked)return;
+        [...oc.children].forEach(c=>c.classList.remove('selected'));
+        b.classList.add('selected');q.picked=o.val;
+      });
+      oc.appendChild(b);
+    });
+    q.el=oc;
+  });
+
+  document.getElementById('gradeBtn').addEventListener('click',()=>{
+    if(state.answeredCurrent)return;
+    if(questions.some(q=>q.picked==null)){
+      if(!confirm('未回答の設問があります。このまま採点しますか？'))return;
+    }
+    state.answeredCurrent=true;
+    let allOK=true;
+    questions.forEach(q=>{
+      q.locked=true;
+      const okThis=(q.picked===q.answer);
+      [...q.el.children].forEach(c=>{
+        c.disabled=true;c.classList.remove('selected');
+        const v=c.dataset.val;
+        const isAns=(v===q.answer);
+        const isPicked=(v===q.picked);
+        if(isAns)c.classList.add('correct');
+        else if(isPicked && v!=='__dk__')c.classList.add('wrong');
+        else c.classList.add('dim');
+        if(isPicked && v!=='__dk__')addBadge(c,'あなたの解答','your');
+        if(isAns)addBadge(c,'正しい選択肢','ans');
+      });
+      if(!okThis)allOK=false;
+    });
+    if(allOK)state.correct++; else state.wrong.push({type:'item',id:d.id});
+    weakRecord(d.term,d.read,REGION_TAG,allOK);
+    document.getElementById('gradeBtn').disabled=true;
+    document.getElementById('afterB').innerHTML=
+      verdict(allOK)
+      +`<p style="font-size:12px;color:var(--ink-soft);margin:8px 0 0">${allOK?'すべての設問に正解しました。':'設問に誤りがあります（全問正解で1点）。'}</p>`
+      +explainHTML(d)+nextBtnHTML();
+    bindNext();
+  });
+}
+
+/* ---- モードC：分類（複数選択） ---- */
+function renderModeC(){
+  const task=CTASKS[state.pool[state.idx]];
+  const items=task.items();
+  const correctItems=items.filter(task.test);
+  const picked=new Set();
+
+  const body=document.getElementById('quizBody');
+  body.innerHTML=`<div class="card">
+    <div class="prompt-label">次のうち、${task.label}にあてはまるものを<b style="color:var(--ink)">すべて</b>選んでください</div>
+    <div class="prompt-sub">あてはまる語は1つとは限りません。</div>
+    <div class="opts" id="optsC"></div>
+    <div class="actions"><button class="btn btn-primary" id="gradeC">採点する</button><button class="btn btn-ghost" id="dkC">わからない</button></div>
+    <div id="afterC"></div>
+  </div>`;
+  const oc=document.getElementById('optsC');
+  items.forEach(it=>{
+    const b=document.createElement('button');
+    b.className='opt';b.dataset.id=it.id;
+    b.innerHTML=`<span class="mk">□</span><span>${it.term}<span style="color:var(--ink-soft);font-size:12px">（${it.read}）</span></span>`;
+    b.addEventListener('click',()=>{
+      if(state.answeredCurrent)return;
+      const on=picked.has(it.id);
+      if(on){picked.delete(it.id);b.querySelector('.mk').textContent='□';b.classList.remove('selected');}
+      else{picked.add(it.id);b.querySelector('.mk').textContent='■';b.classList.add('selected');}
+    });
+    oc.appendChild(b);
+  });
+  function settleC(forceWrong){
+    if(state.answeredCurrent)return;state.answeredCurrent=true;
+    let ok=!forceWrong;
+    [...oc.children].forEach(c=>{
+      c.disabled=true;c.classList.remove('selected');
+      const it=items.find(x=>x.id===c.dataset.id);
+      const isCorrect=task.test(it);
+      {const _t=REGION_TAG;const _ch=!forceWrong&&picked.has(c.dataset.id);if(isCorrect&&_ch)weakRecord(it.term,it.read,_t,true,0.5);else if(isCorrect&&!_ch)weakRecord(it.term,it.read,_t,false,0.5);else if(!isCorrect&&_ch)weakRecord(it.term,it.read,_t,false,0.5);}
+      const chosen=!forceWrong && picked.has(c.dataset.id);
+      if(isCorrect&&chosen){c.classList.add('correct');addBadge(c,'あなたの解答','your');addBadge(c,'正しい選択肢','ans');}
+      else if(isCorrect&&!chosen){c.classList.add('correct');c.style.opacity='.7';if(!forceWrong)ok=false;addBadge(c,'正しい選択肢','ans');}
+      else if(!isCorrect&&chosen){c.classList.add('wrong');ok=false;addBadge(c,'あなたの解答','your');}
+      else c.classList.add('dim');
+    });
+    if(ok)state.correct++; else state.wrong.push({type:'ctask',key:state.pool[state.idx]});
+    document.getElementById('gradeC').disabled=true;
+    document.getElementById('dkC').disabled=true;
+    const list=correctItems.map(x=>task.plain?x.term:cLabel(x)).join('、');
+    const tail=ok?'すべて正しく選べています。':(forceWrong?'「わからない」を選びました。':'取りこぼし・誤選択があります。');
+    const noteLine=task.note?`<br><span style="color:var(--ink-soft)">※ ${task.note}</span>`:'';
+    document.getElementById('afterC').innerHTML=
+      verdict(ok)
+      +`<div class="explain"><span class="ttl">解説</span>あてはまるのは <b>${list}</b> です。${tail}${noteLine}<br><br>
+      <span style="color:var(--ink-soft);font-size:12px">※ 緑＝あてはまる語、薄い緑＝選び落とした正解、赤＝誤って選んだ語。</span></div>`
+      +nextBtnHTML();
+    bindNext();
+  }
+  document.getElementById('gradeC').addEventListener('click',()=>settleC(false));
+  document.getElementById('dkC').addEventListener('click',()=>settleC(true));
+}
+
+// ---- 共通：正誤の明示 ----
+function verdict(ok){
+  return `<div class="verdict ${ok?'ok':'ng'}"><span class="ic">${ok?'○':'×'}</span><span>${ok?'正解':'不正解'}</span></div>`;
+}
+
+// ---- 共通：次へ ----
+function nextBtnHTML(){
+  const last=state.idx>=state.total-1;
+  return `<div class="actions"><button class="btn btn-primary" id="nextBtn">${last?'結果を見る':'次の問題へ →'}</button></div>`;
+}
+function bindNext(){
+  const nb=document.getElementById('nextBtn');
+  if(nb)nb.addEventListener('click',()=>{
+    state.idx++;
+    if(state.idx>=state.total)finish();
+    else renderQuestion();
+  });
+}
+
+function dedupWrong(arr){
+  const seen=new Set(),out=[];
+  arr.forEach(w=>{const k=w.type+':'+(w.id!=null?w.id:w.key);if(!seen.has(k)){seen.add(k);out.push(w);}});
+  return out;
+}
+function ctaskPlainLabel(t){return t.label.replace(/<[^>]+>/g,'');}
+function finish(){
+  show('done');
+  document.getElementById('doneScore').textContent=`${state.correct} / ${state.total}`;
+  const r=state.total?state.correct/state.total:0;
+  let msg;
+  if(r===1)msg='全問正解です。';
+  else if(r>=0.7)msg='よく取れています。間違えた語を確認しておきましょう。';
+  else if(r>=0.4)msg='半ばまで来ています。間違えた箇所を中心に復習しましょう。';
+  else msg='まずは人物と業績・思想の対応を整理し直すとよいでしょう。';
+  document.getElementById('doneMsg').textContent=msg;
+
+  const uniq=dedupWrong(state.wrong);
+  const area=document.getElementById('wrongArea');
+  if(uniq.length===0){
+    area.innerHTML=`<div class="actions" style="justify-content:center">
+      <button class="btn btn-primary" id="againBtn">同じ形式でもう一度</button>
+      <button class="btn btn-ghost" id="homeBtn">形式を選び直す</button></div>`;
+  }else{
+    const rows=uniq.map(w=>{
+      if(w.type==='ctask')return `<li><span>${ctaskPlainLabel(CTASKS[w.key])}（分類）</span><span class="rd">モードC</span></li>`;
+      const d=byId(w.id);
+      return `<li><span>${d.term}</span><span class="rd">${d.read}</span></li>`;
+    }).join('');
+    area.innerHTML=`<div class="wrong-list">
+      <div class="wl-ttl">間違えた問題（${uniq.length}件）</div>
+      <ul>${rows}</ul></div>
+      <div class="actions" style="justify-content:center">
+        <button class="btn btn-primary" id="retryBtn">間違えた問題をもう一度（${uniq.length}問）</button>
+        <button class="btn btn-ghost" id="homeBtn">セッションを終了する</button></div>`;
+    document.getElementById('retryBtn').addEventListener('click',retryWrong);
+  }
+  const ag=document.getElementById('againBtn');if(ag)ag.addEventListener('click',()=>{buildPool();show('quiz');renderQuestion();});
+  const hm=document.getElementById('homeBtn');if(hm)hm.addEventListener('click',goHome);
+}
+function retryWrong(){
+  const uniq=dedupWrong(state.wrong);
+  state.pool = state.mode==='C' ? uniq.map(w=>w.key) : uniq.map(w=>byId(w.id));
+  state.idx=0;state.total=state.pool.length;state.correct=0;state.wrong=[];
+  show('quiz');renderQuestion();
+}
+</script>
