@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>語法スラ練 演習</title>
+<style>
+:root{--bg:#faf9f7;--panel:#fff;--ink:#1c1b19;--sub:#6b6862;--line:#ddd9d2;--accent:#8c2f2f;--soft:#f3e7e5;--ok:#2f6b45;--okbg:#e6f0e9;--ng:#a33;--ngbg:#f7e4e4;--btn:#f3f1ed;--on:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17161a;--panel:#201f24;--ink:#eceae6;--sub:#9c9890;--line:#34323a;--accent:#d98a8a;--soft:#3a2a2c;--ok:#8fd0a8;--okbg:#25352c;--ng:#e59a9a;--ngbg:#3a2628;--btn:#2a292f;--on:#17161a}}
+:root[data-theme="dark"]{--bg:#17161a;--panel:#201f24;--ink:#eceae6;--sub:#9c9890;--line:#34323a;--accent:#d98a8a;--soft:#3a2a2c;--ok:#8fd0a8;--okbg:#25352c;--ng:#e59a9a;--ngbg:#3a2628;--btn:#2a292f;--on:#17161a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Yu Gothic","Noto Sans JP",system-ui,sans-serif;line-height:1.75;-webkit-text-size-adjust:100%}
+.wrap{max-width:700px;margin:0 auto;padding:18px 16px 70px}
+h1{font-size:1rem;margin:0;font-weight:600}
+.sub{color:var(--sub);font-size:.8rem}
+header{border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px}
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:6px;margin-bottom:14px}
+.tab{background:var(--btn);border:1px solid var(--line);border-radius:8px;padding:9px 6px;font:inherit;font-size:.82rem;color:inherit;cursor:pointer;text-align:center}
+.tab.on{background:var(--accent);border-color:var(--accent);color:var(--on);font-weight:600}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:14px}
+.verb{font-size:2.3rem;font-weight:600;text-align:center;margin:6px 0 2px;font-family:Georgia,"Times New Roman",serif}
+.ask{text-align:center;color:var(--sub);font-size:.82rem;margin-bottom:16px}
+.sent{font-family:Georgia,"Times New Roman",serif;font-size:1.16rem;line-height:1.8;margin:10px 0 18px;text-align:center}
+.blank{border-bottom:1.5px solid var(--accent);display:inline-block;min-width:4.2em;text-align:center;margin:0 .2em;color:var(--accent);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px}
+.grid.two{grid-template-columns:1fr 1fr}
+button{font:inherit;color:inherit;cursor:pointer}
+.opt{background:var(--btn);border:1px solid var(--line);border-radius:8px;padding:12px 8px;font-size:.9rem;text-align:center;transition:background .12s}
+.opt:hover{background:var(--soft)}
+.opt.sel{background:var(--soft);border-color:var(--accent);font-weight:600}
+.opt:disabled{cursor:default;opacity:.5}
+.opt.correct{background:var(--okbg);border-color:var(--ok);color:var(--ok);opacity:1;font-weight:600}
+.opt.wrong{background:var(--ngbg);border-color:var(--ng);color:var(--ng);opacity:1}
+.mono{font-family:Georgia,serif;letter-spacing:.04em}
+.go{width:100%;margin-top:14px;background:var(--accent);color:var(--on);border:0;border-radius:8px;padding:13px;font-size:.95rem;font-weight:600}
+.go.ghost{background:transparent;border:1px solid var(--line);color:var(--sub);font-weight:400;font-size:.85rem}
+.reveal{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.pat{display:grid;grid-template-columns:5em 1fr;gap:4px 12px;margin-bottom:9px;font-size:.9rem}
+.pat b{font-family:Georgia,serif;color:var(--accent);letter-spacing:.04em;font-weight:600}
+.pat .ex{grid-column:2;font-family:Georgia,serif;font-size:.85rem;color:var(--sub)}
+.form{text-align:center;font-family:Georgia,serif;font-size:1.5rem;color:var(--accent);margin:4px 0 6px;font-weight:600}
+.bar{display:flex;justify-content:space-between;font-size:.78rem;color:var(--sub);margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.done{text-align:center}
+.big{font-size:2rem;font-weight:600;font-variant-numeric:tabular-nums}
+.list{text-align:left;margin-top:16px;font-size:.86rem}
+.list li{margin-bottom:6px}
+.ja{color:var(--sub);font-size:.85rem}
+.tag{display:inline-block;font-family:Georgia,serif;font-size:.75rem;background:var(--soft);color:var(--accent);border-radius:4px;padding:1px 7px;margin-right:6px;letter-spacing:.04em}
+.gate{text-align:center;padding:10px 4px}
+.qn{font-size:.83rem;color:var(--sub);margin:16px 0 8px;font-weight:600}
+.tiny{display:block;font-size:.7rem;opacity:.7;font-weight:400;margin-top:1px}
+.prompt{border:1px dashed var(--line);border-radius:8px;padding:11px;text-align:center;color:var(--sub);font-size:.83rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>つばめ学習舎　語法スラ練 演習</h1>
+  <div class="sub">動詞の判別・語法・文型</div>
+</header>
+<div class="tabs" id="tabs"></div>
+<div class="bar"><div id="chips"></div><div id="score"></div></div>
+<div id="app"></div>
+</div>
+
+<script>
+/* ═══════ データ ═══════ */
+const VT=[
+ {v:"resemble",t:"vt",form:"resemble A",m:"A に似ている"},
+ {v:"answer",t:"vt",form:"answer A",m:"A に答える"},
+ {v:"attend",t:"vt",form:"attend A",m:"A に出席する"},
+ {v:"deserve",t:"vt",form:"deserve A",m:"A に値する"},
+ {v:"reach",t:"vt",form:"reach A",m:"A に着く（＝ arrive at A ＝ get to A）"},
+ {v:"enter",t:"vt",form:"enter A",m:"A に入る"},
+ {v:"approach",t:"vt",form:"approach A",m:"A に近づく"},
+ {v:"visit",t:"vt",form:"visit A",m:"A を訪問する"},
+ {v:"marry",t:"vt",form:"marry A",m:"A と結婚する（be / get married to A）"},
+ {v:"contact",t:"vt",form:"contact A",m:"A と連絡をとる"},
+ {v:"follow",t:"vt",form:"follow A",m:"A についていく"},
+ {v:"join",t:"vt",form:"join A",m:"A に参加する"},
+ {v:"discuss",t:"vt",form:"discuss A",m:"A について議論する"},
+ {v:"mention",t:"vt",form:"mention A",m:"A について言及する"},
+ {v:"consider",t:"vt",form:"consider A",m:"A について考える"},
+ {v:"survive",t:"vt",form:"survive A",m:"A を生き延びる"},
+ {v:"strike",t:"vt",form:"strike A",m:"考えが A の心にうかぶ"},
+ {v:"leave",t:"vt",form:"leave A",m:"A を出発する"},
+ {v:"lay",t:"vt",form:"lay A",m:"A を置く・横にする（lay − laid − laid）"},
+ {v:"raise",t:"vt",form:"raise A",m:"A を上げる（raise − raised − raised）"},
+ {v:"bring up",t:"vt",form:"bring up A",m:"A を育てる（be brought up）"},
+ {v:"arrive",t:"vi",prep:"at / in",form:"arrive at / in A",m:"A に着く"},
+ {v:"object",t:"vi",prep:"to",form:"object to A",m:"A に反対する"},
+ {v:"reply",t:"vi",prep:"to",form:"reply to A",m:"A に返答する"},
+ {v:"graduate",t:"vi",prep:"from",form:"graduate from A",m:"A を卒業する"},
+ {v:"apologize",t:"vi",prep:"to",form:"apologize to A",m:"A に謝る（apologize for 事）"},
+ {v:"agree",t:"vi",prep:"with / to",form:"agree with / to A",m:"A に同意する"},
+ {v:"belong",t:"vi",prep:"to",form:"belong to A",m:"A に所属する"},
+ {v:"succeed",t:"vi",prep:"in",form:"succeed in A",m:"A に成功する"},
+ {v:"complain",t:"vi",prep:"about / of",form:"complain about / of A",m:"A に不満を言う"},
+ {v:"consist",t:"vi",prep:"of",form:"consist of A",m:"A から成る"},
+];
+
+const PR=[
+ {ja:"疲れていたので、彼女はソファに横になった。",s:["Worn out, she","down on the sofa."],o:["lay","laid","lain","lied"],a:"lay",n:"直後に目的語がない → 自動詞 lie。文が過去なので過去形 lay。"},
+ {ja:"彼はその本を机に置いた。",s:["He","the book on the desk."],o:["lay","laid","lain","lied"],a:"laid",n:"直後に the book → 他動詞 lay。その過去形は laid。"},
+ {ja:"その猫は一日中そこに横になっていた。",s:["The cat had","there all day."],o:["lay","laid","lain","lied"],a:"lain",n:"had ＋ 過去分詞。自動詞 lie の過去分詞は lain。"},
+ {ja:"彼は年齢について嘘をついた。",s:["He","about his age."],o:["lay","laid","lain","lied"],a:"lied",n:"lie「嘘をつく」は規則変化。lie − lied − lied。"},
+ {ja:"昨年、物価が急激に上がった。",s:["Prices","sharply last year."],o:["rose","raised","risen","rise"],a:"rose",n:"直後に目的語がない → 自動詞 rise。過去形は rose。"},
+ {ja:"市はバス運賃を上げた。",s:["The city","the bus fare."],o:["rose","raised","risen","rise"],a:"raised",n:"直後に the bus fare → 他動詞 raise。"},
+ {ja:"太陽はもう昇ってしまった。",s:["The sun has already","."],o:["rose","raised","risen","rise"],a:"risen",n:"has ＋ 過去分詞。自動詞 rise の過去分詞は risen。"},
+ {ja:"私は動物虐待への意識を高めることができた。",s:["I could","awareness of animal abuse."],o:["rise","raise","rose","risen"],a:"raise",n:"awareness という目的語がある → 他動詞 raise。could の後は原形。"},
+ {ja:"私は福島で育って、五年前にここへ来た。",s:["I","in Fukushima and came here five years ago."],o:["grew up","brought up","was grown up","was brought up"],a:"grew up",n:"「育つ」は自動詞 grow up。受動態にはできない。"},
+ {ja:"彼の息子はカリフォルニアで育てられた。",s:["His son","in California."],o:["grew up","brought up","was grown up","was brought up"],a:"was brought up",n:"「育てられる」は他動詞 bring up の受動態。"},
+ {ja:"私たちは正午にその村に着いた。",s:["We","the village at noon."],o:["reached","arrived","got","left"],a:"reached",n:"直後に名詞 → 他動詞 reach。arrive / get なら前置詞が要る。"},
+ {ja:"私たちは正午にその村に着いた。",s:["We","at the village at noon."],o:["reached","arrived","got","entered"],a:"arrived",n:"at があるので arrive at。reach と enter は前置詞をとらない。"},
+ {ja:"私たちは正午にその村に着いた。",s:["We","to the village at noon."],o:["reached","arrived","got","approached"],a:"got",n:"to があるので get to。arrive は at / in、reach と approach は前置詞不要。"},
+ {ja:"私は彼から本を借りた。",s:["I","a book from him."],o:["borrowed","lent","owed","rented"],a:"borrowed",n:"borrow A from B。無料で移動して借りる。"},
+ {ja:"彼女は私に傘を貸してくれた。",s:["She","me her umbrella."],o:["borrowed","lent","owed","rented"],a:"lent",n:"lend 人 物。第4文型で「与える」側。"},
+ {ja:"私は彼に一万円借りている。",s:["I","him ten thousand yen."],o:["borrow","lend","owe","rent"],a:"owe",n:"owe 人 お金。借りている状態を表す。"},
+];
+
+const NB="何も入らない";
+const CL=[
+ {s:["He married","her last spring."],a:[NB],o:["to","with",NB,"for"],n:"marry は直後に名詞。be / get married to A と区別する。"},
+ {s:["He got married","her last spring."],a:["to"],o:["to","with",NB,"for"],n:"married は形容詞なので to が要る。marry her と対で覚える。"},
+ {s:["She resembles","her grandmother."],a:[NB],o:["to","like",NB,"with"],n:"resemble は直後に名詞。"},
+ {s:["Let's discuss","the problem tomorrow."],a:[NB],o:["about","on",NB,"over"],n:"discuss は直後に名詞。discuss it と正しい形で反復する。"},
+ {s:["He mentioned","your name at dinner."],a:[NB],o:["about","of",NB,"to"],n:"mention は直後に名詞。"},
+ {s:["We finally reached","the village."],a:[NB],o:["at","to",NB,"in"],n:"reach は直後に名詞。arrive at / get to と使い分ける。"},
+ {s:["She entered","the room quietly."],a:[NB],o:["into","in",NB,"to"],n:"enter は直後に名詞。"},
+ {s:["A stranger approached","me on the street."],a:[NB],o:["to","toward",NB,"at"],n:"approach は直後に名詞。"},
+ {s:["Will you join","us for dinner?"],a:[NB],o:["in","with",NB,"to"],n:"join は直後に名詞。"},
+ {s:["He attended","the meeting yesterday."],a:[NB],o:["to","at",NB,"in"],n:"attend は直後に名詞。"},
+ {s:["Please contact","me by email."],a:[NB],o:["with","to",NB,"at"],n:"contact は直後に名詞。"},
+ {s:["Only two passengers survived","the crash."],a:[NB],o:["from","in",NB,"through"],n:"survive は直後に名詞。"},
+ {s:["Your effort deserves","praise."],a:[NB],o:["of","for",NB,"to"],n:"deserve は直後に名詞。"},
+ {s:["He answered","my question at once."],a:[NB],o:["to","for",NB,"about"],n:"answer は直後に名詞。"},
+ {s:["A dog followed","me all the way home."],a:[NB],o:["after","to",NB,"behind"],n:"follow は直後に名詞。"},
+ {s:["We left","Tokyo early that morning."],a:[NB],o:["from","for",NB,"out"],n:"leave は直後に名詞。leave for A なら「A に向けて出発する」。"},
+ {s:["They succeeded","raising the funds."],a:["in"],o:["in","to",NB,"for"],n:"succeed in A。"},
+ {s:["She succeeded","her attempt to climb the peak."],a:["in"],o:["in","at",NB,"on"],n:"succeed in A。"},
+ {s:["He never replied","my letter."],a:["to"],o:["to","for",NB,"on"],n:"reply to A。"},
+ {s:["He replied","the email within an hour."],a:["to"],o:["to","at",NB,"about"],n:"reply to A。"},
+ {s:["She objected","the new rule."],a:["to"],o:["to","against",NB,"for"],n:"object to A。"},
+ {s:["I object","being treated like a child."],a:["to"],o:["to","for",NB,"from"],n:"object to A。to は前置詞なので後ろは動名詞。"},
+ {s:["You should apologize","her."],a:["to"],o:["to","for",NB,"with"],n:"apologize to 人。"},
+ {s:["She apologized","being late."],a:["for"],o:["for","to",NB,"about"],n:"apologize for 事。相手が人なら to。"},
+ {s:["He belongs","the tennis club."],a:["to"],o:["to","in",NB,"at"],n:"belong to A。"},
+ {s:["The team consists","five members."],a:["of"],o:["of","from",NB,"in"],n:"consist of A。"},
+ {s:["She graduated","a local college."],a:["from"],o:["from","at",NB,"of"],n:"graduate from A。"},
+ {s:["She graduated","high school two years ago."],a:["from"],o:["from","in",NB,"out"],n:"graduate from A。"},
+ {s:["We arrived","the station just before noon."],a:["at"],o:["at","to",NB,"into"],n:"arrive at 地点／arrive in 広い場所。"},
+ {s:["We arrived","Nagano late at night."],a:["in"],o:["in","to",NB,"on"],n:"arrive in 広い場所／arrive at 地点。"},
+ {s:["He complained","the noise upstairs."],a:["about"],o:["about","to",NB,"at"],n:"complain about / of A。complain to 人 なら「人に苦情を言う」。"},
+ {s:["I agree","you on that point."],a:["with"],o:["with","to",NB,"for"],n:"agree with 人／agree to 提案。"},
+];
+
+const P=(p,ja,en,jaex)=>({p,ja,en,jaex});
+const VP=[
+ {v:"give",ps:[P("SVOO","S が O1 に O2 を与える","He gave me a useful hint.","彼は私に役立つ助言をくれた。"),P("SVO","S が O を寄付する","They give money to the shelter every winter.","彼らは毎冬その保護施設に寄付をしている。")]},
+ {v:"show",ps:[P("SVOO","S が O1 に O2 を見せる","She showed me her sketchbook.","彼女は私にスケッチブックを見せてくれた。"),P("SVO","S が O を示す","The chart shows a clear decline.","その図は明確な減少を示している。")]},
+ {v:"tell",ps:[P("SVOO","S が O1 に O2 を話す","He told us a strange story.","彼は私たちに奇妙な話をした。"),P("SVOC","S が O に〜するよう言う","She told me to wait outside.","彼女は私に外で待つように言った。")]},
+ {v:"teach",ps:[P("SVOO","S が O1 に O2 を教える","My aunt taught me the basics of cooking.","叔母が料理の基本を教えてくれた。"),P("SVO","S が O を教える","He teaches history at a high school.","彼は高校で歴史を教えている。")]},
+ {v:"lend",ps:[P("SVOO","S が O1 に O2 を貸す","She lent me her umbrella.","彼女は私に傘を貸してくれた。")]},
+ {v:"offer",ps:[P("SVOO","S が O1 に O2 を提供する","The company offered him a position.","会社は彼に職を提示した。")]},
+ {v:"pass",ps:[P("SVOO","S が O1 に O2 を手渡す","Please pass me the salt.","塩を取ってください。"),P("SV","S が通り過ぎる","Three buses passed without stopping.","バスが三台、止まらずに通り過ぎた。")]},
+ {v:"do",ps:[P("SVOO","S が O1 に O2（利益・害）を与える","A short walk will do you good.","少し歩けば気分がよくなるだろう。"),P("SVO","S が O をする","She did the dishes after dinner.","彼女は夕食後に皿を洗った。")]},
+ {v:"buy",ps:[P("SVOO","S が O1 に O2 を買ってやる","I bought my mother some flowers.","母に花を買った。"),P("SVO","S が O を買う","He bought a second-hand bicycle.","彼は中古の自転車を買った。")]},
+ {v:"cook",ps:[P("SVOO","S が O1 に O2 を作ってやる","He cooked his wife a cake.","彼は妻にケーキを作った。"),P("SVO","S が O を料理する","She cooked the fish over a low flame.","彼女は弱火で魚を料理した。")]},
+ {v:"make",ps:[P("SVO","S が O を作る","He made a wooden shelf.","彼は木の棚を作った。"),P("SVOO","S が O1 に O2 を作ってやる","She made me a cup of tea.","彼女は私にお茶をいれてくれた。"),P("SVOC","S が O に C させる（強制・必然）","The teacher made her students rewrite the essay.","先生は生徒に小論文を書き直させた。")]},
+ {v:"get",ps:[P("SVC","S が C になる","The room got cold after sunset.","日が沈むと部屋は寒くなった。"),P("SVO","S が O を手に入れる","I got two tickets for the concert.","コンサートの券を二枚手に入れた。"),P("SVOO","S が O1 に O2 を買ってやる","He got his daughter a new bag.","彼は娘に新しい鞄を買ってやった。"),P("SVOC","S が O を C の状態にする","I must get my homework done before dinner.","夕食前に宿題を終わらせなければならない。")]},
+ {v:"take",ps:[P("SVO","S が O を取る","She took the seat by the window.","彼女は窓際の席を取った。"),P("SVOO","S が O1 に O2（時間）を要する","It took me three hours to finish it.","終えるのに三時間かかった。"),P("SVOC","S が O を C とみなす","We took his silence as consent.","私たちは彼の沈黙を同意とみなした。")]},
+ {v:"cost",ps:[P("SVOO","S が O1 に O2（お金）をかけさせる","The repairs cost us a great deal of money.","修理には多額の費用がかかった。")]},
+ {v:"save",ps:[P("SVO","S が O を救う","The doctor saved his life.","医者が彼の命を救った。"),P("SVOO","S が O1 の O2（手間）を省く","Your advice saved me the trouble of rewriting it.","君の助言のおかげで書き直さずにすんだ。")]},
+ {v:"spare",ps:[P("SVOO","S が O1 に O2（時間）を割く／O1 の O2（手間）を省く","Can you spare me a few minutes?","少しお時間をいただけますか。")]},
+ {v:"owe",ps:[P("SVOO","S が O1 に O2 を借りている","I owe him ten thousand yen.","私は彼に一万円借りている。")]},
+ {v:"ask",ps:[P("SVOO","S が O1 に O2 をたずねる","May I ask you a question?","質問してもよろしいですか。"),P("SVOC","S が O に〜するよう頼む","She asked me to close the window.","彼女は私に窓を閉めるよう頼んだ。"),P("SV","S が（for 〜を）求める","He asked for a second chance.","彼はもう一度の機会を求めた。")]},
+ {v:"leave",ps:[P("SVO","S が O を去る・出発する","We left the village at dawn.","私たちは夜明けにその村を出た。"),P("SVOO","S が O1 に O2 を残す","His father left him a small house.","父は彼に小さな家を残した。"),P("SVOC","S が O を C のままにする","Don't leave the door unlocked.","ドアの鍵を開けたままにしないで。")]},
+ {v:"find",ps:[P("SVO","S が O を見つける","I found my keys under the sofa.","ソファの下で鍵を見つけた。"),P("SVOO","S が O1 に O2 を見つけてやる","She found me a quiet seat.","彼女は私に静かな席を見つけてくれた。"),P("SVOC","S が O が C だとわかる","He found the lecture surprisingly clear.","彼はその講義が意外なほど明快だとわかった。")]},
+ {v:"keep",ps:[P("SVC","S が C のままでいる","Keep quiet during the exam.","試験中は静かにしていなさい。"),P("SVO","S が O を保つ・持ち続ける","She keeps a diary in English.","彼女は英語で日記をつけている。"),P("SVOC","S が O を C の状態に保つ","They kept us waiting for over an hour.","彼らは私たちを一時間以上待たせた。")]},
+ {v:"remain",ps:[P("SV","S が残る","Only three seats remained.","席は三つしか残っていなかった。"),P("SVC","S が C のままだ","The door remained open all night.","ドアは一晩中開いたままだった。")]},
+ {v:"stay",ps:[P("SV","S が滞在する","We stayed in Matsumoto for two nights.","私たちは松本に二泊した。"),P("SVC","S が C のままでいる","I exercise to stay healthy.","健康でいるために運動している。")]},
+ {v:"grow",ps:[P("SV","S が成長する","These trees grow very slowly.","この木はとてもゆっくり育つ。"),P("SVC","S が C になる","The sky grew dark before the storm.","嵐の前に空が暗くなった。"),P("SVO","S が O を育てる","They grow rice on the hillside.","彼らは斜面で米を作っている。")]},
+ {v:"turn",ps:[P("SV","S が曲がる","Turn at the second corner.","二つ目の角で曲がってください。"),P("SVC","S が C になる","The leaves turned red in October.","十月に葉が赤くなった。"),P("SVO","S が O を回す","He turned the handle slowly.","彼はゆっくり取っ手を回した。")]},
+ {v:"prove",ps:[P("SVC","S が C だとわかる","The rumor proved false.","その噂は誤りだとわかった。"),P("SVO","S が O を証明する","She proved the theory in a single page.","彼女は一ページでその理論を証明した。")]},
+ {v:"appear",ps:[P("SV","S が現れる","A figure appeared at the far end of the hall.","廊下の奥に人影が現れた。"),P("SVC","S が C のようだ","He appeared calm during the interview.","面接の間、彼は落ち着いて見えた。")]},
+ {v:"look",ps:[P("SV","S が（at 〜を）見る","She looked at the map for a long time.","彼女は長いこと地図を見ていた。"),P("SVC","S が C に見える","You look tired this morning.","今朝は疲れて見えるね。"),P("SVOC","S が O を C とみなす（look on O as C）","We look upon him as our leader.","私たちは彼を指導者とみなしている。")]},
+ {v:"feel",ps:[P("SVC","S が C のように感じる","I felt uneasy about the decision.","その決定に不安を覚えた。"),P("SVO","S が O を感じる","He felt a sharp pain in his knee.","彼は膝に鋭い痛みを感じた。"),P("SVOC","S が O が C するのを感じる","I felt the floor shake.","床が揺れるのを感じた。")]},
+ {v:"taste",ps:[P("SVC","S が C の味がする","This soup tastes a little salty.","このスープは少し塩辛い。"),P("SVO","S が O を味わう","She tasted the sauce before serving it.","彼女は出す前にソースを味見した。")]},
+ {v:"smell",ps:[P("SVC","S が C のにおいがする","The kitchen smelled sweet.","台所は甘いにおいがした。"),P("SVO","S が O のにおいをかぐ","He smelled the flowers one by one.","彼は花を一つずつかいでいった。")]},
+ {v:"sound",ps:[P("SVC","S が C に聞こえる","Her voice sounded strange on the phone.","彼女の声は電話では奇妙に聞こえた。")]},
+ {v:"seem",ps:[P("SVC","S が C のようだ","The plan seems reasonable to me.","その計画は私には妥当に思える。")]},
+ {v:"become",ps:[P("SVC","S が C になる","He became famous almost overnight.","彼は一夜にして有名になった。")]},
+ {v:"go",ps:[P("SV","S が行く","She goes to the library every Sunday.","彼女は毎週日曜に図書館へ行く。"),P("SVC","S が C になる（悪い方向へ）","The milk went bad in a day.","牛乳は一日で悪くなった。")]},
+ {v:"fall",ps:[P("SV","S が落ちる","A branch fell onto the roof.","枝が屋根に落ちた。"),P("SVC","S が C になる","The room fell silent at once.","部屋は一瞬で静まりかえった。")]},
+ {v:"have",ps:[P("SVO","S が O を持つ","They have a small garden behind the house.","彼らは家の裏に小さな庭を持っている。"),P("SVOC","S が O に C させる・してもらう","I'll have my son carry the boxes.","息子に箱を運ばせます。")]},
+ {v:"let",ps:[P("SVOC","S が O に C させてやる","Let me introduce myself.","自己紹介をさせてください。")]},
+ {v:"see",ps:[P("SVO","S が O を見る","I saw the same poster twice.","同じ掲示を二度見た。"),P("SVOC","S が O が C するのを見る","I saw a girl eating an apple.","女の子がりんごを食べているのを見た。")]},
+ {v:"hear",ps:[P("SVO","S が O を聞く","We heard the news last night.","昨夜そのニュースを聞いた。"),P("SVOC","S が O が C するのが聞こえる","I heard my name called.","自分の名前が呼ばれるのが聞こえた。")]},
+ {v:"watch",ps:[P("SVO","S が O を見る","He watched the game to the end.","彼は最後まで試合を見た。"),P("SVOC","S が O が C するのを見る","She watched the suspect leave the bank.","彼女は容疑者が銀行を出るのを見た。")]},
+ {v:"allow",ps:[P("SVO","S が O を許す","The school does not allow smoking.","学校は喫煙を許可していない。"),P("SVOC","S が O が〜するのを許可する","Please allow me to introduce myself.","自己紹介をさせてください。")]},
+ {v:"enable",ps:[P("SVOC","S が O が〜するのを可能にする","This course enabled us to write more clearly.","この講座で私たちはより明快に書けるようになった。")]},
+ {v:"cause",ps:[P("SVO","S が O を引き起こす","Heavy rain caused the delay.","大雨が遅延を引き起こした。"),P("SVOC","S が O に〜させる","His carelessness caused her to lose everything.","彼の不注意で彼女はすべてを失った。")]},
+ {v:"force",ps:[P("SVOC","S が O に〜するよう強制する","The storm forced us to cancel the trip.","嵐のため旅行を中止せざるをえなかった。")]},
+ {v:"expect",ps:[P("SVO","S が O を予期する","We expect heavy traffic tonight.","今夜は渋滞を予想している。"),P("SVOC","S が O が〜すると思う","I didn't expect the test to be so hard.","テストがそんなに難しいとは思わなかった。")]},
+ {v:"want",ps:[P("SVO","S が O を欲しがる","She wants a quieter room.","彼女はもっと静かな部屋を求めている。"),P("SVOC","S が O に〜してほしい","I want you to read this first.","まずこれを読んでほしい。")]},
+ {v:"help",ps:[P("SVO","S が O を手伝う","Could you help me with my homework?","宿題を手伝ってくれませんか。"),P("SVOC","S が O が〜するのを手伝う","He helped her peel the onions.","彼は彼女がタマネギの皮をむくのを手伝った。")]},
+ {v:"regard",ps:[P("SVOC","S が O を C とみなす","Many regard him as the finest writer of the period.","多くの人が彼をその時代で最も優れた作家とみなしている。")]},
+ {v:"consider",ps:[P("SVO","S が O について考える","We considered several options.","私たちはいくつかの選択肢を検討した。"),P("SVOC","S が O を C とみなす","They considered the plan a failure.","彼らはその計画を失敗とみなした。")]},
+ {v:"describe",ps:[P("SVO","S が O を描写する","She described the village in detail.","彼女はその村を詳しく描写した。"),P("SVOC","S が O を C と表現する","Critics described the film as dull.","批評家はその映画を退屈だと評した。")]},
+ {v:"run",ps:[P("SV","S が走る","He runs along the river every morning.","彼は毎朝川沿いを走っている。"),P("SVO","S が O を経営する","Her family runs a small inn.","彼女の家族は小さな宿を営んでいる。")]},
+];
+
+/* ═══════ 状態 ═══════ */
+const FORMS=["SV","SVC","SVO","SVOO","SVOC"];
+const KEY="tsubame-drill-v2";
+const shuffle=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+const eq=(a,b)=>a.length===b.length&&a.every(x=>b.includes(x));
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}};
+const save=o=>{try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}};
+const LABELS=["自他の判別と産出","使い分け","空所補充","文型を選ぶ","和訳を作る"];
+const NOTES=["判別してから、正しい形を声に出す","紛らわしい二語の使い分けと活用","私大型。前置詞と「何も入らない」の四択","SV / SVC / SVO / SVOO / SVOC から複数選択","12問。自己申告で採点"];
+let mode=0,q=[],cur=null,phase="",sel=[],picked=null,log=[],n=0,hit=0,gated=false;
+
+function start(){
+  sel=[];picked=null;log=[];n=0;hit=0;gated=false;cur=null;
+  if(mode===0) q=shuffle(VT.slice());
+  else if(mode===1) q=shuffle(PR.slice());
+  else if(mode===2){
+    if(!load().unlocked){gated=true;render();return;}
+    q=shuffle(CL.slice()).slice(0,16);
+  }
+  else if(mode===3) q=shuffle(VP.slice());
+  else{const all=[];VP.forEach(x=>x.ps.forEach(p=>all.push({v:x.v,...p})));q=shuffle(all).slice(0,12);}
+  next();
+}
+function next(){cur=q.shift();sel=[];picked=null;phase="q";render();}
+function miss(x){q.push(x);if(!log.includes(x))log.push(x);}
+
+function render(){
+  const app=document.getElementById("app");
+  document.getElementById("score").textContent=gated?"":(n?`${hit} / ${n}　残り ${q.length}`:(cur?`残り ${q.length+1}`:""));
+  document.getElementById("chips").textContent=NOTES[mode];
+
+  if(gated){
+    app.innerHTML=`<div class="card gate">
+      <div style="font-size:.92rem;margin-bottom:10px">先に「自他の判別と産出」を一巡してください。</div>
+      <div class="sub">このモードには誤りの前置詞が選択肢に並びます。正しい形が口から出るようになる前に取り組むと、誤った形の印象が残ることがあります。</div>
+      <button class="go ghost" id="force">それでも始める</button></div>`;
+    app.querySelector("#force").onclick=()=>{gated=false;q=shuffle(CL.slice()).slice(0,16);next()};
+    return;
+  }
+  if(!cur){summary(app);return;}
+
+  /* ── 判別・前置詞・和訳を三問一括 ── */
+  if(mode===0){
+    const vi=cur.t==="vi", ok1=picked===cur.t;
+    const showQ2 = picked==="vi";
+    const cls=t=>{let c="opt";
+      if(phase==="a"){ if(t===cur.t)c+=" correct"; else if(t===picked)c+=" wrong"; }
+      else if(t===picked)c+=" sel";
+      return c};
+    app.innerHTML=`<div class="card">
+      <div class="verb">${cur.v}</div>
+
+      <div class="qn">Q1　この動詞の直後には？</div>
+      <div class="grid two">
+        <button class="${cls("vt")}" ${phase==="a"?"disabled":""} data-t="vt">目的語がくる<span class="tiny">他動詞</span></button>
+        <button class="${cls("vi")}" ${phase==="a"?"disabled":""} data-t="vi">前置詞がくる<span class="tiny">自動詞</span></button>
+      </div>
+
+      ${picked?`<div class="qn">${showQ2?"Q2　入る前置詞は？":"Q2　── （他動詞を選んだので省略）"}</div>
+        ${showQ2?`<div class="prompt">思い浮かべる</div>`:""}
+        <div class="qn">Q3　このフレーズを和訳すると？</div>
+        <div class="prompt">思い浮かべる</div>`:""}
+
+      ${picked&&phase!=="a"?`<button class="go">解答を見る</button>`:""}
+
+      ${phase==="a"?`<div class="reveal">
+        <div class="pat"><b>Q1</b><span>${vi?"前置詞がくる（自動詞）":"目的語がくる（他動詞）"}　${ok1?"○":"×"}</span></div>
+        <div class="pat"><b>Q2</b><span>${vi?(cur.prep?`<span class="mono">${cur.prep}</span>`:"前置詞をとらない（目的語も不要）"):"前置詞は不要"}</span></div>
+        <div class="pat"><b>Q3</b><span>${cur.m}</span></div>
+        <div class="form">${cur.form}</div>
+        <div class="grid two" style="margin-top:14px">
+          <button class="opt" data-ok="1">Q2・Q3 とも言えた</button>
+          <button class="opt" data-ok="0">詰まった</button>
+        </div></div>`:""}
+    </div>`;
+    if(phase==="q"){
+      app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{picked=b.dataset.t;render()});
+      const g=app.querySelector(".go"); if(g) g.onclick=()=>{
+        n++; if(ok1)hit++; else miss(cur);
+        phase="a"; render();};
+    } else app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      n++; if(b.dataset.ok==="1")hit++; else miss(cur); next();});
+    return;
+  }
+
+  /* ── 使い分け ── */
+  if(mode===1){
+    const cls=o=>{let c="opt mono";if(phase==="a"){if(o===cur.a)c+=" correct";else if(o===picked)c+=" wrong";}return c};
+    app.innerHTML=`<div class="card">
+      <div class="ask">${cur.ja}</div>
+      <div class="sent">${cur.s[0]} <span class="blank">${phase==="a"?cur.a:"&nbsp;"}</span> ${cur.s[1]}</div>
+      <div class="grid two">${cur.o.map(o=>`<button class="${cls(o)}" ${phase==="a"?"disabled":""} data-o="${o}">${o}</button>`).join("")}</div>
+      ${phase==="a"?`<div class="reveal"><div class="sub">${cur.n}</div><button class="go">次へ</button></div>`:""}
+    </div>`;
+    if(phase==="q") app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      picked=b.dataset.o;n++;
+      if(picked===cur.a)hit++;else miss(cur);
+      phase="a";render();});
+    else app.querySelector(".go").onclick=next;
+    return;
+  }
+
+  /* ── 空所補充 ── */
+  if(mode===2){
+    const cls=o=>{let c="opt";if(phase==="a"){if(cur.a.includes(o))c+=" correct";else if(o===picked)c+=" wrong";}return c};
+    app.innerHTML=`<div class="card">
+      <div class="ask">空所に入るものを選ぶ</div>
+      <div class="sent">${cur.s[0]} <span class="blank">${phase==="a"?(cur.a[0]===NB?"—":cur.a[0]):"&nbsp;"}</span> ${cur.s[1]}</div>
+      <div class="grid two">${cur.o.map(o=>`<button class="${cls(o)}" ${phase==="a"?"disabled":""} data-o="${o}">${o===NB?o:`<span class="mono">${o}</span>`}</button>`).join("")}</div>
+      ${phase==="a"?`<div class="reveal"><div class="sub">${cur.n}</div><button class="go">次へ</button></div>`:""}
+    </div>`;
+    if(phase==="q") app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      picked=b.dataset.o;n++;
+      if(cur.a.includes(picked))hit++;else miss(cur);
+      phase="a";render();});
+    else app.querySelector(".go").onclick=next;
+    return;
+  }
+
+  /* ── 文型を選ぶ ── */
+  if(mode===3){
+    const right=cur.ps.map(p=>p.p);
+    const cls=f=>{let c="opt mono";
+      if(phase==="a"){if(right.includes(f))c+=" correct";else if(sel.includes(f))c+=" wrong";}
+      else if(sel.includes(f))c+=" sel";return c};
+    app.innerHTML=`<div class="card">
+      <div class="verb">${cur.v}</div>
+      <div class="ask">この動詞がとりうる主な文型を全て選ぶ</div>
+      <div class="grid">${FORMS.map(f=>`<button class="${cls(f)}" ${phase==="a"?"disabled":""} data-f="${f}">${f}</button>`).join("")}</div>
+      ${phase==="q"?`<button class="go">決定</button>`:`<div class="reveal">
+        <div class="ask" style="margin-bottom:12px">それぞれの和訳の型</div>
+        ${cur.ps.map(p=>`<div class="pat"><b>${p.p}</b><span>${p.ja}</span><span class="ex">${p.en}</span></div>`).join("")}
+        <button class="go">次へ</button></div>`}
+    </div>`;
+    if(phase==="q"){
+      app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+        sel=sel.includes(b.dataset.f)?sel.filter(x=>x!==b.dataset.f):[...sel,b.dataset.f];render();});
+      app.querySelector(".go").onclick=()=>{
+        if(!sel.length)return;n++;
+        if(eq(sel,right))hit++;else miss(cur);
+        phase="a";render();};
+    } else app.querySelector(".go").onclick=next;
+    return;
+  }
+
+  /* ── 和訳を作る ── */
+  app.innerHTML=`<div class="card">
+    <div class="ask">和訳を思い浮かべる</div>
+    <div class="sent">${cur.en}</div>
+    ${phase==="q"?`<button class="go">解答を見る</button>`:`<div class="reveal">
+      <div style="margin-bottom:10px"><span class="tag">${cur.p}</span><span class="sub">${cur.ja}</span></div>
+      <div>${cur.jaex}</div>
+      <div class="grid two" style="margin-top:16px">
+        <button class="opt" data-ok="1">言えた</button>
+        <button class="opt" data-ok="0">詰まった</button>
+      </div></div>`}
+  </div>`;
+  if(phase==="q") app.querySelector(".go").onclick=()=>{phase="a";render()};
+  else app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    n++;if(b.dataset.ok==="1")hit++;else miss(cur);next();});
+}
+
+function summary(app){
+  const acc=n?Math.round(hit/n*100):0;
+  const first=mode===0&&!load().unlocked;
+  if(mode===0) save({...load(),unlocked:true});
+  const u=[...new Set(log)];
+  app.innerHTML=`<div class="card done">
+    <div class="sub">この回の成績</div>
+    <div class="big">${acc}<span style="font-size:1rem">%</span></div>
+    <div class="sub">${hit} / ${n}</div>
+    ${first?`<div class="sub" style="margin-top:8px">「空所補充」が使えるようになりました。</div>`:""}
+    ${u.length?`<div class="list"><div class="sub">詰まったもの</div><ul>${u.map(x=>
+      mode===0?`<li><b class="mono">${x.form}</b> ── ${x.m}</li>`
+      :mode===1?`<li><b class="mono">${x.a}</b> ── ${x.ja}</li>`
+      :mode===2?`<li>${x.s[0]} <b class="mono">${x.a[0]===NB?"（なし）":x.a[0]}</b> ${x.s[1]}</li>`
+      :mode===3?`<li><b>${x.v}</b> ── ${x.ps.map(p=>p.p).join(" ・ ")}</li>`
+      :`<li>${x.en}<br><span class="ja">${x.jaex}</span></li>`).join("")}</ul></div>`
+    :`<div class="sub" style="margin-top:10px">詰まりなし。</div>`}
+    <button class="go">もう一度</button>
+  </div>`;
+  app.querySelector(".go").onclick=start;
+}
+
+const tabs=document.getElementById("tabs");
+LABELS.forEach((label,i)=>{
+  const b=document.createElement("button");
+  b.className="tab"+(i===mode?" on":"");b.textContent=label;
+  b.onclick=()=>{mode=i;[...tabs.children].forEach((c,j)=>c.classList.toggle("on",j===i));start()};
+  tabs.appendChild(b);
+});
+start();
+</script>
+</body>
+</html>
