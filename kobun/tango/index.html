@@ -158,6 +158,15 @@
   .rc-label{font-weight:600;letter-spacing:.02em}
   .rc-count{font-family:system-ui,sans-serif;font-size:.74rem;color:var(--ink-soft);white-space:nowrap}
   .rc-wide{grid-column:1 / -1;width:100%}
+  .rc-custom{margin:0 0 9px;padding:11px 14px;background:#fff;border:1.5px solid var(--line);border-radius:10px}
+  .rc-custom-title{font-weight:600;letter-spacing:.02em;margin-bottom:8px}
+  .rc-custom-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+  .rc-num{width:4.6em;font-family:system-ui,sans-serif;font-size:1rem;padding:7px 8px;text-align:center;border:1.5px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+  .rc-num:focus-visible{outline:2px solid var(--indigo);outline-offset:1px}
+  .rc-go{margin-left:auto;font-family:system-ui,sans-serif;font-size:.88rem;padding:8px 14px;cursor:pointer;background:var(--indigo);color:#fff;border:1px solid var(--indigo);border-radius:9px}
+  .rc-go:disabled{opacity:.4;cursor:not-allowed}
+  .mode-block:has(.mode-card.b.open) .rc-go{background:var(--enji);border-color:var(--enji)}
+  .rc-custom-msg{font-family:system-ui,sans-serif;font-size:.76rem;color:var(--ink-soft);margin-top:7px;min-height:1.2em}
   .rc-weak{grid-column:1 / -1;width:100%;border-color:var(--enji);background:#fdf3f4}
   .rc-weak:hover{border-color:var(--enji);background:#fbe9ec}
   .rc-weak .rc-label{color:var(--enji)}
@@ -996,6 +1005,7 @@ window.addEventListener('orientationchange',setHeadHeight);
 /* ---------- ホーム：モード選択アコーディオン & 範囲選択 ---------- */
 let openMode=null;      // 現在開いているモード（'A'|'B'|null）
 let rangeTab={A:'band',B:'band'}; // 各モードで開いているタブ
+let customRange={A:{min:'',max:''},B:{min:'',max:''}}; // 自分で決める番号範囲の入力値
 
 function toggleMode(mode){
   if(openMode===mode){ closeMode(mode); openMode=null; return; }
@@ -1032,6 +1042,19 @@ function buildRangePanel(mode){
          '<span class="rc-label">'+b.label+'</span>'+
          '<span class="rc-count">'+cnt+(mode==='A'?'語':'例文')+'</span></button>';
     });
+    h+='</div>'+
+       '<div class="rc-custom">'+
+       '<div class="rc-custom-title">自分で番号を決める</div>'+
+       '<div class="rc-custom-row">'+
+       '<input class="rc-num" id="cr-min-'+mode+'" type="number" inputmode="numeric" min="'+NO_MIN+'" max="'+NO_MAX+'" placeholder="'+NO_MIN+'" value="'+customRange[mode].min+'" aria-label="はじめの番号" oninput="onCustomRange(\''+mode+'\')">'+
+       '<span>番 〜</span>'+
+       '<input class="rc-num" id="cr-max-'+mode+'" type="number" inputmode="numeric" min="'+NO_MIN+'" max="'+NO_MAX+'" placeholder="'+NO_MAX+'" value="'+customRange[mode].max+'" aria-label="おわりの番号" oninput="onCustomRange(\''+mode+'\')">'+
+       '<span>番</span>'+
+       '<button class="rc-go" id="cr-go-'+mode+'" onclick="startCustomRange(\''+mode+'\')" disabled>この範囲で始める</button>'+
+       '</div>'+
+       '<div class="rc-custom-msg" id="cr-msg-'+mode+'"></div>'+
+       '</div>'+
+       '<div hidden>';
   }else{
     POS_LIST.forEach(p=>{
       const cnt=countPool(mode,{type:'pos',pos:p});
@@ -1063,9 +1086,33 @@ function buildRangePanel(mode){
   }
 
   panel.innerHTML=h;
+  if(tab==='band'&&(customRange[mode].min!==''||customRange[mode].max!==''))onCustomRange(mode);
 }
 
 function setRangeTab(mode,tab){ rangeTab[mode]=tab; buildRangePanel(mode); }
+
+// 自分で決める番号範囲：入力を検査して、押せるかどうかと出題数を表示する
+function readCustomRange(mode){
+  const minS=$('#cr-min-'+mode).value.trim(), maxS=$('#cr-max-'+mode).value.trim();
+  customRange[mode]={min:minS,max:maxS};
+  if(minS===''||maxS==='')return {ok:false,msg:'はじめの番号とおわりの番号を入れてください（'+NO_MIN+'〜'+NO_MAX+'）。'};
+  const min=Number(minS), max=Number(maxS);
+  if(!Number.isInteger(min)||!Number.isInteger(max))return {ok:false,msg:'番号は整数で入れてください。'};
+  if(min<NO_MIN||max>NO_MAX||max<NO_MIN||min>NO_MAX)return {ok:false,msg:'番号は'+NO_MIN+'〜'+NO_MAX+'の間で入れてください。'};
+  if(min>max)return {ok:false,msg:'はじめの番号は、おわりの番号以下にしてください。'};
+  return {ok:true,range:{type:'band',min:min,max:max}};
+}
+function onCustomRange(mode){
+  const r=readCustomRange(mode);
+  const go=$('#cr-go-'+mode), msg=$('#cr-msg-'+mode);
+  go.disabled=!r.ok;
+  msg.textContent=r.ok?('No.'+r.range.min+'–'+r.range.max+'：'+countPool(mode,r.range)+(mode==='A'?'語':'例文')):r.msg;
+}
+function startCustomRange(mode){
+  const r=readCustomRange(mode);
+  if(!r.ok){ onCustomRange(mode); return; }
+  chooseRange(mode,r.range);
+}
 
 // そのモード・範囲で実際に出題可能な数（A=語数、B=傍線可能な例文数）
 function countPool(mode,range){
